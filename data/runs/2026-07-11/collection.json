@@ -1,6 +1,6 @@
 {
   "date": "2026-07-11",
-  "collected_at": "2026-07-11T05:52:20.947220+00:00",
+  "collected_at": "2026-07-11T05:55:19.479785+00:00",
   "selection_rule": "최근 24시간 검증 기사 중 GitHub 또는 Hugging Face 공식 프로젝트 1건 이상 필수",
   "candidates": [
     {
@@ -34,7 +34,7 @@
       "summary": "Shell to Obfuscated Binary. Beyond shc: Embedded Shell Interpreter & Advanced Obfuscation for Shell Script Protection.",
       "listing_url": "https://news.hada.io/topic?id=31321",
       "introduced_at": "2026-07-11T13:20:59+09:00",
-      "image_url": "https://himitsushell.com/img/og-image.png?v=1783749131063",
+      "image_url": "https://himitsushell.com/img/og-image.png?v=1783749310876",
       "official_url": "https://github.com/HimitsuShell/Himitsu",
       "canonical_key": "https://github.com/himitsushell/himitsu",
       "verification": {
@@ -64,7 +64,7 @@
       "summary": "Shell to Obfuscated Binary. Beyond shc: Embedded Shell Interpreter & Advanced Obfuscation for Shell Script Protection.",
       "listing_url": "https://news.hada.io/topic?id=31321",
       "introduced_at": "2026-07-11T13:20:59+09:00",
-      "image_url": "https://himitsushell.com/img/og-image.png?v=1783749131063",
+      "image_url": "https://himitsushell.com/img/og-image.png?v=1783749310876",
       "official_url": "https://github.com/HimitsuShell/Himitsu",
       "canonical_key": "https://github.com/himitsushell/himitsu",
       "verification": {
@@ -104,5 +104,7 @@
       }
     }
   ],
-  "collector_errors": []
+  "collector_errors": [
+    "검증 제외: https://news.hada.io/topic?id=31275 (페이지 확인 실패: https://openai.com/index/gpt-5-6/ (HTTP Error 403: Forbidden))"
+  ]
 }

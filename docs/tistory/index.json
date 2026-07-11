@@ -1,23 +1,24 @@
 [
   {
     "date": "2026-07-11",
-    "title": "Fable 5 규제 해제와 HimitsuShell: AI 엔지니어를 위한 오늘의 기술 동향",
+    "title": "Anthropic Fable 5 활용 가이드와 HimitsuShell: AI/ML 엔지니어링의 현재와 미래",
     "title_candidates": [
-      "Fable 5 활용 가이드와 HimitsuShell: AI 개발 보안과 생산성 업데이트",
-      "앤트로픽 엔지니어의 Fable 5 활용 팁, 그리고 HimitsuShell로 스크립트 보호하기",
-      "AI 시대의 개발 도구: Fable 5의 부활과 HimitsuShell의 스크립트 보안 전략"
+      "Fable 5 활용 가이드와 HimitsuShell: 2026년 7월 11일 AI/ML 엔지니어 동향",
+      "Anthropic Fable 5의 현황과 HimitsuShell로 본 스크립트 보안",
+      "AI 개발 도구 Fable 5와 셸 스크립트 보호 HimitsuShell 업데이트"
     ],
     "tags": [
-      "AI 엔지니어링",
-      "ML 엔지니어링",
       "생성형 AI",
       "개발 도구",
+      "Fable 5",
+      "Anthropic",
+      "셸 스크립트",
       "보안",
-      "오픈소스",
-      "배포"
+      "HimitsuShell",
+      "AI 엔지니어링"
     ],
-    "meta_description": "2026년 7월 11일, AI 엔지니어를 위한 기술 블로그. Fable 5의 규제 해제와 Anthropic 엔지니어의 활용 가이드, 그리고 셸 스크립트 보호를 위한 HimitsuShell 프로젝트를 깊이 있게 다룹니다.",
-    "article_count_note": "오늘은 기준을 충족한 기사가 2건이었다. 아쉽게도 한 건이 부족하여 세 번째 이슈는 다루지 못했다.",
+    "meta_description": "2026년 7월 11일, Anthropic Fable 5의 최신 활용 가이드와 셸 스크립트 보안을 강화하는 HimitsuShell 프로젝트를 심층 분석합니다. AI/ML 엔지니어를 위한 필수 기술 동향을 놓치지 마세요.",
+    "article_count_note": "오늘은 기준을 충족한 기사가 2건이었다. 아쉽게도 3개 미만이므로, 모든 항목을 다루지는 못했지만, 핵심적인 두 가지 이슈를 밀도 있게 분석했다.",
     "quality_status": "READY_FOR_MANUAL_REVIEW",
     "manual_review_required": true,
     "publish_checklist": [
@@ -46,7 +47,7 @@
         "kind": "generated-hero"
       },
       "geeknews-8ebcb2040a6aa5a9": {
-        "origin_url": "https://himitsushell.com/img/og-image.png?v=1783749131063",
+        "origin_url": "https://himitsushell.com/img/og-image.png?v=1783749310876",
         "kind": "source-image",
         "path": "issue-1.png",
         "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-11/issue-1.png"
