@@ -81,7 +81,7 @@ def make_rewrite_prompt(date: str, sources: list[SourceItem], draft: dict[str, A
     """Ask for a factual rewrite when the first pass sounds like a generic digest."""
     source_payload = json.dumps([item.to_dict() for item in sources], ensure_ascii=False, indent=2)
     draft_payload = json.dumps(draft, ensure_ascii=False, indent=2)
-    marker_payload = json.dumps(markers, ensure_ascii=False)
+    marker_payload = json.dumps(reasons, ensure_ascii=False)
     return f"""당신은 한국어 기술 블로그의 최종 편집자입니다. 아래 초안은 확인된 출처를 바탕으로 만들었지만, 너무 일반적인 AI 요약문처럼 들립니다. 사실과 source_ids를 보존하면서 전체 문장을 사람이 직접 읽고 쓴 기술 칼럼처럼 다시 써 주세요.
 
 편집 원칙:

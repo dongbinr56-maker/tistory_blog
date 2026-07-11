@@ -19,6 +19,9 @@ DEFAULT_SITE = {
     "minimum_body_characters": 1400,
     "required_source_count": 3,
     "required_internal_link_note": "관련 기존 글이 있다면 내부 링크를 1개 이상 넣으세요.",
+    "github_repository": "",
+    "github_branch": "main",
+    "github_workflow_file": "daily-tistory-draft.yml",
 }
 
 

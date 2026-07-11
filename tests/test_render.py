@@ -66,3 +66,14 @@ class RenderTest(unittest.TestCase):
         self.assertIn('data-tab="view"', page)
         self.assertIn('frame.src=raw.html_path', page)
         self.assertIn('currentHtml=await response.text()', page)
+
+    def test_copy_page_can_dispatch_a_same_day_regeneration_without_storing_the_token(self):
+        page = _copy_page(
+            [{"date": "2026-07-11", "title": "초안", "title_candidates": [], "tags": [], "quality_status": "OK", "publish_checklist": [], "html_path": "tistory/2026-07-11.html"}],
+            {"github_repository": "owner/repository", "github_branch": "main", "github_workflow_file": "daily-tistory-draft.yml"},
+        )
+        self.assertIn("원문 재생성", page)
+        self.assertIn("/dispatches", page)
+        self.assertIn("refresh:'true'", page)
+        self.assertIn("GitHub fine-grained PAT", page)
+        self.assertNotIn("localStorage", page)

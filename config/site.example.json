@@ -9,5 +9,8 @@
   "language": "ko",
   "minimum_body_characters": 1400,
   "required_source_count": 3,
-  "required_internal_link_note": "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요."
+  "required_internal_link_note": "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요.",
+  "github_repository": "YOUR_GITHUB_ID/tistory_blog",
+  "github_branch": "main",
+  "github_workflow_file": "daily-tistory-draft.yml"
 }
