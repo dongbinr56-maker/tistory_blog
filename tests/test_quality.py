@@ -76,6 +76,20 @@ class QualityGateTest(unittest.TestCase):
         self.assertEqual(report.status, "BLOCKED")
         self.assertFalse(report.checks["specific_intro"])
 
+    def test_secondary_source_fact_summary_must_name_the_source(self):
+        draft = generate_demo("2026-07-11", sources(), SITE)
+        draft.sections[1].what_happened = "새 서비스가 규제 때문에 중단됐다가 재개됐습니다."
+        report = inspect_draft(draft, SITE)
+        self.assertEqual(report.status, "BLOCKED")
+        self.assertFalse(report.checks["secondary_source_attribution"])
+
+    def test_volatile_community_metrics_are_kept_out_of_the_body(self):
+        draft = generate_demo("2026-07-11", sources(), SITE)
+        draft.sections[0].what_happened += " GitHub 스타 22만 개를 기록했습니다."
+        report = inspect_draft(draft, SITE)
+        self.assertEqual(report.status, "BLOCKED")
+        self.assertFalse(report.checks["no_volatile_community_metrics"])
+
     def test_placeholder_identity_blocks_production_draft(self):
         draft = generate_demo("2026-07-11", sources(), SITE)
         placeholder_site = {**SITE, "author_name": "작성자 이름", "contact_email": "hello@example.com", "blog_url": "https://example.tistory.com"}

@@ -1,6 +1,7 @@
 import unittest
+from unittest.mock import patch
 
-from tistory_newsroom.collect import choose_diverse
+from tistory_newsroom.collect import _fetch_headers, choose_diverse
 from tistory_newsroom.models import SourceItem
 
 
@@ -20,6 +21,13 @@ def item(number: int, project_kind: str = "", community: bool = False) -> Source
 
 
 class SelectionTest(unittest.TestCase):
+    def test_github_api_uses_the_optional_action_token_but_other_hosts_do_not(self):
+        with patch.dict("os.environ", {"GH_API_TOKEN": "test-token"}, clear=False):
+            github_headers = _fetch_headers("https://api.github.com/repos/owner/project", "application/json")
+            web_headers = _fetch_headers("https://github.com/owner/project", "text/html")
+        self.assertEqual(github_headers["Authorization"], "Bearer test-token")
+        self.assertNotIn("Authorization", web_headers)
+
     def test_requires_one_github_or_huggingface_community_project(self):
         selected = choose_diverse([item(1), item(2)], 3, [])
         self.assertEqual(selected, [])

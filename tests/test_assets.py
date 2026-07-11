@@ -25,3 +25,23 @@ class AssetTest(unittest.TestCase):
             self.assertEqual(set(images), {"hero", "item-1", "item-2", "item-3"})
             self.assertTrue((Path(directory) / "docs/tistory/assets/2026-07-11/hero.svg").exists())
             self.assertTrue(images["item-1"]["url"].startswith("https://example.github.io/"))
+
+    def test_refresh_removes_stale_daily_asset_variants(self):
+        sources = [
+            SourceItem(
+                id="item", source="출처", topic="AI 모델링", title="모델 이슈",
+                url="https://example.org/item", published_at="", summary="검증된 기사입니다.",
+            )
+        ]
+        draft = generate_demo("2026-07-11", sources, {"blog_name": "테스트", "author_name": "테스터"})
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            assets = root / "docs/tistory/assets/2026-07-11"
+            assets.mkdir(parents=True)
+            (assets / "issue-1.png").write_bytes(b"old")
+            (assets / "hero.svg").write_text("old", encoding="utf-8")
+
+            create_image_assets(root, draft, "https://example.github.io/repo/tistory/assets")
+
+            self.assertFalse((assets / "issue-1.png").exists())
+            self.assertTrue((assets / "issue-1.svg").exists())

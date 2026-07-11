@@ -3,7 +3,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from tistory_newsroom.pipeline import _existing_ready_draft, historical_url_keys
+from tistory_newsroom.models import SourceItem
+from tistory_newsroom.pipeline import _existing_ready_draft, historical_url_keys, prune_expired_details, record_historical_url_keys
 
 
 def write_json(path: Path, value: object) -> None:
@@ -42,6 +43,7 @@ class PipelineStateTest(unittest.TestCase):
             day = "2026-07-11"
             self.assertIsNone(_existing_ready_draft(root, day))
 
+            write_json(root / f"data/runs/{day}/collection.json", {"selected": [{"url": "https://example.org/one"}]})
             write_json(root / f"data/runs/{day}/draft.json", {"source_items": [{"id": "one"}]})
             write_json(root / f"data/runs/{day}/quality-report.json", {
                 "status": "READY_FOR_MANUAL_REVIEW",
@@ -62,3 +64,53 @@ class PipelineStateTest(unittest.TestCase):
 
             write_json(root / f"data/runs/{day}/quality-report.json", {"status": "BLOCKED"})
             self.assertIsNone(_existing_ready_draft(root, day))
+
+    def test_compact_history_index_survives_pruning_of_old_collection_records(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = SourceItem(
+                id="project", source="GitHub", topic="AI 모델링", title="owner/project",
+                url="https://github.com/owner/project", published_at="", summary="공식 프로젝트입니다.",
+                official_url="https://github.com/owner/project", canonical_key="https://github.com/owner/project",
+            )
+            record_historical_url_keys(root, "2026-07-10", [source])
+
+            index = root / "data/history/seen-url-keys.json"
+            self.assertTrue(index.exists())
+            self.assertIn("https://github.com/owner/project", historical_url_keys(root, "2026-07-11"))
+            self.assertNotIn("https://github.com/owner/project", historical_url_keys(root, "2026-07-10"))
+
+    def test_no_op_does_not_reuse_a_draft_when_collection_audit_is_missing(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            day = "2026-07-11"
+            write_json(root / f"data/runs/{day}/draft.json", {"source_items": []})
+            write_json(root / f"data/runs/{day}/quality-report.json", {"status": "READY_FOR_MANUAL_REVIEW"})
+            output = root / "docs/tistory"
+            output.mkdir(parents=True, exist_ok=True)
+            (output / f"{day}.html").write_text("<article>ready</article>", encoding="utf-8")
+            write_json(output / f"{day}.json", {"date": day})
+            self.assertIsNone(_existing_ready_draft(root, day))
+
+    def test_pruning_removes_old_detail_artifacts_but_not_the_history_index(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            old_day, fresh_day, current_day = "2025-01-01", "2026-07-10", "2026-07-11"
+            write_json(root / f"data/runs/{old_day}/collection.json", {"selected": []})
+            write_json(root / f"data/runs/{fresh_day}/collection.json", {"selected": []})
+            write_json(root / "data/history/seen-url-keys.json", {"entries": {"https://example.org/old": old_day}})
+            for day in (old_day, fresh_day):
+                write_json(root / f"docs/tistory/{day}.json", {"date": day})
+                (root / f"docs/tistory/{day}.html").write_text("<article></article>", encoding="utf-8")
+                asset_dir = root / f"docs/tistory/assets/{day}"
+                asset_dir.mkdir(parents=True)
+                (asset_dir / "hero.svg").write_text("asset", encoding="utf-8")
+
+            removed = prune_expired_details(root, current_day, 180)
+
+            self.assertTrue(removed)
+            self.assertFalse((root / f"data/runs/{old_day}").exists())
+            self.assertFalse((root / f"docs/tistory/{old_day}.json").exists())
+            self.assertFalse((root / f"docs/tistory/assets/{old_day}").exists())
+            self.assertTrue((root / f"data/runs/{fresh_day}").exists())
+            self.assertTrue((root / "data/history/seen-url-keys.json").exists())

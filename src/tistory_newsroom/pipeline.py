@@ -3,6 +3,7 @@ from __future__ import annotations
 import datetime as dt
 import json
 from pathlib import Path
+import shutil
 from typing import Any
 import urllib.parse
 
@@ -12,7 +13,7 @@ from .config import ROOT, load_site_config, load_sources_config
 from .generate import generate_demo, generate_with_gemini
 from .models import SourceItem
 from .quality import inspect_draft
-from .render import write_outputs
+from .render import build_site, write_outputs
 
 
 def _write_json(path: Path, value: Any) -> None:
@@ -43,19 +44,25 @@ def _url_key(value: object) -> str:
     return urllib.parse.urlunparse(clean).rstrip("/").lower()
 
 
-def historical_url_keys(root: Path, day: str) -> set[str]:
-    """Read selected records from older daily runs without trusting raw listings.
+def _selected_url_keys(item: dict[str, Any]) -> set[str]:
+    return {
+        key
+        for field in ("canonical_key", "url", "official_url", "listing_url")
+        if (key := _url_key(item.get(field)))
+    }
 
-    Only selected articles count as published coverage.  This avoids starving the
-    selection pool because a candidate was merely collected and then rejected.
-    """
+
+def _history_index_path(root: Path) -> Path:
+    return root / "data" / "history" / "seen-url-keys.json"
+
+
+def _scan_history_entries(root: Path) -> dict[str, str]:
+    """Build a compact URL index from legacy daily collection records."""
     runs_root = root / "data" / "runs"
     if not runs_root.exists():
-        return set()
-    keys: set[str] = set()
+        return {}
+    entries: dict[str, str] = {}
     for collection_path in sorted(runs_root.glob("*/collection.json")):
-        if collection_path.parent.name == day:
-            continue
         try:
             payload = json.loads(collection_path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
@@ -64,31 +71,107 @@ def historical_url_keys(root: Path, day: str) -> set[str]:
         if not isinstance(selected, list):
             continue
         for item in selected:
-            if not isinstance(item, dict):
-                continue
-            for field in ("canonical_key", "url", "official_url", "listing_url"):
-                key = _url_key(item.get(field))
-                if key:
-                    keys.add(key)
-    return keys
+            if isinstance(item, dict):
+                for key in _selected_url_keys(item):
+                    entries.setdefault(key, collection_path.parent.name)
+    return entries
+
+
+def _history_entries(root: Path) -> dict[str, str]:
+    path = _history_index_path(root)
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        entries = payload.get("entries")
+        if isinstance(entries, dict):
+            return {_url_key(key): str(value) for key, value in entries.items() if _url_key(key)}
+    except (OSError, json.JSONDecodeError):
+        pass
+    return _scan_history_entries(root)
+
+
+def historical_url_keys(root: Path, day: str) -> set[str]:
+    """Read selected URLs from a compact index, with a legacy-record fallback.
+
+    Only selected articles count as published coverage.  This avoids starving the
+    selection pool because a candidate was merely collected and then rejected.
+    """
+    return {key for key, first_seen_day in _history_entries(root).items() if first_seen_day != day}
+
+
+def record_historical_url_keys(root: Path, day: str, selected: list[SourceItem]) -> None:
+    """Persist every selected URL identity once so old drafts can be pruned safely."""
+    entries = _history_entries(root)
+    for source in selected:
+        for key in _selected_url_keys(source.to_dict()):
+            entries.setdefault(key, day)
+    _write_json(_history_index_path(root), {
+        "version": 1,
+        "updated_at": dt.datetime.now(dt.timezone.utc).isoformat(),
+        "entries": dict(sorted(entries.items())),
+    })
+
+
+def _is_expired_daily_path(path: Path, cutoff: dt.date) -> bool:
+    try:
+        return dt.date.fromisoformat(path.name) < cutoff
+    except ValueError:
+        return False
+
+
+def prune_expired_details(root: Path, day: str, retention_days: int) -> list[str]:
+    """Keep review artifacts bounded without dropping the permanent URL index."""
+    if retention_days <= 0:
+        return []
+    cutoff = dt.date.fromisoformat(day) - dt.timedelta(days=retention_days)
+    removed: list[str] = []
+    runs_root = root / "data" / "runs"
+    if runs_root.exists():
+        for run_dir in runs_root.iterdir():
+            if run_dir.is_dir() and _is_expired_daily_path(run_dir, cutoff):
+                shutil.rmtree(run_dir)
+                removed.append(str(run_dir.relative_to(root)))
+    tistory_root = root / "docs" / "tistory"
+    if tistory_root.exists():
+        for metadata_path in tistory_root.glob("????-??-??.json"):
+            try:
+                expired = dt.date.fromisoformat(metadata_path.stem) < cutoff
+            except ValueError:
+                expired = False
+            if expired:
+                html_path = metadata_path.with_suffix(".html")
+                metadata_path.unlink()
+                if html_path.exists():
+                    html_path.unlink()
+                removed.append(str(metadata_path.relative_to(root)))
+        assets_root = tistory_root / "assets"
+        if assets_root.exists():
+            for asset_dir in assets_root.iterdir():
+                if asset_dir.is_dir() and _is_expired_daily_path(asset_dir, cutoff):
+                    shutil.rmtree(asset_dir)
+                    removed.append(str(asset_dir.relative_to(root)))
+    return removed
 
 
 def _existing_ready_draft(root: Path, day: str) -> dict[str, Any] | None:
     """Return an existing complete daily draft so a rerun is a true no-op."""
     run_dir = root / "data" / "runs" / day
     draft_path = run_dir / "draft.json"
+    collection_path = run_dir / "collection.json"
     report_path = run_dir / "quality-report.json"
     html_path = root / "docs" / "tistory" / f"{day}.html"
     metadata_path = root / "docs" / "tistory" / f"{day}.json"
-    required = (draft_path, report_path, html_path, metadata_path)
+    required = (collection_path, draft_path, report_path, html_path, metadata_path)
     if not all(path.is_file() for path in required):
         return None
     try:
+        collection = json.loads(collection_path.read_text(encoding="utf-8"))
         draft = json.loads(draft_path.read_text(encoding="utf-8"))
         report = json.loads(report_path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return None
     if report.get("status") != "READY_FOR_MANUAL_REVIEW":
+        return None
+    if not isinstance(collection.get("selected"), list):
         return None
     source_items = draft.get("source_items")
     if not isinstance(source_items, list):
@@ -173,5 +256,10 @@ def run(root: Path = ROOT, date: str | None = None, demo: bool = False, refresh:
     _write_json(run_dir / "quality-report.json", report.to_dict())
     if report.status != "READY_FOR_MANUAL_REVIEW":
         raise RuntimeError("초안 품질 게이트가 차단했습니다: " + " / ".join(report.errors))
+    record_historical_url_keys(root, day, selected)
     write_outputs(root, draft, report, site)
-    return {"date": day, "article_count": len(selected), "status": report.status, "output": str(root / "docs" / "tistory" / f"{day}.html"), "warnings": report.warnings, "reused_existing_draft": False}
+    retention_days = int(sources_config.get("selection", {}).get("detail_retention_days", 180))
+    pruned_details = prune_expired_details(root, day, retention_days)
+    if pruned_details:
+        build_site(root, site)
+    return {"date": day, "article_count": len(selected), "status": report.status, "output": str(root / "docs" / "tistory" / f"{day}.html"), "warnings": report.warnings, "pruned_details": pruned_details, "reused_existing_draft": False}

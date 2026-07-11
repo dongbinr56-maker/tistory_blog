@@ -32,6 +32,7 @@ jobs:
       TZ: Asia/Seoul
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       GEMINI_MODEL: gemini-2.5-flash
+      GH_API_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
 
@@ -40,28 +41,50 @@ jobs:
           python-version: '3.12'
 
       - name: Generate reviewable draft and enforce quality gate
+        env:
+          RUN_DATE: ${{ inputs.run_date }}
+          REFRESH_FLAG: ${{ inputs.refresh }}
         run: |
-          refresh=""
-          if [ "${{ inputs.refresh }}" = "true" ]; then
-            refresh="--refresh"
+          set -euo pipefail
+          args=()
+          case "$REFRESH_FLAG" in
+            true) args+=(--refresh) ;;
+            false|"") ;;
+            *) echo "Invalid refresh input" >&2; exit 2 ;;
+          esac
+          if [ -n "$RUN_DATE" ]; then
+            if ! [[ "$RUN_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+              echo "run_date must use YYYY-MM-DD" >&2
+              exit 2
+            fi
+            args+=(--date "$RUN_DATE")
           fi
-          if [ -n "${{ inputs.run_date }}" ]; then
-            PYTHONPATH=src python -m tistory_newsroom run --date "${{ inputs.run_date }}" $refresh
-          else
-            PYTHONPATH=src python -m tistory_newsroom run $refresh
-          fi
+          PYTHONPATH=src python -m tistory_newsroom run "${args[@]}"
 
       - name: Commit daily source records and draft
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/runs docs
+          if [ -d data/history ]; then
+            git add data/history
+          fi
           if git diff --cached --quiet; then
             echo "No generated changes to commit."
           else
             git commit -m "Daily Tistory draft: $(TZ=Asia/Seoul date +%F)"
             git push
           fi
+
+      - name: Summarize a blocked or failed draft
+        if: failure()
+        run: |
+          {
+            echo "## Daily draft generation failed"
+            echo
+            echo "The existing published review draft was left unchanged. Review the failed generation step and the committed data/runs audit record."
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - uses: actions/configure-pages@v5
 

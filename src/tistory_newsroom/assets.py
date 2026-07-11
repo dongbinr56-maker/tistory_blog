@@ -39,6 +39,12 @@ def create_image_assets(root: Path, draft: Draft, asset_base_url: str) -> dict[s
     """Save a hero and one visual per verified article for copy-ready HTML."""
     directory = root / "docs" / "tistory" / "assets" / draft.date
     directory.mkdir(parents=True, exist_ok=True)
+    # A refresh can switch a remote image between png/jpg/svg fallback.  This
+    # directory belongs entirely to the fixed daily draft, so stale variants
+    # must go before writing the new canonical set.
+    for stale_path in directory.iterdir():
+        if stale_path.is_file() and (stale_path.name == "hero.svg" or stale_path.name.startswith("issue-")):
+            stale_path.unlink()
     images: dict[str, dict[str, str]] = {}
     hero_name = "hero.svg"
     (directory / hero_name).write_text(_svg_card(draft.title, "AI · MODEL · OPEN SOURCE"), encoding="utf-8")

@@ -15,6 +15,9 @@ UNNATURAL_TECH_MARKERS = (
     "{'모델'",
     '"모델"',
 )
+COMMUNITY_METRIC_MARKERS = (
+    "GitHub 스타", "깃허브 스타", "Hugging Face 다운로드", "허깅페이스 다운로드", "다운로드 수", "좋아요 수",
+)
 
 
 def _body_text(draft: Draft) -> str:
@@ -53,6 +56,20 @@ def inspect_draft(draft: Draft, site: dict[str, object]) -> QualityReport:
     if not checks["all_sections_trace_to_source"]:
         errors.append("각 이슈는 출처 ID와 1:1로 추적 가능해야 하며, 선택된 모든 출처를 다뤄야 합니다.")
 
+    source_by_id = {source.id: source for source in draft.source_items}
+    secondary_sections = [
+        section
+        for section in draft.sections
+        if section.source_ids and all(not source_by_id[source_id].official_url for source_id in section.source_ids if source_id in source_by_id)
+    ]
+    checks["secondary_source_attribution"] = all(
+        "원문" in section.what_happened
+        or any(source_by_id[source_id].source in section.what_happened for source_id in section.source_ids if source_id in source_by_id)
+        for section in secondary_sections
+    )
+    if not checks["secondary_source_attribution"]:
+        errors.append("공식 출처가 없는 이슈의 사실 요약은 원문 매체에 귀속해 작성해야 합니다.")
+
     checks["plain_language_and_engineering_value"] = all(len(section.plain_explanation) >= 90 and len(section.why_it_matters) >= 90 and len(section.editorial_take) >= 130 for section in draft.sections)
     if not checks["plain_language_and_engineering_value"]:
         errors.append("각 이슈에는 일반인 설명과 엔지니어 관점의 충분한 분석이 필요합니다.")
@@ -86,6 +103,10 @@ def inspect_draft(draft: Draft, site: dict[str, object]) -> QualityReport:
     checks["no_empty_technical_inventory"] = not any(term in body for term in UNNATURAL_TECH_MARKERS)
     if not checks["no_empty_technical_inventory"]:
         errors.append("확인 불가 항목을 나열하는 기술 인벤토리 대신, 실제 확인한 내용만 자연스러운 문장으로 작성해야 합니다.")
+
+    checks["no_volatile_community_metrics"] = not any(term.lower() in lowered for term in COMMUNITY_METRIC_MARKERS)
+    if not checks["no_volatile_community_metrics"]:
+        errors.append("변동 가능한 커뮤니티 수치는 본문이 아닌 검토 화면의 사실·수치 근거에서 확인해야 합니다.")
 
     generic_markers = generic_editorial_markers(body)
     checks["natural_editorial_voice"] = not generic_markers

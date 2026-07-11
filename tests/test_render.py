@@ -1,3 +1,4 @@
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -77,3 +78,16 @@ class RenderTest(unittest.TestCase):
         self.assertIn("refresh:'true'", page)
         self.assertIn("GitHub fine-grained PAT", page)
         self.assertNotIn("localStorage", page)
+
+    def test_fact_review_keeps_verified_metrics_out_of_the_article_body(self):
+        draft = generate_demo("2026-07-11", self.sources, self.site)
+        report = inspect_draft(draft, self.site)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            write_outputs(root, draft, report, self.site)
+            metadata = json.loads((root / "docs/tistory/2026-07-11.json").read_text(encoding="utf-8"))
+            self.assertIn("fact_review", metadata)
+            self.assertEqual(metadata["fact_review"][0]["official_url"], "https://github.com/test/project")
+            page = (root / "docs/index.html").read_text(encoding="utf-8")
+            self.assertIn("사실·수치 검토", page)
+            self.assertIn("fact_review", page)

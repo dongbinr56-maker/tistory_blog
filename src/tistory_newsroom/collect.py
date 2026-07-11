@@ -4,6 +4,7 @@ import datetime as dt
 import hashlib
 import html
 import json
+import os
 import re
 import time
 import urllib.parse
@@ -101,11 +102,19 @@ def _absolute(url: str, base: str) -> str:
     return urllib.parse.urljoin(base, html.unescape(url))
 
 
+def _fetch_headers(url: str, accept: str) -> dict[str, str]:
+    headers = {"User-Agent": USER_AGENT, "Accept": accept, "Accept-Language": "ko,en;q=0.8"}
+    token = os.environ.get("GH_API_TOKEN", "").strip()
+    if token and urllib.parse.urlparse(url).netloc.lower() == "api.github.com":
+        headers["Authorization"] = f"Bearer {token}"
+    return headers
+
+
 def _fetch_bytes(url: str, accept: str = "text/html,*/*", attempts: int = 3) -> tuple[bytes, str]:
     last_error: Exception | None = None
     for attempt in range(attempts):
         try:
-            request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": accept, "Accept-Language": "ko,en;q=0.8"})
+            request = urllib.request.Request(url, headers=_fetch_headers(url, accept))
             with urllib.request.urlopen(request, timeout=45) as response:
                 return response.read(3_000_000), response.headers.get("Content-Type", "")
         except Exception as error:
