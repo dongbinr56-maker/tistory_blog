@@ -481,10 +481,35 @@ def _score(item: SourceItem) -> int:
     return score
 
 
-def choose_diverse(items: list[SourceItem], count: int, excluded_terms: list[str]) -> list[SourceItem]:
-    """Fill three slots with at least one currently active GitHub/HF community project."""
+def _item_url_keys(item: SourceItem) -> set[str]:
+    """Return every stable URL identity known for a source item.
+
+    Editorial articles can point to a GitHub/Hugging Face official page.  Keeping
+    both the article URL and the official URL here prevents the same announcement
+    from returning through a different publication on a later day.
+    """
+    return {
+        _canonical(value, "")
+        for value in (item.canonical_key, item.url, item.official_url, item.listing_url)
+        if value
+    }
+
+
+def choose_diverse(
+    items: list[SourceItem],
+    count: int,
+    excluded_terms: list[str],
+    excluded_canonical_keys: set[str] | None = None,
+) -> list[SourceItem]:
+    """Fill three slots with a community project while excluding prior URL identities."""
     blocked = [term.lower() for term in excluded_terms]
-    eligible = [item for item in items if not any(term in f"{item.title} {item.summary}".lower() for term in blocked)]
+    history_keys = {_canonical(value, "") for value in (excluded_canonical_keys or set()) if value}
+    eligible = [
+        item
+        for item in items
+        if not any(term in f"{item.title} {item.summary}".lower() for term in blocked)
+        and not (_item_url_keys(item) & history_keys)
+    ]
     ordered = sorted(eligible, key=lambda item: (_score(item), item.published_at, item.title), reverse=True)
     project = next((item for item in ordered if item.verification.get("community_source") in {"github", "huggingface"}), None)
     if project is None:
@@ -505,11 +530,23 @@ def choose_diverse(items: list[SourceItem], count: int, excluded_terms: list[str
     return selected
 
 
-def collection_payload(date: str, candidates: list[SourceItem], selected: list[SourceItem], errors: list[str]) -> dict[str, Any]:
+def collection_payload(
+    date: str,
+    candidates: list[SourceItem],
+    selected: list[SourceItem],
+    errors: list[str],
+    *,
+    historical_url_key_count: int = 0,
+    historically_excluded_candidate_count: int = 0,
+) -> dict[str, Any]:
     return {
         "date": date,
         "collected_at": dt.datetime.now(dt.timezone.utc).isoformat(),
-        "selection_rule": "최근 24시간 요즘IT·GeekNews 기사와 최근 14일 GitHub/Hugging Face 커뮤니티 활성 프로젝트를 조합해 3건을 구성하며, 커뮤니티 프로젝트 1건 이상 필수",
+        "selection_rule": "최근 24시간 요즘IT·GeekNews 기사와 최근 14일 GitHub/Hugging Face 커뮤니티 활성 프로젝트를 조합해 3건을 구성하며, 커뮤니티 프로젝트 1건 이상 필수. 이전 날짜에 선택한 원문·공식 프로젝트 URL은 제외",
+        "history_exclusion": {
+            "past_url_key_count": historical_url_key_count,
+            "excluded_candidate_count": historically_excluded_candidate_count,
+        },
         "candidates": [item.to_dict() for item in candidates],
         "selected": [item.to_dict() for item in selected],
         "collector_errors": errors,

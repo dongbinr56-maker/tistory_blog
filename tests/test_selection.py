@@ -29,3 +29,16 @@ class SelectionTest(unittest.TestCase):
         self.assertEqual(len(selected), 3)
         self.assertEqual(selected[0].verification["project_kind"], "github")
         self.assertEqual(selected[0].verification["community_source"], "github")
+
+    def test_excludes_a_previously_selected_official_project_url(self):
+        prior_project = item(1, "github", community=True)
+        replacement_project = item(2, "huggingface", community=True)
+        selected = choose_diverse(
+            [prior_project, replacement_project, item(3), item(4)],
+            3,
+            [],
+            {prior_project.official_url},
+        )
+        self.assertNotIn(prior_project, selected)
+        self.assertIn(replacement_project, selected)
+        self.assertEqual(len(selected), 3)
