@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import re
-
 from .models import Draft, QualityReport
 
 BLOCKED_TERMS = (
@@ -10,12 +8,18 @@ BLOCKED_TERMS = (
 CLICK_INDUCEMENT = (
     "광고를 클릭", "광고 클릭", "클릭해서 응원", "click ads",
 )
+UNNATURAL_TECH_MARKERS = (
+    "해당 없음",
+    "공개 자료에서 확인하지 못함",
+    "{'모델'",
+    '"모델"',
+)
 
 
 def _body_text(draft: Draft) -> str:
     pieces = [draft.intro, draft.closing, draft.editorial_disclosure]
     for section in draft.sections:
-        pieces.extend((section.headline, section.what_happened, section.plain_explanation, section.why_it_matters, section.technical_details, section.editorial_take, section.reader_action, section.verification_notes))
+        pieces.extend((section.headline, section.what_happened, section.plain_explanation, section.why_it_matters, section.editorial_take, section.reader_action))
     return " ".join(pieces)
 
 
@@ -35,10 +39,6 @@ def inspect_draft(draft: Draft, site: dict[str, object]) -> QualityReport:
     if not checks["reasonable_title_length"]:
         errors.append("선택된 제목은 15~75자여야 합니다.")
 
-    checks["article_count_disclosed"] = bool(re.search(r"기사가?\s*\d+건", draft.article_count_note))
-    if not checks["article_count_disclosed"]:
-        errors.append("오늘 기준을 충족한 기사 수를 본문에 명시해야 합니다.")
-
     checks["tag_count_and_uniqueness"] = 5 <= len(draft.tags) <= 10 and len({tag.lower() for tag in draft.tags}) == len(draft.tags)
     if not checks["tag_count_and_uniqueness"]:
         errors.append("태그는 중복 없이 5~10개여야 합니다.")
@@ -52,9 +52,9 @@ def inspect_draft(draft: Draft, site: dict[str, object]) -> QualityReport:
     if not checks["all_sections_trace_to_source"]:
         errors.append("각 이슈는 출처 ID와 1:1로 추적 가능해야 하며, 선택된 모든 출처를 다뤄야 합니다.")
 
-    checks["plain_language_and_technical_depth"] = all(len(section.plain_explanation) >= 90 and len(section.technical_details) >= 150 and len(section.verification_notes) >= 30 for section in draft.sections)
-    if not checks["plain_language_and_technical_depth"]:
-        errors.append("각 이슈에는 일반인 설명, 확인된 기술 정보, 검증 메모가 충분히 있어야 합니다.")
+    checks["plain_language_and_engineering_value"] = all(len(section.plain_explanation) >= 90 and len(section.why_it_matters) >= 90 and len(section.editorial_take) >= 130 for section in draft.sections)
+    if not checks["plain_language_and_engineering_value"]:
+        errors.append("각 이슈에는 일반인 설명과 엔지니어 관점의 충분한 분석이 필요합니다.")
 
     checks["original_value_added"] = all(len(section.editorial_take) >= 130 and len(section.why_it_matters) >= 90 and len(section.reader_action) >= 45 for section in draft.sections)
     if not checks["original_value_added"]:
@@ -69,6 +69,10 @@ def inspect_draft(draft: Draft, site: dict[str, object]) -> QualityReport:
     if not checks["github_or_huggingface_project_included"]:
         errors.append("GitHub 또는 Hugging Face 공식 프로젝트가 최소 1건 포함되어야 합니다.")
 
+    checks["community_project_included"] = any(item.verification.get("community_source") in {"github", "huggingface"} for item in draft.source_items)
+    if not checks["community_project_included"]:
+        errors.append("GitHub 또는 Hugging Face 커뮤니티에서 최근 주목받는 프로젝트가 최소 1건 포함되어야 합니다.")
+
     checks["ai_disclosure"] = "AI" in draft.editorial_disclosure and ("검토" in draft.editorial_disclosure or "확인" in draft.editorial_disclosure)
     if not checks["ai_disclosure"]:
         errors.append("AI 활용 및 사람 검토 고지가 필요합니다.")
@@ -77,6 +81,10 @@ def inspect_draft(draft: Draft, site: dict[str, object]) -> QualityReport:
     checks["no_click_inducement"] = not any(term in lowered for term in CLICK_INDUCEMENT)
     if not checks["no_click_inducement"]:
         errors.append("광고 클릭을 유도하는 표현은 사용할 수 없습니다.")
+
+    checks["no_empty_technical_inventory"] = not any(term in body for term in UNNATURAL_TECH_MARKERS)
+    if not checks["no_empty_technical_inventory"]:
+        errors.append("확인 불가 항목을 나열하는 기술 인벤토리 대신, 실제 확인한 내용만 자연스러운 문장으로 작성해야 합니다.")
 
     blocked = [term for term in BLOCKED_TERMS if term in body]
     checks["no_restricted_topic_signal"] = not blocked

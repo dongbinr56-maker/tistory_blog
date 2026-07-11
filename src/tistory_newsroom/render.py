@@ -39,10 +39,8 @@ def render_article_html(draft: Draft, site: dict[str, Any]) -> str:
   <h3>무슨 일이 있었나</h3>{paragraphs(section.what_happened)}
   <h3>쉽게 말하면</h3>{paragraphs(section.plain_explanation)}
   <h3>왜 중요한가</h3>{paragraphs(section.why_it_matters)}
-  <h3>기술적으로 확인한 내용</h3>{paragraphs(section.technical_details)}
   <h3>작성자 관점</h3>{paragraphs(section.editorial_take)}
   <h3>오늘의 점검</h3>{paragraphs(section.reader_action)}
-  <h3>검증 메모</h3>{paragraphs(section.verification_notes)}
   <h3>출처</h3><ul class="sources">{links}</ul>
 </section>"""
         )
@@ -67,7 +65,6 @@ def render_article_html(draft: Draft, site: dict[str, Any]) -> str:
     <h1>{esc(draft.title)}</h1>
     {paragraphs(draft.intro)}
   </header>
-  <p class="notice">{esc(draft.article_count_note)}</p>
   {''.join(sections)}
   <section><h2>마무리</h2>{paragraphs(draft.closing)}</section>
   <aside class="notice">{esc(draft.editorial_disclosure)}</aside>

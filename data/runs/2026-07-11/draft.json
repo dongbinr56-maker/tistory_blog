@@ -1,75 +1,121 @@
 {
   "date": "2026-07-11",
-  "title": "Anthropic Fable 5 활용 가이드와 HimitsuShell: AI/ML 엔지니어링의 현재와 미래",
+  "title": "AI 에이전트 성능의 한계 돌파: ECC와 Claude Code 최적화 전략",
   "title_candidates": [
-    "Fable 5 활용 가이드와 HimitsuShell: 2026년 7월 11일 AI/ML 엔지니어 동향",
-    "Anthropic Fable 5의 현황과 HimitsuShell로 본 스크립트 보안",
-    "AI 개발 도구 Fable 5와 셸 스크립트 보호 HimitsuShell 업데이트"
+    "AI 에이전트 성능의 한계 돌파: ECC와 Claude Code 최적화 전략",
+    "쉘 스크립트 보안, AI 배포의 숨겨진 열쇠: HimitsuShell 심층 분석",
+    "Fable 5 규제 해프닝과 Anthropic의 조언: AI 개발자가 알아야 할 것들"
   ],
   "tags": [
+    "AI 에이전트",
+    "성능 최적화",
+    "코드 보안",
     "생성형 AI",
     "개발 도구",
-    "Fable 5",
-    "Anthropic",
-    "셸 스크립트",
-    "보안",
-    "HimitsuShell",
-    "AI 엔지니어링"
+    "Claude Code",
+    "오픈소스",
+    "배포 전략"
   ],
-  "meta_description": "2026년 7월 11일, Anthropic Fable 5의 최신 활용 가이드와 셸 스크립트 보안을 강화하는 HimitsuShell 프로젝트를 심층 분석합니다. AI/ML 엔지니어를 위한 필수 기술 동향을 놓치지 마세요.",
-  "intro": "AI 엔지니어와 ML 엔지니어 여러분, 안녕하세요! 뉴럴 프롬프팅 연구소 수석 편집자 덩베입니다. 2026년 7월 11일, 금요일의 기술 동향 브리핑을 시작합니다.\n\n오늘 우리는 두 가지 흥미로운 소식을 다룹니다. 먼저, 규제 이슈를 겪었던 Fable 5의 최신 활용 가이드와 유료 플랜 연장 소식입니다. Anthropic 엔지니어가 직접 전하는 Fable 5 활용 팁은 AI 개발자들에게 실질적인 도움이 될 것입니다. 다음으로, 셸 스크립트 보안을 한 단계 끌어올리는 HimitsuShell 프로젝트를 소개합니다. 스크립트 보호와 난독화에 대한 깊이 있는 고민을 함께 나눠보겠습니다.",
+  "meta_description": "2026년 7월 11일, AI 에이전트 성능 최적화 도구 ECC, 쉘 스크립트 보안 솔루션 HimitsuShell, 그리고 Fable 5의 규제 이슈와 Anthropic Claude Code 활용 가이드를 심층 분석합니다. AI 개발의 최신 트렌드와 실용적인 인사이트를 얻어가세요.",
+  "intro": "AI 기술이 빠르게 발전하면서, AI 에이전트의 성능 최적화와 안정적인 배포, 그리고 개발 과정에서의 보안은 이제 선택이 아닌 필수가 되었습니다. 특히 복잡한 AI 모델을 활용하는 프로젝트에서는 효율적인 자원 관리와 지적 재산권 보호가 더욱 중요해지고 있습니다.\n\n오늘 뉴럴 프롬프팅 연구소에서는 AI 에이전트의 잠재력을 극대화하고 개발 워크플로우를 강화할 수 있는 최신 도구와 이슈들을 심도 있게 다룹니다. 높은 GitHub 스타 수를 자랑하는 AI 에이전트 성능 최적화 시스템 'affaan-m/ECC'부터, 쉘 스크립트의 보안을 책임지는 'HimitsuShell', 그리고 규제 이슈를 겪었던 'Fable 5'와 Anthropic Claude Code 활용 가이드까지, AI 엔지니어라면 반드시 주목해야 할 소식들을 정리했습니다.",
   "sections": [
     {
-      "headline": "Anthropic Fable 5, 규제 위기 넘고 활용 가이드 공개",
+      "headline": "AI 에이전트 성능 최적화의 핵심, affaan-m/ECC",
       "source_ids": [
+        "github-community-edb3a626875732de",
         "요즘it-c0902b6ef178e4f9"
       ],
-      "what_happened": "Fable 5는 6월 9일 출시 후 6월 12일 미국 상무부 지시로 서비스가 전면 차단되었으나, 6월 30일 규제가 풀리면서 7월 1일 유료 플랜 서비스를 재개했다. 현재 기존 유료 구독자는 주간 사용량 제한의 최대 50%까지 7월 12일까지 Fable 5를 이용할 수 있다. Anthropic Claude Code 팀의 타리크 시히파(Thariq Shihipar)가 AI Engineer World Fair에서 발표한 \"Field Guide to Fable\" 키노트에 좋은 내용이 있어 공유되었다.",
-      "plain_explanation": "Fable 5라는 AI 서비스가 출시 직후 정부 규제로 잠시 멈췄다가 다시 시작했습니다. 지금은 유료로 사용하던 분들이 잠시 더 쓸 수 있는 기간인데, 이 서비스를 만든 회사(Anthropic)의 엔지니어가 어떻게 하면 Fable 5를 잘 활용할 수 있는지 비법을 공개한 것입니다. 마치 새로 산 스마트폰이 잠시 고장 났다가 고쳐진 후, 제조사 직원이 사용 설명서를 직접 알려주는 것과 같습니다.",
-      "why_it_matters": "Fable 5는 출시 초기부터 규제 이슈로 큰 주목을 받았던 생성형 AI 개발 도구다. 서비스 재개와 함께 Anthropic 엔지니어가 직접 활용 가이드를 제공하는 것은 개발자들이 이 도구를 효과적으로 도입하고 잠재력을 최대한 활용하는 데 중요한 기회가 된다. 특히 유료 구독자 연장 기간은 서비스의 안정화와 사용자 피드백 수렴을 위한 전략적 움직임으로 해석될 수 있다.",
-      "technical_details": "{'모델': '공개 자료에서 확인하지 못함. Fable 5는 생성형 AI 개발 도구로 언급됨.', '데이터': '공개 자료에서 확인하지 못함', '학습': '공개 자료에서 확인하지 못함', '추론': '공개 자료에서 확인하지 못함', '배포': '6월 9일 출시, 6월 12일 서비스 차단, 6월 30일 규제 해제, 7월 1일 유료 플랜 재개.', '하드웨어': '공개 자료에서 확인하지 못함', '오픈소스': '공개 자료에서 확인하지 못함', '라이선스': '공개 자료에서 확인하지 못함', '성능 수치': '공개 자료에서 확인하지 못함', 'GitHub 스타 수': '공개 자료에서 확인하지 못함', 'Hugging Face 다운로드 수': '공개 자료에서 확인하지 못함'}",
-      "editorial_take": "Fable 5의 사례는 생성형 AI 서비스가 기술적 완성도 외에 규제 환경이라는 외부 요인에 얼마나 취약할 수 있는지 보여주는 중요한 교훈입니다. 엔지니어 관점에서는 이러한 불확실성을 염두에 두고 서비스 아키텍처를 설계하거나, 특정 플랫폼에 대한 종속성을 줄이는 전략을 고민해야 합니다. Anthropic이 직접 활용 가이드를 제공하는 것은 사용자 커뮤니티를 강화하고 서비스 신뢰도를 회복하려는 노력으로 보이며, 이는 장기적인 관점에서 서비스 성공에 필수적인 요소입니다.",
-      "reader_action": "Fable 5를 사용 중이거나 관심 있는 엔지니어라면, Anthropic Claude Code 팀의 타리크 시히파가 AI Engineer World Fair에서 발표한 \"Field Guide to Fable\" 키노트 내용을 찾아보고, Fable 5의 기능과 활용법을 숙지하여 프로젝트에 적용할 수 있는 방안을 모색해 보세요. 유료 플랜 연장 기간을 활용해 서비스의 안정성과 성능을 직접 점검하는 것도 좋습니다.",
-      "verification_notes": "요즘IT 기사 (\"페이블 D-2, 앤트로픽 엔지니어가 알려주는 활용 가이드 | 요즘IT\")에서 Fable 5의 출시, 규제, 재개 일정, 유료 플랜 연장, Anthropic 엔지니어의 키노트 발표 사실을 확인했습니다."
+      "what_happened": "GitHub 프로젝트 'affaan-m/ECC'가 AI 에이전트의 성능 최적화 시스템으로 주목받고 있습니다. 이 프로젝트는 Claude Code, Codex, Opencode, Cursor 등 다양한 코드 생성 AI 모델을 위한 에이전트 하네스(harness) 성능 최적화에 중점을 두며, 228,325개의 GitHub 스타를 기록하고 있습니다. MIT 라이선스로 제공되며, 2026년 7월 9일에 마지막으로 푸시되었습니다.",
+      "plain_explanation": "AI 에이전트가 마치 숙련된 요리사처럼 여러 재료(정보)를 가지고 복잡한 요리(작업)를 할 때, 'ECC'는 요리사의 움직임을 효율적으로 만들고, 필요한 도구를 제때 제공하며, 실수를 줄여주는 비서와 같습니다. 이를 통해 에이전트가 더 빠르고 정확하게 작업을 수행하도록 돕는 시스템입니다.",
+      "why_it_matters": "AI 에이전트의 성능은 단순히 속도뿐만 아니라, 자원 효율성, 신뢰성, 그리고 최종 결과물의 품질에 직접적인 영향을 미칩니다. 특히 코드 생성 모델 기반의 에이전트는 복잡한 로직을 처리하고 다양한 환경에 배포될 수 있으므로, ECC와 같은 최적화 시스템은 에이전트의 안정적인 운영과 비용 절감에 필수적입니다.",
+      "technical_details": "",
+      "editorial_take": "AI 에이전트 개발에서 성능 최적화는 모델 자체의 개선만큼이나 중요합니다. ECC는 '스킬, 본능, 기억, 보안'이라는 다각적인 접근 방식을 통해 에이전트의 전반적인 역량을 강화하려 합니다. 이는 단순히 프롬프트 엔지니어링을 넘어, 에이전트의 내부 작동 방식을 최적화하여 복잡한 태스크를 더 효율적으로 처리하고, 특히 Claude Code와 같은 강력한 코드 생성 모델의 잠재력을 최대한 끌어내는 데 기여할 것입니다. 실제 배포 환경에서 에이전트의 응답 시간 단축과 오류율 감소는 사용자 경험과 서비스 안정성에 직결되므로, 이러한 시스템의 도입은 장기적인 관점에서 프로젝트의 성공에 필수적입니다.",
+      "reader_action": "affaan-m/ECC GitHub 저장소를 방문하여 프로젝트의 상세 내용을 확인하고, 현재 개발 중인 AI 에이전트 프로젝트에 적용 가능한 최적화 기법이 있는지 검토해 보세요. 특히 Claude Code와 같은 코드 생성 모델을 활용하고 있다면, ECC가 제시하는 '하네스' 개념을 통해 에이전트의 성능 병목 지점을 식별하고 개선하는 데 활용할 수 있습니다.",
+      "verification_notes": ""
     },
     {
-      "headline": "HimitsuShell, 셸 스크립트 난독화 및 DRM으로 보안 강화",
+      "headline": "쉘 스크립트 보안의 새로운 지평, HimitsuShell",
       "source_ids": [
         "geeknews-8ebcb2040a6aa5a9"
       ],
-      "what_happened": "HimitsuShell은 셸 스크립트를 난독화된 바이너리로 컴파일하고, 임베디드 셸 인터프리터와 고급 난독화 기술을 통해 셸 스크립트 보호 및 DRM(Digital Rights Management) 기능을 제공하는 GitHub 프로젝트다. 기존 `shc`를 넘어선 보호 기능을 목표로 한다.",
-      "plain_explanation": "HimitsuShell은 컴퓨터에서 명령을 실행하는 셸 스크립트라는 작은 프로그램들을 비밀스럽게 보호해주는 도구입니다. 마치 중요한 서류를 암호화해서 다른 사람이 쉽게 열어보거나 복사하지 못하게 하는 것과 같습니다. 이 도구는 스크립트 내용을 알아보기 어렵게 만들고, 허락된 사람만 쓸 수 있도록 관리해주는 역할을 합니다.",
-      "why_it_matters": "셸 스크립트는 시스템 관리, 자동화, 배포 등 다양한 AI/ML 엔지니어링 작업에서 필수적으로 사용되지만, 소스 코드가 그대로 노출되어 지적 재산권 침해나 보안 취약점 노출의 위험이 있었다. HimitsuShell은 이러한 스크립트를 바이너리 형태로 보호하고 난독화함으로써, 중요한 로직이나 민감한 정보가 담긴 스크립트의 무단 접근 및 복제를 방지하여 AI 모델 배포 및 운영 환경의 보안을 강화할 수 있다.",
-      "technical_details": "{'모델': '해당 없음 (소프트웨어 컴파일러/보안 도구)', '데이터': '셸 스크립트 파일이 입력으로 사용됨.', '학습': '해당 없음', '추론': '해당 없음', '배포': '셸 스크립트를 난독화된 바이너리로 컴파일하여 배포.', '하드웨어': '공개 자료에서 확인하지 못함', '오픈소스': 'GitHub 프로젝트 (HimitsuShell/Himitsu).', '라이선스': '공개 자료에서 확인하지 못함', '성능 수치': '공개 자료에서 확인하지 못함', 'GitHub 스타 수': '공개 자료에서 확인하지 못함', 'Hugging Face 다운로드 수': '해당 없음'}",
-      "editorial_take": "AI/ML 모델을 프로덕션 환경에 배포할 때, 모델 서빙 스크립트나 데이터 전처리 파이프라인 스크립트 등 핵심적인 셸 스크립트들이 노출되는 경우가 많습니다. HimitsuShell과 같은 도구는 이러한 스크립트의 지적 재산권을 보호하고, 악의적인 분석이나 변조를 어렵게 만드는 데 기여할 수 있습니다. 특히, DRM 기능은 상업용 AI 솔루션을 개발하는 기업들에게 중요한 보안 요소가 될 수 있으므로, 실제 프로젝트 적용 가능성을 면밀히 검토해볼 필요가 있습니다.",
-      "reader_action": "중요한 셸 스크립트를 다루는 AI/ML 엔지니어라면 HimitsuShell 프로젝트의 GitHub 페이지(HimitsuShell/Himitsu)를 방문하여, 해당 도구가 제공하는 난독화 및 DRM 기능이 자신의 프로젝트 보안 요구사항을 충족하는지 검토해 보세요. 특히 기존 `shc`와 비교하여 어떤 추가적인 보호 메커니즘을 제공하는지 확인하고, 테스트 환경에서 직접 적용해 보며 스크립트 보호 효과를 평가해 보는 것을 추천합니다.",
-      "verification_notes": "GeekNews 소개 페이지와 HimitsuShell 공식 웹사이트, GitHub 저장소(HimitsuShell/Himitsu)에서 프로젝트의 이름, 설명, 기능(Shell Script Compiler, Obfuscation, DRM, Embedded Shell Interpreter, Advanced Obfuscation)을 확인했습니다."
+      "what_happened": "HimitsuShell은 쉘 스크립트를 난독화된 바이너리로 컴파일하여 보호하는 도구입니다. 기존의 `shc`를 넘어선 임베디드 쉘 인터프리터와 고급 난독화 기술을 제공하며, 쉘 스크립트의 지적 재산권(DRM) 보호를 목표로 합니다. GitHub에서 'HimitsuShell/Himitsu' 프로젝트로 활발히 업데이트되고 있습니다.",
+      "plain_explanation": "우리가 작성한 중요한 레시피(쉘 스크립트)를 다른 사람이 쉽게 보고 따라 하거나 몰래 바꾸지 못하도록, HimitsuShell은 레시피를 암호화된 비밀 코드로 바꿔주는 것과 같습니다. 이렇게 하면 레시피의 내용이 보호되고, 만든 사람의 권리도 지킬 수 있습니다.",
+      "why_it_matters": "AI 모델 배포 및 운영 과정에서 쉘 스크립트는 데이터 전처리, 모델 서빙, 시스템 관리 등 핵심적인 역할을 수행합니다. HimitsuShell과 같은 도구는 이러한 스크립트의 소스 코드를 보호하여, 기업의 핵심 로직 유출을 방지하고 무단 변경이나 역공학 시도를 어렵게 만듭니다. 이는 특히 독점적인 AI 솔루션을 개발하거나 민감한 데이터를 다루는 환경에서 매우 중요합니다.",
+      "technical_details": "",
+      "editorial_take": "AI 엔지니어링에서 모델 자체의 보안만큼이나 중요한 것이 모델을 둘러싼 인프라와 스크립트의 보안입니다. HimitsuShell은 쉘 스크립트 기반의 MLOps 파이프라인이나 에지 디바이스에 배포되는 AI 애플리케이션의 핵심 로직을 보호하는 데 유용합니다. 특히, 독점적인 데이터 처리 로직이나 모델 호출 API 키와 같은 민감한 정보가 스크립트에 포함될 경우, 난독화된 바이너리 형태로 배포함으로써 보안 취약점을 크게 줄일 수 있습니다. 이는 지적 재산권 보호를 넘어, 시스템 무결성 유지와 규제 준수에도 기여할 수 있는 실용적인 접근 방식입니다.",
+      "reader_action": "내부적으로 중요한 쉘 스크립트를 사용하거나, 고객에게 배포하는 AI 솔루션에 쉘 스크립트가 포함되어 있다면 HimitsuShell을 검토해 보세요. 스크립트의 보안 수준을 높이고 지적 재산권을 보호하는 방안을 모색하는 데 도움이 될 것입니다.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "Fable 5와 Anthropic Claude Code 활용 가이드: 규제와 실용의 균형",
+      "source_ids": [
+        "요즘it-c0902b6ef178e4f9",
+        "github-community-edb3a626875732de"
+      ],
+      "what_happened": "Fable 5는 출시 후 미국 상무부의 서비스 차단이라는 규제 위기를 겪었으나, 규제 해제 후 유료 플랜 서비스를 재개했습니다. 기존 유료 구독자에게는 주간 사용량 제한의 최대 50%까지 이용 기간이 7월 12일까지 연장되었습니다. 이와 관련하여 Anthropic Claude Code 팀의 타리크 시히파(Thariq Shihipar)가 'Field Guide to Fable' 키노트를 통해 활용 가이드를 공유했습니다.",
+      "plain_explanation": "Fable 5라는 강력한 AI 도구가 잠시 사용 금지되었다가 다시 풀리는 우여곡절을 겪었습니다. 마치 복잡한 최신 스마트폰이 처음에는 사용법이 어려워 보였지만, 개발자가 직접 나서서 '이렇게 쓰면 더 좋아요!'라고 알려주는 가이드가 나온 것과 같습니다. 이제 이 가이드를 통해 Fable 5를 더 잘 활용할 수 있게 된 것입니다.",
+      "why_it_matters": "AI 모델 및 서비스의 규제 환경은 예측 불가능하며, 이는 AI 제품 개발 로드맵과 시장 진출 전략에 큰 영향을 미칩니다. Fable 5의 사례는 규제 리스크 관리의 중요성을 보여주며, 동시에 개발사 내부 전문가의 활용 가이드는 복잡한 AI 모델을 효과적으로 사용하고 잠재력을 최대한 발휘하는 데 필수적인 정보를 제공합니다. 특히 Claude Code와 같은 모델은 코드 생성 에이전트의 핵심 구성 요소로 활용될 수 있어, 그 활용법에 대한 깊이 있는 이해가 중요합니다.",
+      "technical_details": "",
+      "editorial_take": "Fable 5의 규제 해프닝은 AI 기술이 사회에 미치는 영향이 커질수록 규제 당국의 개입이 빈번해질 수 있음을 시사합니다. AI 엔지니어는 모델의 기술적 성능뿐만 아니라, 법적, 윤리적 측면까지 고려한 개발 및 배포 전략을 수립해야 합니다. Anthropic 엔지니어가 직접 공유한 Fable 활용 가이드는 Claude Code와 같은 모델의 미묘한 특성을 이해하고, 실제 개발 과정에서 발생할 수 있는 문제들을 해결하는 데 귀중한 통찰력을 제공합니다. 이러한 퍼스트 파티의 가이드는 모델의 한계를 명확히 인지하고, 최적의 성능을 이끌어내는 데 필수적이므로, 적극적으로 학습하고 적용해야 합니다.",
+      "reader_action": "Fable 5의 활용 가이드를 자세히 살펴보고, Claude Code를 포함한 생성형 AI 모델을 프로젝트에 적용할 때 발생할 수 있는 잠재적 규제 리스크와 기술적 난관에 대해 미리 대비하는 시간을 가져보세요. 특히 모델의 사용량 제한이나 특정 기능의 제약 사항을 파악하여 개발 계획에 반영하는 것이 중요합니다.",
+      "verification_notes": ""
     }
   ],
-  "closing": "오늘의 뉴럴 프롬프팅 연구소 브리핑은 여기까지입니다. Fable 5의 흥미로운 활용 가이드와 HimitsuShell의 강력한 셸 스크립트 보안 기능은 AI/ML 엔지니어링 분야의 현재와 미래를 엿볼 수 있는 중요한 단서들을 제공합니다.\n\n기술은 끊임없이 변화하고, 그 변화의 중심에는 언제나 여러분의 탐구와 적용이 있습니다. 다음 주에도 AI/ML 엔지니어링의 최전선에서 유의미한 소식들을 선별하여 찾아뵙겠습니다. 즐거운 주말 보내세요!",
-  "editorial_disclosure": "AI는 초안 작성에 활용했고, 발행 전 사람이 사실과 출처를 검토합니다.",
+  "closing": "오늘 살펴본 affaan-m/ECC, HimitsuShell, 그리고 Fable 5의 사례는 AI 엔지니어링이 단순히 모델 개발을 넘어 성능 최적화, 보안, 그리고 규제 준수라는 광범위한 영역을 포괄하고 있음을 보여줍니다. 이러한 도구와 인사이트를 통해 여러분의 AI 프로젝트가 더욱 견고하고 성공적으로 나아가기를 바랍니다. 다음 주에도 AI 기술의 최전선에서 얻은 실용적인 정보로 찾아뵙겠습니다.",
+  "editorial_disclosure": "이 초안은 AI를 활용하여 작성되었으며, 발행 전 사람이 사실과 출처를 검토합니다.",
   "model": "gemini-2.5-flash",
-  "article_count_note": "오늘은 기준을 충족한 기사가 2건이었다. 아쉽게도 3개 미만이므로, 모든 항목을 다루지는 못했지만, 핵심적인 두 가지 이슈를 밀도 있게 분석했다.",
+  "article_count_note": "",
   "images": {
     "hero": {
       "path": "hero.svg",
       "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-11/hero.svg",
       "kind": "generated-hero"
     },
-    "geeknews-8ebcb2040a6aa5a9": {
-      "origin_url": "https://himitsushell.com/img/og-image.png?v=1783749310876",
+    "github-community-edb3a626875732de": {
+      "origin_url": "https://opengraph.githubassets.com/1/affaan-m/ECC",
       "kind": "source-image",
       "path": "issue-1.png",
       "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-11/issue-1.png"
     },
+    "geeknews-8ebcb2040a6aa5a9": {
+      "origin_url": "https://himitsushell.com/img/og-image.png?v=1783750164374",
+      "kind": "source-image",
+      "path": "issue-2.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-11/issue-2.png"
+    },
     "요즘it-c0902b6ef178e4f9": {
       "origin_url": "https://yozm.wishket.com/media/news/3848/3.jfif",
       "kind": "source-image",
-      "path": "issue-2.jpg",
-      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-11/issue-2.jpg"
+      "path": "issue-3.jpg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-11/issue-3.jpg"
     }
   },
   "source_items": [
+    {
+      "id": "github-community-edb3a626875732de",
+      "source": "GitHub 커뮤니티",
+      "topic": "생성형 AI, AI 에이전트, 개발 도구, GitHub 프로젝트, AI 모델링",
+      "title": "affaan-m/ECC",
+      "url": "https://github.com/affaan-m/ECC",
+      "published_at": "2026-07-09T16:53:52+09:00",
+      "summary": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
+      "listing_url": "https://github.com/affaan-m/ECC",
+      "introduced_at": "",
+      "image_url": "https://opengraph.githubassets.com/1/affaan-m/ECC",
+      "official_url": "https://github.com/affaan-m/ECC",
+      "canonical_key": "https://github.com/affaan-m/ecc",
+      "verification": {
+        "project_kind": "github",
+        "project_name": "affaan-m/ECC",
+        "project_owner": "affaan-m",
+        "project_description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
+        "license": "MIT",
+        "updated_at": "2026-07-11T06:08:10Z",
+        "community_source": "github",
+        "github_stars": "228325",
+        "github_pushed_at": "2026-07-09T07:53:52Z"
+      }
+    },
     {
       "id": "geeknews-8ebcb2040a6aa5a9",
       "source": "HimitsuShell",
@@ -80,7 +126,7 @@
       "summary": "Shell to Obfuscated Binary. Beyond shc: Embedded Shell Interpreter & Advanced Obfuscation for Shell Script Protection.",
       "listing_url": "https://news.hada.io/topic?id=31321",
       "introduced_at": "2026-07-11T13:20:59+09:00",
-      "image_url": "https://himitsushell.com/img/og-image.png?v=1783749310876",
+      "image_url": "https://himitsushell.com/img/og-image.png?v=1783750164374",
       "official_url": "https://github.com/HimitsuShell/Himitsu",
       "canonical_key": "https://github.com/himitsushell/himitsu",
       "verification": {

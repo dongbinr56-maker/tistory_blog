@@ -26,7 +26,7 @@ def sources():
             published_at="2026-07-11T07:00:00+09:00",
             summary="검증을 위한 원천 요약입니다. 팀의 판단 기준을 다루는 공개 자료입니다.",
             official_url="https://huggingface.co/test/model" if index == 1 else "",
-            verification={"project_kind": "huggingface", "project_name": "test/model", "license": "Apache-2.0"} if index == 1 else {},
+            verification={"project_kind": "huggingface", "community_source": "huggingface", "project_name": "test/model", "license": "Apache-2.0"} if index == 1 else {},
         )
         for index in range(1, 4)
     ]
@@ -51,6 +51,13 @@ class QualityGateTest(unittest.TestCase):
         report = inspect_draft(draft, SITE)
         self.assertEqual(report.status, "BLOCKED")
         self.assertFalse(report.checks["no_click_inducement"])
+
+    def test_empty_technical_inventory_blocks_draft(self):
+        draft = generate_demo("2026-07-11", sources(), SITE)
+        draft.sections[0].why_it_matters += " 모델: 해당 없음"
+        report = inspect_draft(draft, SITE)
+        self.assertEqual(report.status, "BLOCKED")
+        self.assertFalse(report.checks["no_empty_technical_inventory"])
 
     def test_placeholder_identity_blocks_production_draft(self):
         draft = generate_demo("2026-07-11", sources(), SITE)

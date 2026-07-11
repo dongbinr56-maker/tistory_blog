@@ -250,6 +250,107 @@ def _official_facts(url: str) -> dict[str, str]:
     return facts
 
 
+def _api_json(url: str) -> Any:
+    raw, _ = _fetch_bytes(url, "application/json", attempts=2)
+    return json.loads(raw.decode("utf-8"))
+
+
+def _community_topics(*values: str, fallback: str) -> list[str]:
+    topics = _topics(" ".join(values), "")
+    if fallback not in topics:
+        topics.append(fallback)
+    if "AI 모델링" not in topics:
+        topics.append("AI 모델링")
+    return topics
+
+
+def _github_community_items(source: dict[str, Any], now: dt.datetime, days: int, limit: int) -> list[SourceItem]:
+    since = (now - dt.timedelta(days=days)).date().isoformat()
+    output: list[SourceItem] = []
+    seen: set[str] = set()
+    for topic_query in source.get("queries", []):
+        query = f"{topic_query} pushed:>={since}"
+        endpoint = "https://api.github.com/search/repositories?" + urllib.parse.urlencode({"q": query, "sort": "stars", "order": "desc", "per_page": limit})
+        for item in _api_json(endpoint).get("items", []):
+            url = str(item.get("html_url") or "")
+            full_name = str(item.get("full_name") or "")
+            if not url or not full_name or url in seen:
+                continue
+            seen.add(url)
+            pushed = str(item.get("pushed_at") or "")
+            pushed_at = _parse_datetime(pushed)
+            if pushed_at is None or pushed_at < now - dt.timedelta(days=days):
+                continue
+            facts = {
+                "project_kind": "github",
+                "project_name": full_name,
+                "project_owner": str((item.get("owner") or {}).get("login") or ""),
+                "project_description": str(item.get("description") or ""),
+                "license": str((item.get("license") or {}).get("spdx_id") or (item.get("license") or {}).get("name") or ""),
+                "updated_at": str(item.get("updated_at") or ""),
+                "community_source": "github",
+                "github_stars": str(item.get("stargazers_count") or 0),
+                "github_pushed_at": pushed,
+            }
+            digest = hashlib.sha256(url.encode("utf-8")).hexdigest()[:16]
+            output.append(SourceItem(
+                id=f"github-community-{digest}",
+                source="GitHub 커뮤니티",
+                topic=", ".join(_community_topics(full_name, facts["project_description"], " ".join(item.get("topics") or []), fallback="GitHub 프로젝트")),
+                title=full_name,
+                url=url,
+                published_at=pushed_at.isoformat(),
+                summary=facts["project_description"] or f"GitHub에서 최근 업데이트된 {full_name} 프로젝트입니다.",
+                listing_url=url,
+                image_url=f"https://opengraph.githubassets.com/1/{urllib.parse.quote(full_name, safe='/')}",
+                official_url=url,
+                canonical_key=_canonical(url, url),
+                verification=facts,
+            ))
+            if len(output) >= limit:
+                return output
+    return output
+
+
+def _huggingface_community_items(source: dict[str, Any], now: dt.datetime, days: int, limit: int) -> list[SourceItem]:
+    endpoint = "https://huggingface.co/api/models?" + urllib.parse.urlencode({"sort": "trendingScore", "direction": "-1", "limit": limit, "full": "true"})
+    output: list[SourceItem] = []
+    for item in _api_json(endpoint):
+        model_id = str(item.get("id") or "")
+        last_modified = _parse_datetime(str(item.get("lastModified") or ""))
+        if not model_id or last_modified is None or last_modified < now - dt.timedelta(days=days):
+            continue
+        url = f"https://huggingface.co/{model_id}"
+        card = item.get("cardData") or {}
+        facts = {
+            "project_kind": "huggingface",
+            "project_name": model_id,
+            "project_owner": str(item.get("author") or model_id.split("/", 1)[0]),
+            "license": str(card.get("license") or ""),
+            "updated_at": last_modified.isoformat(),
+            "community_source": "huggingface",
+            "huggingface_likes": str(item.get("likes") or 0),
+            "huggingface_downloads": str(item.get("downloads") or 0),
+            "pipeline_tag": str(item.get("pipeline_tag") or ""),
+        }
+        digest = hashlib.sha256(url.encode("utf-8")).hexdigest()[:16]
+        output.append(SourceItem(
+            id=f"huggingface-community-{digest}",
+            source="Hugging Face 커뮤니티",
+            topic=", ".join(_community_topics(model_id, facts["pipeline_tag"], " ".join(item.get("tags") or []), fallback="Hugging Face")),
+            title=model_id,
+            url=url,
+            published_at=last_modified.isoformat(),
+            summary=f"Hugging Face에서 최근 주목받는 {facts['pipeline_tag'] or 'AI'} 모델 저장소입니다.",
+            listing_url=url,
+            image_url=f"https://huggingface.co/{model_id}/resolve/main/thumbnail.png",
+            official_url=url,
+            canonical_key=_canonical(url, url),
+            verification=facts,
+        ))
+    return output
+
+
 def _topics(text: str, official_url: str) -> list[str]:
     lowered = (text + " " + official_url).lower()
     return [topic for topic, terms in TOPIC_TERMS.items() if any(term in lowered for term in terms)]
@@ -324,6 +425,8 @@ def collect_candidates(config: dict[str, Any], now: dt.datetime | None = None) -
     selection = config.get("selection", {})
     limit = int(selection.get("max_candidates_per_source", 15))
     lookback_hours = int(selection.get("lookback_hours", 24))
+    community_days = int(selection.get("community_lookback_days", 14))
+    community_limit = int(selection.get("community_candidate_limit", 8))
     errors: list[str] = []
     verified: list[SourceItem] = []
     seen: set[str] = set()
@@ -333,6 +436,18 @@ def collect_candidates(config: dict[str, Any], now: dt.datetime | None = None) -
                 listings = _rss_listings(str(source["url"]), str(source["name"]), limit)
             elif source.get("type") == "geeknews_html":
                 listings = _geeknews_listings(str(source["url"]), str(source["name"]), limit)
+            elif source.get("type") == "github_community":
+                for item in _github_community_items(source, now, community_days, community_limit):
+                    if item.canonical_key not in seen:
+                        seen.add(item.canonical_key)
+                        verified.append(item)
+                continue
+            elif source.get("type") == "huggingface_community":
+                for item in _huggingface_community_items(source, now, community_days, community_limit):
+                    if item.canonical_key not in seen:
+                        seen.add(item.canonical_key)
+                        verified.append(item)
+                continue
             else:
                 raise ValueError(f"지원하지 않는 수집기: {source.get('type')}")
             for listing in listings:
@@ -354,30 +469,37 @@ def _score(item: SourceItem) -> int:
     score += sum(2 for term in MODEL_TERMS if term in corpus)
     if item.verification.get("project_kind") in {"github", "huggingface"}:
         score += 20
+    if item.verification.get("community_source") in {"github", "huggingface"}:
+        score += 25
+        try:
+            score += min(int(item.verification.get("github_stars", "0")) // 10_000, 25)
+            score += min(int(item.verification.get("huggingface_likes", "0")) // 100, 15)
+        except ValueError:
+            pass
     if item.official_url:
         score += 5
     return score
 
 
 def choose_diverse(items: list[SourceItem], count: int, excluded_terms: list[str]) -> list[SourceItem]:
-    """Choose up to three recent, verified items with one GitHub/HF item required."""
+    """Fill three slots with at least one currently active GitHub/HF community project."""
     blocked = [term.lower() for term in excluded_terms]
     eligible = [item for item in items if not any(term in f"{item.title} {item.summary}".lower() for term in blocked)]
     ordered = sorted(eligible, key=lambda item: (_score(item), item.published_at, item.title), reverse=True)
-    project = next((item for item in ordered if item.verification.get("project_kind") in {"github", "huggingface"}), None)
+    project = next((item for item in ordered if item.verification.get("community_source") in {"github", "huggingface"}), None)
     if project is None:
         return []
     selected = [project]
-    seen_sources = {project.source}
-    seen_topics = {project.topic}
-    for item in ordered:
+    seen_keys = {project.canonical_key}
+    editorial = [item for item in ordered if not item.verification.get("community_source")]
+    community = [item for item in ordered if item.verification.get("community_source")]
+    for item in editorial + community:
         if item in selected:
             continue
-        if item.source in seen_sources and item.topic in seen_topics:
+        if item.canonical_key in seen_keys:
             continue
         selected.append(item)
-        seen_sources.add(item.source)
-        seen_topics.add(item.topic)
+        seen_keys.add(item.canonical_key)
         if len(selected) == count:
             break
     return selected
@@ -387,7 +509,7 @@ def collection_payload(date: str, candidates: list[SourceItem], selected: list[S
     return {
         "date": date,
         "collected_at": dt.datetime.now(dt.timezone.utc).isoformat(),
-        "selection_rule": "최근 24시간 검증 기사 중 GitHub 또는 Hugging Face 공식 프로젝트 1건 이상 필수",
+        "selection_rule": "최근 24시간 요즘IT·GeekNews 기사와 최근 14일 GitHub/Hugging Face 커뮤니티 활성 프로젝트를 조합해 3건을 구성하며, 커뮤니티 프로젝트 1건 이상 필수",
         "candidates": [item.to_dict() for item in candidates],
         "selected": [item.to_dict() for item in selected],
         "collector_errors": errors,

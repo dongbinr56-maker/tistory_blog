@@ -4,7 +4,7 @@ from tistory_newsroom.collect import choose_diverse
 from tistory_newsroom.models import SourceItem
 
 
-def item(number: int, project_kind: str = "") -> SourceItem:
+def item(number: int, project_kind: str = "", community: bool = False) -> SourceItem:
     return SourceItem(
         id=f"item-{number}",
         source=f"출처-{number}",
@@ -15,16 +15,17 @@ def item(number: int, project_kind: str = "") -> SourceItem:
         summary="모델 추론과 배포, 평가 조건을 확인하는 기사입니다.",
         official_url=f"https://{project_kind}.example.org/project" if project_kind else "",
         canonical_key=f"project-{number}",
-        verification={"project_kind": project_kind} if project_kind else {},
+        verification={"project_kind": project_kind, **({"community_source": project_kind} if community else {})} if project_kind else {},
     )
 
 
 class SelectionTest(unittest.TestCase):
-    def test_requires_one_github_or_huggingface_project(self):
+    def test_requires_one_github_or_huggingface_community_project(self):
         selected = choose_diverse([item(1), item(2)], 3, [])
         self.assertEqual(selected, [])
 
-    def test_keeps_project_and_does_not_pad_to_three(self):
-        selected = choose_diverse([item(1, "github"), item(2)], 3, [])
-        self.assertEqual(len(selected), 2)
+    def test_fills_three_slots_from_editorial_and_community_sources(self):
+        selected = choose_diverse([item(1, "github", community=True), item(2), item(3)], 3, [])
+        self.assertEqual(len(selected), 3)
         self.assertEqual(selected[0].verification["project_kind"], "github")
+        self.assertEqual(selected[0].verification["community_source"], "github")

@@ -11,6 +11,7 @@
     "canonical_key": "https://huggingface.co/example/model-card",
     "verification": {
       "project_kind": "huggingface",
+      "community_source": "huggingface",
       "project_name": "example/model-card",
       "project_owner": "example",
       "license": "Apache-2.0"

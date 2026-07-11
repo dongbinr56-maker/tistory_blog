@@ -9,13 +9,25 @@
       "name": "GeekNews",
       "type": "geeknews_html",
       "url": "https://news.hada.io/"
+    },
+    {
+      "name": "GitHub 커뮤니티",
+      "type": "github_community",
+      "queries": ["topic:llm", "topic:generative-ai", "topic:ai-agent"]
+    },
+    {
+      "name": "Hugging Face 커뮤니티",
+      "type": "huggingface_community"
     }
   ],
   "selection": {
     "max_candidates_per_source": 15,
     "final_article_count": 3,
     "lookback_hours": 24,
+    "community_lookback_days": 14,
+    "community_candidate_limit": 8,
     "excluded_title_terms": ["광고", "채용", "이벤트", "할인", "sponsored", "웨비나", "세미나"],
-    "target_topics": ["생성형 AI", "AI 에이전트", "컴퓨터 비전", "AI 모델링", "오픈소스", "개발 도구", "GitHub", "Hugging Face", "온디바이스 AI", "NPU", "GPU", "엣지 AI"]
+    "target_topics": ["생성형 AI", "AI 에이전트", "컴퓨터 비전", "AI 모델링", "오픈소스", "개발 도구", "GitHub", "Hugging Face", "온디바이스 AI", "NPU", "GPU", "엣지 AI"],
+    "require_community_project": true
   }
 }

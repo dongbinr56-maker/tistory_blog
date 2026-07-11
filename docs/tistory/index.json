@@ -1,24 +1,24 @@
 [
   {
     "date": "2026-07-11",
-    "title": "Anthropic Fable 5 활용 가이드와 HimitsuShell: AI/ML 엔지니어링의 현재와 미래",
+    "title": "AI 에이전트 성능의 한계 돌파: ECC와 Claude Code 최적화 전략",
     "title_candidates": [
-      "Fable 5 활용 가이드와 HimitsuShell: 2026년 7월 11일 AI/ML 엔지니어 동향",
-      "Anthropic Fable 5의 현황과 HimitsuShell로 본 스크립트 보안",
-      "AI 개발 도구 Fable 5와 셸 스크립트 보호 HimitsuShell 업데이트"
+      "AI 에이전트 성능의 한계 돌파: ECC와 Claude Code 최적화 전략",
+      "쉘 스크립트 보안, AI 배포의 숨겨진 열쇠: HimitsuShell 심층 분석",
+      "Fable 5 규제 해프닝과 Anthropic의 조언: AI 개발자가 알아야 할 것들"
     ],
     "tags": [
+      "AI 에이전트",
+      "성능 최적화",
+      "코드 보안",
       "생성형 AI",
       "개발 도구",
-      "Fable 5",
-      "Anthropic",
-      "셸 스크립트",
-      "보안",
-      "HimitsuShell",
-      "AI 엔지니어링"
+      "Claude Code",
+      "오픈소스",
+      "배포 전략"
     ],
-    "meta_description": "2026년 7월 11일, Anthropic Fable 5의 최신 활용 가이드와 셸 스크립트 보안을 강화하는 HimitsuShell 프로젝트를 심층 분석합니다. AI/ML 엔지니어를 위한 필수 기술 동향을 놓치지 마세요.",
-    "article_count_note": "오늘은 기준을 충족한 기사가 2건이었다. 아쉽게도 3개 미만이므로, 모든 항목을 다루지는 못했지만, 핵심적인 두 가지 이슈를 밀도 있게 분석했다.",
+    "meta_description": "2026년 7월 11일, AI 에이전트 성능 최적화 도구 ECC, 쉘 스크립트 보안 솔루션 HimitsuShell, 그리고 Fable 5의 규제 이슈와 Anthropic Claude Code 활용 가이드를 심층 분석합니다. AI 개발의 최신 트렌드와 실용적인 인사이트를 얻어가세요.",
+    "article_count_note": "",
     "quality_status": "READY_FOR_MANUAL_REVIEW",
     "manual_review_required": true,
     "publish_checklist": [
@@ -29,6 +29,11 @@
       "티스토리 HTML 모드에 붙여넣은 뒤 모바일 화면을 확인합니다."
     ],
     "sources": [
+      {
+        "name": "GitHub 커뮤니티",
+        "title": "affaan-m/ECC",
+        "url": "https://github.com/affaan-m/ECC"
+      },
       {
         "name": "HimitsuShell",
         "title": "HimitsuShell – Shell Script Compiler, Obfuscation & DRM",
@@ -46,17 +51,23 @@
         "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-11/hero.svg",
         "kind": "generated-hero"
       },
-      "geeknews-8ebcb2040a6aa5a9": {
-        "origin_url": "https://himitsushell.com/img/og-image.png?v=1783749310876",
+      "github-community-edb3a626875732de": {
+        "origin_url": "https://opengraph.githubassets.com/1/affaan-m/ECC",
         "kind": "source-image",
         "path": "issue-1.png",
         "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-11/issue-1.png"
       },
+      "geeknews-8ebcb2040a6aa5a9": {
+        "origin_url": "https://himitsushell.com/img/og-image.png?v=1783750164374",
+        "kind": "source-image",
+        "path": "issue-2.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-11/issue-2.png"
+      },
       "요즘it-c0902b6ef178e4f9": {
         "origin_url": "https://yozm.wishket.com/media/news/3848/3.jfif",
         "kind": "source-image",
-        "path": "issue-2.jpg",
-        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-11/issue-2.jpg"
+        "path": "issue-3.jpg",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-11/issue-3.jpg"
       }
     },
     "html_path": "tistory/2026-07-11.html"
