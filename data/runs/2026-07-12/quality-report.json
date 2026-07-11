@@ -1,0 +1,31 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    "상투적인 AI 요약 표현을 걷어내고, 출처에 근거한 구체적인 편집 문장으로 다시 작성해야 합니다: 중요한 역할을 합니다"
+  ],
+  "warnings": [],
+  "checks": {
+    "three_distinct_title_candidates": true,
+    "reasonable_title_length": true,
+    "tag_count_and_uniqueness": true,
+    "sufficient_sources": true,
+    "all_sections_trace_to_source": true,
+    "secondary_source_attribution": true,
+    "plain_language_and_engineering_value": true,
+    "original_value_added": true,
+    "substantive_body": true,
+    "github_or_huggingface_project_included": true,
+    "community_project_included": true,
+    "manual_review_required": true,
+    "no_click_inducement": true,
+    "no_empty_technical_inventory": true,
+    "no_volatile_community_metrics": true,
+    "natural_editorial_voice": false,
+    "specific_intro": true,
+    "no_restricted_topic_signal": true,
+    "contact_configured": true,
+    "author_configured": true,
+    "blog_url_configured": true
+  },
+  "manual_review_required": true
+}
