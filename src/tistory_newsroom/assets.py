@@ -1,8 +1,11 @@
 from __future__ import annotations
 
 import html
+import hashlib
 import io
+import math
 import mimetypes
+import random
 import re
 import urllib.parse
 from pathlib import Path
@@ -118,47 +121,53 @@ def _png_card(title: str, eyebrow: str) -> bytes:
     return result.getvalue()
 
 
-def _thumbnail_card(title: str, date: str) -> bytes:
-    """Render a distinct cover thumbnail; it is never inserted into the article body."""
+def _thumbnail_card(draft: Draft) -> bytes:
+    """Render a text-free thematic thumbnail; it is never inserted into the article body."""
     width, height = 1200, 630
-    image = Image.new("RGB", (width, height), "#171b45")
+    themes = " ".join([draft.title, *draft.tags, *(source.topic for source in draft.source_items)]).lower()
+    seed = int(hashlib.sha256(f"{draft.date}|{themes}".encode()).hexdigest()[:16], 16)
+    rng = random.Random(seed)
+    palette = ((5, 18, 38), (16, 62, 96), (32, 211, 238), (139, 92, 246))
+    if any(token in themes for token in ("보안", "security", "암호", "obfusc")):
+        palette = ((8, 14, 39), (24, 42, 102), (34, 211, 238), (168, 85, 247))
+    elif any(token in themes for token in ("비전", "vision", "이미지", "image")):
+        palette = ((10, 20, 45), (17, 94, 89), (45, 212, 191), (59, 130, 246))
+    start, end, cyan, violet = palette
+    image = Image.new("RGB", (width, height), start)
     draw = ImageDraw.Draw(image)
-    start, end = (23, 27, 69), (88, 28, 135)
     for y in range(height):
         ratio = y / (height - 1)
         color = tuple(round(start[index] * (1 - ratio) + end[index] * ratio) for index in range(3))
         draw.line((0, y, width, y), fill=color)
     overlay = Image.new("RGBA", image.size, (0, 0, 0, 0))
     overlay_draw = ImageDraw.Draw(overlay)
-    overlay_draw.rounded_rectangle((780, -120, 1290, 390), radius=120, fill=(125, 211, 252, 27))
-    overlay_draw.ellipse((890, -15, 1160, 255), outline=(224, 231, 255, 68), width=3)
-    overlay_draw.rounded_rectangle((80, 84, 292, 126), radius=21, fill=(224, 231, 255, 32))
+    for index in range(18):
+        x = rng.randint(0, width)
+        y = rng.randint(0, height)
+        radius = rng.randint(2, 7)
+        color = (*cyan, rng.randint(35, 115))
+        overlay_draw.ellipse((x - radius, y - radius, x + radius, y + radius), fill=color)
+    for index in range(10):
+        start_x = rng.randint(40, 520)
+        start_y = rng.randint(90, 560)
+        bend_x = rng.randint(550, 850)
+        end_x = rng.randint(850, 1170)
+        end_y = rng.randint(70, 570)
+        overlay_draw.line((start_x, start_y, bend_x, start_y, bend_x, end_y, end_x, end_y), fill=(*cyan, 75), width=2)
+        overlay_draw.ellipse((end_x - 5, end_y - 5, end_x + 5, end_y + 5), fill=(*violet, 170))
+    overlay_draw.ellipse((660, 100, 1080, 520), outline=(*cyan, 120), width=3)
+    overlay_draw.ellipse((730, 170, 1010, 450), outline=(*violet, 150), width=3)
+    overlay_draw.regular_polygon((870, 310, 120), 6, rotation=30, fill=(*cyan, 45), outline=(*cyan, 220), width=3)
+    for angle in range(0, 360, 45):
+        x = 870 + int(155 * math.cos(math.radians(angle)))
+        y = 310 + int(155 * math.sin(math.radians(angle)))
+        overlay_draw.line((870, 310, x, y), fill=(*violet, 145), width=2)
+        overlay_draw.ellipse((x - 9, y - 9, x + 9, y + 9), fill=(*cyan, 210))
+    # Security-focused days get a visual shield, but never a title or article text.
+    if any(token in themes for token in ("보안", "security", "암호", "obfusc")):
+        overlay_draw.polygon(((1040, 170), (1140, 210), (1120, 365), (1040, 440), (960, 365), (940, 210)), fill=(*violet, 55), outline=(*cyan, 230), width=3)
+        overlay_draw.line((980, 285, 1025, 330, 1105, 235), fill=(*cyan, 230), width=8)
     image = Image.alpha_composite(image.convert("RGBA"), overlay)
-    draw = ImageDraw.Draw(image)
-    label_font = _font(22)
-    footer_font = _font(20)
-    draw.text((104, 93), "TODAY'S AI · DEV", font=label_font, fill="#e0e7ff")
-
-    text_width = 870
-    title_font = _font(56)
-    lines = _wrapped_lines(draw, title[:110], title_font, text_width)
-    for size in (56, 52, 48, 44, 40):
-        title_font = _font(size)
-        lines = _wrapped_lines(draw, title[:110], title_font, text_width)
-        if len(lines) <= 3:
-            break
-    if len(lines) > 3:
-        lines = lines[:3]
-        suffix = "…"
-        while lines[-1] and draw.textlength(lines[-1] + suffix, font=title_font) > text_width:
-            lines[-1] = lines[-1][:-1]
-        lines[-1] += suffix
-    line_height = int(title_font.size * 1.27)
-    title_height = line_height * len(lines)
-    title_y = max(190, min(275, 358 - title_height // 2))
-    for index, line in enumerate(lines):
-        draw.text((80, title_y + index * line_height), line, font=title_font, fill="#ffffff")
-    draw.text((80, 550), f"AI Engineering Daily Brief · {date.replace('-', '.')}", font=footer_font, fill="#c7d2fe")
 
     result = io.BytesIO()
     image.convert("RGB").save(result, format="PNG", optimize=True)
@@ -191,7 +200,7 @@ def create_thumbnail_image_asset(root: Path, draft: Draft, asset_base_url: str) 
     stale_path = directory / thumbnail_name
     if stale_path.is_file():
         stale_path.unlink()
-    (directory / thumbnail_name).write_bytes(_thumbnail_card(draft.title, draft.date))
+    (directory / thumbnail_name).write_bytes(_thumbnail_card(draft))
     return {
         "path": thumbnail_name,
         "url": _public_url(asset_base_url, draft.date, thumbnail_name),

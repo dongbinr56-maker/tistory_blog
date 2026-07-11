@@ -29,6 +29,7 @@ class AssetTest(unittest.TestCase):
             self.assertTrue(thumbnail_path.exists())
             self.assertEqual(hero_path.read_bytes()[:8], b"\x89PNG\r\n\x1a\n")
             self.assertEqual(thumbnail_path.read_bytes()[:8], b"\x89PNG\r\n\x1a\n")
+            self.assertNotEqual(hero_path.read_bytes(), thumbnail_path.read_bytes())
             self.assertEqual(images["hero"]["path"], "hero.png")
             self.assertEqual(images["thumbnail"]["path"], "thumbnail.png")
             self.assertTrue(images["item-1"]["url"].startswith("https://example.github.io/"))
