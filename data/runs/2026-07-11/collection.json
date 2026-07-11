@@ -1,6 +1,6 @@
 {
   "date": "2026-07-11",
-  "collected_at": "2026-07-11T07:34:23.051114+00:00",
+  "collected_at": "2026-07-11T08:03:22.897134+00:00",
   "selection_rule": "최근 24시간 요즘IT·GeekNews 기사와 최근 14일 GitHub/Hugging Face 커뮤니티 활성 프로젝트를 조합해 3건을 구성하며, 커뮤니티 프로젝트 1건 이상 필수. 이전 날짜에 선택한 원문·공식 프로젝트 URL은 제외",
   "history_exclusion": {
     "past_url_key_count": 0,
@@ -17,7 +17,7 @@
       "summary": "Shell to Obfuscated Binary. Beyond shc: Embedded Shell Interpreter & Advanced Obfuscation for Shell Script Protection.",
       "listing_url": "https://news.hada.io/topic?id=31321",
       "introduced_at": "2026-07-11T13:20:59+09:00",
-      "image_url": "https://himitsushell.com/img/og-image.png?v=1783755254122",
+      "image_url": "https://himitsushell.com/img/og-image.png?v=1783756992238",
       "official_url": "https://github.com/HimitsuShell/Himitsu",
       "canonical_key": "https://github.com/himitsushell/himitsu",
       "verification": {
@@ -54,9 +54,9 @@
         "project_owner": "affaan-m",
         "project_description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
         "license": "MIT",
-        "updated_at": "2026-07-11T07:30:50Z",
+        "updated_at": "2026-07-11T07:54:09Z",
         "community_source": "github",
-        "github_stars": "228349",
+        "github_stars": "228354",
         "github_pushed_at": "2026-07-09T07:53:52Z"
       }
     },
@@ -79,9 +79,9 @@
         "project_owner": "NousResearch",
         "project_description": "The agent that grows with you",
         "license": "MIT",
-        "updated_at": "2026-07-11T07:31:10Z",
+        "updated_at": "2026-07-11T08:02:16Z",
         "community_source": "github",
-        "github_stars": "212917",
+        "github_stars": "212925",
         "github_pushed_at": "2026-07-11T06:58:56Z"
       }
     },
@@ -104,9 +104,9 @@
         "project_owner": "Significant-Gravitas",
         "project_description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-11T07:31:39Z",
+        "updated_at": "2026-07-11T07:49:00Z",
         "community_source": "github",
-        "github_stars": "185463",
+        "github_stars": "185462",
         "github_pushed_at": "2026-07-11T06:14:27Z"
       }
     },
@@ -129,9 +129,9 @@
         "project_owner": "ollama",
         "project_description": "Get up and running with Kimi-K2.6, GLM-5.1, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
         "license": "MIT",
-        "updated_at": "2026-07-11T07:05:53Z",
+        "updated_at": "2026-07-11T08:03:18Z",
         "community_source": "github",
-        "github_stars": "175899",
+        "github_stars": "175901",
         "github_pushed_at": "2026-07-10T00:42:15Z"
       }
     },
@@ -154,9 +154,9 @@
         "project_owner": "f",
         "project_description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-11T07:26:10Z",
+        "updated_at": "2026-07-11T07:38:34Z",
         "community_source": "github",
-        "github_stars": "165363",
+        "github_stars": "165365",
         "github_pushed_at": "2026-07-11T04:05:09Z"
       }
     },
@@ -179,9 +179,9 @@
         "project_owner": "huggingface",
         "project_description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
         "license": "Apache-2.0",
-        "updated_at": "2026-07-11T07:02:21Z",
+        "updated_at": "2026-07-11T07:56:08Z",
         "community_source": "github",
-        "github_stars": "162474",
+        "github_stars": "162476",
         "github_pushed_at": "2026-07-10T22:00:52Z"
       }
     },
@@ -191,7 +191,7 @@
       "topic": "생성형 AI, AI 에이전트, GitHub 프로젝트, AI 모델링",
       "title": "firecrawl/firecrawl",
       "url": "https://github.com/firecrawl/firecrawl",
-      "published_at": "2026-07-11T15:51:59+09:00",
+      "published_at": "2026-07-11T16:51:01+09:00",
       "summary": "The API to search, scrape, and interact with the web at scale. 🔥",
       "listing_url": "https://github.com/firecrawl/firecrawl",
       "introduced_at": "",
@@ -204,10 +204,10 @@
         "project_owner": "firecrawl",
         "project_description": "The API to search, scrape, and interact with the web at scale. 🔥",
         "license": "AGPL-3.0",
-        "updated_at": "2026-07-11T07:29:28Z",
+        "updated_at": "2026-07-11T08:02:44Z",
         "community_source": "github",
-        "github_stars": "149043",
-        "github_pushed_at": "2026-07-11T06:51:59Z"
+        "github_stars": "149055",
+        "github_pushed_at": "2026-07-11T07:51:01Z"
       }
     },
     {
@@ -229,9 +229,9 @@
         "project_owner": "langgenius",
         "project_description": "Production-ready platform for agentic workflow development.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-11T07:31:54Z",
+        "updated_at": "2026-07-11T07:49:00Z",
         "community_source": "github",
-        "github_stars": "148467",
+        "github_stars": "148470",
         "github_pushed_at": "2026-07-10T22:12:52Z"
       }
     },
@@ -255,7 +255,7 @@
         "license": "",
         "updated_at": "2026-07-06T23:09:24+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "679",
+        "huggingface_likes": "683",
         "huggingface_downloads": "6923",
         "pipeline_tag": "text-generation"
       }
@@ -305,7 +305,7 @@
         "license": "",
         "updated_at": "2026-07-02T17:08:14+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "3798",
+        "huggingface_likes": "3799",
         "huggingface_downloads": "392655",
         "pipeline_tag": "text-generation"
       }
@@ -405,7 +405,7 @@
         "license": "",
         "updated_at": "2026-07-03T17:54:29+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "839",
+        "huggingface_likes": "840",
         "huggingface_downloads": "0",
         "pipeline_tag": ""
       }
@@ -456,9 +456,9 @@
         "project_owner": "affaan-m",
         "project_description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
         "license": "MIT",
-        "updated_at": "2026-07-11T07:30:50Z",
+        "updated_at": "2026-07-11T07:54:09Z",
         "community_source": "github",
-        "github_stars": "228349",
+        "github_stars": "228354",
         "github_pushed_at": "2026-07-09T07:53:52Z"
       }
     },
@@ -472,7 +472,7 @@
       "summary": "Shell to Obfuscated Binary. Beyond shc: Embedded Shell Interpreter & Advanced Obfuscation for Shell Script Protection.",
       "listing_url": "https://news.hada.io/topic?id=31321",
       "introduced_at": "2026-07-11T13:20:59+09:00",
-      "image_url": "https://himitsushell.com/img/og-image.png?v=1783755254122",
+      "image_url": "https://himitsushell.com/img/og-image.png?v=1783756992238",
       "official_url": "https://github.com/HimitsuShell/Himitsu",
       "canonical_key": "https://github.com/himitsushell/himitsu",
       "verification": {
@@ -509,9 +509,9 @@
         "project_owner": "NousResearch",
         "project_description": "The agent that grows with you",
         "license": "MIT",
-        "updated_at": "2026-07-11T07:31:10Z",
+        "updated_at": "2026-07-11T08:02:16Z",
         "community_source": "github",
-        "github_stars": "212917",
+        "github_stars": "212925",
         "github_pushed_at": "2026-07-11T06:58:56Z"
       }
     }
