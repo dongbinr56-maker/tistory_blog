@@ -1,29 +1,8 @@
 {
   "date": "2026-07-11",
-  "collected_at": "2026-07-11T06:09:36.595233+00:00",
+  "collected_at": "2026-07-11T06:11:30.619921+00:00",
   "selection_rule": "최근 24시간 요즘IT·GeekNews 기사와 최근 14일 GitHub/Hugging Face 커뮤니티 활성 프로젝트를 조합해 3건을 구성하며, 커뮤니티 프로젝트 1건 이상 필수",
   "candidates": [
-    {
-      "id": "요즘it-c0902b6ef178e4f9",
-      "source": "요즘IT",
-      "topic": "생성형 AI, 개발 도구",
-      "title": "페이블 D-2, 앤트로픽 엔지니어가 알려주는 활용 가이드 | 요즘IT",
-      "url": "https://yozm.wishket.com/magazine/detail/3848",
-      "published_at": "2026-07-10T17:00:17+09:00",
-      "summary": "6월 9일 출시된 페이블 5(Fable 5)는 지난 한 달간 롤러코스터 같은 시간을 보냈습니다. 출시 사흘 만인 6월 12일, 미국 상무부의 지시로 서비스가 전면 차단되는 위기를 맞았지만, 6월 30일 규제가 풀리면서 7월 1일 유료 플랜 서비스를 재개했죠. 현재 기존 유료 구독자라면, 주간 사용량 제한의 최대 50%까지 페이블 5를 이용할 수 있는데요. 원래는 7월 7일에 이 구독제 이용도 끝날 예정이었지만, 앤트로픽이 기간을 5일 더 연장했습니다. 변경된 만료일은 7월 12일. 오늘이 7월 10일이니, 이제 딱 이틀 남았습니다. 마침 앤트로픽 클로드 코드(Claude Code) 팀의 타리크 시히파(Thariq Shihipar)가 AI Engineer World Fair에서 발표한 \"Field Guide to Fable\" 키노트에 좋은 내용이 있어 공유합니다.",
-      "listing_url": "https://yozm.wishket.com/magazine/detail/3848",
-      "introduced_at": "",
-      "image_url": "https://yozm.wishket.com/media/news/3848/3.jfif",
-      "official_url": "",
-      "canonical_key": "https://yozm.wishket.com/magazine/detail/3848",
-      "verification": {
-        "article_title_verified": "페이블 D-2, 앤트로픽 엔지니어가 알려주는 활용 가이드 | 요즘IT",
-        "article_source_verified": "요즘IT",
-        "article_published_verified": "2026-07-10T17:00:17+09:00",
-        "article_url_verified": "https://yozm.wishket.com/magazine/detail/3848",
-        "geeknews_listing_url": ""
-      }
-    },
     {
       "id": "geeknews-8ebcb2040a6aa5a9",
       "source": "HimitsuShell",
@@ -34,7 +13,7 @@
       "summary": "Shell to Obfuscated Binary. Beyond shc: Embedded Shell Interpreter & Advanced Obfuscation for Shell Script Protection.",
       "listing_url": "https://news.hada.io/topic?id=31321",
       "introduced_at": "2026-07-11T13:20:59+09:00",
-      "image_url": "https://himitsushell.com/img/og-image.png?v=1783750164374",
+      "image_url": "https://himitsushell.com/img/og-image.png?v=1783750281730",
       "official_url": "https://github.com/HimitsuShell/Himitsu",
       "canonical_key": "https://github.com/himitsushell/himitsu",
       "verification": {
@@ -171,9 +150,9 @@
         "project_owner": "f",
         "project_description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-11T05:53:00Z",
+        "updated_at": "2026-07-11T06:10:10Z",
         "community_source": "github",
-        "github_stars": "165352",
+        "github_stars": "165353",
         "github_pushed_at": "2026-07-11T04:05:09Z"
       }
     },
@@ -221,9 +200,9 @@
         "project_owner": "firecrawl",
         "project_description": "The API to search, scrape, and interact with the web at scale. 🔥",
         "license": "AGPL-3.0",
-        "updated_at": "2026-07-11T06:08:35Z",
+        "updated_at": "2026-07-11T06:09:49Z",
         "community_source": "github",
-        "github_stars": "149010",
+        "github_stars": "149011",
         "github_pushed_at": "2026-07-11T02:21:53Z"
       }
     },
@@ -489,7 +468,7 @@
       "summary": "Shell to Obfuscated Binary. Beyond shc: Embedded Shell Interpreter & Advanced Obfuscation for Shell Script Protection.",
       "listing_url": "https://news.hada.io/topic?id=31321",
       "introduced_at": "2026-07-11T13:20:59+09:00",
-      "image_url": "https://himitsushell.com/img/og-image.png?v=1783750164374",
+      "image_url": "https://himitsushell.com/img/og-image.png?v=1783750281730",
       "official_url": "https://github.com/HimitsuShell/Himitsu",
       "canonical_key": "https://github.com/himitsushell/himitsu",
       "verification": {
@@ -508,26 +487,33 @@
       }
     },
     {
-      "id": "요즘it-c0902b6ef178e4f9",
-      "source": "요즘IT",
-      "topic": "생성형 AI, 개발 도구",
-      "title": "페이블 D-2, 앤트로픽 엔지니어가 알려주는 활용 가이드 | 요즘IT",
-      "url": "https://yozm.wishket.com/magazine/detail/3848",
-      "published_at": "2026-07-10T17:00:17+09:00",
-      "summary": "6월 9일 출시된 페이블 5(Fable 5)는 지난 한 달간 롤러코스터 같은 시간을 보냈습니다. 출시 사흘 만인 6월 12일, 미국 상무부의 지시로 서비스가 전면 차단되는 위기를 맞았지만, 6월 30일 규제가 풀리면서 7월 1일 유료 플랜 서비스를 재개했죠. 현재 기존 유료 구독자라면, 주간 사용량 제한의 최대 50%까지 페이블 5를 이용할 수 있는데요. 원래는 7월 7일에 이 구독제 이용도 끝날 예정이었지만, 앤트로픽이 기간을 5일 더 연장했습니다. 변경된 만료일은 7월 12일. 오늘이 7월 10일이니, 이제 딱 이틀 남았습니다. 마침 앤트로픽 클로드 코드(Claude Code) 팀의 타리크 시히파(Thariq Shihipar)가 AI Engineer World Fair에서 발표한 \"Field Guide to Fable\" 키노트에 좋은 내용이 있어 공유합니다.",
-      "listing_url": "https://yozm.wishket.com/magazine/detail/3848",
+      "id": "github-community-ec2b8bd43eefd65f",
+      "source": "GitHub 커뮤니티",
+      "topic": "생성형 AI, AI 에이전트, 개발 도구, GitHub 프로젝트, AI 모델링",
+      "title": "NousResearch/hermes-agent",
+      "url": "https://github.com/NousResearch/hermes-agent",
+      "published_at": "2026-07-11T14:43:50+09:00",
+      "summary": "The agent that grows with you",
+      "listing_url": "https://github.com/NousResearch/hermes-agent",
       "introduced_at": "",
-      "image_url": "https://yozm.wishket.com/media/news/3848/3.jfif",
-      "official_url": "",
-      "canonical_key": "https://yozm.wishket.com/magazine/detail/3848",
+      "image_url": "https://opengraph.githubassets.com/1/NousResearch/hermes-agent",
+      "official_url": "https://github.com/NousResearch/hermes-agent",
+      "canonical_key": "https://github.com/nousresearch/hermes-agent",
       "verification": {
-        "article_title_verified": "페이블 D-2, 앤트로픽 엔지니어가 알려주는 활용 가이드 | 요즘IT",
-        "article_source_verified": "요즘IT",
-        "article_published_verified": "2026-07-10T17:00:17+09:00",
-        "article_url_verified": "https://yozm.wishket.com/magazine/detail/3848",
-        "geeknews_listing_url": ""
+        "project_kind": "github",
+        "project_name": "NousResearch/hermes-agent",
+        "project_owner": "NousResearch",
+        "project_description": "The agent that grows with you",
+        "license": "MIT",
+        "updated_at": "2026-07-11T06:04:45Z",
+        "community_source": "github",
+        "github_stars": "212886",
+        "github_pushed_at": "2026-07-11T05:43:50Z"
       }
     }
   ],
-  "collector_errors": []
+  "collector_errors": [
+    "수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "검증 제외: https://news.hada.io/topic?id=31275 (페이지 확인 실패: https://openai.com/index/gpt-5-6/ (HTTP Error 403: Forbidden))"
+  ]
 }
