@@ -1,0 +1,108 @@
+{
+  "date": "2026-07-11",
+  "collected_at": "2026-07-11T05:52:20.947220+00:00",
+  "selection_rule": "최근 24시간 검증 기사 중 GitHub 또는 Hugging Face 공식 프로젝트 1건 이상 필수",
+  "candidates": [
+    {
+      "id": "요즘it-c0902b6ef178e4f9",
+      "source": "요즘IT",
+      "topic": "생성형 AI, 개발 도구",
+      "title": "페이블 D-2, 앤트로픽 엔지니어가 알려주는 활용 가이드 | 요즘IT",
+      "url": "https://yozm.wishket.com/magazine/detail/3848",
+      "published_at": "2026-07-10T17:00:17+09:00",
+      "summary": "6월 9일 출시된 페이블 5(Fable 5)는 지난 한 달간 롤러코스터 같은 시간을 보냈습니다. 출시 사흘 만인 6월 12일, 미국 상무부의 지시로 서비스가 전면 차단되는 위기를 맞았지만, 6월 30일 규제가 풀리면서 7월 1일 유료 플랜 서비스를 재개했죠. 현재 기존 유료 구독자라면, 주간 사용량 제한의 최대 50%까지 페이블 5를 이용할 수 있는데요. 원래는 7월 7일에 이 구독제 이용도 끝날 예정이었지만, 앤트로픽이 기간을 5일 더 연장했습니다. 변경된 만료일은 7월 12일. 오늘이 7월 10일이니, 이제 딱 이틀 남았습니다. 마침 앤트로픽 클로드 코드(Claude Code) 팀의 타리크 시히파(Thariq Shihipar)가 AI Engineer World Fair에서 발표한 \"Field Guide to Fable\" 키노트에 좋은 내용이 있어 공유합니다.",
+      "listing_url": "https://yozm.wishket.com/magazine/detail/3848",
+      "introduced_at": "",
+      "image_url": "https://yozm.wishket.com/media/news/3848/3.jfif",
+      "official_url": "",
+      "canonical_key": "https://yozm.wishket.com/magazine/detail/3848",
+      "verification": {
+        "article_title_verified": "페이블 D-2, 앤트로픽 엔지니어가 알려주는 활용 가이드 | 요즘IT",
+        "article_source_verified": "요즘IT",
+        "article_published_verified": "2026-07-10T17:00:17+09:00",
+        "article_url_verified": "https://yozm.wishket.com/magazine/detail/3848",
+        "geeknews_listing_url": ""
+      }
+    },
+    {
+      "id": "geeknews-8ebcb2040a6aa5a9",
+      "source": "HimitsuShell",
+      "topic": "GitHub 프로젝트",
+      "title": "HimitsuShell – Shell Script Compiler, Obfuscation & DRM",
+      "url": "https://himitsushell.com/",
+      "published_at": "2026-07-11T13:20:59+09:00",
+      "summary": "Shell to Obfuscated Binary. Beyond shc: Embedded Shell Interpreter & Advanced Obfuscation for Shell Script Protection.",
+      "listing_url": "https://news.hada.io/topic?id=31321",
+      "introduced_at": "2026-07-11T13:20:59+09:00",
+      "image_url": "https://himitsushell.com/img/og-image.png?v=1783749131063",
+      "official_url": "https://github.com/HimitsuShell/Himitsu",
+      "canonical_key": "https://github.com/himitsushell/himitsu",
+      "verification": {
+        "article_title_verified": "HimitsuShell – Shell Script Compiler, Obfuscation & DRM",
+        "article_source_verified": "HimitsuShell",
+        "article_published_verified": "2026-07-11T13:20:59+09:00",
+        "article_url_verified": "https://himitsushell.com/",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=31321",
+        "official_url": "https://github.com/HimitsuShell/Himitsu",
+        "project_name": "HimitsuShell/Himitsu",
+        "project_owner": "HimitsuShell",
+        "project_description": "Shell Script DRM Compiler, Embedded Interpreter & Obfuscation",
+        "license": "",
+        "updated_at": "2026-07-11T00:17:40Z",
+        "project_kind": "github"
+      }
+    }
+  ],
+  "selected": [
+    {
+      "id": "geeknews-8ebcb2040a6aa5a9",
+      "source": "HimitsuShell",
+      "topic": "GitHub 프로젝트",
+      "title": "HimitsuShell – Shell Script Compiler, Obfuscation & DRM",
+      "url": "https://himitsushell.com/",
+      "published_at": "2026-07-11T13:20:59+09:00",
+      "summary": "Shell to Obfuscated Binary. Beyond shc: Embedded Shell Interpreter & Advanced Obfuscation for Shell Script Protection.",
+      "listing_url": "https://news.hada.io/topic?id=31321",
+      "introduced_at": "2026-07-11T13:20:59+09:00",
+      "image_url": "https://himitsushell.com/img/og-image.png?v=1783749131063",
+      "official_url": "https://github.com/HimitsuShell/Himitsu",
+      "canonical_key": "https://github.com/himitsushell/himitsu",
+      "verification": {
+        "article_title_verified": "HimitsuShell – Shell Script Compiler, Obfuscation & DRM",
+        "article_source_verified": "HimitsuShell",
+        "article_published_verified": "2026-07-11T13:20:59+09:00",
+        "article_url_verified": "https://himitsushell.com/",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=31321",
+        "official_url": "https://github.com/HimitsuShell/Himitsu",
+        "project_name": "HimitsuShell/Himitsu",
+        "project_owner": "HimitsuShell",
+        "project_description": "Shell Script DRM Compiler, Embedded Interpreter & Obfuscation",
+        "license": "",
+        "updated_at": "2026-07-11T00:17:40Z",
+        "project_kind": "github"
+      }
+    },
+    {
+      "id": "요즘it-c0902b6ef178e4f9",
+      "source": "요즘IT",
+      "topic": "생성형 AI, 개발 도구",
+      "title": "페이블 D-2, 앤트로픽 엔지니어가 알려주는 활용 가이드 | 요즘IT",
+      "url": "https://yozm.wishket.com/magazine/detail/3848",
+      "published_at": "2026-07-10T17:00:17+09:00",
+      "summary": "6월 9일 출시된 페이블 5(Fable 5)는 지난 한 달간 롤러코스터 같은 시간을 보냈습니다. 출시 사흘 만인 6월 12일, 미국 상무부의 지시로 서비스가 전면 차단되는 위기를 맞았지만, 6월 30일 규제가 풀리면서 7월 1일 유료 플랜 서비스를 재개했죠. 현재 기존 유료 구독자라면, 주간 사용량 제한의 최대 50%까지 페이블 5를 이용할 수 있는데요. 원래는 7월 7일에 이 구독제 이용도 끝날 예정이었지만, 앤트로픽이 기간을 5일 더 연장했습니다. 변경된 만료일은 7월 12일. 오늘이 7월 10일이니, 이제 딱 이틀 남았습니다. 마침 앤트로픽 클로드 코드(Claude Code) 팀의 타리크 시히파(Thariq Shihipar)가 AI Engineer World Fair에서 발표한 \"Field Guide to Fable\" 키노트에 좋은 내용이 있어 공유합니다.",
+      "listing_url": "https://yozm.wishket.com/magazine/detail/3848",
+      "introduced_at": "",
+      "image_url": "https://yozm.wishket.com/media/news/3848/3.jfif",
+      "official_url": "",
+      "canonical_key": "https://yozm.wishket.com/magazine/detail/3848",
+      "verification": {
+        "article_title_verified": "페이블 D-2, 앤트로픽 엔지니어가 알려주는 활용 가이드 | 요즘IT",
+        "article_source_verified": "요즘IT",
+        "article_published_verified": "2026-07-10T17:00:17+09:00",
+        "article_url_verified": "https://yozm.wishket.com/magazine/detail/3848",
+        "geeknews_listing_url": ""
+      }
+    }
+  ],
+  "collector_errors": []
+}

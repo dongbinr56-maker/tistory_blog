@@ -1,0 +1,45 @@
+[
+  {
+    "id": "sample-hf-model",
+    "source": "Sample Model Journal",
+    "topic": "생성형 AI, Hugging Face, AI 모델링",
+    "title": "Hugging Face 모델 카드에서 추론 환경과 라이선스를 먼저 확인하는 이유",
+    "url": "https://example.com/hf-model-card",
+    "published_at": "2026-07-11T06:10:00+09:00",
+    "summary": "모델을 실제 서비스에 넣기 전 모델 카드의 라이선스, 지원 태스크, 입력 형식과 재현 가능한 평가 조건을 확인해야 한다는 분석입니다.",
+    "official_url": "https://huggingface.co/example/model-card",
+    "canonical_key": "https://huggingface.co/example/model-card",
+    "verification": {
+      "project_kind": "huggingface",
+      "project_name": "example/model-card",
+      "project_owner": "example",
+      "license": "Apache-2.0"
+    }
+  },
+  {
+    "id": "sample-agent-eval",
+    "source": "Sample AI Engineering Review",
+    "topic": "AI 에이전트, 개발 도구, AI 모델링",
+    "title": "에이전트 평가를 모델 성능이 아닌 작업 성공률로 설계하는 방법",
+    "url": "https://example.com/agent-evaluation",
+    "published_at": "2026-07-11T05:40:00+09:00",
+    "summary": "도구 호출이 있는 AI 에이전트는 단일 정답보다 작업 완료율, 비용, 실패 복구와 안전한 중단 조건을 함께 평가해야 한다는 내용을 다룹니다."
+  },
+  {
+    "id": "sample-github-inference",
+    "source": "Sample Open Source Notes",
+    "topic": "GitHub 프로젝트, 온디바이스 AI, GPU, 추론",
+    "title": "GPU 메모리 제약에서 오픈소스 모델 추론 파이프라인을 검증하는 체크리스트",
+    "url": "https://example.com/open-source-inference",
+    "published_at": "2026-07-11T05:05:00+09:00",
+    "summary": "오픈소스 모델을 제한된 GPU에서 배포할 때 양자화, 컨텍스트 길이, 배치 크기와 지연 시간을 같은 조건에서 기록해야 한다는 사례입니다.",
+    "official_url": "https://github.com/example/inference-stack",
+    "canonical_key": "https://github.com/example/inference-stack",
+    "verification": {
+      "project_kind": "github",
+      "project_name": "example/inference-stack",
+      "project_owner": "example",
+      "license": "Apache-2.0"
+    }
+  }
+]

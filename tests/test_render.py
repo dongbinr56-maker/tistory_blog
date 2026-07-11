@@ -1,0 +1,63 @@
+import tempfile
+import unittest
+from pathlib import Path
+
+from tistory_newsroom.generate import generate_demo
+from tistory_newsroom.models import SourceItem
+from tistory_newsroom.quality import inspect_draft
+from tistory_newsroom.render import _copy_page, render_article_html, write_outputs
+
+
+class RenderTest(unittest.TestCase):
+    def setUp(self):
+        self.site = {
+            "blog_name": "테스트 블로그",
+            "author_name": "테스터",
+            "contact_email": "writer@myblog.kr",
+            "blog_url": "https://myblog.tistory.com",
+            "minimum_body_characters": 1500,
+            "required_source_count": 3,
+            "default_category": "IT",
+        }
+        self.sources = [
+            SourceItem(
+                f"id-{number}", "출처", "AI 모델링", f"이슈 {number}", f"https://example.org/{number}", "", "AI 모델 평가와 배포 조건을 설명합니다.",
+                official_url="https://github.com/test/project" if number == 1 else "",
+                verification={"project_kind": "github", "project_name": "test/project", "license": "MIT"} if number == 1 else {},
+            )
+            for number in range(1, 4)
+        ]
+
+    def test_article_escapes_unsafe_title(self):
+        draft = generate_demo("2026-07-11", self.sources, self.site)
+        draft.title = "<script>alert(1)</script> 안전한 제목입니다"
+        article = render_article_html(draft, self.site)
+        self.assertIn("&lt;script&gt;alert(1)&lt;/script&gt;", article)
+        self.assertNotIn("<h1><script>", article)
+
+    def test_outputs_include_copy_page(self):
+        draft = generate_demo("2026-07-11", self.sources, self.site)
+        report = inspect_draft(draft, self.site)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            write_outputs(root, draft, report, self.site)
+            self.assertTrue((root / "docs" / "tistory" / "2026-07-11.html").exists())
+            self.assertTrue((root / "docs" / "index.html").exists())
+            self.assertTrue((root / "docs" / "adsense-checklist.html").exists())
+            self.assertTrue((root / "docs" / "tistory-pages" / "index.html").exists())
+            contact_page = (root / "docs" / "tistory-pages" / "contact.html").read_text(encoding="utf-8")
+            self.assertIn("writer@myblog.kr", contact_page)
+            self.assertNotIn("{{contact_email}}", contact_page)
+
+    def test_copy_page_escapes_dynamic_values(self):
+        page = _copy_page([{"date": "2026-07-11", "title": "</script><img src=x onerror=alert(1)>", "title_candidates": [], "tags": [], "quality_status": "OK", "publish_checklist": [], "html_path": "tistory/2026-07-11.html"}])
+        self.assertIn("function escapeHtml", page)
+        self.assertIn("<\\/script>", page)
+
+    def test_copy_page_defaults_to_html_and_uses_one_article_source(self):
+        page = _copy_page([{"date": "2026-07-11", "title": "초안", "title_candidates": [], "tags": [], "quality_status": "OK", "publish_checklist": [], "html_path": "tistory/2026-07-11.html"}])
+        self.assertIn('aria-selected="true"', page)
+        self.assertIn('data-tab="html"', page)
+        self.assertIn('data-tab="view"', page)
+        self.assertIn('frame.src=raw.html_path', page)
+        self.assertIn('currentHtml=await response.text()', page)

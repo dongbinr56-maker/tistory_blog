@@ -1,0 +1,24 @@
+{
+  "status": "READY_FOR_MANUAL_REVIEW",
+  "errors": [],
+  "warnings": [],
+  "checks": {
+    "three_distinct_title_candidates": true,
+    "reasonable_title_length": true,
+    "article_count_disclosed": true,
+    "tag_count_and_uniqueness": true,
+    "sufficient_sources": true,
+    "all_sections_trace_to_source": true,
+    "plain_language_and_technical_depth": true,
+    "original_value_added": true,
+    "substantive_body": true,
+    "github_or_huggingface_project_included": true,
+    "ai_disclosure": true,
+    "no_click_inducement": true,
+    "no_restricted_topic_signal": true,
+    "contact_configured": true,
+    "author_configured": true,
+    "blog_url_configured": true
+  },
+  "manual_review_required": true
+}

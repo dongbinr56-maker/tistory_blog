@@ -1,0 +1,13 @@
+{
+  "blog_name": "나의 IT 인사이트",
+  "author_name": "작성자 이름",
+  "author_bio": "현업과 학습 현장을 연결해 IT 이슈를 해설하는 블로거입니다.",
+  "contact_email": "hello@example.com",
+  "blog_url": "https://example.tistory.com",
+  "draft_assets_base_url": "https://YOUR_GITHUB_ID.github.io/tistory_blog/tistory/assets",
+  "default_category": "IT·개발",
+  "language": "ko",
+  "minimum_body_characters": 1400,
+  "required_source_count": 1,
+  "required_internal_link_note": "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요."
+}

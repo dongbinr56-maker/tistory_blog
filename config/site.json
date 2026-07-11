@@ -1,0 +1,13 @@
+{
+  "blog_name": "뉴럴 프롬프팅 연구소",
+  "author_name": "덩베",
+  "author_bio": "모닝 데일리 IT 테크 다이제스트",
+  "contact_email": "sunnydongbin@naver.com",
+  "blog_url": "https://jammini-info.tistory.com/",
+  "draft_assets_base_url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets",
+  "default_category": "AI·개발",
+  "language": "ko",
+  "minimum_body_characters": 1400,
+  "required_source_count": 1,
+  "required_internal_link_note": "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요."
+}

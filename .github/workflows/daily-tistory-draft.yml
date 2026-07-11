@@ -1,0 +1,63 @@
+name: Daily Tistory newsroom draft
+
+on:
+  schedule:
+    # GitHub Actions cron은 UTC입니다. 22:00 UTC = 매일 07:00 KST.
+    - cron: '0 22 * * *'
+  workflow_dispatch:
+    inputs:
+      run_date:
+        description: 'Optional YYYY-MM-DD (defaults to today in Asia/Seoul)'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: daily-tistory-newsroom
+  cancel-in-progress: false
+
+jobs:
+  build-draft:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Seoul
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GEMINI_MODEL: gemini-2.5-flash
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generate reviewable draft and enforce quality gate
+        run: |
+          if [ -n "${{ inputs.run_date }}" ]; then
+            PYTHONPATH=src python -m tistory_newsroom run --date "${{ inputs.run_date }}"
+          else
+            PYTHONPATH=src python -m tistory_newsroom run
+          fi
+
+      - name: Commit daily source records and draft
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/runs docs
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit."
+          else
+            git commit -m "Daily Tistory draft: $(TZ=Asia/Seoul date +%F)"
+            git push
+          fi
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - uses: actions/deploy-pages@v4
