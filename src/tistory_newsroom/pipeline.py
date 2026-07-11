@@ -7,11 +7,11 @@ import shutil
 from typing import Any
 import urllib.parse
 
-from .assets import create_image_assets
+from .assets import create_hero_image_asset, create_image_assets
 from .collect import choose_diverse, collect_candidates, collection_payload
 from .config import ROOT, load_site_config, load_sources_config
 from .generate import generate_demo, generate_with_gemini
-from .models import SourceItem
+from .models import Draft, QualityReport, SourceItem
 from .quality import inspect_draft
 from .render import build_site, write_outputs
 
@@ -184,6 +184,47 @@ def _existing_ready_draft(root: Path, day: str) -> dict[str, Any] | None:
         "output": str(html_path),
         "warnings": warnings if isinstance(warnings, list) else [],
         "reused_existing_draft": True,
+    }
+
+
+def _quality_report_from_dict(value: dict[str, Any]) -> QualityReport:
+    return QualityReport(
+        status=str(value.get("status") or "BLOCKED"),
+        errors=[str(item) for item in value.get("errors", [])],
+        warnings=[str(item) for item in value.get("warnings", [])],
+        checks={str(key): bool(item) for key, item in dict(value.get("checks") or {}).items()},
+        manual_review_required=bool(value.get("manual_review_required", True)),
+    )
+
+
+def refresh_hero_image(root: Path = ROOT, date: str | None = None) -> dict[str, Any]:
+    """Upgrade the hero image of an approved draft without rewriting its article."""
+    day = _day_or_today(date)
+    run_dir = root / "data" / "runs" / day
+    draft_path = run_dir / "draft.json"
+    report_path = run_dir / "quality-report.json"
+    if not draft_path.is_file() or not report_path.is_file():
+        raise RuntimeError(f"{day} 초안의 이미지 갱신에 필요한 검토 기록이 없습니다.")
+    try:
+        raw_draft = json.loads(draft_path.read_text(encoding="utf-8"))
+        raw_report = json.loads(report_path.read_text(encoding="utf-8"))
+        source_items = [SourceItem.from_dict(item) for item in raw_draft["source_items"]]
+    except (OSError, KeyError, TypeError, json.JSONDecodeError) as error:
+        raise RuntimeError(f"{day} 초안 기록을 읽을 수 없습니다: {error}") from error
+    report = _quality_report_from_dict(raw_report)
+    if report.status != "READY_FOR_MANUAL_REVIEW":
+        raise RuntimeError(f"{day} 초안은 검토 가능 상태가 아니어서 대표 이미지를 갱신하지 않았습니다.")
+    draft = Draft.from_dict(raw_draft, source_items)
+    site = load_site_config(root)
+    asset_base_url = str(site.get("draft_assets_base_url", ""))
+    draft.images["hero"] = create_hero_image_asset(root, draft, asset_base_url)
+    _write_json(draft_path, draft.to_dict())
+    write_outputs(root, draft, report, site)
+    return {
+        "date": day,
+        "status": report.status,
+        "hero": draft.images["hero"],
+        "output": str(root / "docs" / "tistory" / f"{day}.html"),
     }
 
 

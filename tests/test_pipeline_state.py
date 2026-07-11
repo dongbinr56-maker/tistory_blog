@@ -3,8 +3,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from tistory_newsroom.models import SourceItem
-from tistory_newsroom.pipeline import _existing_ready_draft, historical_url_keys, prune_expired_details, record_historical_url_keys
+from tistory_newsroom.assets import create_image_assets
+from tistory_newsroom.generate import generate_demo
+from tistory_newsroom.models import QualityReport, SourceItem
+from tistory_newsroom.pipeline import _existing_ready_draft, historical_url_keys, prune_expired_details, record_historical_url_keys, refresh_hero_image
+from tistory_newsroom.render import write_outputs
 
 
 def write_json(path: Path, value: object) -> None:
@@ -91,6 +94,43 @@ class PipelineStateTest(unittest.TestCase):
             (output / f"{day}.html").write_text("<article>ready</article>", encoding="utf-8")
             write_json(output / f"{day}.json", {"date": day})
             self.assertIsNone(_existing_ready_draft(root, day))
+
+    def test_refresh_hero_image_upgrades_an_approved_draft_without_rewriting_it(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            day = "2026-07-11"
+            site = {
+                "blog_name": "테스트", "author_name": "테스터", "contact_email": "writer@example.com",
+                "blog_url": "https://example.tistory.com", "draft_assets_base_url": "https://example.github.io/repo/tistory/assets",
+                "minimum_body_characters": 1400, "required_source_count": 3,
+            }
+            write_json(root / "config/site.json", site)
+            sources = [
+                SourceItem(
+                    id=f"source-{number}", source="출처", topic="AI 모델링", title=f"AI 모델 이슈 {number}",
+                    url=f"https://example.org/{number}", published_at="", summary="검증된 AI 모델 소식입니다.",
+                    official_url="https://github.com/example/project" if number == 1 else "",
+                    verification={"project_kind": "github", "project_name": "example/project"} if number == 1 else {},
+                )
+                for number in range(1, 4)
+            ]
+            draft = generate_demo(day, sources, site)
+            draft.images = create_image_assets(root, draft, site["draft_assets_base_url"])
+            report = QualityReport(
+                status="READY_FOR_MANUAL_REVIEW", errors=[], warnings=[], checks={}, manual_review_required=True,
+            )
+            write_json(root / f"data/runs/{day}/draft.json", draft.to_dict())
+            write_json(root / f"data/runs/{day}/quality-report.json", report.to_dict())
+            write_outputs(root, draft, report, site)
+            original_title = draft.title
+
+            result = refresh_hero_image(root, day)
+
+            refreshed = json.loads((root / f"data/runs/{day}/draft.json").read_text(encoding="utf-8"))
+            self.assertEqual(result["hero"]["path"], "hero.png")
+            self.assertEqual(refreshed["title"], original_title)
+            self.assertEqual(refreshed["images"]["hero"]["path"], "hero.png")
+            self.assertTrue((root / f"docs/tistory/assets/{day}/hero.png").is_file())
 
     def test_pruning_removes_old_detail_artifacts_but_not_the_history_index(self):
         with tempfile.TemporaryDirectory() as directory:

@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import html
+import io
 import mimetypes
 import re
 import urllib.parse
 from pathlib import Path
+
+from PIL import Image, ImageDraw, ImageFont
 
 from .collect import _fetch_bytes
 from .models import Draft
@@ -29,10 +32,108 @@ def _svg_card(title: str, eyebrow: str) -> str:
 <text x="80" y="558" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="22">AI Engineering Daily Brief</text></svg>"""
 
 
+def _font(size: int) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
+    """Load a Korean-capable system font on macOS and GitHub's Ubuntu runner."""
+    font_paths = (
+        "/System/Library/Fonts/AppleSDGothicNeo.ttc",
+        "/System/Library/Fonts/Supplemental/AppleGothic.ttf",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+        "/usr/share/fonts/truetype/noto/NotoSansCJKkr-Bold.otf",
+        "/usr/share/fonts/truetype/noto/NotoSansKR-Bold.otf",
+    )
+    for path in font_paths:
+        if Path(path).is_file():
+            return ImageFont.truetype(path, size=size)
+    return ImageFont.load_default(size=size)
+
+
+def _wrapped_lines(draw: ImageDraw.ImageDraw, title: str, font: ImageFont.ImageFont, width: int) -> list[str]:
+    """Wrap Korean and English titles without clipping a long project name."""
+    lines: list[str] = []
+    current = ""
+    for token in re.findall(r"\S+\s*", title.strip()):
+        candidate = current + token
+        if not current or draw.textlength(candidate, font=font) <= width:
+            current = candidate
+            continue
+        lines.append(current.rstrip())
+        current = token.lstrip()
+        # A single unbroken token can still be wider than the card. Only then
+        # fall back to character wrapping, keeping normal project names intact.
+        while draw.textlength(current, font=font) > width:
+            split_at = 1
+            while split_at < len(current) and draw.textlength(current[:split_at + 1], font=font) <= width:
+                split_at += 1
+            lines.append(current[:split_at].rstrip())
+            current = current[split_at:].lstrip()
+    if current:
+        lines.append(current.rstrip())
+    return lines or ["AI Engineering Daily Brief"]
+
+
+def _png_card(title: str, eyebrow: str) -> bytes:
+    """Render the independent, text-inclusive hero card as a 1200×630 PNG."""
+    width, height = 1200, 630
+    image = Image.new("RGB", (width, height), "#07142b")
+    draw = ImageDraw.Draw(image)
+    start, end = (7, 20, 43), (16, 107, 84)
+    for y in range(height):
+        ratio = y / (height - 1)
+        color = tuple(round(start[index] * (1 - ratio) + end[index] * ratio) for index in range(3))
+        draw.line((0, y, width, y), fill=color)
+    overlay = Image.new("RGBA", image.size, (0, 0, 0, 0))
+    overlay_draw = ImageDraw.Draw(overlay)
+    overlay_draw.ellipse((820, -140, 1260, 300), fill=(94, 234, 212, 30))
+    overlay_draw.ellipse((895, -65, 1185, 225), outline=(153, 246, 228, 70), width=3)
+    image = Image.alpha_composite(image.convert("RGBA"), overlay)
+    draw = ImageDraw.Draw(image)
+    eyebrow_font = _font(28)
+    footer_font = _font(22)
+    draw.text((80, 108), eyebrow[:48], font=eyebrow_font, fill="#99f6e4", stroke_width=0)
+
+    text_width = 900
+    title_font = _font(54)
+    lines = _wrapped_lines(draw, title[:110], title_font, text_width)
+    for size in (54, 50, 46, 42, 38):
+        title_font = _font(size)
+        lines = _wrapped_lines(draw, title[:110], title_font, text_width)
+        if len(lines) <= 3:
+            break
+    if len(lines) > 3:
+        lines = lines[:3]
+        suffix = "…"
+        while lines[-1] and draw.textlength(lines[-1] + suffix, font=title_font) > text_width:
+            lines[-1] = lines[-1][:-1]
+        lines[-1] += suffix
+    line_height = int(title_font.size * 1.28)
+    title_height = line_height * len(lines)
+    title_y = max(185, min(260, 360 - title_height // 2))
+    for index, line in enumerate(lines):
+        draw.text((80, title_y + index * line_height), line, font=title_font, fill="#f8fafc")
+    draw.text((80, 548), "AI Engineering Daily Brief", font=footer_font, fill="#cbd5e1")
+
+    result = io.BytesIO()
+    image.convert("RGB").save(result, format="PNG", optimize=True)
+    return result.getvalue()
+
+
 def _public_url(base_url: str, date: str, filename: str) -> str:
     if base_url.strip():
         return f"{base_url.rstrip('/')}/{date}/{filename}"
     return f"assets/{date}/{filename}"
+
+
+def create_hero_image_asset(root: Path, draft: Draft, asset_base_url: str) -> dict[str, str]:
+    """Create only the title card so an existing reviewed draft can be upgraded safely."""
+    directory = root / "docs" / "tistory" / "assets" / draft.date
+    directory.mkdir(parents=True, exist_ok=True)
+    for stale_path in (directory / "hero.svg", directory / "hero.png"):
+        if stale_path.is_file():
+            stale_path.unlink()
+    hero_name = "hero.png"
+    (directory / hero_name).write_bytes(_png_card(draft.title, "AI · MODEL · OPEN SOURCE"))
+    return {"path": hero_name, "url": _public_url(asset_base_url, draft.date, hero_name), "kind": "generated-hero"}
 
 
 def create_image_assets(root: Path, draft: Draft, asset_base_url: str) -> dict[str, dict[str, str]]:
@@ -43,12 +144,10 @@ def create_image_assets(root: Path, draft: Draft, asset_base_url: str) -> dict[s
     # directory belongs entirely to the fixed daily draft, so stale variants
     # must go before writing the new canonical set.
     for stale_path in directory.iterdir():
-        if stale_path.is_file() and (stale_path.name == "hero.svg" or stale_path.name.startswith("issue-")):
+        if stale_path.is_file() and (stale_path.name in {"hero.svg", "hero.png"} or stale_path.name.startswith("issue-")):
             stale_path.unlink()
     images: dict[str, dict[str, str]] = {}
-    hero_name = "hero.svg"
-    (directory / hero_name).write_text(_svg_card(draft.title, "AI · MODEL · OPEN SOURCE"), encoding="utf-8")
-    images["hero"] = {"path": hero_name, "url": _public_url(asset_base_url, draft.date, hero_name), "kind": "generated-hero"}
+    images["hero"] = create_hero_image_asset(root, draft, asset_base_url)
     for index, source in enumerate(draft.source_items, start=1):
         key = source.id
         fallback_name = f"issue-{index}.svg"

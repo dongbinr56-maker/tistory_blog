@@ -96,9 +96,9 @@ class RenderTest(unittest.TestCase):
         page = _copy_page([{
             "date": "2026-07-11", "title": "초안", "title_candidates": [], "tags": [], "quality_status": "OK",
             "publish_checklist": [], "html_path": "tistory/2026-07-11.html",
-            "images": {"hero": {"url": "tistory/assets/2026-07-11/hero.svg"}},
+            "images": {"hero": {"url": "tistory/assets/2026-07-11/hero.png"}},
         }])
-        self.assertIn("대표 이미지 다운로드", page)
+        self.assertIn("대표 이미지 PNG 다운로드", page)
         self.assertIn("downloadHero", page)
         self.assertIn("tistory-대표이미지-", page)
         self.assertIn("response.blob()", page)

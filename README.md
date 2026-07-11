@@ -26,7 +26,14 @@ flowchart LR
 
 ## 최초 설정
 
-1. Python 3.11 이상을 준비합니다.
+1. Python 3.11 이상을 준비하고, 프로젝트 전용 환경에 의존성을 설치합니다.
+
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   python -m pip install -e .
+   ```
+
 2. 설정 파일을 복사하고 실제 정보로 채웁니다.
 
    ```bash
@@ -64,7 +71,7 @@ data/runs/YYYY-MM-DD/draft.json            # AI가 반환한 구조화된 초안
 data/runs/YYYY-MM-DD/quality-report.json   # 품질/정책 게이트 결과
 docs/tistory/YYYY-MM-DD.html               # 티스토리 HTML 모드용 본문
 docs/tistory/YYYY-MM-DD.json               # 제목 후보·태그·검토 정보
-docs/tistory/assets/YYYY-MM-DD/             # 대표 이미지 1장 + 기사별 이미지(최대 3장)
+docs/tistory/assets/YYYY-MM-DD/             # 제목 텍스트가 포함된 1200×630 PNG 대표 이미지 1장 + 기사별 이미지(최대 3장)
 docs/index.html                             # 복사 전용 검토 페이지
 docs/adsense-checklist.html                 # 애드센스 준비 체크리스트
 ```
@@ -77,7 +84,7 @@ make run DATE=2026-07-11 REFRESH=1
 
 선택 URL은 `data/history/seen-url-keys.json`에 계속 보관합니다. 상세 초안·이미지·수집 기록은 기본 180일 보관 후 정리하므로 Pages와 작업 디렉터리는 커지지 않지만, 오래된 기사 URL도 다시 선택하지 않습니다. 보존 기간은 `config/sources.json`의 `selection.detail_retention_days`에서 조정하며 `0`이면 자동 정리를 끕니다.
 
-1. 복사 페이지에서 날짜를 고릅니다. 기본 `HTML` 탭에는 티스토리에 바로 붙여넣을 수 있는 실제 본문 소스가 표시되고, `View` 탭에는 같은 소스의 렌더링 결과가 표시됩니다.
+1. 복사 페이지에서 날짜를 고릅니다. 기본 `HTML` 탭에는 티스토리에 바로 붙여넣을 수 있는 실제 본문 소스가 표시되고, `View` 탭에는 같은 소스의 렌더링 결과가 표시됩니다. `대표 이미지 PNG 다운로드`를 누르면 제목 텍스트가 포함된 1200×630 PNG 파일을 받을 수 있습니다.
 2. `View`에서 이미지·본문·원문 링크를 확인한 뒤, `HTML` 탭의 **본문 HTML 복사**를 누릅니다. 티스토리 글쓰기에서 제목/태그를 입력하고 **HTML 모드**에 본문을 붙여넣습니다.
 3. 모든 원문 링크, 사실, 분석의 정확성, 문체, 내부 링크를 검토합니다.
 4. `content/tistory-pages/`의 소개·편집정책·개인정보처리방침·문의 템플릿을 티스토리 페이지로 작성합니다. 연락처와 작성자 정보는 실제 값으로 바꾸세요.

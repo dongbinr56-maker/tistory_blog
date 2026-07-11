@@ -4,7 +4,7 @@ import argparse
 import json
 
 from .config import ROOT, load_local_env, load_site_config
-from .pipeline import run
+from .pipeline import refresh_hero_image, run
 from .render import build_site
 
 
@@ -16,10 +16,14 @@ def main() -> None:
     run_parser.add_argument("--date", help="YYYY-MM-DD; defaults to today in Asia/Seoul")
     run_parser.add_argument("--demo", action="store_true", help="use bundled samples without calling Gemini")
     run_parser.add_argument("--refresh", action="store_true", help="regenerate and overwrite the fixed draft for the selected date")
+    hero_parser = commands.add_parser("refresh-hero", help="regenerate only the PNG hero image for an approved draft")
+    hero_parser.add_argument("--date", help="YYYY-MM-DD; defaults to today in Asia/Seoul")
     commands.add_parser("build-site", help="rebuild the GitHub Pages copy/review UI")
     args = parser.parse_args()
     if args.command == "run":
         print(json.dumps(run(date=args.date, demo=args.demo, refresh=args.refresh), ensure_ascii=False, indent=2))
+    elif args.command == "refresh-hero":
+        print(json.dumps(refresh_hero_image(date=args.date), ensure_ascii=False, indent=2))
     else:
         build_site(ROOT, load_site_config(ROOT))
         print("docs/index.html 과 docs/adsense-checklist.html을 생성했습니다.")
