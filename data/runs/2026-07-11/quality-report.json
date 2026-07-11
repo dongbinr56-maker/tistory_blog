@@ -17,6 +17,7 @@
     "no_click_inducement": true,
     "no_empty_technical_inventory": true,
     "natural_editorial_voice": true,
+    "specific_intro": true,
     "no_restricted_topic_signal": true,
     "contact_configured": true,
     "author_configured": true,
