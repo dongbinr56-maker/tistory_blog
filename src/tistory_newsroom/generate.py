@@ -133,6 +133,18 @@ def _rewrite_reasons(draft: dict[str, Any], sources: list[SourceItem]) -> list[s
     return reasons
 
 
+def _publication_title(raw_draft: dict[str, Any]) -> str:
+    """Prefer a valid title candidate over failing a complete draft on length alone."""
+    candidates = [str(raw_draft.get("title") or "").strip()]
+    candidates.extend(str(value).strip() for value in raw_draft.get("title_candidates", []) if str(value).strip())
+    for candidate in candidates:
+        if 15 <= len(candidate) <= 75:
+            return candidate
+    title = candidates[0] if candidates else "오늘의 AI·개발 데일리 다이제스트"
+    shortened = title[:75].rstrip(" ,:|-–—")
+    return shortened if len(shortened) >= 15 else "오늘의 AI·개발 데일리 다이제스트"
+
+
 def generate_with_gemini(date: str, sources: list[SourceItem], site: dict[str, Any]) -> Draft:
     api_key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not api_key:
@@ -155,6 +167,7 @@ def generate_with_gemini(date: str, sources: list[SourceItem], site: dict[str, A
                 raw_draft["date"] = date
                 raw_draft["model"] = model
                 raw_draft["editorial_disclosure"] = ""
+            raw_draft["title"] = _publication_title(raw_draft)
             return Draft.from_dict(raw_draft, sources)
         except Exception as error:
             last_error = error

@@ -1,6 +1,6 @@
 import unittest
 
-from tistory_newsroom.generate import make_rewrite_prompt
+from tistory_newsroom.generate import _publication_title, make_rewrite_prompt
 from tistory_newsroom.models import SourceItem
 
 
@@ -20,3 +20,11 @@ class GeneratePromptTest(unittest.TestCase):
         prompt = make_rewrite_prompt("2026-07-11", [source], {"intro": "", "sections": []}, ["도입부가 일반적입니다."])
         self.assertIn("도입부가 일반적입니다.", prompt)
         self.assertIn("ECC", prompt)
+
+    def test_uses_a_valid_title_candidate_when_the_selected_title_is_too_long(self):
+        selected = _publication_title({
+            "title": "AI 에이전트 성능과 복잡한 운영 환경, 배포 보안, 규제 이슈, 서비스 안정성, 모델 활용 전략까지 모두 한 번에 설명하는 지나치게 긴 제목입니다",
+            "title_candidates": ["ECC와 HimitsuShell: AI 배포에서 먼저 볼 두 가지"],
+        })
+        self.assertEqual(selected, "ECC와 HimitsuShell: AI 배포에서 먼저 볼 두 가지")
+        self.assertLessEqual(len(selected), 75)
