@@ -128,9 +128,15 @@ class PipelineStateTest(unittest.TestCase):
 
             refreshed = json.loads((root / f"data/runs/{day}/draft.json").read_text(encoding="utf-8"))
             self.assertEqual(result["hero"]["path"], "hero.png")
+            self.assertEqual(result["thumbnail"]["path"], "thumbnail.png")
             self.assertEqual(refreshed["title"], original_title)
             self.assertEqual(refreshed["images"]["hero"]["path"], "hero.png")
+            self.assertEqual(refreshed["images"]["thumbnail"]["path"], "thumbnail.png")
             self.assertTrue((root / f"docs/tistory/assets/{day}/hero.png").is_file())
+            self.assertTrue((root / f"docs/tistory/assets/{day}/thumbnail.png").is_file())
+            article_html = (root / f"docs/tistory/{day}.html").read_text(encoding="utf-8")
+            self.assertIn("hero.png", article_html)
+            self.assertNotIn("thumbnail.png", article_html)
 
     def test_pruning_removes_old_detail_artifacts_but_not_the_history_index(self):
         with tempfile.TemporaryDirectory() as directory:

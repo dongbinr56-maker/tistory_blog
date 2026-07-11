@@ -92,13 +92,14 @@ class RenderTest(unittest.TestCase):
             self.assertIn("사실·수치 검토", page)
             self.assertIn("fact_review", page)
 
-    def test_copy_page_offers_a_text_inclusive_hero_image_download(self):
+    def test_copy_page_offers_a_separate_thumbnail_download(self):
         page = _copy_page([{
             "date": "2026-07-11", "title": "초안", "title_candidates": [], "tags": [], "quality_status": "OK",
             "publish_checklist": [], "html_path": "tistory/2026-07-11.html",
-            "images": {"hero": {"url": "tistory/assets/2026-07-11/hero.png"}},
+            "images": {"hero": {"url": "tistory/assets/2026-07-11/hero.png"}, "thumbnail": {"url": "tistory/assets/2026-07-11/thumbnail.png"}},
         }])
-        self.assertIn("대표 이미지 PNG 다운로드", page)
-        self.assertIn("downloadHero", page)
-        self.assertIn("tistory-대표이미지-", page)
+        self.assertIn("대표 썸네일 PNG 다운로드", page)
+        self.assertIn("downloadThumbnail", page)
+        self.assertIn("tistory-대표-썸네일-", page)
+        self.assertNotIn("const hero=current?.images?.hero", page)
         self.assertIn("response.blob()", page)

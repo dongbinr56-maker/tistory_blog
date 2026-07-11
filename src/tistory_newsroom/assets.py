@@ -118,6 +118,53 @@ def _png_card(title: str, eyebrow: str) -> bytes:
     return result.getvalue()
 
 
+def _thumbnail_card(title: str, date: str) -> bytes:
+    """Render a distinct cover thumbnail; it is never inserted into the article body."""
+    width, height = 1200, 630
+    image = Image.new("RGB", (width, height), "#171b45")
+    draw = ImageDraw.Draw(image)
+    start, end = (23, 27, 69), (88, 28, 135)
+    for y in range(height):
+        ratio = y / (height - 1)
+        color = tuple(round(start[index] * (1 - ratio) + end[index] * ratio) for index in range(3))
+        draw.line((0, y, width, y), fill=color)
+    overlay = Image.new("RGBA", image.size, (0, 0, 0, 0))
+    overlay_draw = ImageDraw.Draw(overlay)
+    overlay_draw.rounded_rectangle((780, -120, 1290, 390), radius=120, fill=(125, 211, 252, 27))
+    overlay_draw.ellipse((890, -15, 1160, 255), outline=(224, 231, 255, 68), width=3)
+    overlay_draw.rounded_rectangle((80, 84, 292, 126), radius=21, fill=(224, 231, 255, 32))
+    image = Image.alpha_composite(image.convert("RGBA"), overlay)
+    draw = ImageDraw.Draw(image)
+    label_font = _font(22)
+    footer_font = _font(20)
+    draw.text((104, 93), "TODAY'S AI · DEV", font=label_font, fill="#e0e7ff")
+
+    text_width = 870
+    title_font = _font(56)
+    lines = _wrapped_lines(draw, title[:110], title_font, text_width)
+    for size in (56, 52, 48, 44, 40):
+        title_font = _font(size)
+        lines = _wrapped_lines(draw, title[:110], title_font, text_width)
+        if len(lines) <= 3:
+            break
+    if len(lines) > 3:
+        lines = lines[:3]
+        suffix = "…"
+        while lines[-1] and draw.textlength(lines[-1] + suffix, font=title_font) > text_width:
+            lines[-1] = lines[-1][:-1]
+        lines[-1] += suffix
+    line_height = int(title_font.size * 1.27)
+    title_height = line_height * len(lines)
+    title_y = max(190, min(275, 358 - title_height // 2))
+    for index, line in enumerate(lines):
+        draw.text((80, title_y + index * line_height), line, font=title_font, fill="#ffffff")
+    draw.text((80, 550), f"AI Engineering Daily Brief · {date.replace('-', '.')}", font=footer_font, fill="#c7d2fe")
+
+    result = io.BytesIO()
+    image.convert("RGB").save(result, format="PNG", optimize=True)
+    return result.getvalue()
+
+
 def _public_url(base_url: str, date: str, filename: str) -> str:
     if base_url.strip():
         return f"{base_url.rstrip('/')}/{date}/{filename}"
@@ -136,6 +183,22 @@ def create_hero_image_asset(root: Path, draft: Draft, asset_base_url: str) -> di
     return {"path": hero_name, "url": _public_url(asset_base_url, draft.date, hero_name), "kind": "generated-hero"}
 
 
+def create_thumbnail_image_asset(root: Path, draft: Draft, asset_base_url: str) -> dict[str, str]:
+    """Create a standalone thumbnail for Tistory's post-cover upload flow."""
+    directory = root / "docs" / "tistory" / "assets" / draft.date
+    directory.mkdir(parents=True, exist_ok=True)
+    thumbnail_name = "thumbnail.png"
+    stale_path = directory / thumbnail_name
+    if stale_path.is_file():
+        stale_path.unlink()
+    (directory / thumbnail_name).write_bytes(_thumbnail_card(draft.title, draft.date))
+    return {
+        "path": thumbnail_name,
+        "url": _public_url(asset_base_url, draft.date, thumbnail_name),
+        "kind": "generated-thumbnail",
+    }
+
+
 def create_image_assets(root: Path, draft: Draft, asset_base_url: str) -> dict[str, dict[str, str]]:
     """Save a hero and one visual per verified article for copy-ready HTML."""
     directory = root / "docs" / "tistory" / "assets" / draft.date
@@ -144,10 +207,11 @@ def create_image_assets(root: Path, draft: Draft, asset_base_url: str) -> dict[s
     # directory belongs entirely to the fixed daily draft, so stale variants
     # must go before writing the new canonical set.
     for stale_path in directory.iterdir():
-        if stale_path.is_file() and (stale_path.name in {"hero.svg", "hero.png"} or stale_path.name.startswith("issue-")):
+        if stale_path.is_file() and (stale_path.name in {"hero.svg", "hero.png", "thumbnail.png"} or stale_path.name.startswith("issue-")):
             stale_path.unlink()
     images: dict[str, dict[str, str]] = {}
     images["hero"] = create_hero_image_asset(root, draft, asset_base_url)
+    images["thumbnail"] = create_thumbnail_image_asset(root, draft, asset_base_url)
     for index, source in enumerate(draft.source_items, start=1):
         key = source.id
         fallback_name = f"issue-{index}.svg"

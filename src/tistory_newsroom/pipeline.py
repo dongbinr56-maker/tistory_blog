@@ -7,7 +7,7 @@ import shutil
 from typing import Any
 import urllib.parse
 
-from .assets import create_hero_image_asset, create_image_assets
+from .assets import create_hero_image_asset, create_image_assets, create_thumbnail_image_asset
 from .collect import choose_diverse, collect_candidates, collection_payload
 from .config import ROOT, load_site_config, load_sources_config
 from .generate import generate_demo, generate_with_gemini
@@ -198,7 +198,7 @@ def _quality_report_from_dict(value: dict[str, Any]) -> QualityReport:
 
 
 def refresh_hero_image(root: Path = ROOT, date: str | None = None) -> dict[str, Any]:
-    """Upgrade the hero image of an approved draft without rewriting its article."""
+    """Refresh generated visuals of an approved draft without rewriting its article."""
     day = _day_or_today(date)
     run_dir = root / "data" / "runs" / day
     draft_path = run_dir / "draft.json"
@@ -218,12 +218,14 @@ def refresh_hero_image(root: Path = ROOT, date: str | None = None) -> dict[str, 
     site = load_site_config(root)
     asset_base_url = str(site.get("draft_assets_base_url", ""))
     draft.images["hero"] = create_hero_image_asset(root, draft, asset_base_url)
+    draft.images["thumbnail"] = create_thumbnail_image_asset(root, draft, asset_base_url)
     _write_json(draft_path, draft.to_dict())
     write_outputs(root, draft, report, site)
     return {
         "date": day,
         "status": report.status,
         "hero": draft.images["hero"],
+        "thumbnail": draft.images["thumbnail"],
         "output": str(root / "docs" / "tistory" / f"{day}.html"),
     }
 

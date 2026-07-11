@@ -168,6 +168,11 @@
         "kind": "source-image",
         "path": "issue-3.png",
         "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-11/issue-3.png"
+      },
+      "thumbnail": {
+        "path": "thumbnail.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-11/thumbnail.png",
+        "kind": "generated-thumbnail"
       }
     },
     "html_path": "tistory/2026-07-11.html"
