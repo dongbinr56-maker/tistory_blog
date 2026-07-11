@@ -36,11 +36,11 @@ def render_article_html(draft: Draft, site: dict[str, Any]) -> str:
   <p class="issue-number">ISSUE {number:02d}</p>
   <h2>{esc(section.headline)}</h2>
   {issue_image}
-  <h3>무슨 일이 있었나</h3>{paragraphs(section.what_happened)}
-  <h3>쉽게 말하면</h3>{paragraphs(section.plain_explanation)}
-  <h3>왜 중요한가</h3>{paragraphs(section.why_it_matters)}
-  <h3>작성자 관점</h3>{paragraphs(section.editorial_take)}
-  <h3>오늘의 점검</h3>{paragraphs(section.reader_action)}
+  <h3>이번 변화의 요점</h3>{paragraphs(section.what_happened)}
+  <h3>쉽게 풀어 보면</h3>{paragraphs(section.plain_explanation)}
+  <h3>실무에서 달라지는 점</h3>{paragraphs(section.why_it_matters)}
+  <h3>먼저 볼 지점</h3>{paragraphs(section.editorial_take)}
+  <h3>확인해 볼 것</h3>{paragraphs(section.reader_action)}
   <h3>출처</h3><ul class="sources">{links}</ul>
 </section>"""
         )
@@ -57,7 +57,6 @@ def render_article_html(draft: Draft, site: dict[str, Any]) -> str:
     .tistory-newsroom .eyebrow,.tistory-newsroom .issue-number {{color:#0f766e;font-weight:700;font-size:13px;letter-spacing:.04em}}
     .tistory-newsroom .issue-card {{margin:28px 0;padding:24px;border:1px solid #e2e8f0;border-radius:16px;background:#fff}}
     .tistory-newsroom .sources {{padding-left:20px}} .tistory-newsroom a {{color:#0f766e}}
-    .tistory-newsroom .notice {{margin-top:28px;padding:16px 18px;border-left:4px solid #0f766e;background:#f0fdfa;color:#475569;font-size:14px}}
   </style>
   <header class="hero">
     {hero_image}
@@ -67,7 +66,6 @@ def render_article_html(draft: Draft, site: dict[str, Any]) -> str:
   </header>
   {''.join(sections)}
   <section><h2>마무리</h2>{paragraphs(draft.closing)}</section>
-  <aside class="notice">{esc(draft.editorial_disclosure)}</aside>
 </article>"""
 
 

@@ -1,23 +1,22 @@
 [
   {
     "date": "2026-07-11",
-    "title": "AI 에이전트 개발의 세 가지 축: ECC, Hermes-agent, HimitsuShell",
+    "title": "AI 에이전트 최적화부터 코드 보안까지: 현업 엔지니어를 위한 실용 가이드",
     "title_candidates": [
-      "AI 에이전트 개발의 세 가지 축: ECC, Hermes-agent, HimitsuShell",
-      "성장하는 AI 에이전트와 안전한 배포를 위한 도구: ECC, Hermes-agent, HimitsuShell",
-      "AI 에이전트 성능 최적화부터 스크립트 보안까지: ECC와 HimitsuShell"
+      "ECC와 HimitsuShell: AI 에이전트 성능과 코드 보안의 두 가지 축",
+      "Fable 5 활용법과 AI 에이전트의 현실: 엔지니어링 관점의 깊이 있는 분석",
+      "2026년 7월 11일: AI 에이전트 성능, 코드 보안, 그리고 Fable 5의 실전 적용"
     ],
     "tags": [
       "AI 에이전트",
-      "개발 도구",
       "성능 최적화",
-      "스크립트 보안",
-      "오픈소스",
-      "LLM",
-      "AI 모델링",
-      "배포"
+      "코드 보안",
+      "생성형 AI",
+      "개발 도구",
+      "LLM 활용",
+      "배포 전략"
     ],
-    "meta_description": "2026년 7월 11일, AI 에이전트의 성능 최적화 시스템 ECC, 성장형 에이전트 Hermes-agent, 그리고 쉘 스크립트 보안 도구 HimitsuShell을 분석합니다.",
+    "meta_description": "AI 에이전트 성능 최적화 도구 ECC, 쉘 스크립트 보안 솔루션 HimitsuShell, 그리고 Fable 5 활용 가이드를 통해 AI 엔지니어링의 실질적인 고민을 다룹니다.",
     "article_count_note": "",
     "quality_status": "READY_FOR_MANUAL_REVIEW",
     "manual_review_required": true,
@@ -40,9 +39,9 @@
         "url": "https://himitsushell.com/"
       },
       {
-        "name": "GitHub 커뮤니티",
-        "title": "NousResearch/hermes-agent",
-        "url": "https://github.com/NousResearch/hermes-agent"
+        "name": "요즘IT",
+        "title": "페이블 D-2, 앤트로픽 엔지니어가 알려주는 활용 가이드 | 요즘IT",
+        "url": "https://yozm.wishket.com/magazine/detail/3848"
       }
     ],
     "images": {
@@ -58,16 +57,16 @@
         "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-11/issue-1.png"
       },
       "geeknews-8ebcb2040a6aa5a9": {
-        "origin_url": "https://himitsushell.com/img/og-image.png?v=1783750281730",
+        "origin_url": "https://himitsushell.com/img/og-image.png?v=1783752391982",
         "kind": "source-image",
         "path": "issue-2.png",
         "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-11/issue-2.png"
       },
-      "github-community-ec2b8bd43eefd65f": {
-        "origin_url": "https://opengraph.githubassets.com/1/NousResearch/hermes-agent",
+      "요즘it-c0902b6ef178e4f9": {
+        "origin_url": "https://yozm.wishket.com/media/news/3848/3.jfif",
         "kind": "source-image",
-        "path": "issue-3.png",
-        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-11/issue-3.png"
+        "path": "issue-3.jpg",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-11/issue-3.jpg"
       }
     },
     "html_path": "tistory/2026-07-11.html"

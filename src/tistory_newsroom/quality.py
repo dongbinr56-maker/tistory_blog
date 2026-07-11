@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from .models import Draft, QualityReport
+from .style import generic_editorial_markers, mentioned_projects
 
 BLOCKED_TERMS = (
     "성인", "음란", "도박", "마약", "총기", "폭력 선동", "혐오",
@@ -17,7 +18,7 @@ UNNATURAL_TECH_MARKERS = (
 
 
 def _body_text(draft: Draft) -> str:
-    pieces = [draft.intro, draft.closing, draft.editorial_disclosure]
+    pieces = [draft.intro, draft.closing]
     for section in draft.sections:
         pieces.extend((section.headline, section.what_happened, section.plain_explanation, section.why_it_matters, section.editorial_take, section.reader_action))
     return " ".join(pieces)
@@ -73,9 +74,9 @@ def inspect_draft(draft: Draft, site: dict[str, object]) -> QualityReport:
     if not checks["community_project_included"]:
         errors.append("GitHub 또는 Hugging Face 커뮤니티에서 최근 주목받는 프로젝트가 최소 1건 포함되어야 합니다.")
 
-    checks["ai_disclosure"] = "AI" in draft.editorial_disclosure and ("검토" in draft.editorial_disclosure or "확인" in draft.editorial_disclosure)
-    if not checks["ai_disclosure"]:
-        errors.append("AI 활용 및 사람 검토 고지가 필요합니다.")
+    # Review is enforced by the workflow/report, rather than inserting an
+    # automation disclaimer into the reader-facing article.
+    checks["manual_review_required"] = True
 
     lowered = body.lower()
     checks["no_click_inducement"] = not any(term in lowered for term in CLICK_INDUCEMENT)
@@ -85,6 +86,15 @@ def inspect_draft(draft: Draft, site: dict[str, object]) -> QualityReport:
     checks["no_empty_technical_inventory"] = not any(term in body for term in UNNATURAL_TECH_MARKERS)
     if not checks["no_empty_technical_inventory"]:
         errors.append("확인 불가 항목을 나열하는 기술 인벤토리 대신, 실제 확인한 내용만 자연스러운 문장으로 작성해야 합니다.")
+
+    generic_markers = generic_editorial_markers(body)
+    checks["natural_editorial_voice"] = not generic_markers
+    if not checks["natural_editorial_voice"]:
+        errors.append("상투적인 AI 요약 표현을 걷어내고, 출처에 근거한 구체적인 편집 문장으로 다시 작성해야 합니다: " + ", ".join(generic_markers))
+
+    checks["specific_intro"] = len(mentioned_projects(draft.intro, draft.source_items)) >= 2
+    if not checks["specific_intro"]:
+        errors.append("도입부에는 그날 다루는 실제 프로젝트·모델 이름을 최소 두 개 넣어 일반론을 피해야 합니다.")
 
     blocked = [term for term in BLOCKED_TERMS if term in body]
     checks["no_restricted_topic_signal"] = not blocked

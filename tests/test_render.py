@@ -36,6 +36,9 @@ class RenderTest(unittest.TestCase):
         self.assertNotIn("<h1><script>", article)
         self.assertNotIn("기술적으로 확인한 내용", article)
         self.assertNotIn("오늘은 기준을 충족한 기사", article)
+        self.assertNotIn("AI는 초안 작성", article)
+        self.assertNotIn("발행 전 사람이", article)
+        self.assertNotIn("<aside", article)
 
     def test_outputs_include_copy_page(self):
         draft = generate_demo("2026-07-11", self.sources, self.site)

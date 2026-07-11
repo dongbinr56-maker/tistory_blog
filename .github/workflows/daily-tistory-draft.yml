@@ -10,6 +10,11 @@ on:
         description: 'Optional YYYY-MM-DD (defaults to today in Asia/Seoul)'
         required: false
         type: string
+      refresh:
+        description: 'Regenerate and overwrite an already review-ready draft for the chosen date'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -36,10 +41,14 @@ jobs:
 
       - name: Generate reviewable draft and enforce quality gate
         run: |
+          refresh=""
+          if [ "${{ inputs.refresh }}" = "true" ]; then
+            refresh="--refresh"
+          fi
           if [ -n "${{ inputs.run_date }}" ]; then
-            PYTHONPATH=src python -m tistory_newsroom run --date "${{ inputs.run_date }}"
+            PYTHONPATH=src python -m tistory_newsroom run --date "${{ inputs.run_date }}" $refresh
           else
-            PYTHONPATH=src python -m tistory_newsroom run
+            PYTHONPATH=src python -m tistory_newsroom run $refresh
           fi
 
       - name: Commit daily source records and draft
