@@ -1,11 +1,11 @@
 [
   {
     "date": "2026-07-12",
-    "title": "AI 개발의 스펙트럼: Hugging Face Transformers, AutoGPT, 그리고 멀티모달 모델의 현재",
+    "title": "[AI 뉴스룸] | transformers, AutoGPT, Qwythos-9B-Claude",
     "title_candidates": [
-      "AI 개발의 스펙트럼: Hugging Face Transformers, AutoGPT, 그리고 멀티모달 모델의 현재",
-      "AI 기술 스택의 진화: 프레임워크부터 자율 에이전트까지",
-      "Hugging Face Transformers와 AutoGPT로 본 AI 생태계의 확장"
+      "[AI 뉴스룸] | transformers, AutoGPT, Qwythos-9B-Claude",
+      "[AI 뉴스룸] | transformers, Qwythos-9B-Claude, AutoGPT",
+      "[AI 뉴스룸] | AutoGPT, transformers, Qwythos-9B-Claude"
     ],
     "tags": [
       "AI 엔지니어링",
@@ -154,11 +154,6 @@
         "path": "hero.png",
         "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-12/hero.png",
         "kind": "generated-hero"
-      },
-      "thumbnail": {
-        "path": "thumbnail.png",
-        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-12/thumbnail.png",
-        "kind": "generated-thumbnail"
       },
       "github-community-53d940334a2a5afd": {
         "origin_url": "https://opengraph.githubassets.com/1/huggingface/transformers",

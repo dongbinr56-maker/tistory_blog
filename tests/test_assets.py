@@ -22,16 +22,11 @@ class AssetTest(unittest.TestCase):
         draft = generate_demo("2026-07-11", sources, site)
         with tempfile.TemporaryDirectory() as directory:
             images = create_image_assets(Path(directory), draft, "https://example.github.io/repo/tistory/assets")
-            self.assertEqual(set(images), {"hero", "thumbnail", "item-1", "item-2", "item-3"})
+            self.assertEqual(set(images), {"hero", "item-1", "item-2", "item-3"})
             hero_path = Path(directory) / "docs/tistory/assets/2026-07-11/hero.png"
-            thumbnail_path = Path(directory) / "docs/tistory/assets/2026-07-11/thumbnail.png"
             self.assertTrue(hero_path.exists())
-            self.assertTrue(thumbnail_path.exists())
             self.assertEqual(hero_path.read_bytes()[:8], b"\x89PNG\r\n\x1a\n")
-            self.assertEqual(thumbnail_path.read_bytes()[:8], b"\x89PNG\r\n\x1a\n")
-            self.assertNotEqual(hero_path.read_bytes(), thumbnail_path.read_bytes())
             self.assertEqual(images["hero"]["path"], "hero.png")
-            self.assertEqual(images["thumbnail"]["path"], "thumbnail.png")
             self.assertTrue(images["item-1"]["url"].startswith("https://example.github.io/"))
 
     def test_refresh_removes_stale_daily_asset_variants(self):
@@ -55,4 +50,4 @@ class AssetTest(unittest.TestCase):
             self.assertTrue((assets / "issue-1.svg").exists())
             self.assertFalse((assets / "hero.svg").exists())
             self.assertTrue((assets / "hero.png").exists())
-            self.assertTrue((assets / "thumbnail.png").exists())
+            self.assertFalse((assets / "thumbnail.png").exists())

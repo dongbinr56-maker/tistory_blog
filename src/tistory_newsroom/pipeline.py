@@ -7,10 +7,10 @@ import shutil
 from typing import Any
 import urllib.parse
 
-from .assets import create_hero_image_asset, create_image_assets, create_thumbnail_image_asset
+from .assets import create_hero_image_asset, create_image_assets
 from .collect import choose_diverse, collect_candidates, collection_payload
 from .config import ROOT, load_site_config, load_sources_config
-from .generate import generate_demo, generate_with_gemini
+from .generate import generate_demo, generate_with_gemini, newsroom_title_candidates
 from .models import Draft, QualityReport, SourceItem
 from .quality import inspect_draft
 from .render import build_site, write_outputs
@@ -217,15 +217,19 @@ def refresh_hero_image(root: Path = ROOT, date: str | None = None) -> dict[str, 
     draft = Draft.from_dict(raw_draft, source_items)
     site = load_site_config(root)
     asset_base_url = str(site.get("draft_assets_base_url", ""))
+    draft.title_candidates = newsroom_title_candidates(draft.source_items)
+    draft.title = draft.title_candidates[0]
     draft.images["hero"] = create_hero_image_asset(root, draft, asset_base_url)
-    draft.images["thumbnail"] = create_thumbnail_image_asset(root, draft, asset_base_url)
+    draft.images.pop("thumbnail", None)
+    legacy_thumbnail = root / "docs" / "tistory" / "assets" / day / "thumbnail.png"
+    if legacy_thumbnail.is_file():
+        legacy_thumbnail.unlink()
     _write_json(draft_path, draft.to_dict())
     write_outputs(root, draft, report, site)
     return {
         "date": day,
         "status": report.status,
         "hero": draft.images["hero"],
-        "thumbnail": draft.images["thumbnail"],
         "output": str(root / "docs" / "tistory" / f"{day}.html"),
     }
 

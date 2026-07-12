@@ -116,6 +116,9 @@ class PipelineStateTest(unittest.TestCase):
             ]
             draft = generate_demo(day, sources, site)
             draft.images = create_image_assets(root, draft, site["draft_assets_base_url"])
+            draft.images["thumbnail"] = {"path": "thumbnail.png", "url": "https://example.github.io/thumbnail.png"}
+            legacy_thumbnail = root / f"docs/tistory/assets/{day}/thumbnail.png"
+            legacy_thumbnail.write_bytes(b"legacy thumbnail")
             report = QualityReport(
                 status="READY_FOR_MANUAL_REVIEW", errors=[], warnings=[], checks={}, manual_review_required=True,
             )
@@ -128,12 +131,12 @@ class PipelineStateTest(unittest.TestCase):
 
             refreshed = json.loads((root / f"data/runs/{day}/draft.json").read_text(encoding="utf-8"))
             self.assertEqual(result["hero"]["path"], "hero.png")
-            self.assertEqual(result["thumbnail"]["path"], "thumbnail.png")
+            self.assertTrue(refreshed["title"].startswith("[AI 뉴스룸] | "))
             self.assertEqual(refreshed["title"], original_title)
             self.assertEqual(refreshed["images"]["hero"]["path"], "hero.png")
-            self.assertEqual(refreshed["images"]["thumbnail"]["path"], "thumbnail.png")
+            self.assertNotIn("thumbnail", refreshed["images"])
             self.assertTrue((root / f"docs/tistory/assets/{day}/hero.png").is_file())
-            self.assertTrue((root / f"docs/tistory/assets/{day}/thumbnail.png").is_file())
+            self.assertFalse((root / f"docs/tistory/assets/{day}/thumbnail.png").exists())
             article_html = (root / f"docs/tistory/{day}.html").read_text(encoding="utf-8")
             self.assertIn("hero.png", article_html)
             self.assertNotIn("thumbnail.png", article_html)

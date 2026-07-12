@@ -1,11 +1,8 @@
 from __future__ import annotations
 
 import html
-import hashlib
 import io
-import math
 import mimetypes
-import random
 import re
 import urllib.parse
 from pathlib import Path
@@ -121,59 +118,6 @@ def _png_card(title: str, eyebrow: str) -> bytes:
     return result.getvalue()
 
 
-def _thumbnail_card(draft: Draft) -> bytes:
-    """Render a text-free thematic thumbnail; it is never inserted into the article body."""
-    width, height = 1200, 630
-    themes = " ".join([draft.title, *draft.tags, *(source.topic for source in draft.source_items)]).lower()
-    seed = int(hashlib.sha256(f"{draft.date}|{themes}".encode()).hexdigest()[:16], 16)
-    rng = random.Random(seed)
-    palette = ((5, 18, 38), (16, 62, 96), (32, 211, 238), (139, 92, 246))
-    if any(token in themes for token in ("보안", "security", "암호", "obfusc")):
-        palette = ((8, 14, 39), (24, 42, 102), (34, 211, 238), (168, 85, 247))
-    elif any(token in themes for token in ("비전", "vision", "이미지", "image")):
-        palette = ((10, 20, 45), (17, 94, 89), (45, 212, 191), (59, 130, 246))
-    start, end, cyan, violet = palette
-    image = Image.new("RGB", (width, height), start)
-    draw = ImageDraw.Draw(image)
-    for y in range(height):
-        ratio = y / (height - 1)
-        color = tuple(round(start[index] * (1 - ratio) + end[index] * ratio) for index in range(3))
-        draw.line((0, y, width, y), fill=color)
-    overlay = Image.new("RGBA", image.size, (0, 0, 0, 0))
-    overlay_draw = ImageDraw.Draw(overlay)
-    for index in range(18):
-        x = rng.randint(0, width)
-        y = rng.randint(0, height)
-        radius = rng.randint(2, 7)
-        color = (*cyan, rng.randint(35, 115))
-        overlay_draw.ellipse((x - radius, y - radius, x + radius, y + radius), fill=color)
-    for index in range(10):
-        start_x = rng.randint(40, 520)
-        start_y = rng.randint(90, 560)
-        bend_x = rng.randint(550, 850)
-        end_x = rng.randint(850, 1170)
-        end_y = rng.randint(70, 570)
-        overlay_draw.line((start_x, start_y, bend_x, start_y, bend_x, end_y, end_x, end_y), fill=(*cyan, 75), width=2)
-        overlay_draw.ellipse((end_x - 5, end_y - 5, end_x + 5, end_y + 5), fill=(*violet, 170))
-    overlay_draw.ellipse((660, 100, 1080, 520), outline=(*cyan, 120), width=3)
-    overlay_draw.ellipse((730, 170, 1010, 450), outline=(*violet, 150), width=3)
-    overlay_draw.regular_polygon((870, 310, 120), 6, rotation=30, fill=(*cyan, 45), outline=(*cyan, 220), width=3)
-    for angle in range(0, 360, 45):
-        x = 870 + int(155 * math.cos(math.radians(angle)))
-        y = 310 + int(155 * math.sin(math.radians(angle)))
-        overlay_draw.line((870, 310, x, y), fill=(*violet, 145), width=2)
-        overlay_draw.ellipse((x - 9, y - 9, x + 9, y + 9), fill=(*cyan, 210))
-    # Security-focused days get a visual shield, but never a title or article text.
-    if any(token in themes for token in ("보안", "security", "암호", "obfusc")):
-        overlay_draw.polygon(((1040, 170), (1140, 210), (1120, 365), (1040, 440), (960, 365), (940, 210)), fill=(*violet, 55), outline=(*cyan, 230), width=3)
-        overlay_draw.line((980, 285, 1025, 330, 1105, 235), fill=(*cyan, 230), width=8)
-    image = Image.alpha_composite(image.convert("RGBA"), overlay)
-
-    result = io.BytesIO()
-    image.convert("RGB").save(result, format="PNG", optimize=True)
-    return result.getvalue()
-
-
 def _public_url(base_url: str, date: str, filename: str) -> str:
     if base_url.strip():
         return f"{base_url.rstrip('/')}/{date}/{filename}"
@@ -192,22 +136,6 @@ def create_hero_image_asset(root: Path, draft: Draft, asset_base_url: str) -> di
     return {"path": hero_name, "url": _public_url(asset_base_url, draft.date, hero_name), "kind": "generated-hero"}
 
 
-def create_thumbnail_image_asset(root: Path, draft: Draft, asset_base_url: str) -> dict[str, str]:
-    """Create a standalone thumbnail for Tistory's post-cover upload flow."""
-    directory = root / "docs" / "tistory" / "assets" / draft.date
-    directory.mkdir(parents=True, exist_ok=True)
-    thumbnail_name = "thumbnail.png"
-    stale_path = directory / thumbnail_name
-    if stale_path.is_file():
-        stale_path.unlink()
-    (directory / thumbnail_name).write_bytes(_thumbnail_card(draft))
-    return {
-        "path": thumbnail_name,
-        "url": _public_url(asset_base_url, draft.date, thumbnail_name),
-        "kind": "generated-thumbnail",
-    }
-
-
 def create_image_assets(root: Path, draft: Draft, asset_base_url: str) -> dict[str, dict[str, str]]:
     """Save a hero and one visual per verified article for copy-ready HTML."""
     directory = root / "docs" / "tistory" / "assets" / draft.date
@@ -220,7 +148,6 @@ def create_image_assets(root: Path, draft: Draft, asset_base_url: str) -> dict[s
             stale_path.unlink()
     images: dict[str, dict[str, str]] = {}
     images["hero"] = create_hero_image_asset(root, draft, asset_base_url)
-    images["thumbnail"] = create_thumbnail_image_asset(root, draft, asset_base_url)
     for index, source in enumerate(draft.source_items, start=1):
         key = source.id
         fallback_name = f"issue-{index}.svg"

@@ -146,43 +146,35 @@ def _publication_title(raw_draft: dict[str, Any]) -> str:
     return shortened if len(shortened) >= 15 else "오늘의 AI·개발 데일리 다이제스트"
 
 
-def _distinct_title_candidates(raw_draft: dict[str, Any], sources: list[SourceItem]) -> list[str]:
-    """Keep usable model suggestions, then fill missing choices from verified project names."""
-    selected = _publication_title(raw_draft)
-    candidates = [selected]
-    candidates.extend(str(value).strip() for value in raw_draft.get("title_candidates", []) if str(value).strip())
-    unique: list[str] = []
-    seen: set[str] = set()
-    for candidate in candidates:
-        compact = re.sub(r"\s+", " ", candidate).strip()
-        key = compact.casefold()
-        if 15 <= len(compact) <= 75 and key not in seen:
-            unique.append(compact)
-            seen.add(key)
+def _issue_title_label(source: SourceItem, number: int) -> str:
+    """Use a compact, recognizable project name in the fixed newsroom title."""
+    raw = source.verification.get("project_name") or source.title
+    label = raw.rsplit("/", 1)[-1].strip()
+    label = re.sub(r"-(?:GGUF|quantized|instruct)$", "", label, flags=re.IGNORECASE)
+    label = re.sub(r"\s+", " ", label).strip(" ,:|-–—")
+    return label[:18].rstrip(" ,:|-–—") or f"AI 이슈 {number}"
 
-    projects = project_aliases(sources)
 
-    def label(index: int, fallback: str) -> str:
-        value = projects[index] if len(projects) > index else fallback
-        return value[:30].rstrip(" ,:|-–—")
-
-    first = label(0, "AI 프로젝트")
-    second = label(1, "오픈소스 도구")
-    third = label(2, "모델 업데이트")
-    fallbacks = (
-        f"{first}·{second}: 모델·에이전트 개발자가 볼 변화",
-        f"{first}부터 {third}까지, 오늘의 AI 개발 프로젝트",
-        f"모델·에이전트·오픈소스: {first}와 {second} 업데이트",
-    )
-    for candidate in fallbacks:
-        compact = re.sub(r"\s+", " ", candidate).strip()
-        key = compact.casefold()
-        if 15 <= len(compact) <= 75 and key not in seen:
-            unique.append(compact)
-            seen.add(key)
-        if len(unique) == 3:
-            break
-    return unique[:3]
+def newsroom_title_candidates(sources: list[SourceItem]) -> list[str]:
+    """Return three SEO-safe variants of the fixed newsroom title format."""
+    labels: list[str] = []
+    used: set[str] = set()
+    for number, source in enumerate(sources[:3], start=1):
+        label = _issue_title_label(source, number)
+        key = label.casefold()
+        if key in used:
+            label = f"{label} {number}"
+            key = label.casefold()
+        labels.append(label)
+        used.add(key)
+    while len(labels) < 3:
+        labels.append(f"AI 이슈 {len(labels) + 1}")
+    first, second, third = labels[:3]
+    return [
+        f"[AI 뉴스룸] | {first}, {second}, {third}",
+        f"[AI 뉴스룸] | {first}, {third}, {second}",
+        f"[AI 뉴스룸] | {second}, {first}, {third}",
+    ]
 
 
 def generate_with_gemini(date: str, sources: list[SourceItem], site: dict[str, Any]) -> Draft:
@@ -207,8 +199,8 @@ def generate_with_gemini(date: str, sources: list[SourceItem], site: dict[str, A
                 raw_draft["date"] = date
                 raw_draft["model"] = model
                 raw_draft["editorial_disclosure"] = ""
-            raw_draft["title_candidates"] = _distinct_title_candidates(raw_draft, sources)
-            raw_draft["title"] = _publication_title(raw_draft)
+            raw_draft["title_candidates"] = newsroom_title_candidates(sources)
+            raw_draft["title"] = raw_draft["title_candidates"][0]
             return Draft.from_dict(raw_draft, sources)
         except Exception as error:
             last_error = error
@@ -248,11 +240,7 @@ def generate_demo(date: str, sources: list[SourceItem], site: dict[str, Any]) ->
                 ),
             }
         )
-    titles = [
-        f"{date} AI 모델·에이전트 브리핑: GitHub·Hugging Face 프로젝트와 실무 포인트",
-        f"AI 엔지니어 데일리: 모델·에이전트·오픈소스 프로젝트 {len(sources)}건 분석",
-        f"오늘의 AI 모델 뉴스 | 프로젝트 검증부터 배포 판단까지",
-    ]
+    titles = newsroom_title_candidates(sources)
     lead_projects = ", ".join(project_aliases(sources)[:2])
     raw = {
         "date": date,

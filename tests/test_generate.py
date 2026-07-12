@@ -1,6 +1,6 @@
 import unittest
 
-from tistory_newsroom.generate import _distinct_title_candidates, _publication_title, make_rewrite_prompt
+from tistory_newsroom.generate import _publication_title, make_rewrite_prompt, newsroom_title_candidates
 from tistory_newsroom.models import SourceItem
 
 
@@ -29,7 +29,7 @@ class GeneratePromptTest(unittest.TestCase):
         self.assertEqual(selected, "ECC와 HimitsuShell: AI 배포에서 먼저 볼 두 가지")
         self.assertLessEqual(len(selected), 75)
 
-    def test_fills_duplicate_title_candidates_with_verified_project_variants(self):
+    def test_title_candidates_always_use_the_newsroom_format(self):
         sources = [
             SourceItem(
                 id="first", source="GitHub", topic="AI 모델링", title="owner/first-project",
@@ -43,11 +43,9 @@ class GeneratePromptTest(unittest.TestCase):
             ),
         ]
 
-        candidates = _distinct_title_candidates({
-            "title": "owner/first-project와 AI 에이전트 개발 흐름",
-            "title_candidates": ["중복 후보", "중복 후보", "중복 후보"],
-        }, sources)
+        candidates = newsroom_title_candidates(sources)
 
         self.assertEqual(len(candidates), 3)
         self.assertEqual(len({candidate.casefold() for candidate in candidates}), 3)
-        self.assertIn("owner/first-project", candidates[0])
+        self.assertTrue(all(candidate.startswith("[AI 뉴스룸] | ") for candidate in candidates))
+        self.assertIn("first-project", candidates[0])

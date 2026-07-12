@@ -16,7 +16,7 @@ def main() -> None:
     run_parser.add_argument("--date", help="YYYY-MM-DD; defaults to today in Asia/Seoul")
     run_parser.add_argument("--demo", action="store_true", help="use bundled samples without calling Gemini")
     run_parser.add_argument("--refresh", action="store_true", help="regenerate and overwrite the fixed draft for the selected date")
-    hero_parser = commands.add_parser("refresh-hero", help="regenerate the PNG hero and standalone thumbnail for an approved draft")
+    hero_parser = commands.add_parser("refresh-hero", help="regenerate the body hero image and fixed newsroom title for an approved draft")
     hero_parser.add_argument("--date", help="YYYY-MM-DD; defaults to today in Asia/Seoul")
     commands.add_parser("build-site", help="rebuild the GitHub Pages copy/review UI")
     args = parser.parse_args()
