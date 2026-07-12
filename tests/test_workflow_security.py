@@ -13,5 +13,7 @@ class WorkflowSecurityTest(unittest.TestCase):
         self.assertIn('args+=(--date "$RUN_DATE")', workflow)
         self.assertIn('python -m tistory_newsroom run "${args[@]}"', workflow)
         self.assertIn('if [ -d data/history ]; then', workflow)
+        self.assertIn('git rebase -X ours origin/main', workflow)
+        self.assertIn('PYTHONPATH=src python -m tistory_newsroom build-site', workflow)
         self.assertNotIn('"${{ inputs.run_date }}"', workflow)
         self.assertNotIn('"${{ inputs.refresh }}"', workflow)

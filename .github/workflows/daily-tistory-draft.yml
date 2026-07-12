@@ -81,7 +81,24 @@ jobs:
             echo "No generated changes to commit."
           else
             git commit -m "Daily Tistory draft: $(TZ=Asia/Seoul date +%F)"
-            git push
+            # A developer can push to main while the daily run is collecting
+            # sources. Rebase the generated commit onto that newer main and
+            # rebuild the derived review page before retrying the push.
+            # `-X ours` favors the newer main on a conflict, so this job never
+            # overwrites a manual code or page change.
+            attempt=1
+            until git push; do
+              if [ "$attempt" -ge 3 ]; then
+                echo "Could not push generated draft after ${attempt} attempts." >&2
+                exit 1
+              fi
+              git fetch origin main
+              git rebase -X ours origin/main
+              PYTHONPATH=src python -m tistory_newsroom build-site
+              git add docs
+              git commit --amend --no-edit
+              attempt=$((attempt + 1))
+            done
           fi
 
       - name: Summarize a blocked or failed draft
