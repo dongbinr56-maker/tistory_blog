@@ -1,11 +1,11 @@
 {
   "status": "BLOCKED",
   "errors": [
-    "상투적인 AI 요약 표현을 걷어내고, 출처에 근거한 구체적인 편집 문장으로 다시 작성해야 합니다: 중요한 역할을 합니다"
+    "제목 후보는 서로 다른 3개 이상이어야 합니다."
   ],
   "warnings": [],
   "checks": {
-    "three_distinct_title_candidates": true,
+    "three_distinct_title_candidates": false,
     "reasonable_title_length": true,
     "tag_count_and_uniqueness": true,
     "sufficient_sources": true,
@@ -20,7 +20,7 @@
     "no_click_inducement": true,
     "no_empty_technical_inventory": true,
     "no_volatile_community_metrics": true,
-    "natural_editorial_voice": false,
+    "natural_editorial_voice": true,
     "specific_intro": true,
     "no_restricted_topic_signal": true,
     "contact_configured": true,

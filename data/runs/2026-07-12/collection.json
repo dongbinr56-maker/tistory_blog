@@ -1,12 +1,119 @@
 {
   "date": "2026-07-12",
-  "collected_at": "2026-07-11T22:37:53.505285+00:00",
+  "collected_at": "2026-07-12T06:40:05.541618+00:00",
   "selection_rule": "최근 24시간 요즘IT·GeekNews 기사와 최근 14일 GitHub/Hugging Face 커뮤니티 활성 프로젝트를 조합해 3건을 구성하며, 커뮤니티 프로젝트 1건 이상 필수. 이전 날짜에 선택한 원문·공식 프로젝트 URL은 제외",
   "history_exclusion": {
     "past_url_key_count": 5,
-    "excluded_candidate_count": 2
+    "excluded_candidate_count": 7
   },
   "candidates": [
+    {
+      "id": "geeknews-d25a187a89eb6dd7",
+      "source": "www.mixfont.com",
+      "topic": "개발 도구",
+      "title": "Ghost Font: The Anti-AI Font Only Humans Can Read",
+      "url": "https://www.mixfont.com/ghost-font",
+      "published_at": "2026-07-12T09:44:08+09:00",
+      "summary": "An anti-AI font that can be read by humans but not leading AI models. Type your text below, then download and share the video clip containing your message.",
+      "listing_url": "https://news.hada.io/topic?id=31343",
+      "introduced_at": "2026-07-12T09:44:08+09:00",
+      "image_url": "https://static.mixfont.com/assets/20260711-092742-ghostfont-og-j3qj8h8p.webp",
+      "official_url": "",
+      "canonical_key": "https://www.mixfont.com/ghost-font",
+      "verification": {
+        "article_title_verified": "Ghost Font: The Anti-AI Font Only Humans Can Read",
+        "article_source_verified": "www.mixfont.com",
+        "article_published_verified": "2026-07-12T09:44:08+09:00",
+        "article_url_verified": "https://www.mixfont.com/ghost-font",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=31343"
+      }
+    },
+    {
+      "id": "geeknews-3a308f44abebbb79",
+      "source": "GitHub",
+      "topic": "AI 에이전트, GitHub 프로젝트",
+      "title": "GitHub - Ataraxy-Labs/sem: Semantic version control => entity-level diffs, blame, and impact analysis on top of git. 28 languages via tree-sitter. Built for coding agents.",
+      "url": "https://github.com/Ataraxy-Labs/sem",
+      "published_at": "2026-07-12T09:31:02+09:00",
+      "summary": "Semantic version control => entity-level diffs, blame, and impact analysis on top of git. 28 languages via tree-sitter. Built for coding agents. - Ataraxy-Labs/sem",
+      "listing_url": "https://news.hada.io/topic?id=31339",
+      "introduced_at": "2026-07-12T09:31:02+09:00",
+      "image_url": "https://opengraph.githubassets.com/7d1fcd6003688c98b20e94c7b47e9d4e8d9a4a476311e4e7a4d7f75adfa29fa4/Ataraxy-Labs/sem",
+      "official_url": "https://github.com/fluidicon.png",
+      "canonical_key": "https://github.com/fluidicon.png",
+      "verification": {
+        "article_title_verified": "GitHub - Ataraxy-Labs/sem: Semantic version control => entity-level diffs, blame, and impact analysis on top of git. 28 languages via tree-sitter. Built for coding agents.",
+        "article_source_verified": "GitHub",
+        "article_published_verified": "2026-07-12T09:31:02+09:00",
+        "article_url_verified": "https://github.com/Ataraxy-Labs/sem",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=31339",
+        "official_url": "https://github.com/fluidicon.png"
+      }
+    },
+    {
+      "id": "geeknews-a982d0396a658427",
+      "source": "Ian Reppel",
+      "topic": "GitHub 프로젝트",
+      "title": "How Successful Companies Go Blind",
+      "url": "https://ianreppel.org/how-successful-companies-go-blind/",
+      "published_at": "2026-07-09T00:00:00+09:00",
+      "summary": "The Mexican cavefish kept its eye genes for over a million years after the eyes themselves disappeared. Something similar happens to companies once they achieve success.",
+      "listing_url": "https://news.hada.io/topic?id=31337",
+      "introduced_at": "2026-07-12T08:34:15+09:00",
+      "image_url": "/images/2026-07-09-cavefish.jpeg",
+      "official_url": "https://github.com/ianreppel",
+      "canonical_key": "https://github.com/ianreppel",
+      "verification": {
+        "article_title_verified": "How Successful Companies Go Blind",
+        "article_source_verified": "Ian Reppel",
+        "article_published_verified": "2026-07-09T00:00:00+09:00",
+        "article_url_verified": "https://ianreppel.org/how-successful-companies-go-blind/",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=31337",
+        "official_url": "https://github.com/ianreppel"
+      }
+    },
+    {
+      "id": "geeknews-24fd53f66cfcc1c6",
+      "source": "TryAI",
+      "topic": "생성형 AI",
+      "title": "GPT-5.6, Grok 4.5, Claude, and Muse Spark build the same 4 apps",
+      "url": "https://www.tryai.dev/blog/gpt-5.6-build-off-12-models",
+      "published_at": "2026-07-09T00:00:00+09:00",
+      "summary": "GPT-5.6's new Sol, Terra, and Luna tiers go head-to-head with Grok 4.5, Claude, Meta's Muse Spark, and the open-weights crew on a raycaster, a Rubik's cube, a calculator, and Game of Life. Here's every build, with cost and latency.",
+      "listing_url": "https://news.hada.io/topic?id=31342",
+      "introduced_at": "2026-07-12T09:42:10+09:00",
+      "image_url": "https://www.tryai.dev/blog/gpt-5.6-build-off-12-models/opengraph-image-yqks0s?3313ef8f7f360358",
+      "official_url": "",
+      "canonical_key": "https://www.tryai.dev/blog/gpt-5.6-build-off-12-models",
+      "verification": {
+        "article_title_verified": "GPT-5.6, Grok 4.5, Claude, and Muse Spark build the same 4 apps",
+        "article_source_verified": "TryAI",
+        "article_published_verified": "2026-07-09T00:00:00+09:00",
+        "article_url_verified": "https://www.tryai.dev/blog/gpt-5.6-build-off-12-models",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=31342"
+      }
+    },
+    {
+      "id": "geeknews-47d40526e3a168ed",
+      "source": "Cambridge Programme on AI Science & Policy",
+      "topic": "생성형 AI",
+      "title": "CASP — Cambridge Programme on AI Science & Policy | University of Cambridge",
+      "url": "https://casp.ac/reports/ai-enabled-terrorism",
+      "published_at": "2026-07-12T09:31:54+09:00",
+      "summary": "The Cambridge Programme on AI Science & Policy (CASP) is an interdisciplinary research programme on frontier AI at the University of Cambridge.",
+      "listing_url": "https://news.hada.io/topic?id=31340",
+      "introduced_at": "2026-07-12T09:31:54+09:00",
+      "image_url": "https://storage.googleapis.com/gpt-engineer-file-uploads/AwmrFUJUl1Miu5dNMpFBx8P372K3/social-images/social-1783516958074-CASP_Social_Logos_White.webp",
+      "official_url": "",
+      "canonical_key": "https://casp.ac/reports/ai-enabled-terrorism",
+      "verification": {
+        "article_title_verified": "CASP — Cambridge Programme on AI Science & Policy | University of Cambridge",
+        "article_source_verified": "Cambridge Programme on AI Science & Policy",
+        "article_published_verified": "2026-07-12T09:31:54+09:00",
+        "article_url_verified": "https://casp.ac/reports/ai-enabled-terrorism",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=31340"
+      }
+    },
     {
       "id": "github-community-edb3a626875732de",
       "source": "GitHub 커뮤니티",
@@ -26,9 +133,9 @@
         "project_owner": "affaan-m",
         "project_description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
         "license": "MIT",
-        "updated_at": "2026-07-11T22:35:29Z",
+        "updated_at": "2026-07-12T06:26:17Z",
         "community_source": "github",
-        "github_stars": "228589",
+        "github_stars": "228684",
         "github_pushed_at": "2026-07-09T07:53:52Z"
       }
     },
@@ -38,7 +145,7 @@
       "topic": "생성형 AI, AI 에이전트, 개발 도구, GitHub 프로젝트, AI 모델링",
       "title": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
-      "published_at": "2026-07-12T03:16:13+09:00",
+      "published_at": "2026-07-12T15:39:46+09:00",
       "summary": "The agent that grows with you",
       "listing_url": "https://github.com/NousResearch/hermes-agent",
       "introduced_at": "",
@@ -51,10 +158,10 @@
         "project_owner": "NousResearch",
         "project_description": "The agent that grows with you",
         "license": "MIT",
-        "updated_at": "2026-07-11T22:37:39Z",
+        "updated_at": "2026-07-12T06:34:23Z",
         "community_source": "github",
-        "github_stars": "213267",
-        "github_pushed_at": "2026-07-11T18:16:13Z"
+        "github_stars": "213384",
+        "github_pushed_at": "2026-07-12T06:39:46Z"
       }
     },
     {
@@ -76,9 +183,9 @@
         "project_owner": "Significant-Gravitas",
         "project_description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-11T22:33:52Z",
+        "updated_at": "2026-07-12T06:36:10Z",
         "community_source": "github",
-        "github_stars": "185478",
+        "github_stars": "185484",
         "github_pushed_at": "2026-07-11T20:00:23Z"
       }
     },
@@ -101,9 +208,9 @@
         "project_owner": "ollama",
         "project_description": "Get up and running with Kimi-K2.6, GLM-5.1, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
         "license": "MIT",
-        "updated_at": "2026-07-11T21:58:53Z",
+        "updated_at": "2026-07-12T06:19:28Z",
         "community_source": "github",
-        "github_stars": "175936",
+        "github_stars": "175949",
         "github_pushed_at": "2026-07-10T00:42:15Z"
       }
     },
@@ -113,7 +220,7 @@
       "topic": "생성형 AI, 오픈소스, GitHub 프로젝트, AI 모델링",
       "title": "f/prompts.chat",
       "url": "https://github.com/f/prompts.chat",
-      "published_at": "2026-07-11T13:05:09+09:00",
+      "published_at": "2026-07-12T13:15:09+09:00",
       "summary": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
       "listing_url": "https://github.com/f/prompts.chat",
       "introduced_at": "",
@@ -126,10 +233,10 @@
         "project_owner": "f",
         "project_description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-11T22:37:32Z",
+        "updated_at": "2026-07-12T06:37:35Z",
         "community_source": "github",
-        "github_stars": "165431",
-        "github_pushed_at": "2026-07-11T04:05:09Z"
+        "github_stars": "165463",
+        "github_pushed_at": "2026-07-12T04:15:09Z"
       }
     },
     {
@@ -138,7 +245,7 @@
       "topic": "생성형 AI, AI 모델링, GitHub 프로젝트",
       "title": "huggingface/transformers",
       "url": "https://github.com/huggingface/transformers",
-      "published_at": "2026-07-12T04:00:13+09:00",
+      "published_at": "2026-07-12T09:55:33+09:00",
       "summary": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
       "listing_url": "https://github.com/huggingface/transformers",
       "introduced_at": "",
@@ -151,10 +258,10 @@
         "project_owner": "huggingface",
         "project_description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
         "license": "Apache-2.0",
-        "updated_at": "2026-07-11T22:25:51Z",
+        "updated_at": "2026-07-12T06:07:09Z",
         "community_source": "github",
-        "github_stars": "162503",
-        "github_pushed_at": "2026-07-11T19:00:13Z"
+        "github_stars": "162518",
+        "github_pushed_at": "2026-07-12T00:55:33Z"
       }
     },
     {
@@ -163,7 +270,7 @@
       "topic": "생성형 AI, AI 에이전트, GitHub 프로젝트, AI 모델링",
       "title": "firecrawl/firecrawl",
       "url": "https://github.com/firecrawl/firecrawl",
-      "published_at": "2026-07-12T06:41:35+09:00",
+      "published_at": "2026-07-12T10:13:06+09:00",
       "summary": "The API to search, scrape, and interact with the web at scale. 🔥",
       "listing_url": "https://github.com/firecrawl/firecrawl",
       "introduced_at": "",
@@ -176,10 +283,10 @@
         "project_owner": "firecrawl",
         "project_description": "The API to search, scrape, and interact with the web at scale. 🔥",
         "license": "AGPL-3.0",
-        "updated_at": "2026-07-11T22:33:19Z",
+        "updated_at": "2026-07-12T06:34:40Z",
         "community_source": "github",
-        "github_stars": "149354",
-        "github_pushed_at": "2026-07-11T21:41:35Z"
+        "github_stars": "149505",
+        "github_pushed_at": "2026-07-12T01:13:06Z"
       }
     },
     {
@@ -201,9 +308,9 @@
         "project_owner": "langgenius",
         "project_description": "Production-ready platform for agentic workflow development.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-11T22:21:36Z",
+        "updated_at": "2026-07-12T06:24:05Z",
         "community_source": "github",
-        "github_stars": "148520",
+        "github_stars": "148542",
         "github_pushed_at": "2026-07-11T13:22:51Z"
       }
     },
@@ -227,7 +334,7 @@
         "license": "",
         "updated_at": "2026-07-06T23:09:24+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "697",
+        "huggingface_likes": "702",
         "huggingface_downloads": "8210",
         "pipeline_tag": "text-generation"
       }
@@ -238,7 +345,7 @@
       "topic": "생성형 AI, AI 에이전트, 오픈소스, Hugging Face, AI 모델링",
       "title": "empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF",
       "url": "https://huggingface.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF",
-      "published_at": "2026-06-29T02:05:20+09:00",
+      "published_at": "2026-07-12T09:57:41+09:00",
       "summary": "Hugging Face에서 최근 주목받는 image-text-to-text 모델 저장소입니다.",
       "listing_url": "https://huggingface.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF",
       "introduced_at": "",
@@ -250,9 +357,9 @@
         "project_name": "empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF",
         "project_owner": "empero-ai",
         "license": "",
-        "updated_at": "2026-06-29T02:05:20+09:00",
+        "updated_at": "2026-07-12T09:57:41+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "2008",
+        "huggingface_likes": "2023",
         "huggingface_downloads": "1944961",
         "pipeline_tag": "image-text-to-text"
       }
@@ -277,7 +384,7 @@
         "license": "",
         "updated_at": "2026-07-02T17:08:14+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "3828",
+        "huggingface_likes": "3837",
         "huggingface_downloads": "421270",
         "pipeline_tag": "text-generation"
       }
@@ -302,7 +409,7 @@
         "license": "",
         "updated_at": "2026-07-09T10:14:45+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "491",
+        "huggingface_likes": "497",
         "huggingface_downloads": "28141",
         "pipeline_tag": "text-generation"
       }
@@ -327,33 +434,8 @@
         "license": "",
         "updated_at": "2026-07-10T22:15:25+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "234",
+        "huggingface_likes": "240",
         "huggingface_downloads": "4128",
-        "pipeline_tag": "image-text-to-text"
-      }
-    },
-    {
-      "id": "huggingface-community-b7884da985bf42b8",
-      "source": "Hugging Face 커뮤니티",
-      "topic": "오픈소스, Hugging Face, AI 모델링",
-      "title": "baidu/Unlimited-OCR",
-      "url": "https://huggingface.co/baidu/Unlimited-OCR",
-      "published_at": "2026-07-03T14:15:09+09:00",
-      "summary": "Hugging Face에서 최근 주목받는 image-text-to-text 모델 저장소입니다.",
-      "listing_url": "https://huggingface.co/baidu/Unlimited-OCR",
-      "introduced_at": "",
-      "image_url": "https://huggingface.co/baidu/Unlimited-OCR/resolve/main/thumbnail.png",
-      "official_url": "https://huggingface.co/baidu/Unlimited-OCR",
-      "canonical_key": "https://huggingface.co/baidu/unlimited-ocr",
-      "verification": {
-        "project_kind": "huggingface",
-        "project_name": "baidu/Unlimited-OCR",
-        "project_owner": "baidu",
-        "license": "",
-        "updated_at": "2026-07-03T14:15:09+09:00",
-        "community_source": "huggingface",
-        "huggingface_likes": "1929",
-        "huggingface_downloads": "1380690",
         "pipeline_tag": "image-text-to-text"
       }
     },
@@ -377,9 +459,34 @@
         "license": "",
         "updated_at": "2026-07-03T17:54:29+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "851",
+        "huggingface_likes": "855",
         "huggingface_downloads": "0",
         "pipeline_tag": ""
+      }
+    },
+    {
+      "id": "huggingface-community-b7884da985bf42b8",
+      "source": "Hugging Face 커뮤니티",
+      "topic": "오픈소스, Hugging Face, AI 모델링",
+      "title": "baidu/Unlimited-OCR",
+      "url": "https://huggingface.co/baidu/Unlimited-OCR",
+      "published_at": "2026-07-03T14:15:09+09:00",
+      "summary": "Hugging Face에서 최근 주목받는 image-text-to-text 모델 저장소입니다.",
+      "listing_url": "https://huggingface.co/baidu/Unlimited-OCR",
+      "introduced_at": "",
+      "image_url": "https://huggingface.co/baidu/Unlimited-OCR/resolve/main/thumbnail.png",
+      "official_url": "https://huggingface.co/baidu/Unlimited-OCR",
+      "canonical_key": "https://huggingface.co/baidu/unlimited-ocr",
+      "verification": {
+        "project_kind": "huggingface",
+        "project_name": "baidu/Unlimited-OCR",
+        "project_owner": "baidu",
+        "license": "",
+        "updated_at": "2026-07-03T14:15:09+09:00",
+        "community_source": "huggingface",
+        "huggingface_likes": "1932",
+        "huggingface_downloads": "1380690",
+        "pipeline_tag": "image-text-to-text"
       }
     },
     {
@@ -402,7 +509,7 @@
         "license": "",
         "updated_at": "2026-07-09T22:51:08+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "181",
+        "huggingface_likes": "195",
         "huggingface_downloads": "0",
         "pipeline_tag": ""
       }
@@ -415,7 +522,7 @@
       "topic": "생성형 AI, AI 모델링, GitHub 프로젝트",
       "title": "huggingface/transformers",
       "url": "https://github.com/huggingface/transformers",
-      "published_at": "2026-07-12T04:00:13+09:00",
+      "published_at": "2026-07-12T09:55:33+09:00",
       "summary": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
       "listing_url": "https://github.com/huggingface/transformers",
       "introduced_at": "",
@@ -428,10 +535,10 @@
         "project_owner": "huggingface",
         "project_description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
         "license": "Apache-2.0",
-        "updated_at": "2026-07-11T22:25:51Z",
+        "updated_at": "2026-07-12T06:07:09Z",
         "community_source": "github",
-        "github_stars": "162503",
-        "github_pushed_at": "2026-07-11T19:00:13Z"
+        "github_stars": "162518",
+        "github_pushed_at": "2026-07-12T00:55:33Z"
       }
     },
     {
@@ -453,9 +560,9 @@
         "project_owner": "Significant-Gravitas",
         "project_description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-11T22:33:52Z",
+        "updated_at": "2026-07-12T06:36:10Z",
         "community_source": "github",
-        "github_stars": "185478",
+        "github_stars": "185484",
         "github_pushed_at": "2026-07-11T20:00:23Z"
       }
     },
@@ -465,7 +572,7 @@
       "topic": "생성형 AI, AI 에이전트, 오픈소스, Hugging Face, AI 모델링",
       "title": "empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF",
       "url": "https://huggingface.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF",
-      "published_at": "2026-06-29T02:05:20+09:00",
+      "published_at": "2026-07-12T09:57:41+09:00",
       "summary": "Hugging Face에서 최근 주목받는 image-text-to-text 모델 저장소입니다.",
       "listing_url": "https://huggingface.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF",
       "introduced_at": "",
@@ -477,15 +584,13 @@
         "project_name": "empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF",
         "project_owner": "empero-ai",
         "license": "",
-        "updated_at": "2026-06-29T02:05:20+09:00",
+        "updated_at": "2026-07-12T09:57:41+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "2008",
+        "huggingface_likes": "2023",
         "huggingface_downloads": "1944961",
         "pipeline_tag": "image-text-to-text"
       }
     }
   ],
-  "collector_errors": [
-    "수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))"
-  ]
+  "collector_errors": []
 }
