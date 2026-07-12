@@ -1,5 +1,181 @@
 [
   {
+    "date": "2026-07-13",
+    "title": "[AI 뉴스룸] | prompts.chat, dify, firecrawl",
+    "title_candidates": [
+      "[AI 뉴스룸] | prompts.chat, dify, firecrawl",
+      "[AI 뉴스룸] | prompts.chat, firecrawl, dify",
+      "[AI 뉴스룸] | dify, prompts.chat, firecrawl"
+    ],
+    "tags": [
+      "AI 엔지니어링",
+      "머신러닝",
+      "오픈소스",
+      "프롬프트 엔지니어링",
+      "AI 에이전트",
+      "웹 크롤링",
+      "개발 도구"
+    ],
+    "meta_description": "AI 애플리케이션 구축의 복잡성 속에서, 개발자들은 프롬프트 관리, 에이전트 워크플로우, 웹 데이터 수집이라는 핵심 난관에 직면합니다. f/prompts.chat, langgenius/dify, firecrawl/firecrawl과 같은 오픈소스 프로젝트들이 제시하는 실질적인 해결책과 그 선택지를 탐색합니다.",
+    "article_count_note": "",
+    "quality_status": "READY_FOR_MANUAL_REVIEW",
+    "manual_review_required": true,
+    "publish_checklist": [
+      "원문 링크와 사실관계를 확인합니다.",
+      "작성자 분석이 자신의 실제 관점인지 검토합니다.",
+      "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요.",
+      "소개·문의·개인정보 페이지가 실제 값으로 공개됐는지 확인합니다.",
+      "티스토리 HTML 모드에 붙여넣은 뒤 모바일 화면을 확인합니다."
+    ],
+    "sources": [
+      {
+        "name": "GitHub 커뮤니티",
+        "title": "f/prompts.chat",
+        "url": "https://github.com/f/prompts.chat"
+      },
+      {
+        "name": "GitHub 커뮤니티",
+        "title": "langgenius/dify",
+        "url": "https://github.com/langgenius/dify"
+      },
+      {
+        "name": "GitHub 커뮤니티",
+        "title": "firecrawl/firecrawl",
+        "url": "https://github.com/firecrawl/firecrawl"
+      }
+    ],
+    "fact_review": [
+      {
+        "source": "GitHub 커뮤니티",
+        "title": "f/prompts.chat",
+        "source_url": "https://github.com/f/prompts.chat",
+        "official_url": "https://github.com/f/prompts.chat",
+        "summary": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
+        "verified_facts": [
+          {
+            "label": "프로젝트·모델",
+            "value": "f/prompts.chat"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "f"
+          },
+          {
+            "label": "라이선스",
+            "value": "NOASSERTION"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-07-12T22:26:40Z"
+          },
+          {
+            "label": "GitHub 스타 (수집 시점)",
+            "value": "165562"
+          },
+          {
+            "label": "GitHub 최근 푸시",
+            "value": "2026-07-12T04:15:09Z"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      },
+      {
+        "source": "GitHub 커뮤니티",
+        "title": "langgenius/dify",
+        "source_url": "https://github.com/langgenius/dify",
+        "official_url": "https://github.com/langgenius/dify",
+        "summary": "Production-ready platform for agentic workflow development.",
+        "verified_facts": [
+          {
+            "label": "프로젝트·모델",
+            "value": "langgenius/dify"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "langgenius"
+          },
+          {
+            "label": "라이선스",
+            "value": "NOASSERTION"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-07-12T22:23:40Z"
+          },
+          {
+            "label": "GitHub 스타 (수집 시점)",
+            "value": "148607"
+          },
+          {
+            "label": "GitHub 최근 푸시",
+            "value": "2026-07-12T17:19:42Z"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      },
+      {
+        "source": "GitHub 커뮤니티",
+        "title": "firecrawl/firecrawl",
+        "source_url": "https://github.com/firecrawl/firecrawl",
+        "official_url": "https://github.com/firecrawl/firecrawl",
+        "summary": "The API to search, scrape, and interact with the web at scale. 🔥",
+        "verified_facts": [
+          {
+            "label": "프로젝트·모델",
+            "value": "firecrawl/firecrawl"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "firecrawl"
+          },
+          {
+            "label": "라이선스",
+            "value": "AGPL-3.0"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-07-12T22:27:02Z"
+          },
+          {
+            "label": "GitHub 스타 (수집 시점)",
+            "value": "149865"
+          },
+          {
+            "label": "GitHub 최근 푸시",
+            "value": "2026-07-12T13:18:12Z"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      }
+    ],
+    "images": {
+      "hero": {
+        "path": "hero.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-13/hero.png",
+        "kind": "generated-hero"
+      },
+      "github-community-1643157b768c76e7": {
+        "origin_url": "https://opengraph.githubassets.com/1/f/prompts.chat",
+        "kind": "source-image",
+        "path": "issue-1.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-13/issue-1.png"
+      },
+      "github-community-97dcab4759c83fdb": {
+        "origin_url": "https://opengraph.githubassets.com/1/langgenius/dify",
+        "kind": "source-image",
+        "path": "issue-2.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-13/issue-2.png"
+      },
+      "github-community-e9dbf459bd01dca3": {
+        "origin_url": "https://opengraph.githubassets.com/1/firecrawl/firecrawl",
+        "kind": "source-image",
+        "path": "issue-3.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-13/issue-3.png"
+      }
+    },
+    "html_path": "tistory/2026-07-13.html"
+  },
+  {
     "date": "2026-07-12",
     "title": "[AI 뉴스룸] | transformers, AutoGPT, Qwythos-9B-Claude",
     "title_candidates": [
