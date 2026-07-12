@@ -1,11 +1,9 @@
 {
-  "status": "BLOCKED",
-  "errors": [
-    "제목 후보는 서로 다른 3개 이상이어야 합니다."
-  ],
+  "status": "READY_FOR_MANUAL_REVIEW",
+  "errors": [],
   "warnings": [],
   "checks": {
-    "three_distinct_title_candidates": false,
+    "three_distinct_title_candidates": true,
     "reasonable_title_length": true,
     "tag_count_and_uniqueness": true,
     "sufficient_sources": true,

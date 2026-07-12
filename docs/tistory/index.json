@@ -1,5 +1,187 @@
 [
   {
+    "date": "2026-07-12",
+    "title": "AI 개발의 스펙트럼: Hugging Face Transformers, AutoGPT, 그리고 멀티모달 모델의 현재",
+    "title_candidates": [
+      "AI 개발의 스펙트럼: Hugging Face Transformers, AutoGPT, 그리고 멀티모달 모델의 현재",
+      "AI 기술 스택의 진화: 프레임워크부터 자율 에이전트까지",
+      "Hugging Face Transformers와 AutoGPT로 본 AI 생태계의 확장"
+    ],
+    "tags": [
+      "AI 엔지니어링",
+      "머신러닝",
+      "오픈소스",
+      "AI 에이전트",
+      "멀티모달 AI",
+      "Hugging Face",
+      "GitHub",
+      "모델 배포"
+    ],
+    "meta_description": "AI 기술의 발전은 견고한 프레임워크, 자율 에이전트의 가능성, 그리고 멀티모달 모델의 실용적인 적용 사례를 통해 새로운 도전을 제시합니다. Transformers, AutoGPT, Qwythos 모델을 중심으로 AI 개발의 현재와 미래를 조망합니다.",
+    "article_count_note": "",
+    "quality_status": "READY_FOR_MANUAL_REVIEW",
+    "manual_review_required": true,
+    "publish_checklist": [
+      "원문 링크와 사실관계를 확인합니다.",
+      "작성자 분석이 자신의 실제 관점인지 검토합니다.",
+      "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요.",
+      "소개·문의·개인정보 페이지가 실제 값으로 공개됐는지 확인합니다.",
+      "티스토리 HTML 모드에 붙여넣은 뒤 모바일 화면을 확인합니다."
+    ],
+    "sources": [
+      {
+        "name": "GitHub 커뮤니티",
+        "title": "huggingface/transformers",
+        "url": "https://github.com/huggingface/transformers"
+      },
+      {
+        "name": "GitHub 커뮤니티",
+        "title": "Significant-Gravitas/AutoGPT",
+        "url": "https://github.com/Significant-Gravitas/AutoGPT"
+      },
+      {
+        "name": "Hugging Face 커뮤니티",
+        "title": "empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF",
+        "url": "https://huggingface.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF"
+      }
+    ],
+    "fact_review": [
+      {
+        "source": "GitHub 커뮤니티",
+        "title": "huggingface/transformers",
+        "source_url": "https://github.com/huggingface/transformers",
+        "official_url": "https://github.com/huggingface/transformers",
+        "summary": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
+        "verified_facts": [
+          {
+            "label": "프로젝트·모델",
+            "value": "huggingface/transformers"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "huggingface"
+          },
+          {
+            "label": "라이선스",
+            "value": "Apache-2.0"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-07-12T06:41:05Z"
+          },
+          {
+            "label": "GitHub 스타 (수집 시점)",
+            "value": "162519"
+          },
+          {
+            "label": "GitHub 최근 푸시",
+            "value": "2026-07-12T00:55:33Z"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      },
+      {
+        "source": "GitHub 커뮤니티",
+        "title": "Significant-Gravitas/AutoGPT",
+        "source_url": "https://github.com/Significant-Gravitas/AutoGPT",
+        "official_url": "https://github.com/Significant-Gravitas/AutoGPT",
+        "summary": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
+        "verified_facts": [
+          {
+            "label": "프로젝트·모델",
+            "value": "Significant-Gravitas/AutoGPT"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "Significant-Gravitas"
+          },
+          {
+            "label": "라이선스",
+            "value": "NOASSERTION"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-07-12T06:36:10Z"
+          },
+          {
+            "label": "GitHub 스타 (수집 시점)",
+            "value": "185484"
+          },
+          {
+            "label": "GitHub 최근 푸시",
+            "value": "2026-07-11T20:00:23Z"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      },
+      {
+        "source": "Hugging Face 커뮤니티",
+        "title": "empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF",
+        "source_url": "https://huggingface.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF",
+        "official_url": "https://huggingface.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF",
+        "summary": "Hugging Face에서 최근 주목받는 image-text-to-text 모델 저장소입니다.",
+        "verified_facts": [
+          {
+            "label": "프로젝트·모델",
+            "value": "empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "empero-ai"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-07-12T09:57:41+09:00"
+          },
+          {
+            "label": "Hugging Face 좋아요 (수집 시점)",
+            "value": "2023"
+          },
+          {
+            "label": "Hugging Face 다운로드 (수집 시점)",
+            "value": "1944961"
+          },
+          {
+            "label": "Hugging Face 파이프라인",
+            "value": "image-text-to-text"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      }
+    ],
+    "images": {
+      "hero": {
+        "path": "hero.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-12/hero.png",
+        "kind": "generated-hero"
+      },
+      "thumbnail": {
+        "path": "thumbnail.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-12/thumbnail.png",
+        "kind": "generated-thumbnail"
+      },
+      "github-community-53d940334a2a5afd": {
+        "origin_url": "https://opengraph.githubassets.com/1/huggingface/transformers",
+        "kind": "source-image",
+        "path": "issue-1.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-12/issue-1.png"
+      },
+      "github-community-7fc08de27bce1b0c": {
+        "origin_url": "https://opengraph.githubassets.com/1/Significant-Gravitas/AutoGPT",
+        "kind": "source-image",
+        "path": "issue-2.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-12/issue-2.png"
+      },
+      "huggingface-community-d9f49e336e714662": {
+        "origin_url": "https://huggingface.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF/resolve/main/thumbnail.png",
+        "kind": "generated-fallback",
+        "path": "issue-3.svg",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-12/issue-3.svg"
+      }
+    },
+    "html_path": "tistory/2026-07-12.html"
+  },
+  {
     "date": "2026-07-11",
     "title": "AI 에이전트 개발의 성능 최적화와 스크립트 보안: ECC, Hermes-Agent, HimitsuShell",
     "title_candidates": [

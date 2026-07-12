@@ -1,33 +1,12 @@
 {
   "date": "2026-07-12",
-  "collected_at": "2026-07-12T06:40:05.541618+00:00",
+  "collected_at": "2026-07-12T06:43:28.385762+00:00",
   "selection_rule": "최근 24시간 요즘IT·GeekNews 기사와 최근 14일 GitHub/Hugging Face 커뮤니티 활성 프로젝트를 조합해 3건을 구성하며, 커뮤니티 프로젝트 1건 이상 필수. 이전 날짜에 선택한 원문·공식 프로젝트 URL은 제외",
   "history_exclusion": {
     "past_url_key_count": 5,
     "excluded_candidate_count": 7
   },
   "candidates": [
-    {
-      "id": "geeknews-d25a187a89eb6dd7",
-      "source": "www.mixfont.com",
-      "topic": "개발 도구",
-      "title": "Ghost Font: The Anti-AI Font Only Humans Can Read",
-      "url": "https://www.mixfont.com/ghost-font",
-      "published_at": "2026-07-12T09:44:08+09:00",
-      "summary": "An anti-AI font that can be read by humans but not leading AI models. Type your text below, then download and share the video clip containing your message.",
-      "listing_url": "https://news.hada.io/topic?id=31343",
-      "introduced_at": "2026-07-12T09:44:08+09:00",
-      "image_url": "https://static.mixfont.com/assets/20260711-092742-ghostfont-og-j3qj8h8p.webp",
-      "official_url": "",
-      "canonical_key": "https://www.mixfont.com/ghost-font",
-      "verification": {
-        "article_title_verified": "Ghost Font: The Anti-AI Font Only Humans Can Read",
-        "article_source_verified": "www.mixfont.com",
-        "article_published_verified": "2026-07-12T09:44:08+09:00",
-        "article_url_verified": "https://www.mixfont.com/ghost-font",
-        "geeknews_listing_url": "https://news.hada.io/topic?id=31343"
-      }
-    },
     {
       "id": "geeknews-3a308f44abebbb79",
       "source": "GitHub",
@@ -48,6 +27,27 @@
         "article_url_verified": "https://github.com/Ataraxy-Labs/sem",
         "geeknews_listing_url": "https://news.hada.io/topic?id=31339",
         "official_url": "https://github.com/fluidicon.png"
+      }
+    },
+    {
+      "id": "geeknews-d25a187a89eb6dd7",
+      "source": "www.mixfont.com",
+      "topic": "개발 도구",
+      "title": "Ghost Font: The Anti-AI Font Only Humans Can Read",
+      "url": "https://www.mixfont.com/ghost-font",
+      "published_at": "2026-07-12T09:44:08+09:00",
+      "summary": "An anti-AI font that can be read by humans but not leading AI models. Type your text below, then download and share the video clip containing your message.",
+      "listing_url": "https://news.hada.io/topic?id=31343",
+      "introduced_at": "2026-07-12T09:44:08+09:00",
+      "image_url": "https://static.mixfont.com/assets/20260711-092742-ghostfont-og-j3qj8h8p.webp",
+      "official_url": "",
+      "canonical_key": "https://www.mixfont.com/ghost-font",
+      "verification": {
+        "article_title_verified": "Ghost Font: The Anti-AI Font Only Humans Can Read",
+        "article_source_verified": "www.mixfont.com",
+        "article_published_verified": "2026-07-12T09:44:08+09:00",
+        "article_url_verified": "https://www.mixfont.com/ghost-font",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=31343"
       }
     },
     {
@@ -158,9 +158,9 @@
         "project_owner": "NousResearch",
         "project_description": "The agent that grows with you",
         "license": "MIT",
-        "updated_at": "2026-07-12T06:34:23Z",
+        "updated_at": "2026-07-12T06:41:27Z",
         "community_source": "github",
-        "github_stars": "213384",
+        "github_stars": "213385",
         "github_pushed_at": "2026-07-12T06:39:46Z"
       }
     },
@@ -258,9 +258,9 @@
         "project_owner": "huggingface",
         "project_description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
         "license": "Apache-2.0",
-        "updated_at": "2026-07-12T06:07:09Z",
+        "updated_at": "2026-07-12T06:41:05Z",
         "community_source": "github",
-        "github_stars": "162518",
+        "github_stars": "162519",
         "github_pushed_at": "2026-07-12T00:55:33Z"
       }
     },
@@ -283,9 +283,9 @@
         "project_owner": "firecrawl",
         "project_description": "The API to search, scrape, and interact with the web at scale. 🔥",
         "license": "AGPL-3.0",
-        "updated_at": "2026-07-12T06:34:40Z",
+        "updated_at": "2026-07-12T06:42:44Z",
         "community_source": "github",
-        "github_stars": "149505",
+        "github_stars": "149506",
         "github_pushed_at": "2026-07-12T01:13:06Z"
       }
     },
@@ -484,7 +484,7 @@
         "license": "",
         "updated_at": "2026-07-03T14:15:09+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "1932",
+        "huggingface_likes": "1933",
         "huggingface_downloads": "1380690",
         "pipeline_tag": "image-text-to-text"
       }
@@ -509,7 +509,7 @@
         "license": "",
         "updated_at": "2026-07-09T22:51:08+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "195",
+        "huggingface_likes": "196",
         "huggingface_downloads": "0",
         "pipeline_tag": ""
       }
@@ -535,9 +535,9 @@
         "project_owner": "huggingface",
         "project_description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
         "license": "Apache-2.0",
-        "updated_at": "2026-07-12T06:07:09Z",
+        "updated_at": "2026-07-12T06:41:05Z",
         "community_source": "github",
-        "github_stars": "162518",
+        "github_stars": "162519",
         "github_pushed_at": "2026-07-12T00:55:33Z"
       }
     },
@@ -592,5 +592,7 @@
       }
     }
   ],
-  "collector_errors": []
+  "collector_errors": [
+    "수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))"
+  ]
 }

@@ -1,11 +1,14 @@
 {
   "version": 1,
-  "updated_at": "2026-07-11T08:04:24.512997+00:00",
+  "updated_at": "2026-07-12T06:44:44.039096+00:00",
   "entries": {
     "https://github.com/affaan-m/ecc": "2026-07-11",
     "https://github.com/himitsushell/himitsu": "2026-07-11",
+    "https://github.com/huggingface/transformers": "2026-07-12",
     "https://github.com/nousresearch/hermes-agent": "2026-07-11",
+    "https://github.com/significant-gravitas/autogpt": "2026-07-12",
     "https://himitsushell.com": "2026-07-11",
+    "https://huggingface.co/empero-ai/qwythos-9b-claude-mythos-5-1m-gguf": "2026-07-12",
     "https://news.hada.io/topic": "2026-07-11"
   }
 }
