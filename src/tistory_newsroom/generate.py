@@ -146,6 +146,45 @@ def _publication_title(raw_draft: dict[str, Any]) -> str:
     return shortened if len(shortened) >= 15 else "오늘의 AI·개발 데일리 다이제스트"
 
 
+def _distinct_title_candidates(raw_draft: dict[str, Any], sources: list[SourceItem]) -> list[str]:
+    """Keep usable model suggestions, then fill missing choices from verified project names."""
+    selected = _publication_title(raw_draft)
+    candidates = [selected]
+    candidates.extend(str(value).strip() for value in raw_draft.get("title_candidates", []) if str(value).strip())
+    unique: list[str] = []
+    seen: set[str] = set()
+    for candidate in candidates:
+        compact = re.sub(r"\s+", " ", candidate).strip()
+        key = compact.casefold()
+        if 15 <= len(compact) <= 75 and key not in seen:
+            unique.append(compact)
+            seen.add(key)
+
+    projects = project_aliases(sources)
+
+    def label(index: int, fallback: str) -> str:
+        value = projects[index] if len(projects) > index else fallback
+        return value[:30].rstrip(" ,:|-–—")
+
+    first = label(0, "AI 프로젝트")
+    second = label(1, "오픈소스 도구")
+    third = label(2, "모델 업데이트")
+    fallbacks = (
+        f"{first}·{second}: 모델·에이전트 개발자가 볼 변화",
+        f"{first}부터 {third}까지, 오늘의 AI 개발 프로젝트",
+        f"모델·에이전트·오픈소스: {first}와 {second} 업데이트",
+    )
+    for candidate in fallbacks:
+        compact = re.sub(r"\s+", " ", candidate).strip()
+        key = compact.casefold()
+        if 15 <= len(compact) <= 75 and key not in seen:
+            unique.append(compact)
+            seen.add(key)
+        if len(unique) == 3:
+            break
+    return unique[:3]
+
+
 def generate_with_gemini(date: str, sources: list[SourceItem], site: dict[str, Any]) -> Draft:
     api_key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not api_key:
@@ -168,6 +207,7 @@ def generate_with_gemini(date: str, sources: list[SourceItem], site: dict[str, A
                 raw_draft["date"] = date
                 raw_draft["model"] = model
                 raw_draft["editorial_disclosure"] = ""
+            raw_draft["title_candidates"] = _distinct_title_candidates(raw_draft, sources)
             raw_draft["title"] = _publication_title(raw_draft)
             return Draft.from_dict(raw_draft, sources)
         except Exception as error:
