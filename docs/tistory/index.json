@@ -1,24 +1,30 @@
 [
   {
     "date": "2026-07-13",
-    "title": "[AI 뉴스룸] | prompts.chat, dify, firecrawl",
+    "title": "상용 에이전트의 보이지 않는 청구서와 로컬 제어권 확보의 기술적 손익 계산",
     "title_candidates": [
-      "[AI 뉴스룸] | prompts.chat, dify, firecrawl",
-      "[AI 뉴스룸] | prompts.chat, firecrawl, dify",
-      "[AI 뉴스룸] | dify, prompts.chat, firecrawl"
+      "상용 에이전트의 보이지 않는 청구서와 로컬 제어권 확보의 기술적 손익 계산",
+      "Claude Code의 토큰 오버헤드 폭로와 로컬 에이전트 분석기의 등장",
+      "GLM-5.2와 OpenCode로 구축하는 탈클라우드 로컬 개발 환경의 명암",
+      "[AI 뉴스룸] | prompts.chat, agentsview, meridian"
     ],
     "tags": [
-      "AI 엔지니어링",
-      "머신러닝",
-      "오픈소스",
-      "프롬프트 엔지니어링",
-      "AI 에이전트",
-      "웹 크롤링",
-      "개발 도구"
+      "코딩에이전트",
+      "로컬LLM",
+      "토큰최적화",
+      "프롬프트관리",
+      "오픈소스개발",
+      "ClaudeCode",
+      "GLM모델"
     ],
-    "meta_description": "AI 애플리케이션 구축의 복잡성 속에서, 개발자들은 프롬프트 관리, 에이전트 워크플로우, 웹 데이터 수집이라는 핵심 난관에 직면합니다. f/prompts.chat, langgenius/dify, firecrawl/firecrawl과 같은 오픈소스 프로젝트들이 제시하는 실질적인 해결책과 그 선택지를 탐색합니다.",
+    "meta_description": "Claude Code의 토큰 오버헤드 분석부터 로컬 에이전트 모니터링 도구 agentsview, 프롬프트 관리 f/prompts.chat, 로컬 GLM-5.2 활용까지 상용 서비스의 비용을 줄이고 데이터 주권을 확보하는 개발자 중심의 AI 최적화 방안을 살펴봅니다.",
     "article_count_note": "",
     "quality_status": "READY_FOR_MANUAL_REVIEW",
+    "warnings": [
+      "수집 경고: 검증 제외: https://news.hada.io/topic?id=31372 (페이지 확인 실패: https://addyo.substack.com/p/own-the-outer-loop (HTTP Error 403: Forbidden))",
+      "수집 경고: 검증 제외: https://news.hada.io/topic?id=31372&go=comments (페이지 확인 실패: https://addyo.substack.com/p/own-the-outer-loop (HTTP Error 403: Forbidden))",
+      "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=48881874 (페이지 확인 실패: https://www.economist.com/leaders/2026/07/09/a-no-brainer-for-protecting-your-brain (HTTP Error 403: Forbidden))"
+    ],
     "manual_review_required": true,
     "publish_checklist": [
       "원문 링크와 사실관계를 확인합니다.",
@@ -34,14 +40,19 @@
         "url": "https://github.com/f/prompts.chat"
       },
       {
-        "name": "GitHub 커뮤니티",
-        "title": "langgenius/dify",
-        "url": "https://github.com/langgenius/dify"
+        "name": "GitHub",
+        "title": "GitHub - kenn-io/agentsview: Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents.",
+        "url": "https://github.com/kenn-io/agentsview"
       },
       {
-        "name": "GitHub 커뮤니티",
-        "title": "firecrawl/firecrawl",
-        "url": "https://github.com/firecrawl/firecrawl"
+        "name": "Systima",
+        "title": "Claude Code Sends 4.7x More Tokens Than OpenCode Before Reading Your Prompt",
+        "url": "https://systima.ai/blog/claude-code-vs-opencode-token-overhead"
+      },
+      {
+        "name": "the singularity is nearer",
+        "title": "I love LLMs, I hate hype",
+        "url": "https://geohot.github.io//blog/jekyll/update/2026/07/12/i-love-llms.html"
       }
     ],
     "fact_review": [
@@ -66,83 +77,113 @@
           },
           {
             "label": "최근 업데이트",
-            "value": "2026-07-12T22:26:40Z"
+            "value": "2026-07-13T09:21:09Z"
           },
           {
             "label": "GitHub 스타 (수집 시점)",
-            "value": "165562"
+            "value": "165597"
           },
           {
             "label": "GitHub 최근 푸시",
-            "value": "2026-07-12T04:15:09Z"
+            "value": "2026-07-13T07:50:13Z"
           }
         ],
         "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
       },
       {
-        "source": "GitHub 커뮤니티",
-        "title": "langgenius/dify",
-        "source_url": "https://github.com/langgenius/dify",
-        "official_url": "https://github.com/langgenius/dify",
-        "summary": "Production-ready platform for agentic workflow development.",
+        "source": "GitHub",
+        "title": "GitHub - kenn-io/agentsview: Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents.",
+        "source_url": "https://github.com/kenn-io/agentsview",
+        "official_url": "https://github.com/kenn-io/agentsview",
+        "summary": "Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents. - kenn-io/agentsview",
         "verified_facts": [
           {
+            "label": "기사 출처",
+            "value": "GitHub"
+          },
+          {
+            "label": "기사 게시 시각",
+            "value": "2026-07-13T09:31:01+09:00"
+          },
+          {
             "label": "프로젝트·모델",
-            "value": "langgenius/dify"
+            "value": "kenn-io/agentsview"
           },
           {
             "label": "개발·배포 주체",
-            "value": "langgenius"
+            "value": "kenn-io"
           },
           {
             "label": "라이선스",
-            "value": "NOASSERTION"
+            "value": "MIT"
           },
           {
             "label": "최근 업데이트",
-            "value": "2026-07-12T22:23:40Z"
-          },
-          {
-            "label": "GitHub 스타 (수집 시점)",
-            "value": "148607"
-          },
-          {
-            "label": "GitHub 최근 푸시",
-            "value": "2026-07-12T17:19:42Z"
+            "value": "2026-07-13T09:14:57Z"
           }
         ],
         "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
       },
       {
-        "source": "GitHub 커뮤니티",
-        "title": "firecrawl/firecrawl",
-        "source_url": "https://github.com/firecrawl/firecrawl",
-        "official_url": "https://github.com/firecrawl/firecrawl",
-        "summary": "The API to search, scrape, and interact with the web at scale. 🔥",
+        "source": "Systima",
+        "title": "Claude Code Sends 4.7x More Tokens Than OpenCode Before Reading Your Prompt",
+        "source_url": "https://systima.ai/blog/claude-code-vs-opencode-token-overhead",
+        "official_url": "https://github.com/rynfar/meridian",
+        "summary": "Claude Code vs OpenCode token overhead measured at the API boundary. Out-of-the-box baselines, instruction file weight, MCP schema tax, subagent multipliers, and cache-write behaviour.",
         "verified_facts": [
           {
+            "label": "기사 출처",
+            "value": "Systima"
+          },
+          {
+            "label": "기사 게시 시각",
+            "value": "2026-07-13T02:36:18.269000+09:00"
+          },
+          {
             "label": "프로젝트·모델",
-            "value": "firecrawl/firecrawl"
+            "value": "rynfar/meridian"
           },
           {
             "label": "개발·배포 주체",
-            "value": "firecrawl"
-          },
-          {
-            "label": "라이선스",
-            "value": "AGPL-3.0"
+            "value": "rynfar"
           },
           {
             "label": "최근 업데이트",
-            "value": "2026-07-12T22:27:02Z"
+            "value": "2026-07-13T09:13:27Z"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      },
+      {
+        "source": "the singularity is nearer",
+        "title": "I love LLMs, I hate hype",
+        "source_url": "https://geohot.github.io//blog/jekyll/update/2026/07/12/i-love-llms.html",
+        "official_url": "https://huggingface.co/zai-org/GLM-5.2",
+        "summary": "I think from this blog you may misunderestimate how absolutely giddy I am about AI. I did hacking from 2007-2014, after that my whole career has been devoted to AI. I love the progress. I’m so excited for the new LLMs, self driving cars, video generation models, and coding agents. I set up a Linux box with opencode on my local GLM-5.2 last week and wow like just saying install tmux with the geohot configuration works; the Year of the Linux Desktop is finally here!",
+        "verified_facts": [
+          {
+            "label": "기사 출처",
+            "value": "the singularity is nearer"
           },
           {
-            "label": "GitHub 스타 (수집 시점)",
-            "value": "149865"
+            "label": "기사 게시 시각",
+            "value": "2026-07-12T16:00:00+09:00"
           },
           {
-            "label": "GitHub 최근 푸시",
-            "value": "2026-07-12T13:18:12Z"
+            "label": "프로젝트·모델",
+            "value": "zai-org/GLM-5.2"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "zai-org"
+          },
+          {
+            "label": "라이선스",
+            "value": "mit"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-07-02T08:08:14.000Z"
           }
         ],
         "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
@@ -160,17 +201,23 @@
         "path": "issue-1.png",
         "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-13/issue-1.png"
       },
-      "github-community-97dcab4759c83fdb": {
-        "origin_url": "https://opengraph.githubassets.com/1/langgenius/dify",
+      "geeknews-68551dc8cb2a5ed6": {
+        "origin_url": "https://opengraph.githubassets.com/07d9d12dc06c3b7c179ee898a985d53c4b49ed07f525cbcc506702eb8c2c3f50/kenn-io/agentsview",
         "kind": "source-image",
         "path": "issue-2.png",
         "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-13/issue-2.png"
       },
-      "github-community-e9dbf459bd01dca3": {
-        "origin_url": "https://opengraph.githubassets.com/1/firecrawl/firecrawl",
+      "hacker-news-2e3f6d613d415836": {
+        "origin_url": "https://systima.ai/images/claude-code-vs-opencode-banner.png",
         "kind": "source-image",
         "path": "issue-3.png",
         "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-13/issue-3.png"
+      },
+      "hacker-news-41c61f1cbfb7febb": {
+        "origin_url": "",
+        "kind": "source-image",
+        "path": "issue-4.svg",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-13/issue-4.svg"
       }
     },
     "html_path": "tistory/2026-07-13.html"

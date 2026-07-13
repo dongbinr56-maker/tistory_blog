@@ -1,82 +1,112 @@
 {
   "date": "2026-07-13",
-  "title": "에이전트 비용 폭탄과 보안 우려 속에서 찾는 로컬·경량화 대안",
+  "title": "상용 에이전트의 보이지 않는 청구서와 로컬 제어권 확보의 기술적 손익 계산",
   "title_candidates": [
-    "에이전트 비용 폭탄과 보안 우려 속에서 찾는 로컬·경량화 대안",
-    "Claude Code의 숨겨진 토큰 비용과 GLM-5.2 로컬 에이전트의 실용성 분석",
-    "프롬프트 자체 호스팅부터 에이전트 토큰 추적까지, 비용 효율적인 AI 개발 환경 구축하기",
+    "상용 에이전트의 보이지 않는 청구서와 로컬 제어권 확보의 기술적 손익 계산",
+    "Claude Code의 토큰 오버헤드 폭로와 로컬 에이전트 분석기의 등장",
+    "GLM-5.2와 OpenCode로 구축하는 탈클라우드 로컬 개발 환경의 명암",
     "[AI 뉴스룸] | prompts.chat, agentsview, meridian"
   ],
   "tags": [
     "코딩에이전트",
-    "토큰최적화",
     "로컬LLM",
-    "프롬프트엔지니어링",
-    "오픈소스AI",
-    "GLM모델",
-    "개발도구"
+    "토큰최적화",
+    "프롬프트관리",
+    "오픈소스개발",
+    "ClaudeCode",
+    "GLM모델"
   ],
-  "meta_description": "Claude Code의 토큰 오버헤드 분석부터 GLM-5.2 로컬 에이전트 활용법, agentsview를 통한 세션 추적, f/prompts.chat 자체 호스팅까지 비용 효율적인 AI 개발 환경 구축 전략을 살펴봅니다.",
-  "intro": "코딩 에이전트의 편리함 뒤에 숨은 막대한 API 비용과 프라이버시 침해 우려는 개발 환경의 통제권을 어디까지 유지해야 하는가에 대한 질문을 던집니다. 외부 서버로 나가는 토큰 소모를 감시하는 kenn-io/agentsview 같은 도구를 도입하거나, 보안을 위해 f/prompts.chat을 사내에 직접 구축하려는 움직임은 이러한 현실적 타협의 결과물입니다. 성능과 비용, 그리고 데이터 주권 사이에서 최적의 균형점을 찾으려는 시도들을 짚어봅니다.",
+  "meta_description": "Claude Code의 토큰 오버헤드 분석부터 로컬 에이전트 모니터링 도구 agentsview, 프롬프트 관리 f/prompts.chat, 로컬 GLM-5.2 활용까지 상용 서비스의 비용을 줄이고 데이터 주권을 확보하는 개발자 중심의 AI 최적화 방안을 살펴봅니다.",
+  "intro": "편리함에 이끌려 도입한 상용 코딩 에이전트가 개발 프로세스의 블랙박스로 전락하고 있습니다. 질문 한 줄을 던질 때마다 발생하는 불투명한 토큰 과금과 기업 내부 자산인 프롬프트의 유출 우려는 개발 조직이 마주한 당면 과제입니다. 이에 대응해 사내 프롬프트의 독립적 통제를 지원하는 f/prompts.chat을 구축하거나, 로컬 우선 분석 도구인 kenn-io/agentsview를 통해 에이전트의 내부 동작과 토큰 소모를 투명하게 추적하려는 시도가 늘고 있습니다. 외부 API에 의존하는 개발 방식을 탈피해 로컬 환경에서 주도권을 되찾으려는 움직임은 단순한 비용 절감을 넘어 기술적 자립을 위한 현실적인 대안으로 주목받고 있습니다.",
   "sections": [
     {
-      "headline": "프라이버시 확보를 위한 프롬프트 관리 플랫폼 f/prompts.chat의 자체 호스팅 전환",
+      "headline": "프롬프트 자산의 외부 유출을 차단하는 자체 호스팅 프레임워크 f/prompts.chat",
       "source_ids": [
         "github-community-1643157b768c76e7"
       ],
-      "what_happened": "GitHub 커뮤니티에 따르면, 기존 Awesome ChatGPT Prompts에서 이름을 변경한 f/prompts.chat 프로젝트는 사용자가 프롬프트를 수집하고 공유할 수 있는 오픈소스 플랫폼을 제공하며, 조직 내부의 완전한 보안 유지를 위해 자체 호스팅 기능을 지원합니다.",
-      "plain_explanation": "효과적인 AI 지시문들을 한데 모아 관리하는 오픈소스 도구입니다. 외부 클라우드 서비스를 거치지 않고 기업 내부 서버에 직접 설치하여 구동할 수 있으므로, 민감한 비즈니스 로직이나 내부 자산이 외부로 유출될 우려를 방지합니다.",
-      "why_it_matters": "프롬프트가 단순한 팁을 넘어 기업의 지적 자산으로 취급되면서, 외부 유출 없이 안전하게 통제할 수 있는 독립적인 관리 인프라의 필요성이 커졌기 때문입니다.",
+      "what_happened": "GitHub 커뮤니티 소식에 따르면, 기존 Awesome ChatGPT Prompts에서 명칭을 변경한 f/prompts.chat은 커뮤니티의 다양한 프롬프트를 공유하고 수집하는 오픈소스 프로젝트로, 기업 내부에 직접 설치해 완전한 프라이버시를 보장받으며 운영할 수 있는 자가 호스팅 기능을 제공합니다.",
+      "plain_explanation": "인공지능 모델이 최적의 결과물을 내도록 유도하는 지시문인 프롬프트를 한곳에서 체계적으로 관리하고 공유하는 도구입니다. 외부 클라우드 서비스에 의존하지 않고 기업 내부 인프라에 직접 설치하여 구동할 수 있어, 비즈니스 기밀이나 민감한 내부 데이터가 포함된 프롬프트가 외부로 흘러나가는 경로를 원천 차단합니다.",
+      "why_it_matters": "개별 작업자의 브라우저나 메모장에 파편화되어 사라지기 쉬운 프롬프트 작성 기법을 조직의 공식 자산으로 축적하는 동시에, 상용 플랫폼의 데이터 수집 정책으로부터 사내 보안 가이드라인을 방어하는 기준선이 됩니다.",
       "technical_details": "",
-      "editorial_take": "자체 호스팅은 보안 규정이 까다로운 환경에서 확실한 대안이 되지만, 단순한 정적 저장소 역할에 그치면 실무 적용률이 떨어지기 쉽습니다. 실제 개발 파이프라인에서 프롬프트의 버전 관리나 변경 이력이 유기적으로 연동되지 않으면 관리 비용만 늘어나는 결과를 초래하므로, 도입 전에 CI/CD 도구와의 연동 규격을 미리 설계해 두는 편이 안전합니다.",
-      "reader_action": "사내 인프라에 직접 배포하여 외부 프롬프트 관리 툴을 대체할 수 있을지 기술적 타당성을 검토하는 과정을 추천합니다.",
+      "editorial_take": "자가 호스팅을 통한 데이터 격리는 보안 측면에서 확실한 이점을 주지만, 도구의 도입이 곧바로 프롬프트의 자산화로 이어지지는 않습니다. 거대언어모델의 API 버전 업데이트에 따라 기존 프롬프트의 작동 방식과 결과 품질이 수시로 변하므로, 이를 감시하고 보정할 수 있는 자체적인 버전 관리 체계와 주기적인 유효성 검증 프로세스를 수동으로 설계해야 하는 운영 리스크가 존재합니다.",
+      "reader_action": "사내 개발팀이 빈번하게 사용하는 프롬프트를 수집하여 로컬 가상 환경에 이 도구를 배포하고, 외부 유출 가능성이 있는 민감 정보의 필터링 성능을 검증하십시오.",
       "verification_notes": ""
     },
     {
-      "headline": "로컬 우선 에이전트 분석 도구 kenn-io/agentsview의 등장",
+      "headline": "에이전트의 블랙박스를 여는 로컬 분석 도구 kenn-io/agentsview",
       "source_ids": [
         "geeknews-68551dc8cb2a5ed6"
       ],
-      "what_happened": "GitHub에 공개된 kenn-io/agentsview는 Claude Code와 Codex를 비롯한 20개 이상의 코딩 에이전트를 지원하며, 로컬 우선 방식으로 세션 검색, 분석, 토큰 사용량 통계를 제공합니다.",
-      "plain_explanation": "개발용 AI 에이전트가 백그라운드에서 어떤 명령을 수행하고 토큰을 얼마나 소비하는지 실시간으로 추적하는 분석 도구입니다. 모든 데이터 처리가 개발자의 로컬 컴퓨터 내에서 이루어지므로, 작업 로그나 소스 코드가 외부 분석 서버로 전송되지 않습니다.",
-      "why_it_matters": "에이전트의 무한 루프 호출이나 불필요한 컨텍스트 전송으로 인한 API 비용 폭탄을 방지하기 위해, 로컬 단에서 실시간 감시 체계를 구축할 수 있습니다.",
+      "what_happened": "GitHub에 공개된 kenn-io/agentsview는 Claude Code와 Codex를 비롯한 20종 이상의 코딩 에이전트를 대상으로 로컬 환경에서 세션 검색, 동작 분석, 토큰 사용량 통계를 실시간으로 모니터링할 수 있는 기능을 지원합니다.",
+      "plain_explanation": "개발을 보조하는 인공지능 에이전트가 백그라운드에서 실행한 명령과 소모한 토큰의 양을 로컬 시스템 내부에서 직접 추적하고 시각화하는 프로그램입니다. 외부 분석 서버로 데이터를 전송하지 않고 사용자의 컴퓨터 안에서 모든 처리가 완결되므로 소스 코드의 외부 노출 우려가 없습니다.",
+      "why_it_matters": "자율적으로 작동하는 에이전트가 예기치 못한 루프에 빠지거나 불필요한 컨텍스트를 반복 호출하여 초래하는 비정상적인 API 과금 문제를 실시간으로 감지하고 통제하는 안전장치 역할을 합니다.",
       "technical_details": "",
-      "editorial_take": "로컬 우선 방식은 프라이버시 확보에 유리하지만, 다양한 에이전트 도구들의 빈번한 업데이트에 맞춰 파싱 규칙을 지속적으로 유지보수해야 하는 부담이 따릅니다. 분석 도구 자체의 리소스 점유율이 개발 장비의 성능에 미치는 영향도 간과할 수 없으므로, 대규모 코드베이스에 전면 도입하기 전에 리소스 경량화 수준을 먼저 측정하는 과정이 필요합니다.",
-      "reader_action": "로컬 개발 환경에 설치하여 현재 구동 중인 코딩 에이전트가 실제로 소모하는 토큰 추이를 직접 모니터링하기 바랍니다.",
+      "editorial_take": "에이전트의 자율성이 극대화될수록 내부의 의사결정 과정은 블랙박스에 가까워지며, 이를 감시할 투명한 모니터링 도구는 필수적입니다. 다만 지원 대상 에이전트가 다양하더라도 각 에이전트의 잦은 업데이트 주기에 맞춰 분석 파서가 신속하게 유지보수되지 않는다면 분석 신뢰도가 급격히 저하될 수 있으며, 대규모 프로젝트 분석 시 로컬 디스크에 누적되는 로그 용량 관리 방안도 선행되어야 합니다.",
+      "reader_action": "현재 프로젝트에 적용 중인 코딩 에이전트의 로그 출력 경로를 파악하고, 본 분석 도구를 연동하여 실제 호출되는 토큰 소모 추이를 대시보드로 확인해 보시기 바랍니다.",
       "verification_notes": ""
     },
     {
-      "headline": "Claude Code의 초기 토큰 오버헤드와 OpenCode의 효율성 비교",
+      "headline": "Claude Code의 토큰 오버헤드 실태와 우회 프록시 rynfar/meridian의 한계",
       "source_ids": [
         "hacker-news-2e3f6d613d415836"
       ],
-      "what_happened": "Systima에 따르면, API 경계에서 측정했을 때 Claude Code는 사용자가 실제 프롬프트를 입력하기도 전에 OpenCode보다 4.7배 더 많은 토큰을 전송하는 오버헤드가 발생하는 것으로 나타났으며, rynfar/meridian은 서드파티 도구에서 Claude Max 구독을 연동할 수 있도록 돕는 프록시 프로젝트입니다.",
-      "plain_explanation": "AI 개발 비서인 클로드 코드가 작동할 때, 본격적인 명령을 내리기 전 단계에서 기본적으로 전송하는 배경 데이터의 양이 오픈코드에 비해 네 배 이상 많다는 분석입니다. 이는 에이전트 구동을 위한 초기 설정과 시스템 프롬프트의 비중이 매우 크다는 점을 보여줍니다.",
-      "why_it_matters": "상용 에이전트가 제공하는 편의성의 이면에 숨겨진 비용 구조를 정량적으로 밝혀냄으로써, 대규모 프로젝트에서 상시 가동할 때 누적될 재정적 부담을 경고하는 지표가 됩니다.",
+      "what_happened": "Systima의 분석 결과에 따르면, Claude Code는 사용자가 첫 프롬프트를 입력하기도 전에 기본 지시 파일의 무게, MCP 스키마 비용, 서브에이전트 배율 및 캐시 기록 동작 등으로 인해 OpenCode 대비 4.7배 더 많은 토큰을 API 경계에서 전송하는 것으로 나타났으며, 이에 대응해 Anthropic의 공식 SDK를 우회하여 서드파티 개발 도구에서 Claude Max 구독을 활용할 수 있게 돕는 프록시 rynfar/meridian 프로젝트가 주목받고 있습니다.",
+      "plain_explanation": "Claude Code와 같은 상용 도구는 사용자가 질문을 던지기 전부터 시스템 구동에 필요한 방대한 설정 데이터와 프로토콜 정보를 서버에 미리 전송합니다. 이 과정에서 발생하는 보이지 않는 데이터 전송량이 매우 크기 때문에, 가벼운 작업 하나를 수행하더라도 사용자가 인지하지 못하는 사이에 상당한 비용이 청구되는 구조를 지니고 있습니다.",
+      "why_it_matters": "상용 에이전트의 즉각적인 편리함 이면에 숨겨진 고비용 구조를 실제 API 호출 경계에서 정량적으로 입증함으로써, 무분별한 상용 도구 도입이 가져올 재정적 부담을 경고합니다.",
       "technical_details": "",
-      "editorial_take": "클로드 코드의 높은 초기 토큰 소모는 도구 통합이나 캐싱 제어 등 고도화된 기능을 안정적으로 수행하기 위한 트레이드오프입니다. 그러나 예산이 한정된 환경에서는 이러한 숨은 비용이 진입 장벽이 되므로, rynfar/meridian 같은 프록시를 활용해 경량화된 오픈소스 에이전트 환경과 상용 모델을 조합하는 대안적 파이프라인을 구축하는 것도 현실적인 돌파구입니다.",
-      "reader_action": "사용 중인 에이전트의 첫 API 호출 로그를 열어 시스템 프롬프트가 차지하는 토큰 비율을 직접 계산해 볼 것을 권합니다.",
+      "editorial_take": "캐싱 기법이나 rynfar/meridian 같은 우회 프록시를 도입하여 구독 요금제 기반으로 비용 효율을 극대화하려는 시도는 매력적이지만, 이는 임시방편에 불과합니다. 공식 SDK를 우회하는 방식은 서비스 제공업체의 이용 약관 위반 소지가 다분하며 보안 취약점을 노출할 위험이 크기 때문에, 장기적으로는 가벼운 오픈소스 에이전트와 상용 모델을 혼합하여 사용하는 하이브리드 아키텍처로 전환하는 설계가 훨씬 안전합니다.",
+      "reader_action": "개발 환경에서 발생하는 API 호출 로그를 활성화하고, 초기 시스템 프롬프트 전송 시 청구되는 토큰의 비중을 직접 계산하여 비용 효율성을 수치화하십시오.",
       "verification_notes": ""
     },
     {
-      "headline": "로컬 GLM-5.2 모델과 OpenCode를 활용한 오프라인 시스템 제어 실증",
+      "headline": "로컬 환경에서 구동하는 GLM-5.2 모델과 OpenCode의 시스템 제어 가능성",
       "source_ids": [
         "hacker-news-41c61f1cbfb7febb"
       ],
-      "what_happened": "the singularity is nearer 블로그에 따르면, 개발자 geohot은 로컬 환경에 구축한 zai-org/GLM-5.2 모델과 OpenCode를 연동하여 리눅스 시스템 상에서 tmux 설정을 자동으로 완료하는 등 로컬 에이전트의 실용성을 확인했습니다.",
-      "plain_explanation": "인터넷 연결 없이 개인 컴퓨터 내부에서만 작동하는 인공지능 모델인 GLM-5.2를 개발 도구와 결합하여 복잡한 운영체제 설정 작업을 수행하는 데 성공한 사례입니다. 외부 서버에 의존하지 않고도 개발자가 원하는 복잡한 시스템 명령어를 로컬 환경에서 안전하게 실행할 수 있음을 보여줍니다.",
-      "why_it_matters": "민감한 소스 코드나 시스템 제어 권한을 외부 클라우드 서버로 전송하지 않고도, 로컬 인프라만으로 고성능 에이전트 환경을 구축할 수 있다는 가능성을 입증한 지점입니다.",
+      "what_happened": "개인 블로그 the singularity is nearer에 게재된 글에 따르면, 개발자 geohot은 인공지능 업계의 과장 광고를 비판하면서도 로컬 리눅스 환경에 오픈소스 모델 zai-org/GLM-5.2와 OpenCode를 설정하여 특정 설정이 적용된 tmux 설치 등의 복잡한 시스템 구성 작업을 성공적으로 자동화했다고 밝혔습니다.",
+      "plain_explanation": "매달 비용을 지불해야 하는 클라우드 기반의 인공지능 API를 사용하지 않고, 개인용 컴퓨터의 로컬 하드웨어에 직접 오픈소스 모델을 설치하여 운영체제의 복잡한 환경 설정과 유틸리티 설치 작업을 인공지능 에이전트가 스스로 수행하도록 만든 실제 사례입니다.",
+      "why_it_matters": "고성능 로컬 모델과 오픈소스 코딩 에이전트의 조합이 외부 클라우드 서비스에 의존하지 않고도 실무 수준의 시스템 엔지니어링 작업을 충분히 자동화할 수 있다는 기술적 가능성을 실증적으로 확인해 줍니다.",
       "technical_details": "",
-      "editorial_take": "로컬 모델과 에이전트의 조합은 보안성과 비용 절감 측면에서 이상적인 지향점이지만, 이를 매끄럽게 구동하려면 고성능 GPU 등 하드웨어 자원이 전제되어야 합니다. 또한 상용 클라우드 모델에 비해 복잡한 예외 상황에서의 추론 능력이 부족할 수 있으므로, 초기에는 시스템 설정이나 정형화된 반복 코딩 작업 등 범위를 좁혀 적용하는 접근이 현실적입니다.",
-      "reader_action": "오픈소스 모델인 GLM-5.2를 로컬 환경에 구성하고 간단한 터미널 자동화 작업을 수행하여 구동 속도와 정확도를 측정해 보십시오.",
+      "editorial_take": "로컬 환경에서의 모델 구동은 데이터 보안 확보와 추가적인 운영 비용이 발생하지 않는다는 강력한 장점을 제공하지만, 이를 뒷받침하기 위한 고성능 GPU 등 하드웨어 인프라 도입에 따른 초기 비용 부담이 큽니다. 또한 모델의 로컬 최적화와 에이전트 연동 과정에서 요구되는 엔지니어링 공수가 상당하므로, 조직 단위 도입 시에는 단순한 구독료 절감액과 인건비 투입량을 냉정하게 비교 분석해야 합니다.",
+      "reader_action": "보유 중인 로컬 워크스테이션에 경량화된 오픈소스 모델을 배포하고, 일상적인 터미널 명령어 실행이나 환경 설정 스크립트 작성을 위임하여 로컬 에이전트의 성능 한계를 직접 측정하십시오.",
       "verification_notes": ""
     }
   ],
-  "closing": "에이전트 기술이 고도화될수록 엔지니어들의 관심은 단순한 기능 구현에서 운영 효율성과 비용 통제라는 현실적인 영역으로 이동하기 마련입니다. 화려한 데모 뒤에 숨겨진 토큰 오버헤드를 추적하고, 프라이빗한 프롬프트 관리 체계를 세우며, 로컬 환경에서 오픈소스 모델을 직접 구동해 보는 시도들은 모두 이러한 흐름을 대변합니다. 기술의 외형적인 편리함에 매몰되지 않고 실제 인프라 비용과 보안 요구사항을 냉정하게 따져보는 엔지니어링적 접근이 필요한 시점입니다.",
+  "closing": "상용 에이전트가 약속하는 생산성의 이면에는 불투명한 비용 구조와 데이터 주권의 상실이라는 트레이드오프가 명확히 존재합니다. 로컬 우선의 분석 도구를 통한 투명성 확보, 사내 독립 호스팅을 통한 프롬프트 자산 보호, 그리고 고성능 로컬 오픈소스 모델의 조합은 이러한 리스크를 통제하기 위한 실질적인 돌파구입니다. 기술의 외형적 편리함에 매몰되기보다, 실제 데이터 흐름과 비용 효율을 정밀하게 측정하여 각자의 인프라 환경에 최적화된 하이브리드 전략을 구축해야 합니다.",
   "editorial_disclosure": "",
   "model": "gemini-3.5-flash",
   "article_count_note": "",
-  "images": {},
+  "images": {
+    "hero": {
+      "path": "hero.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-13/hero.png",
+      "kind": "generated-hero"
+    },
+    "github-community-1643157b768c76e7": {
+      "origin_url": "https://opengraph.githubassets.com/1/f/prompts.chat",
+      "kind": "source-image",
+      "path": "issue-1.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-13/issue-1.png"
+    },
+    "geeknews-68551dc8cb2a5ed6": {
+      "origin_url": "https://opengraph.githubassets.com/07d9d12dc06c3b7c179ee898a985d53c4b49ed07f525cbcc506702eb8c2c3f50/kenn-io/agentsview",
+      "kind": "source-image",
+      "path": "issue-2.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-13/issue-2.png"
+    },
+    "hacker-news-2e3f6d613d415836": {
+      "origin_url": "https://systima.ai/images/claude-code-vs-opencode-banner.png",
+      "kind": "source-image",
+      "path": "issue-3.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-13/issue-3.png"
+    },
+    "hacker-news-41c61f1cbfb7febb": {
+      "origin_url": "",
+      "kind": "source-image",
+      "path": "issue-4.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-13/issue-4.svg"
+    }
+  },
   "source_items": [
     {
       "id": "github-community-1643157b768c76e7",
@@ -97,7 +127,7 @@
         "project_owner": "f",
         "project_description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-13T09:07:47Z",
+        "updated_at": "2026-07-13T09:21:09Z",
         "community_source": "github",
         "github_stars": "165597",
         "github_pushed_at": "2026-07-13T07:50:13Z"
@@ -113,7 +143,7 @@
       "summary": "Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents. - kenn-io/agentsview",
       "listing_url": "https://news.hada.io/topic?id=31370",
       "introduced_at": "2026-07-13T09:31:01+09:00",
-      "image_url": "https://opengraph.githubassets.com/29dcbcc5b5ad240cad8089d9409e6a8c1a84b8c5d334d668f303e13142c261a2/kenn-io/agentsview",
+      "image_url": "https://opengraph.githubassets.com/07d9d12dc06c3b7c179ee898a985d53c4b49ed07f525cbcc506702eb8c2c3f50/kenn-io/agentsview",
       "official_url": "https://github.com/kenn-io/agentsview",
       "canonical_key": "https://github.com/kenn-io/agentsview",
       "verification": {
@@ -127,7 +157,7 @@
         "project_owner": "kenn-io",
         "project_description": "Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents. ",
         "license": "MIT",
-        "updated_at": "2026-07-13T09:05:23Z",
+        "updated_at": "2026-07-13T09:14:57Z",
         "project_kind": "github"
       }
     },
@@ -155,7 +185,7 @@
         "project_owner": "rynfar",
         "project_description": "Use your Claude Max subscription with OpenCode, Pi, Droid, Aider, Crush, Cline. Proxy that bridges Anthropic's official SDK to enable Claude Max in third-party tools.",
         "license": "",
-        "updated_at": "2026-07-13T07:56:05Z",
+        "updated_at": "2026-07-13T09:13:27Z",
         "project_kind": "github"
       }
     },
