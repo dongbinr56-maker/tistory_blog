@@ -302,7 +302,7 @@ def run(root: Path = ROOT, date: str | None = None, demo: bool = False, refresh:
     _write_json(run_dir / "collection.json", collection)
     required_sources = int(site.get("required_source_count", 3))
     if len(selected) < required_sources:
-        message = f"초안 생성 중단: 요즘IT·GeekNews 기사와 GitHub/Hugging Face 커뮤니티 프로젝트를 합쳐 검증 가능한 {required_sources}건을 만들지 못했습니다."
+        message = f"초안 생성 중단: 요즘IT·GeekNews·Hacker News 기사와 GitHub/Hugging Face 커뮤니티 프로젝트를 합쳐 검증 가능한 {required_sources}건을 만들지 못했습니다."
         _write_json(run_dir / "quality-report.json", {"status": "BLOCKED", "errors": [message], "collector_errors": collector_errors})
         raise RuntimeError(message)
     asset_base_url = str(site.get("draft_assets_base_url", ""))

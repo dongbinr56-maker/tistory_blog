@@ -1,7 +1,18 @@
+import datetime as dt
 import unittest
 from unittest.mock import patch
 
-from tistory_newsroom.collect import _extract_geeknews_original, _fetch_bytes, _find_official_url, _topics
+from tistory_newsroom.collect import (
+    ListingCandidate,
+    _extract_geeknews_original,
+    _fetch_bytes,
+    _find_official_url,
+    _hackernews_listings,
+    _topics,
+    _verify_listing,
+)
+
+KST = dt.timezone(dt.timedelta(hours=9))
 
 
 class TopicRelevanceTest(unittest.TestCase):
@@ -57,6 +68,55 @@ class GeekNewsOriginalTest(unittest.TestCase):
             _extract_geeknews_original(page, "https://news.hada.io/topic?id=1"),
             "https://original.example.com/post",
         )
+
+
+class HackerNewsTest(unittest.TestCase):
+    def test_builds_candidates_and_skips_self_posts(self):
+        hits = {"hits": [
+            {"title": "I love LLMs, I hate hype", "url": "https://example.org/llm-post", "objectID": "111", "created_at": "2026-07-12T18:31:56Z", "points": 415},
+            {"title": "Ask HN: Add flag for AI articles", "url": None, "objectID": "222", "created_at": "2026-07-13T01:24:20Z", "points": 606},
+        ]}
+        now = dt.datetime(2026, 7, 13, 7, 0, tzinfo=KST)
+        with patch("tistory_newsroom.collect._api_json", return_value=hits) as api:
+            listings = _hackernews_listings({"name": "Hacker News", "minimum_points": 100}, now, 24, 15)
+
+        self.assertEqual(len(listings), 1)
+        candidate = listings[0]
+        self.assertEqual(candidate.article_url, "https://example.org/llm-post")
+        self.assertEqual(candidate.listing_url, "https://news.ycombinator.com/item?id=111")
+        self.assertTrue(candidate.introduced_at)
+        endpoint = api.call_args[0][0]
+        self.assertIn("points%3E%3D100", endpoint)
+
+    def test_verification_uses_the_preset_article_and_the_surfacing_time(self):
+        candidate = ListingCandidate(
+            source="Hacker News",
+            listing_url="https://news.ycombinator.com/item?id=111",
+            listing_title="I love LLMs, I hate hype",
+            article_url="https://example.org/llm-post",
+            introduced_at="2026-07-13T06:00:00+09:00",
+        )
+        article_page = (
+            '<html><head>'
+            '<meta property="og:title" content="I love LLMs, I hate hype">'
+            '<meta property="og:description" content="LLM 에이전트와 모델 추론 비용에 대한 글">'
+            '<meta property="og:site_name" content="example.org">'
+            '<meta property="article:published_time" content="2026-07-01T00:00:00Z">'
+            "</head><body></body></html>"
+        )
+        now = dt.datetime(2026, 7, 13, 7, 0, tzinfo=KST)
+        with patch("tistory_newsroom.collect._fetch_text", return_value=article_page) as fetch:
+            item = _verify_listing(candidate, now, 24)
+
+        self.assertIsNotNone(item)
+        assert item is not None
+        # HN 아이템 페이지는 가져오지 않고 원문만 확인한다.
+        fetch.assert_called_once_with("https://example.org/llm-post")
+        self.assertEqual(item.url, "https://example.org/llm-post")
+        self.assertEqual(item.source, "example.org")
+        self.assertEqual(item.listing_url, "https://news.ycombinator.com/item?id=111")
+        # 원문 게시일(7/1)이 오래돼도 HN에 오늘 올라왔으면 24시간 창을 통과한다.
+        self.assertEqual(item.introduced_at, "2026-07-13T06:00:00+09:00")
 
 
 class _FakeResponse:

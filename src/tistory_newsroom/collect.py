@@ -54,6 +54,10 @@ class ListingCandidate:
     source: str
     listing_url: str
     listing_title: str
+    # Aggregator APIs (Hacker News) already name the original article and its
+    # surfacing time; a preset article_url skips fetching the listing page.
+    article_url: str = ""
+    introduced_at: str = ""
 
 
 class _PageParser(HTMLParser):
@@ -211,6 +215,38 @@ def _geeknews_listings(url: str, source: str, limit: int) -> list[ListingCandida
         listings.append(ListingCandidate(source, absolute, title))
         if len(listings) == limit:
             break
+    return listings
+
+
+def _hackernews_listings(source: dict[str, Any], now: dt.datetime, lookback_hours: int, limit: int) -> list[ListingCandidate]:
+    """List recent high-score Hacker News stories via the official Algolia API.
+
+    Ask HN and other self posts carry no article URL and are skipped; the
+    linked article still passes the same verification, relevance filter and
+    dedup as every other listing.
+    """
+    minimum_points = int(source.get("minimum_points", 100))
+    since_epoch = int((now - dt.timedelta(hours=lookback_hours)).timestamp())
+    endpoint = str(source.get("url") or "https://hn.algolia.com/api/v1/search") + "?" + urllib.parse.urlencode({
+        "tags": "story",
+        "numericFilters": f"created_at_i>={since_epoch},points>={minimum_points}",
+        "hitsPerPage": limit,
+    })
+    listings: list[ListingCandidate] = []
+    for hit in _api_json(endpoint).get("hits", []):
+        title = _clean_text(str(hit.get("title") or ""))
+        article_url = str(hit.get("url") or "").strip()
+        object_id = str(hit.get("objectID") or "")
+        introduced = _parse_datetime(str(hit.get("created_at") or ""))
+        if not title or not object_id or introduced is None or not article_url.startswith(("https://", "http://")):
+            continue
+        listings.append(ListingCandidate(
+            source=str(source.get("name") or "Hacker News"),
+            listing_url=f"https://news.ycombinator.com/item?id={object_id}",
+            listing_title=title,
+            article_url=article_url,
+            introduced_at=introduced.isoformat(),
+        ))
     return listings
 
 
@@ -447,19 +483,28 @@ def _canonical(url: str, official_url: str) -> str:
 
 
 def _verify_listing(candidate: ListingCandidate, now: dt.datetime, lookback_hours: int) -> SourceItem | None:
-    listing_page = _fetch_text(candidate.listing_url)
-    listing_meta = _metadata(listing_page)
-    source_page = listing_page
-    source_meta = listing_meta
-    article_url = candidate.listing_url
-    introduced_at = ""
-    if candidate.source == "GeekNews":
-        introduced_at = listing_meta["published"]
-        article_url = _extract_geeknews_original(listing_page, candidate.listing_url)
-        if not article_url:
-            return None
+    introduced_at = candidate.introduced_at
+    if candidate.article_url:
+        # The aggregator API already named the original article, so the
+        # listing page itself never needs a fetch.
+        article_url = candidate.article_url
         source_page = _fetch_text(article_url)
         source_meta = _metadata(source_page)
+        listing_page = ""
+        listing_meta = {"title": "", "description": "", "image": "", "published": "", "site_name": "", "canonical": ""}
+    else:
+        listing_page = _fetch_text(candidate.listing_url)
+        listing_meta = _metadata(listing_page)
+        source_page = listing_page
+        source_meta = listing_meta
+        article_url = candidate.listing_url
+        if candidate.source == "GeekNews":
+            introduced_at = listing_meta["published"]
+            article_url = _extract_geeknews_original(listing_page, candidate.listing_url)
+            if not article_url:
+                return None
+            source_page = _fetch_text(article_url)
+            source_meta = _metadata(source_page)
     published = source_meta["published"] or introduced_at
     recent_time = _parse_datetime(introduced_at or published)
     if recent_time is None or recent_time < now - dt.timedelta(hours=lookback_hours) or recent_time > now + dt.timedelta(minutes=10):
@@ -524,6 +569,8 @@ def collect_candidates(config: dict[str, Any], now: dt.datetime | None = None) -
                 listings = _rss_listings(str(source["url"]), str(source["name"]), limit)
             elif source.get("type") == "geeknews_html":
                 listings = _geeknews_listings(str(source["url"]), str(source["name"]), limit)
+            elif source.get("type") == "hackernews_api":
+                listings = _hackernews_listings(source, now, lookback_hours, limit)
             elif source.get("type") == "github_community":
                 for item in _github_community_items(source, now, community_days, community_limit):
                     if item.canonical_key not in seen:
@@ -633,7 +680,7 @@ def collection_payload(
     return {
         "date": date,
         "collected_at": dt.datetime.now(dt.timezone.utc).isoformat(),
-        "selection_rule": "최근 24시간 요즘IT·GeekNews 기사와 최근 14일 GitHub/Hugging Face 커뮤니티 활성 프로젝트를 조합해 3건(검증된 기사가 3건 이상인 날은 4건)을 구성하며, 커뮤니티 프로젝트 1건 이상 필수. 이전 날짜에 선택한 원문·공식 프로젝트 URL은 제외",
+        "selection_rule": "최근 24시간 요즘IT·GeekNews·Hacker News 기사와 최근 14일 GitHub/Hugging Face 커뮤니티 활성 프로젝트를 조합해 3건(검증된 기사가 3건 이상인 날은 4건)을 구성하며, 커뮤니티 프로젝트 1건 이상 필수. 이전 날짜에 선택한 원문·공식 프로젝트 URL은 제외",
         "history_exclusion": {
             "past_url_key_count": historical_url_key_count,
             "excluded_candidate_count": historically_excluded_candidate_count,
