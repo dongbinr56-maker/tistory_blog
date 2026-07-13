@@ -181,7 +181,7 @@ def generate_with_gemini(date: str, sources: list[SourceItem], site: dict[str, A
     api_key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not api_key:
         raise RuntimeError("GEMINI_API_KEY가 없습니다. .env.example과 README의 설정 절차를 확인하세요.")
-    model = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash").strip()
+    model = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash").strip()
     encoded_key = urllib.parse.quote(api_key, safe="")
     endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={encoded_key}"
     last_error: Exception | None = None
