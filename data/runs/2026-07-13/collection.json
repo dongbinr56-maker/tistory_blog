@@ -1,6 +1,6 @@
 {
   "date": "2026-07-13",
-  "collected_at": "2026-07-13T06:59:43.823429+00:00",
+  "collected_at": "2026-07-13T07:27:23.761636+00:00",
   "selection_rule": "최근 24시간 요즘IT·GeekNews 기사와 최근 14일 GitHub/Hugging Face 커뮤니티 활성 프로젝트를 조합해 3건(검증된 기사가 3건 이상인 날은 4건)을 구성하며, 커뮤니티 프로젝트 1건 이상 필수. 이전 날짜에 선택한 원문·공식 프로젝트 URL은 제외",
   "history_exclusion": {
     "past_url_key_count": 8,
@@ -17,7 +17,7 @@
       "summary": "Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents. - kenn-io/agentsview",
       "listing_url": "https://news.hada.io/topic?id=31370",
       "introduced_at": "2026-07-13T09:31:01+09:00",
-      "image_url": "https://opengraph.githubassets.com/c44cd1a6acff4df01ca7e0cc69cf165f7469eed5f5749a098afb5397a9d3da81/kenn-io/agentsview",
+      "image_url": "https://opengraph.githubassets.com/181f673cdc8d4efda076217ab7132dfdf6525b68fe44e6e7b3130cdc61578151/kenn-io/agentsview",
       "official_url": "https://github.com/kenn-io/agentsview",
       "canonical_key": "https://github.com/kenn-io/agentsview",
       "verification": {
@@ -31,8 +31,29 @@
         "project_owner": "kenn-io",
         "project_description": "Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents. ",
         "license": "MIT",
-        "updated_at": "2026-07-13T06:55:36Z",
+        "updated_at": "2026-07-13T07:21:11Z",
         "project_kind": "github"
+      }
+    },
+    {
+      "id": "geeknews-35ec77961ea7f10b",
+      "source": "www.thevccorner.com",
+      "topic": "AI 에이전트",
+      "title": "This Is the New SaaS Playbook",
+      "url": "https://www.thevccorner.com/p/the-new-saas-playbook-ai-agent-era",
+      "published_at": "2026-07-02T23:16:11+09:00",
+      "summary": "SaaS just got demoted from the prize to the packaging and the value moved somewhere else entirely.",
+      "listing_url": "https://news.hada.io/topic?id=31387",
+      "introduced_at": "2026-07-13T11:26:01+09:00",
+      "image_url": "https://substackcdn.com/image/fetch/$s_!Djsj!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F52531c0b-7f06-4cba-937c-504ab2c46d72_1600x1050.webp",
+      "official_url": "",
+      "canonical_key": "https://www.thevccorner.com/p/the-new-saas-playbook-ai-agent-era",
+      "verification": {
+        "article_title_verified": "This Is the New SaaS Playbook",
+        "article_source_verified": "www.thevccorner.com",
+        "article_published_verified": "2026-07-02T23:16:11+09:00",
+        "article_url_verified": "https://www.thevccorner.com/p/the-new-saas-playbook-ai-agent-era",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=31387"
       }
     },
     {
@@ -64,27 +85,6 @@
       }
     },
     {
-      "id": "geeknews-35ec77961ea7f10b",
-      "source": "www.thevccorner.com",
-      "topic": "AI 에이전트",
-      "title": "This Is the New SaaS Playbook",
-      "url": "https://www.thevccorner.com/p/the-new-saas-playbook-ai-agent-era",
-      "published_at": "2026-07-02T23:16:11+09:00",
-      "summary": "SaaS just got demoted from the prize to the packaging and the value moved somewhere else entirely.",
-      "listing_url": "https://news.hada.io/topic?id=31387",
-      "introduced_at": "2026-07-13T11:26:01+09:00",
-      "image_url": "https://substackcdn.com/image/fetch/$s_!Djsj!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F52531c0b-7f06-4cba-937c-504ab2c46d72_1600x1050.webp",
-      "official_url": "",
-      "canonical_key": "https://www.thevccorner.com/p/the-new-saas-playbook-ai-agent-era",
-      "verification": {
-        "article_title_verified": "This Is the New SaaS Playbook",
-        "article_source_verified": "www.thevccorner.com",
-        "article_published_verified": "2026-07-02T23:16:11+09:00",
-        "article_url_verified": "https://www.thevccorner.com/p/the-new-saas-playbook-ai-agent-era",
-        "geeknews_listing_url": "https://news.hada.io/topic?id=31387"
-      }
-    },
-    {
       "id": "github-community-edb3a626875732de",
       "source": "GitHub 커뮤니티",
       "topic": "생성형 AI, AI 에이전트, 개발 도구, GitHub 프로젝트, AI 모델링",
@@ -103,9 +103,9 @@
         "project_owner": "affaan-m",
         "project_description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
         "license": "MIT",
-        "updated_at": "2026-07-13T06:58:40Z",
+        "updated_at": "2026-07-13T07:26:05Z",
         "community_source": "github",
-        "github_stars": "229025",
+        "github_stars": "229032",
         "github_pushed_at": "2026-07-13T04:55:50Z"
       }
     },
@@ -128,9 +128,9 @@
         "project_owner": "NousResearch",
         "project_description": "The agent that grows with you",
         "license": "MIT",
-        "updated_at": "2026-07-13T06:58:11Z",
+        "updated_at": "2026-07-13T07:24:08Z",
         "community_source": "github",
-        "github_stars": "213900",
+        "github_stars": "213911",
         "github_pushed_at": "2026-07-13T06:56:09Z"
       }
     },
@@ -140,7 +140,7 @@
       "topic": "생성형 AI, AI 에이전트, GitHub 프로젝트, AI 모델링",
       "title": "Significant-Gravitas/AutoGPT",
       "url": "https://github.com/Significant-Gravitas/AutoGPT",
-      "published_at": "2026-07-13T15:56:10+09:00",
+      "published_at": "2026-07-13T16:20:04+09:00",
       "summary": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
       "listing_url": "https://github.com/Significant-Gravitas/AutoGPT",
       "introduced_at": "",
@@ -153,10 +153,10 @@
         "project_owner": "Significant-Gravitas",
         "project_description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-13T06:55:26Z",
+        "updated_at": "2026-07-13T07:18:10Z",
         "community_source": "github",
         "github_stars": "185498",
-        "github_pushed_at": "2026-07-13T06:56:10Z"
+        "github_pushed_at": "2026-07-13T07:20:04Z"
       }
     },
     {
@@ -203,9 +203,9 @@
         "project_owner": "f",
         "project_description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-13T06:58:52Z",
+        "updated_at": "2026-07-13T07:25:42Z",
         "community_source": "github",
-        "github_stars": "165586",
+        "github_stars": "165587",
         "github_pushed_at": "2026-07-13T04:17:18Z"
       }
     },
@@ -215,7 +215,7 @@
       "topic": "생성형 AI, AI 모델링, GitHub 프로젝트",
       "title": "huggingface/transformers",
       "url": "https://github.com/huggingface/transformers",
-      "published_at": "2026-07-13T15:36:25+09:00",
+      "published_at": "2026-07-13T16:25:38+09:00",
       "summary": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
       "listing_url": "https://github.com/huggingface/transformers",
       "introduced_at": "",
@@ -228,10 +228,10 @@
         "project_owner": "huggingface",
         "project_description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
         "license": "Apache-2.0",
-        "updated_at": "2026-07-13T06:15:44Z",
+        "updated_at": "2026-07-13T07:26:54Z",
         "community_source": "github",
-        "github_stars": "162557",
-        "github_pushed_at": "2026-07-13T06:36:25Z"
+        "github_stars": "162558",
+        "github_pushed_at": "2026-07-13T07:25:38Z"
       }
     },
     {
@@ -240,7 +240,7 @@
       "topic": "생성형 AI, AI 에이전트, GitHub 프로젝트, AI 모델링",
       "title": "firecrawl/firecrawl",
       "url": "https://github.com/firecrawl/firecrawl",
-      "published_at": "2026-07-12T22:18:12+09:00",
+      "published_at": "2026-07-13T16:17:30+09:00",
       "summary": "The API to search, scrape, and interact with the web at scale. 🔥",
       "listing_url": "https://github.com/firecrawl/firecrawl",
       "introduced_at": "",
@@ -253,10 +253,10 @@
         "project_owner": "firecrawl",
         "project_description": "The API to search, scrape, and interact with the web at scale. 🔥",
         "license": "AGPL-3.0",
-        "updated_at": "2026-07-13T06:59:35Z",
+        "updated_at": "2026-07-13T07:27:20Z",
         "community_source": "github",
-        "github_stars": "150044",
-        "github_pushed_at": "2026-07-12T13:18:12Z"
+        "github_stars": "150060",
+        "github_pushed_at": "2026-07-13T07:17:30Z"
       }
     },
     {
@@ -265,7 +265,7 @@
       "topic": "생성형 AI, AI 에이전트, GitHub 프로젝트, AI 모델링",
       "title": "langgenius/dify",
       "url": "https://github.com/langgenius/dify",
-      "published_at": "2026-07-13T15:58:12+09:00",
+      "published_at": "2026-07-13T16:27:02+09:00",
       "summary": "Production-ready platform for agentic workflow development.",
       "listing_url": "https://github.com/langgenius/dify",
       "introduced_at": "",
@@ -278,10 +278,10 @@
         "project_owner": "langgenius",
         "project_description": "Production-ready platform for agentic workflow development.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-13T06:58:19Z",
+        "updated_at": "2026-07-13T07:16:29Z",
         "community_source": "github",
-        "github_stars": "148643",
-        "github_pushed_at": "2026-07-13T06:58:12Z"
+        "github_stars": "148644",
+        "github_pushed_at": "2026-07-13T07:27:02Z"
       }
     },
     {
@@ -329,7 +329,7 @@
         "license": "",
         "updated_at": "2026-07-12T09:57:41+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "2054",
+        "huggingface_likes": "2055",
         "huggingface_downloads": "1967677",
         "pipeline_tag": "image-text-to-text"
       }
@@ -354,7 +354,7 @@
         "license": "",
         "updated_at": "2026-07-02T17:08:14+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "3866",
+        "huggingface_likes": "3867",
         "huggingface_downloads": "441413",
         "pipeline_tag": "text-generation"
       }
@@ -379,7 +379,7 @@
         "license": "",
         "updated_at": "2026-07-10T22:15:25+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "271",
+        "huggingface_likes": "272",
         "huggingface_downloads": "4463",
         "pipeline_tag": "image-text-to-text"
       }
@@ -429,7 +429,7 @@
         "license": "",
         "updated_at": "2026-07-09T10:14:45+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "511",
+        "huggingface_likes": "512",
         "huggingface_downloads": "29038",
         "pipeline_tag": "text-generation"
       }
@@ -505,9 +505,9 @@
         "project_owner": "f",
         "project_description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-13T06:58:52Z",
+        "updated_at": "2026-07-13T07:25:42Z",
         "community_source": "github",
-        "github_stars": "165586",
+        "github_stars": "165587",
         "github_pushed_at": "2026-07-13T04:17:18Z"
       }
     },
@@ -521,7 +521,7 @@
       "summary": "Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents. - kenn-io/agentsview",
       "listing_url": "https://news.hada.io/topic?id=31370",
       "introduced_at": "2026-07-13T09:31:01+09:00",
-      "image_url": "https://opengraph.githubassets.com/c44cd1a6acff4df01ca7e0cc69cf165f7469eed5f5749a098afb5397a9d3da81/kenn-io/agentsview",
+      "image_url": "https://opengraph.githubassets.com/181f673cdc8d4efda076217ab7132dfdf6525b68fe44e6e7b3130cdc61578151/kenn-io/agentsview",
       "official_url": "https://github.com/kenn-io/agentsview",
       "canonical_key": "https://github.com/kenn-io/agentsview",
       "verification": {
@@ -535,7 +535,7 @@
         "project_owner": "kenn-io",
         "project_description": "Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents. ",
         "license": "MIT",
-        "updated_at": "2026-07-13T06:55:36Z",
+        "updated_at": "2026-07-13T07:21:11Z",
         "project_kind": "github"
       }
     },
