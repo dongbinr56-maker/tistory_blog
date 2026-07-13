@@ -1,118 +1,87 @@
 {
   "date": "2026-07-13",
-  "collected_at": "2026-07-12T22:29:18.979642+00:00",
-  "selection_rule": "최근 24시간 요즘IT·GeekNews 기사와 최근 14일 GitHub/Hugging Face 커뮤니티 활성 프로젝트를 조합해 3건을 구성하며, 커뮤니티 프로젝트 1건 이상 필수. 이전 날짜에 선택한 원문·공식 프로젝트 URL은 제외",
+  "collected_at": "2026-07-13T06:59:43.823429+00:00",
+  "selection_rule": "최근 24시간 요즘IT·GeekNews 기사와 최근 14일 GitHub/Hugging Face 커뮤니티 활성 프로젝트를 조합해 3건(검증된 기사가 3건 이상인 날은 4건)을 구성하며, 커뮤니티 프로젝트 1건 이상 필수. 이전 날짜에 선택한 원문·공식 프로젝트 URL은 제외",
   "history_exclusion": {
     "past_url_key_count": 8,
-    "excluded_candidate_count": 10
+    "excluded_candidate_count": 5
   },
   "candidates": [
     {
-      "id": "geeknews-ddac48632b5295d4",
-      "source": "Sidedock",
-      "topic": "개발 도구",
-      "title": "Sidedock — AI·사이드 프로젝트 발견 플랫폼",
-      "url": "https://www.sidedock.io",
-      "published_at": "2026-07-13T05:56:27+09:00",
-      "summary": "AI 툴, SaaS, 사이드 프로젝트를 가장 먼저 발견하세요.",
-      "listing_url": "https://news.hada.io/topic?id=31363",
-      "introduced_at": "2026-07-13T05:56:27+09:00",
-      "image_url": "https://sidedock.io/og-default.png",
-      "official_url": "",
-      "canonical_key": "https://www.sidedock.io",
-      "verification": {
-        "article_title_verified": "Sidedock — AI·사이드 프로젝트 발견 플랫폼",
-        "article_source_verified": "Sidedock",
-        "article_published_verified": "2026-07-13T05:56:27+09:00",
-        "article_url_verified": "https://www.sidedock.io",
-        "geeknews_listing_url": "https://news.hada.io/topic?id=31363"
-      }
-    },
-    {
-      "id": "geeknews-3a308f44abebbb79",
+      "id": "geeknews-68551dc8cb2a5ed6",
       "source": "GitHub",
-      "topic": "AI 에이전트, GitHub 프로젝트",
-      "title": "GitHub - Ataraxy-Labs/sem: Semantic version control => entity-level diffs, blame, and impact analysis on top of git. 28 languages via tree-sitter. Built for coding agents.",
-      "url": "https://github.com/Ataraxy-Labs/sem",
-      "published_at": "2026-07-12T09:31:02+09:00",
-      "summary": "Semantic version control => entity-level diffs, blame, and impact analysis on top of git. 28 languages via tree-sitter. Built for coding agents. - Ataraxy-Labs/sem",
-      "listing_url": "https://news.hada.io/topic?id=31339",
-      "introduced_at": "2026-07-12T09:31:02+09:00",
-      "image_url": "https://opengraph.githubassets.com/de21e8ac979693f003aaf4da569779ca70e018e0b96c13e423d90489ab82ed02/Ataraxy-Labs/sem",
-      "official_url": "https://github.com/fluidicon.png",
-      "canonical_key": "https://github.com/fluidicon.png",
+      "topic": "생성형 AI, AI 에이전트, 개발 도구",
+      "title": "GitHub - kenn-io/agentsview: Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents.",
+      "url": "https://github.com/kenn-io/agentsview",
+      "published_at": "2026-07-13T09:31:01+09:00",
+      "summary": "Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents. - kenn-io/agentsview",
+      "listing_url": "https://news.hada.io/topic?id=31370",
+      "introduced_at": "2026-07-13T09:31:01+09:00",
+      "image_url": "https://opengraph.githubassets.com/c44cd1a6acff4df01ca7e0cc69cf165f7469eed5f5749a098afb5397a9d3da81/kenn-io/agentsview",
+      "official_url": "https://github.com/kenn-io/agentsview",
+      "canonical_key": "https://github.com/kenn-io/agentsview",
       "verification": {
-        "article_title_verified": "GitHub - Ataraxy-Labs/sem: Semantic version control => entity-level diffs, blame, and impact analysis on top of git. 28 languages via tree-sitter. Built for coding agents.",
+        "article_title_verified": "GitHub - kenn-io/agentsview: Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents.",
         "article_source_verified": "GitHub",
-        "article_published_verified": "2026-07-12T09:31:02+09:00",
-        "article_url_verified": "https://github.com/Ataraxy-Labs/sem",
-        "geeknews_listing_url": "https://news.hada.io/topic?id=31339",
-        "official_url": "https://github.com/fluidicon.png"
+        "article_published_verified": "2026-07-13T09:31:01+09:00",
+        "article_url_verified": "https://github.com/kenn-io/agentsview",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=31370",
+        "official_url": "https://github.com/kenn-io/agentsview",
+        "project_name": "kenn-io/agentsview",
+        "project_owner": "kenn-io",
+        "project_description": "Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents. ",
+        "license": "MIT",
+        "updated_at": "2026-07-13T06:55:36Z",
+        "project_kind": "github"
       }
     },
     {
-      "id": "geeknews-24fd53f66cfcc1c6",
-      "source": "TryAI",
-      "topic": "생성형 AI",
-      "title": "GPT-5.6, Grok 4.5, Claude, and Muse Spark build the same 4 apps",
-      "url": "https://www.tryai.dev/blog/gpt-5.6-build-off-12-models",
-      "published_at": "2026-07-09T00:00:00+09:00",
-      "summary": "GPT-5.6's new Sol, Terra, and Luna tiers go head-to-head with Grok 4.5, Claude, Meta's Muse Spark, and the open-weights crew on a raycaster, a Rubik's cube, a calculator, and Game of Life. Here's every build, with cost and latency.",
-      "listing_url": "https://news.hada.io/topic?id=31342",
-      "introduced_at": "2026-07-12T09:42:10+09:00",
-      "image_url": "https://www.tryai.dev/blog/gpt-5.6-build-off-12-models/opengraph-image-yqks0s?3313ef8f7f360358",
+      "id": "geeknews-469ab1ad253f7c9c",
+      "source": "www.datagravity.dev",
+      "topic": "AI 모델링, NPU·GPU·엣지 AI",
+      "title": "How an AI Token Travels Through a Data Center",
+      "url": "https://www.datagravity.dev/p/how-an-ai-token-travels-through-a",
+      "published_at": "2026-07-02T04:14:22+09:00",
+      "summary": "Trace one prompt from gateway to scheduler, KV cache, GPU, and network — every component that powers AI inference.",
+      "listing_url": "https://news.hada.io/topic?id=31381",
+      "introduced_at": "2026-07-13T10:11:02+09:00",
+      "image_url": "https://substackcdn.com/image/fetch/$s_!jS5q!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faad09364-980a-40d0-b66a-b262696effbe_2078x1304.png",
+      "official_url": "https://github.com/deepseek-ai/DeepEP",
+      "canonical_key": "https://github.com/deepseek-ai/deepep",
+      "verification": {
+        "article_title_verified": "How an AI Token Travels Through a Data Center",
+        "article_source_verified": "www.datagravity.dev",
+        "article_published_verified": "2026-07-02T04:14:22+09:00",
+        "article_url_verified": "https://www.datagravity.dev/p/how-an-ai-token-travels-through-a",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=31381",
+        "official_url": "https://github.com/deepseek-ai/DeepEP",
+        "project_name": "deepseek-ai/DeepEP",
+        "project_owner": "deepseek-ai",
+        "project_description": "DeepEP: an efficient expert-parallel communication library",
+        "license": "MIT",
+        "updated_at": "2026-07-11T16:14:35Z",
+        "project_kind": "github"
+      }
+    },
+    {
+      "id": "geeknews-35ec77961ea7f10b",
+      "source": "www.thevccorner.com",
+      "topic": "AI 에이전트",
+      "title": "This Is the New SaaS Playbook",
+      "url": "https://www.thevccorner.com/p/the-new-saas-playbook-ai-agent-era",
+      "published_at": "2026-07-02T23:16:11+09:00",
+      "summary": "SaaS just got demoted from the prize to the packaging and the value moved somewhere else entirely.",
+      "listing_url": "https://news.hada.io/topic?id=31387",
+      "introduced_at": "2026-07-13T11:26:01+09:00",
+      "image_url": "https://substackcdn.com/image/fetch/$s_!Djsj!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F52531c0b-7f06-4cba-937c-504ab2c46d72_1600x1050.webp",
       "official_url": "",
-      "canonical_key": "https://www.tryai.dev/blog/gpt-5.6-build-off-12-models",
+      "canonical_key": "https://www.thevccorner.com/p/the-new-saas-playbook-ai-agent-era",
       "verification": {
-        "article_title_verified": "GPT-5.6, Grok 4.5, Claude, and Muse Spark build the same 4 apps",
-        "article_source_verified": "TryAI",
-        "article_published_verified": "2026-07-09T00:00:00+09:00",
-        "article_url_verified": "https://www.tryai.dev/blog/gpt-5.6-build-off-12-models",
-        "geeknews_listing_url": "https://news.hada.io/topic?id=31342"
-      }
-    },
-    {
-      "id": "geeknews-2a825b09b3123e48",
-      "source": "Dan Q",
-      "topic": "GitHub 프로젝트",
-      "title": "Your ‘App’ Could Have Been a Webpage (so I fixed it for you…)",
-      "url": "https://danq.me/2026/07/09/your-app-could-have-been-a-webpage/",
-      "published_at": "2026-07-10T01:55:32+09:00",
-      "summary": "I was asked to install a mobile app to get access to the itinerary of a trip to Disneyland I'm taking with the kids. Fuck that noise: couldn't it have just been a Web page? An hour of reverse-engineering later, it is, and it's superior in virtually every way to the \"app\" that it replaces.",
-      "listing_url": "https://news.hada.io/topic?id=31338",
-      "introduced_at": "2026-07-12T09:01:51+09:00",
-      "image_url": "https://danq.me/_q23-og/29641/0.png",
-      "official_url": "https://github.com/dan-q/",
-      "canonical_key": "https://github.com/dan-q",
-      "verification": {
-        "article_title_verified": "Your ‘App’ Could Have Been a Webpage (so I fixed it for you…)",
-        "article_source_verified": "Dan Q",
-        "article_published_verified": "2026-07-10T01:55:32+09:00",
-        "article_url_verified": "https://danq.me/2026/07/09/your-app-could-have-been-a-webpage/",
-        "geeknews_listing_url": "https://news.hada.io/topic?id=31338",
-        "official_url": "https://github.com/dan-q/"
-      }
-    },
-    {
-      "id": "geeknews-a982d0396a658427",
-      "source": "Ian Reppel",
-      "topic": "GitHub 프로젝트",
-      "title": "How Successful Companies Go Blind",
-      "url": "https://ianreppel.org/how-successful-companies-go-blind/",
-      "published_at": "2026-07-09T00:00:00+09:00",
-      "summary": "The Mexican cavefish kept its eye genes for over a million years after the eyes themselves disappeared. Something similar happens to companies once they achieve success.",
-      "listing_url": "https://news.hada.io/topic?id=31337",
-      "introduced_at": "2026-07-12T08:34:15+09:00",
-      "image_url": "/images/2026-07-09-cavefish.jpeg",
-      "official_url": "https://github.com/ianreppel",
-      "canonical_key": "https://github.com/ianreppel",
-      "verification": {
-        "article_title_verified": "How Successful Companies Go Blind",
-        "article_source_verified": "Ian Reppel",
-        "article_published_verified": "2026-07-09T00:00:00+09:00",
-        "article_url_verified": "https://ianreppel.org/how-successful-companies-go-blind/",
-        "geeknews_listing_url": "https://news.hada.io/topic?id=31337",
-        "official_url": "https://github.com/ianreppel"
+        "article_title_verified": "This Is the New SaaS Playbook",
+        "article_source_verified": "www.thevccorner.com",
+        "article_published_verified": "2026-07-02T23:16:11+09:00",
+        "article_url_verified": "https://www.thevccorner.com/p/the-new-saas-playbook-ai-agent-era",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=31387"
       }
     },
     {
@@ -121,7 +90,7 @@
       "topic": "생성형 AI, AI 에이전트, 개발 도구, GitHub 프로젝트, AI 모델링",
       "title": "affaan-m/ECC",
       "url": "https://github.com/affaan-m/ECC",
-      "published_at": "2026-07-09T16:53:52+09:00",
+      "published_at": "2026-07-13T13:55:50+09:00",
       "summary": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
       "listing_url": "https://github.com/affaan-m/ECC",
       "introduced_at": "",
@@ -134,10 +103,10 @@
         "project_owner": "affaan-m",
         "project_description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
         "license": "MIT",
-        "updated_at": "2026-07-12T22:16:51Z",
+        "updated_at": "2026-07-13T06:58:40Z",
         "community_source": "github",
-        "github_stars": "228929",
-        "github_pushed_at": "2026-07-09T07:53:52Z"
+        "github_stars": "229025",
+        "github_pushed_at": "2026-07-13T04:55:50Z"
       }
     },
     {
@@ -146,7 +115,7 @@
       "topic": "생성형 AI, AI 에이전트, 개발 도구, GitHub 프로젝트, AI 모델링",
       "title": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
-      "published_at": "2026-07-13T03:27:47+09:00",
+      "published_at": "2026-07-13T15:56:09+09:00",
       "summary": "The agent that grows with you",
       "listing_url": "https://github.com/NousResearch/hermes-agent",
       "introduced_at": "",
@@ -159,19 +128,19 @@
         "project_owner": "NousResearch",
         "project_description": "The agent that grows with you",
         "license": "MIT",
-        "updated_at": "2026-07-12T22:17:51Z",
+        "updated_at": "2026-07-13T06:58:11Z",
         "community_source": "github",
-        "github_stars": "213715",
-        "github_pushed_at": "2026-07-12T18:27:47Z"
+        "github_stars": "213900",
+        "github_pushed_at": "2026-07-13T06:56:09Z"
       }
     },
     {
       "id": "github-community-7fc08de27bce1b0c",
       "source": "GitHub 커뮤니티",
-      "topic": "생성형 AI, AI 에이전트, 개발 도구, GitHub 프로젝트, AI 모델링",
+      "topic": "생성형 AI, AI 에이전트, GitHub 프로젝트, AI 모델링",
       "title": "Significant-Gravitas/AutoGPT",
       "url": "https://github.com/Significant-Gravitas/AutoGPT",
-      "published_at": "2026-07-12T05:00:23+09:00",
+      "published_at": "2026-07-13T15:56:10+09:00",
       "summary": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
       "listing_url": "https://github.com/Significant-Gravitas/AutoGPT",
       "introduced_at": "",
@@ -184,10 +153,10 @@
         "project_owner": "Significant-Gravitas",
         "project_description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-12T22:12:44Z",
+        "updated_at": "2026-07-13T06:55:26Z",
         "community_source": "github",
-        "github_stars": "185496",
-        "github_pushed_at": "2026-07-11T20:00:23Z"
+        "github_stars": "185498",
+        "github_pushed_at": "2026-07-13T06:56:10Z"
       }
     },
     {
@@ -209,9 +178,9 @@
         "project_owner": "ollama",
         "project_description": "Get up and running with Kimi-K2.6, GLM-5.1, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
         "license": "MIT",
-        "updated_at": "2026-07-12T22:27:15Z",
+        "updated_at": "2026-07-13T06:15:59Z",
         "community_source": "github",
-        "github_stars": "175996",
+        "github_stars": "176013",
         "github_pushed_at": "2026-07-10T00:42:15Z"
       }
     },
@@ -221,7 +190,7 @@
       "topic": "생성형 AI, 오픈소스, GitHub 프로젝트, AI 모델링",
       "title": "f/prompts.chat",
       "url": "https://github.com/f/prompts.chat",
-      "published_at": "2026-07-12T13:15:09+09:00",
+      "published_at": "2026-07-13T13:17:18+09:00",
       "summary": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
       "listing_url": "https://github.com/f/prompts.chat",
       "introduced_at": "",
@@ -234,10 +203,10 @@
         "project_owner": "f",
         "project_description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-12T22:26:40Z",
+        "updated_at": "2026-07-13T06:58:52Z",
         "community_source": "github",
-        "github_stars": "165562",
-        "github_pushed_at": "2026-07-12T04:15:09Z"
+        "github_stars": "165586",
+        "github_pushed_at": "2026-07-13T04:17:18Z"
       }
     },
     {
@@ -246,7 +215,7 @@
       "topic": "생성형 AI, AI 모델링, GitHub 프로젝트",
       "title": "huggingface/transformers",
       "url": "https://github.com/huggingface/transformers",
-      "published_at": "2026-07-12T09:55:33+09:00",
+      "published_at": "2026-07-13T15:36:25+09:00",
       "summary": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
       "listing_url": "https://github.com/huggingface/transformers",
       "introduced_at": "",
@@ -259,10 +228,10 @@
         "project_owner": "huggingface",
         "project_description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
         "license": "Apache-2.0",
-        "updated_at": "2026-07-12T21:10:05Z",
+        "updated_at": "2026-07-13T06:15:44Z",
         "community_source": "github",
-        "github_stars": "162546",
-        "github_pushed_at": "2026-07-12T00:55:33Z"
+        "github_stars": "162557",
+        "github_pushed_at": "2026-07-13T06:36:25Z"
       }
     },
     {
@@ -284,9 +253,9 @@
         "project_owner": "firecrawl",
         "project_description": "The API to search, scrape, and interact with the web at scale. 🔥",
         "license": "AGPL-3.0",
-        "updated_at": "2026-07-12T22:27:02Z",
+        "updated_at": "2026-07-13T06:59:35Z",
         "community_source": "github",
-        "github_stars": "149865",
+        "github_stars": "150044",
         "github_pushed_at": "2026-07-12T13:18:12Z"
       }
     },
@@ -296,7 +265,7 @@
       "topic": "생성형 AI, AI 에이전트, GitHub 프로젝트, AI 모델링",
       "title": "langgenius/dify",
       "url": "https://github.com/langgenius/dify",
-      "published_at": "2026-07-13T02:19:42+09:00",
+      "published_at": "2026-07-13T15:58:12+09:00",
       "summary": "Production-ready platform for agentic workflow development.",
       "listing_url": "https://github.com/langgenius/dify",
       "introduced_at": "",
@@ -309,10 +278,10 @@
         "project_owner": "langgenius",
         "project_description": "Production-ready platform for agentic workflow development.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-12T22:23:40Z",
+        "updated_at": "2026-07-13T06:58:19Z",
         "community_source": "github",
-        "github_stars": "148607",
-        "github_pushed_at": "2026-07-12T17:19:42Z"
+        "github_stars": "148643",
+        "github_pushed_at": "2026-07-13T06:58:12Z"
       }
     },
     {
@@ -335,7 +304,7 @@
         "license": "",
         "updated_at": "2026-07-06T23:09:24+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "715",
+        "huggingface_likes": "736",
         "huggingface_downloads": "8655",
         "pipeline_tag": "text-generation"
       }
@@ -360,7 +329,7 @@
         "license": "",
         "updated_at": "2026-07-12T09:57:41+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "2043",
+        "huggingface_likes": "2054",
         "huggingface_downloads": "1967677",
         "pipeline_tag": "image-text-to-text"
       }
@@ -385,7 +354,7 @@
         "license": "",
         "updated_at": "2026-07-02T17:08:14+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "3853",
+        "huggingface_likes": "3866",
         "huggingface_downloads": "441413",
         "pipeline_tag": "text-generation"
       }
@@ -410,9 +379,34 @@
         "license": "",
         "updated_at": "2026-07-10T22:15:25+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "260",
+        "huggingface_likes": "271",
         "huggingface_downloads": "4463",
         "pipeline_tag": "image-text-to-text"
+      }
+    },
+    {
+      "id": "huggingface-community-57ecca1a82ddc602",
+      "source": "Hugging Face 커뮤니티",
+      "topic": "오픈소스, Hugging Face, AI 모델링",
+      "title": "conradlocke/krea2-identity-edit",
+      "url": "https://huggingface.co/conradlocke/krea2-identity-edit",
+      "published_at": "2026-07-09T22:51:08+09:00",
+      "summary": "Hugging Face에서 최근 주목받는 AI 모델 저장소입니다.",
+      "listing_url": "https://huggingface.co/conradlocke/krea2-identity-edit",
+      "introduced_at": "",
+      "image_url": "https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/thumbnail.png",
+      "official_url": "https://huggingface.co/conradlocke/krea2-identity-edit",
+      "canonical_key": "https://huggingface.co/conradlocke/krea2-identity-edit",
+      "verification": {
+        "project_kind": "huggingface",
+        "project_name": "conradlocke/krea2-identity-edit",
+        "project_owner": "conradlocke",
+        "license": "",
+        "updated_at": "2026-07-09T22:51:08+09:00",
+        "community_source": "huggingface",
+        "huggingface_likes": "218",
+        "huggingface_downloads": "0",
+        "pipeline_tag": ""
       }
     },
     {
@@ -435,40 +429,15 @@
         "license": "",
         "updated_at": "2026-07-09T10:14:45+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "506",
+        "huggingface_likes": "511",
         "huggingface_downloads": "29038",
         "pipeline_tag": "text-generation"
       }
     },
     {
-      "id": "huggingface-community-57ecca1a82ddc602",
-      "source": "Hugging Face 커뮤니티",
-      "topic": "오픈소스, 개발 도구, Hugging Face, AI 모델링",
-      "title": "conradlocke/krea2-identity-edit",
-      "url": "https://huggingface.co/conradlocke/krea2-identity-edit",
-      "published_at": "2026-07-09T22:51:08+09:00",
-      "summary": "Hugging Face에서 최근 주목받는 AI 모델 저장소입니다.",
-      "listing_url": "https://huggingface.co/conradlocke/krea2-identity-edit",
-      "introduced_at": "",
-      "image_url": "https://huggingface.co/conradlocke/krea2-identity-edit/resolve/main/thumbnail.png",
-      "official_url": "https://huggingface.co/conradlocke/krea2-identity-edit",
-      "canonical_key": "https://huggingface.co/conradlocke/krea2-identity-edit",
-      "verification": {
-        "project_kind": "huggingface",
-        "project_name": "conradlocke/krea2-identity-edit",
-        "project_owner": "conradlocke",
-        "license": "",
-        "updated_at": "2026-07-09T22:51:08+09:00",
-        "community_source": "huggingface",
-        "huggingface_likes": "208",
-        "huggingface_downloads": "0",
-        "pipeline_tag": ""
-      }
-    },
-    {
       "id": "huggingface-community-1dc2322c4361beca",
       "source": "Hugging Face 커뮤니티",
-      "topic": "생성형 AI, 오픈소스, Hugging Face, AI 모델링",
+      "topic": "오픈소스, Hugging Face, AI 모델링",
       "title": "froggeric/Qwen-Fixed-Chat-Templates",
       "url": "https://huggingface.co/froggeric/Qwen-Fixed-Chat-Templates",
       "published_at": "2026-07-03T17:54:29+09:00",
@@ -485,7 +454,7 @@
         "license": "",
         "updated_at": "2026-07-03T17:54:29+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "861",
+        "huggingface_likes": "872",
         "huggingface_downloads": "0",
         "pipeline_tag": ""
       }
@@ -510,7 +479,7 @@
         "license": "",
         "updated_at": "2026-07-03T14:15:09+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "1942",
+        "huggingface_likes": "1951",
         "huggingface_downloads": "1430656",
         "pipeline_tag": "image-text-to-text"
       }
@@ -523,7 +492,7 @@
       "topic": "생성형 AI, 오픈소스, GitHub 프로젝트, AI 모델링",
       "title": "f/prompts.chat",
       "url": "https://github.com/f/prompts.chat",
-      "published_at": "2026-07-12T13:15:09+09:00",
+      "published_at": "2026-07-13T13:17:18+09:00",
       "summary": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
       "listing_url": "https://github.com/f/prompts.chat",
       "introduced_at": "",
@@ -536,64 +505,93 @@
         "project_owner": "f",
         "project_description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-12T22:26:40Z",
+        "updated_at": "2026-07-13T06:58:52Z",
         "community_source": "github",
-        "github_stars": "165562",
-        "github_pushed_at": "2026-07-12T04:15:09Z"
+        "github_stars": "165586",
+        "github_pushed_at": "2026-07-13T04:17:18Z"
       }
     },
     {
-      "id": "github-community-97dcab4759c83fdb",
-      "source": "GitHub 커뮤니티",
-      "topic": "생성형 AI, AI 에이전트, GitHub 프로젝트, AI 모델링",
-      "title": "langgenius/dify",
-      "url": "https://github.com/langgenius/dify",
-      "published_at": "2026-07-13T02:19:42+09:00",
-      "summary": "Production-ready platform for agentic workflow development.",
-      "listing_url": "https://github.com/langgenius/dify",
-      "introduced_at": "",
-      "image_url": "https://opengraph.githubassets.com/1/langgenius/dify",
-      "official_url": "https://github.com/langgenius/dify",
-      "canonical_key": "https://github.com/langgenius/dify",
+      "id": "geeknews-68551dc8cb2a5ed6",
+      "source": "GitHub",
+      "topic": "생성형 AI, AI 에이전트, 개발 도구",
+      "title": "GitHub - kenn-io/agentsview: Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents.",
+      "url": "https://github.com/kenn-io/agentsview",
+      "published_at": "2026-07-13T09:31:01+09:00",
+      "summary": "Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents. - kenn-io/agentsview",
+      "listing_url": "https://news.hada.io/topic?id=31370",
+      "introduced_at": "2026-07-13T09:31:01+09:00",
+      "image_url": "https://opengraph.githubassets.com/c44cd1a6acff4df01ca7e0cc69cf165f7469eed5f5749a098afb5397a9d3da81/kenn-io/agentsview",
+      "official_url": "https://github.com/kenn-io/agentsview",
+      "canonical_key": "https://github.com/kenn-io/agentsview",
       "verification": {
-        "project_kind": "github",
-        "project_name": "langgenius/dify",
-        "project_owner": "langgenius",
-        "project_description": "Production-ready platform for agentic workflow development.",
-        "license": "NOASSERTION",
-        "updated_at": "2026-07-12T22:23:40Z",
-        "community_source": "github",
-        "github_stars": "148607",
-        "github_pushed_at": "2026-07-12T17:19:42Z"
+        "article_title_verified": "GitHub - kenn-io/agentsview: Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents.",
+        "article_source_verified": "GitHub",
+        "article_published_verified": "2026-07-13T09:31:01+09:00",
+        "article_url_verified": "https://github.com/kenn-io/agentsview",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=31370",
+        "official_url": "https://github.com/kenn-io/agentsview",
+        "project_name": "kenn-io/agentsview",
+        "project_owner": "kenn-io",
+        "project_description": "Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents. ",
+        "license": "MIT",
+        "updated_at": "2026-07-13T06:55:36Z",
+        "project_kind": "github"
       }
     },
     {
-      "id": "github-community-e9dbf459bd01dca3",
-      "source": "GitHub 커뮤니티",
-      "topic": "생성형 AI, AI 에이전트, GitHub 프로젝트, AI 모델링",
-      "title": "firecrawl/firecrawl",
-      "url": "https://github.com/firecrawl/firecrawl",
-      "published_at": "2026-07-12T22:18:12+09:00",
-      "summary": "The API to search, scrape, and interact with the web at scale. 🔥",
-      "listing_url": "https://github.com/firecrawl/firecrawl",
-      "introduced_at": "",
-      "image_url": "https://opengraph.githubassets.com/1/firecrawl/firecrawl",
-      "official_url": "https://github.com/firecrawl/firecrawl",
-      "canonical_key": "https://github.com/firecrawl/firecrawl",
+      "id": "geeknews-469ab1ad253f7c9c",
+      "source": "www.datagravity.dev",
+      "topic": "AI 모델링, NPU·GPU·엣지 AI",
+      "title": "How an AI Token Travels Through a Data Center",
+      "url": "https://www.datagravity.dev/p/how-an-ai-token-travels-through-a",
+      "published_at": "2026-07-02T04:14:22+09:00",
+      "summary": "Trace one prompt from gateway to scheduler, KV cache, GPU, and network — every component that powers AI inference.",
+      "listing_url": "https://news.hada.io/topic?id=31381",
+      "introduced_at": "2026-07-13T10:11:02+09:00",
+      "image_url": "https://substackcdn.com/image/fetch/$s_!jS5q!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faad09364-980a-40d0-b66a-b262696effbe_2078x1304.png",
+      "official_url": "https://github.com/deepseek-ai/DeepEP",
+      "canonical_key": "https://github.com/deepseek-ai/deepep",
       "verification": {
-        "project_kind": "github",
-        "project_name": "firecrawl/firecrawl",
-        "project_owner": "firecrawl",
-        "project_description": "The API to search, scrape, and interact with the web at scale. 🔥",
-        "license": "AGPL-3.0",
-        "updated_at": "2026-07-12T22:27:02Z",
-        "community_source": "github",
-        "github_stars": "149865",
-        "github_pushed_at": "2026-07-12T13:18:12Z"
+        "article_title_verified": "How an AI Token Travels Through a Data Center",
+        "article_source_verified": "www.datagravity.dev",
+        "article_published_verified": "2026-07-02T04:14:22+09:00",
+        "article_url_verified": "https://www.datagravity.dev/p/how-an-ai-token-travels-through-a",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=31381",
+        "official_url": "https://github.com/deepseek-ai/DeepEP",
+        "project_name": "deepseek-ai/DeepEP",
+        "project_owner": "deepseek-ai",
+        "project_description": "DeepEP: an efficient expert-parallel communication library",
+        "license": "MIT",
+        "updated_at": "2026-07-11T16:14:35Z",
+        "project_kind": "github"
+      }
+    },
+    {
+      "id": "geeknews-35ec77961ea7f10b",
+      "source": "www.thevccorner.com",
+      "topic": "AI 에이전트",
+      "title": "This Is the New SaaS Playbook",
+      "url": "https://www.thevccorner.com/p/the-new-saas-playbook-ai-agent-era",
+      "published_at": "2026-07-02T23:16:11+09:00",
+      "summary": "SaaS just got demoted from the prize to the packaging and the value moved somewhere else entirely.",
+      "listing_url": "https://news.hada.io/topic?id=31387",
+      "introduced_at": "2026-07-13T11:26:01+09:00",
+      "image_url": "https://substackcdn.com/image/fetch/$s_!Djsj!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F52531c0b-7f06-4cba-937c-504ab2c46d72_1600x1050.webp",
+      "official_url": "",
+      "canonical_key": "https://www.thevccorner.com/p/the-new-saas-playbook-ai-agent-era",
+      "verification": {
+        "article_title_verified": "This Is the New SaaS Playbook",
+        "article_source_verified": "www.thevccorner.com",
+        "article_published_verified": "2026-07-02T23:16:11+09:00",
+        "article_url_verified": "https://www.thevccorner.com/p/the-new-saas-playbook-ai-agent-era",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=31387"
       }
     }
   ],
   "collector_errors": [
-    "수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))"
+    "수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "검증 제외: https://news.hada.io/topic?id=31372 (페이지 확인 실패: https://addyo.substack.com/p/own-the-outer-loop (HTTP Error 403: Forbidden))",
+    "검증 제외: https://news.hada.io/topic?id=31372&go=comments (페이지 확인 실패: https://addyo.substack.com/p/own-the-outer-loop (HTTP Error 403: Forbidden))"
   ]
 }
