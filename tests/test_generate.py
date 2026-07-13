@@ -55,8 +55,12 @@ class GateRepairTest(unittest.TestCase):
         self.assertTrue(any("plain_explanation" in reason for reason in reasons))
         self.assertTrue(any("www.thevccorner.com" in reason for reason in reasons))
 
+    def test_flags_a_short_editor_comment(self):
+        reasons = _gate_repair_reasons({"tags": ["하나", "둘", "셋", "넷", "다섯"], "editor_comment": "짧은 코멘트", "sections": []}, [])
+        self.assertTrue(any("editor_comment" in reason for reason in reasons))
+
     def test_accepts_attribution_written_without_the_www_prefix(self):
-        draft = {"tags": ["하나", "둘", "셋", "넷", "다섯"], "sections": [{
+        draft = {"tags": ["하나", "둘", "셋", "넷", "다섯"], "editor_comment": "이번 주에는 문서를 열어 팀 작업 흐름과 겹치는 지점을 하나만 찾아보시길 권합니다. 비교 과정이 평가 기준을 선명하게 만듭니다.", "sections": [{
             "source_ids": ["a"],
             "what_happened": "thevccorner.com의 분석에 따르면 SaaS의 가치가 업무 완결로 이동하고 있습니다.",
             "plain_explanation": "설" * 90,

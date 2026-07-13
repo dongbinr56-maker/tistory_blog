@@ -91,6 +91,7 @@ class Draft:
     intro: str
     sections: list[ArticleSection]
     closing: str
+    editor_comment: str
     editorial_disclosure: str
     model: str
     article_count_note: str = ""
@@ -108,6 +109,7 @@ class Draft:
             intro=_prose(value.get("intro")),
             sections=[ArticleSection.from_dict(item) for item in value.get("sections", [])],
             closing=_prose(value.get("closing")),
+            editor_comment=_prose(value.get("editor_comment")),
             editorial_disclosure=str(value.get("editorial_disclosure") or ""),
             model=str(value.get("model") or "unknown"),
             article_count_note=str(value.get("article_count_note") or ""),
@@ -125,6 +127,7 @@ class Draft:
             "intro": self.intro,
             "sections": [section.to_dict() for section in self.sections],
             "closing": self.closing,
+            "editor_comment": self.editor_comment,
             "editorial_disclosure": self.editorial_disclosure,
             "model": self.model,
             "article_count_note": self.article_count_note,

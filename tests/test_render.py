@@ -63,12 +63,17 @@ class RenderTest(unittest.TestCase):
         self.assertIn('<article class="tistory-newsroom"', page)
         self.assertIn("</article>", page)
 
-    def test_copy_page_requires_a_manual_editor_note_before_copying(self):
+    def test_copy_page_editor_note_is_an_optional_override(self):
         page = _copy_page([{"date": "2026-07-11", "title": "초안", "title_candidates": [], "tags": [], "quality_status": "OK", "publish_checklist": [], "html_path": "tistory/2026-07-11.html"}])
-        self.assertIn("editor-note", page)
-        self.assertIn("작성자 코멘트", page)
-        self.assertIn("note.length<60", page)
-        self.assertIn("withEditorNote", page)
+        self.assertIn("작성자 코멘트 (선택)", page)
+        self.assertIn("applyEditorNote", page)
+        self.assertNotIn("note.length<60", page)
+
+    def test_article_includes_the_generated_editor_comment(self):
+        draft = generate_demo("2026-07-11", self.sources, self.site)
+        article = render_article_html(draft, self.site)
+        self.assertIn('<section class="editor-note">', article)
+        self.assertIn(draft.editor_comment[:20], article)
 
     def test_copy_page_shows_run_warnings(self):
         page = _copy_page([{"date": "2026-07-11", "title": "초안", "title_candidates": [], "tags": [], "quality_status": "OK", "publish_checklist": [], "warnings": ["수집 경고: 요즘IT 405"], "html_path": "tistory/2026-07-11.html"}])

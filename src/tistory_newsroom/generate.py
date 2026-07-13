@@ -51,6 +51,7 @@ def make_prompt(date: str, sources: list[SourceItem], site: dict[str, Any]) -> s
 - sections는 [입력 출처]의 항목마다 정확히 하나씩, 총 {len(sources)}개를 만듭니다. 어떤 출처도 빠뜨리거나 한 섹션에 합치지 않으며, 각 섹션의 source_ids에는 해당 입력의 id를 넣습니다.
 - 제목 후보 3개는 문장 구조가 서로 다르게 만들되 과장·낚시를 피하고, 오늘 다루는 핵심 모델·프로젝트 이름을 자연스럽게 포함해 그날의 긴장이나 관점을 담습니다(예: "GLM-5.2와 OpenCode로 구축하는 탈클라우드 로컬 개발 환경의 명암"). "[AI 뉴스룸]" 머리말은 시스템이 자동으로 붙이므로 직접 쓰지 말고, 머리말 제외 15~60자로 만듭니다. 태그는 5~8개, # 없이 작성하되 전날과 똑같은 조합이 되지 않게 그날 내용에서 뽑습니다.
 - 전체 본문은 밀도 있게 쓰고, 각 editorial_take은 3문장 이상입니다. 뜬구름 잡는 생산성 조언, 억지로 모든 이슈를 AI 모델과 연결하는 설명, 일반론은 금지합니다.
+- editor_comment는 도입부 아래에 들어가는 작성자 코멘트 한 문단(60~180자)입니다. 오늘 이슈에서 독자가 바로 해볼 만한 제안이나 작성자의 견해를 독자에게 말 걸듯 씁니다(예: "이번 주말에는 ○○로 △△를 직접 꾸려 보시는 건 어떨까요?"). 직접 사용해 봤다는 식의 경험 날조("직접 써봤는데", "제 프로젝트에 적용해 보니")는 절대 하지 않습니다.
 - `editorial_disclosure`는 빈 문자열로 반환합니다. 이 값은 공개 본문에 표시하지 않는 내부 호환 필드입니다. AI 작성·검토 과정에 관한 문구나 변명은 본문, 도입, 마무리에 넣지 않습니다.
 
 블로그: {site['blog_name']}
@@ -74,6 +75,7 @@ def make_prompt(date: str, sources: list[SourceItem], site: dict[str, Any]) -> s
     "reader_action": "독자 행동 제안"
   }}],
   "closing": "마무리",
+  "editor_comment": "독자에게 건네는 작성자 코멘트 한 문단",
   "editorial_disclosure": ""
 }}
 
@@ -90,7 +92,7 @@ def _draft_text(value: dict[str, Any]) -> str:
         if isinstance(section, dict)
         for field in ("headline", "what_happened", "plain_explanation", "why_it_matters", "editorial_take", "reader_action")
     ]
-    return " ".join([str(value.get("intro") or ""), str(value.get("closing") or ""), *section_text])
+    return " ".join([str(value.get("intro") or ""), str(value.get("closing") or ""), str(value.get("editor_comment") or ""), *section_text])
 
 
 def make_rewrite_prompt(date: str, sources: list[SourceItem], draft: dict[str, Any], reasons: list[str]) -> str:
@@ -207,6 +209,11 @@ def _gate_repair_reasons(draft: dict[str, Any], sources: list[SourceItem]) -> li
     tags = [str(tag).strip() for tag in draft.get("tags") or [] if str(tag).strip()]
     if not 5 <= len(set(tag.lower() for tag in tags)) <= 10:
         reasons.append(f"태그가 중복 없이 5~10개여야 하는데 현재 {len(tags)}개입니다.")
+    comment = str(draft.get("editor_comment") or "")
+    if len(comment) < 60:
+        reasons.append(
+            f"editor_comment(작성자 코멘트)가 {len(comment)}자로 짧습니다. 독자에게 제안하거나 견해를 밝히는 한 문단을 60자 이상으로 쓰세요. 경험을 지어내지는 마세요."
+        )
     for number, section in enumerate([item for item in sections if isinstance(item, dict)], start=1):
         for field, minimum in SECTION_MINIMUM_LENGTHS:
             length = len(str(section.get(field) or ""))
@@ -425,6 +432,10 @@ def generate_demo(date: str, sources: list[SourceItem], site: dict[str, Any]) ->
         "closing": (
             "새 프로젝트를 볼 때는 기능 목록보다 기존 흐름에서 무엇이 달라지는지 먼저 따져 보는 편이 낫습니다. "
             "오늘 언급한 항목 가운데 하나를 골라 작은 평가 세트에 적용해 보면, 화제와 적합성 사이의 거리가 금방 드러납니다."
+        ),
+        "editor_comment": (
+            f"이번 주에는 {first}의 문서를 열어 팀의 현재 작업 흐름과 겹치는 지점을 하나만 찾아보시길 권합니다. "
+            "도입 여부보다 그 비교 과정 자체가 평가 기준을 선명하게 만들어 줍니다."
         ),
         "editorial_disclosure": "",
         "model": "local-demo",
