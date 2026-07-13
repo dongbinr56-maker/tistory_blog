@@ -1,7 +1,7 @@
 {
   "date": "2026-07-13",
-  "collected_at": "2026-07-13T08:40:34.923619+00:00",
-  "selection_rule": "최근 24시간 요즘IT·GeekNews 기사와 최근 14일 GitHub/Hugging Face 커뮤니티 활성 프로젝트를 조합해 3건(검증된 기사가 3건 이상인 날은 4건)을 구성하며, 커뮤니티 프로젝트 1건 이상 필수. 이전 날짜에 선택한 원문·공식 프로젝트 URL은 제외",
+  "collected_at": "2026-07-13T09:10:17.341253+00:00",
+  "selection_rule": "최근 24시간 요즘IT·GeekNews·Hacker News 기사와 최근 14일 GitHub/Hugging Face 커뮤니티 활성 프로젝트를 조합해 3건(검증된 기사가 3건 이상인 날은 4건)을 구성하며, 커뮤니티 프로젝트 1건 이상 필수. 이전 날짜에 선택한 원문·공식 프로젝트 URL은 제외",
   "history_exclusion": {
     "past_url_key_count": 8,
     "excluded_candidate_count": 5
@@ -38,7 +38,7 @@
       "summary": "Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents. - kenn-io/agentsview",
       "listing_url": "https://news.hada.io/topic?id=31370",
       "introduced_at": "2026-07-13T09:31:01+09:00",
-      "image_url": "https://opengraph.githubassets.com/9867e3d3067ced868a423ff76d01477a699502c41307c17393cf674a319a4621/kenn-io/agentsview",
+      "image_url": "https://opengraph.githubassets.com/29dcbcc5b5ad240cad8089d9409e6a8c1a84b8c5d334d668f303e13142c261a2/kenn-io/agentsview",
       "official_url": "https://github.com/kenn-io/agentsview",
       "canonical_key": "https://github.com/kenn-io/agentsview",
       "verification": {
@@ -52,29 +52,113 @@
         "project_owner": "kenn-io",
         "project_description": "Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents. ",
         "license": "MIT",
-        "updated_at": "2026-07-13T08:28:01Z",
+        "updated_at": "2026-07-13T09:05:23Z",
         "project_kind": "github"
       }
     },
     {
-      "id": "geeknews-72f28014a0a68514",
-      "source": "www.youtube.com",
-      "topic": "AI 에이전트",
-      "title": "- YouTube",
-      "url": "https://www.youtube.com/watch?v=83fWzQSWB10",
-      "published_at": "2026-07-13T10:02:01+09:00",
-      "summary": "YouTube에서 마음에 드는 동영상과 음악을 감상하고, 직접 만든 콘텐츠를 업로드하여 친구, 가족뿐 아니라 전 세계 사람들과 콘텐츠를 공유할 수 있습니다.",
-      "listing_url": "https://news.hada.io/topic?id=31376",
-      "introduced_at": "2026-07-13T10:02:01+09:00",
-      "image_url": "https://social.news.hada.io/topic/31376",
-      "official_url": "",
-      "canonical_key": "https://www.youtube.com/watch",
+      "id": "hacker-news-2e3f6d613d415836",
+      "source": "Systima",
+      "topic": "생성형 AI, AI 에이전트, 개발 도구",
+      "title": "Claude Code Sends 4.7x More Tokens Than OpenCode Before Reading Your Prompt",
+      "url": "https://systima.ai/blog/claude-code-vs-opencode-token-overhead",
+      "published_at": "2026-07-13T02:36:18.269000+09:00",
+      "summary": "Claude Code vs OpenCode token overhead measured at the API boundary. Out-of-the-box baselines, instruction file weight, MCP schema tax, subagent multipliers, and cache-write behaviour.",
+      "listing_url": "https://news.ycombinator.com/item?id=48883275",
+      "introduced_at": "2026-07-13T03:25:51+09:00",
+      "image_url": "https://systima.ai/images/claude-code-vs-opencode-banner.png",
+      "official_url": "https://github.com/rynfar/meridian",
+      "canonical_key": "https://github.com/rynfar/meridian",
       "verification": {
-        "article_title_verified": "- YouTube",
-        "article_source_verified": "www.youtube.com",
-        "article_published_verified": "2026-07-13T10:02:01+09:00",
-        "article_url_verified": "https://www.youtube.com/watch?v=83fWzQSWB10",
-        "geeknews_listing_url": "https://news.hada.io/topic?id=31376"
+        "article_title_verified": "Claude Code Sends 4.7x More Tokens Than OpenCode Before Reading Your Prompt",
+        "article_source_verified": "Systima",
+        "article_published_verified": "2026-07-13T02:36:18.269000+09:00",
+        "article_url_verified": "https://systima.ai/blog/claude-code-vs-opencode-token-overhead",
+        "geeknews_listing_url": "",
+        "official_url": "https://github.com/rynfar/meridian",
+        "project_name": "rynfar/meridian",
+        "project_owner": "rynfar",
+        "project_description": "Use your Claude Max subscription with OpenCode, Pi, Droid, Aider, Crush, Cline. Proxy that bridges Anthropic's official SDK to enable Claude Max in third-party tools.",
+        "license": "",
+        "updated_at": "2026-07-13T07:56:05Z",
+        "project_kind": "github"
+      }
+    },
+    {
+      "id": "hacker-news-acb3ffccb24e35e7",
+      "source": "What's new",
+      "topic": "AI 에이전트",
+      "title": "Old and new apps, via modern coding agents",
+      "url": "https://terrytao.wordpress.com/2026/07/11/old-and-new-apps-via-modern-coding-agents/",
+      "published_at": "2026-07-12T07:48:30+09:00",
+      "summary": "I have been interested in machine-assisted ways to do and teach mathematics from as far back as 1999, when I started coding several applets in Java 1.0, both for my complex analysis and linear alge…",
+      "listing_url": "https://news.ycombinator.com/item?id=48880170",
+      "introduced_at": "2026-07-12T20:09:42+09:00",
+      "image_url": "https://terrytao.wordpress.com/wp-content/uploads/2026/07/image-2.png",
+      "official_url": "https://github.com/WordPress/WordPress",
+      "canonical_key": "https://github.com/wordpress/wordpress",
+      "verification": {
+        "article_title_verified": "Old and new apps, via modern coding agents",
+        "article_source_verified": "What's new",
+        "article_published_verified": "2026-07-12T07:48:30+09:00",
+        "article_url_verified": "https://terrytao.wordpress.com/2026/07/11/old-and-new-apps-via-modern-coding-agents/",
+        "geeknews_listing_url": "",
+        "official_url": "https://github.com/WordPress/WordPress",
+        "project_name": "WordPress/WordPress",
+        "project_owner": "WordPress",
+        "project_description": "WordPress, Git-ified. This repository is just a mirror of the WordPress subversion repository. Please do not send pull requests. Submit pull requests to https://github.com/WordPress/wordpress-develop and patches to https://core.trac.wordpress.org/ instead.",
+        "license": "NOASSERTION",
+        "updated_at": "2026-07-13T07:34:35Z",
+        "project_kind": "github"
+      }
+    },
+    {
+      "id": "hacker-news-41c61f1cbfb7febb",
+      "source": "the singularity is nearer",
+      "topic": "AI 에이전트, Hugging Face",
+      "title": "I love LLMs, I hate hype",
+      "url": "https://geohot.github.io//blog/jekyll/update/2026/07/12/i-love-llms.html",
+      "published_at": "2026-07-12T16:00:00+09:00",
+      "summary": "I think from this blog you may misunderestimate how absolutely giddy I am about AI. I did hacking from 2007-2014, after that my whole career has been devoted to AI. I love the progress. I’m so excited for the new LLMs, self driving cars, video generation models, and coding agents. I set up a Linux box with opencode on my local GLM-5.2 last week and wow like just saying install tmux with the geohot configuration works; the Year of the Linux Desktop is finally here!",
+      "listing_url": "https://news.ycombinator.com/item?id=48883343",
+      "introduced_at": "2026-07-13T03:31:56+09:00",
+      "image_url": "",
+      "official_url": "https://huggingface.co/zai-org/GLM-5.2",
+      "canonical_key": "https://huggingface.co/zai-org/glm-5.2",
+      "verification": {
+        "article_title_verified": "I love LLMs, I hate hype",
+        "article_source_verified": "the singularity is nearer",
+        "article_published_verified": "2026-07-12T16:00:00+09:00",
+        "article_url_verified": "https://geohot.github.io//blog/jekyll/update/2026/07/12/i-love-llms.html",
+        "geeknews_listing_url": "",
+        "official_url": "https://huggingface.co/zai-org/GLM-5.2",
+        "project_name": "zai-org/GLM-5.2",
+        "project_owner": "zai-org",
+        "project_description": "",
+        "license": "mit",
+        "updated_at": "2026-07-02T08:08:14.000Z",
+        "project_kind": "huggingface"
+      }
+    },
+    {
+      "id": "hacker-news-6340c21e25cd51fb",
+      "source": "Ploy",
+      "topic": "생성형 AI, AI 에이전트",
+      "title": "Migrating a production AI agent to GPT-5.6 | Ploy",
+      "url": "https://ploy.ai/blog/migrating-a-production-ai-agent-to-gpt-5-6",
+      "published_at": "2026-07-09T09:00:00+09:00",
+      "summary": "We hold frontier models to a high bar, and for four months nothing beat Claude Opus. GPT-5.6 did. Here's the migration guide we wish we'd had.",
+      "listing_url": "https://news.ycombinator.com/item?id=48882716",
+      "introduced_at": "2026-07-13T02:13:07+09:00",
+      "image_url": "https://storage.googleapis.com/ployai/d21bf4ad-2458-43ee-9561-54c28ab0e85f/user/fcebce5c-colorful-hero-opus-vs-gpt.png",
+      "official_url": "",
+      "canonical_key": "https://ploy.ai/blog/migrating-a-production-ai-agent-to-gpt-5-6",
+      "verification": {
+        "article_title_verified": "Migrating a production AI agent to GPT-5.6 | Ploy",
+        "article_source_verified": "Ploy",
+        "article_published_verified": "2026-07-09T09:00:00+09:00",
+        "article_url_verified": "https://ploy.ai/blog/migrating-a-production-ai-agent-to-gpt-5-6",
+        "geeknews_listing_url": ""
       }
     },
     {
@@ -96,9 +180,9 @@
         "project_owner": "affaan-m",
         "project_description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
         "license": "MIT",
-        "updated_at": "2026-07-13T08:33:44Z",
+        "updated_at": "2026-07-13T09:09:51Z",
         "community_source": "github",
-        "github_stars": "229060",
+        "github_stars": "229071",
         "github_pushed_at": "2026-07-13T04:55:50Z"
       }
     },
@@ -108,7 +192,7 @@
       "topic": "생성형 AI, AI 에이전트, 개발 도구, GitHub 프로젝트, AI 모델링",
       "title": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
-      "published_at": "2026-07-13T15:56:09+09:00",
+      "published_at": "2026-07-13T18:07:32+09:00",
       "summary": "The agent that grows with you",
       "listing_url": "https://github.com/NousResearch/hermes-agent",
       "introduced_at": "",
@@ -121,10 +205,10 @@
         "project_owner": "NousResearch",
         "project_description": "The agent that grows with you",
         "license": "MIT",
-        "updated_at": "2026-07-13T08:38:16Z",
+        "updated_at": "2026-07-13T09:07:54Z",
         "community_source": "github",
-        "github_stars": "213960",
-        "github_pushed_at": "2026-07-13T06:56:09Z"
+        "github_stars": "213977",
+        "github_pushed_at": "2026-07-13T09:07:32Z"
       }
     },
     {
@@ -133,7 +217,7 @@
       "topic": "생성형 AI, AI 에이전트, GitHub 프로젝트, AI 모델링",
       "title": "Significant-Gravitas/AutoGPT",
       "url": "https://github.com/Significant-Gravitas/AutoGPT",
-      "published_at": "2026-07-13T16:56:05+09:00",
+      "published_at": "2026-07-13T17:46:16+09:00",
       "summary": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
       "listing_url": "https://github.com/Significant-Gravitas/AutoGPT",
       "introduced_at": "",
@@ -146,10 +230,10 @@
         "project_owner": "Significant-Gravitas",
         "project_description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-13T08:33:59Z",
+        "updated_at": "2026-07-13T08:56:01Z",
         "community_source": "github",
-        "github_stars": "185503",
-        "github_pushed_at": "2026-07-13T07:56:05Z"
+        "github_stars": "185504",
+        "github_pushed_at": "2026-07-13T08:46:16Z"
       }
     },
     {
@@ -171,9 +255,9 @@
         "project_owner": "ollama",
         "project_description": "Get up and running with Kimi-K2.6, GLM-5.1, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
         "license": "MIT",
-        "updated_at": "2026-07-13T08:22:23Z",
+        "updated_at": "2026-07-13T08:48:32Z",
         "community_source": "github",
-        "github_stars": "176020",
+        "github_stars": "176022",
         "github_pushed_at": "2026-07-10T00:42:15Z"
       }
     },
@@ -196,9 +280,9 @@
         "project_owner": "f",
         "project_description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-13T08:26:49Z",
+        "updated_at": "2026-07-13T09:07:47Z",
         "community_source": "github",
-        "github_stars": "165591",
+        "github_stars": "165597",
         "github_pushed_at": "2026-07-13T07:50:13Z"
       }
     },
@@ -221,9 +305,9 @@
         "project_owner": "huggingface",
         "project_description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
         "license": "Apache-2.0",
-        "updated_at": "2026-07-13T08:16:15Z",
+        "updated_at": "2026-07-13T09:03:12Z",
         "community_source": "github",
-        "github_stars": "162561",
+        "github_stars": "162562",
         "github_pushed_at": "2026-07-13T08:02:27Z"
       }
     },
@@ -246,9 +330,9 @@
         "project_owner": "firecrawl",
         "project_description": "The API to search, scrape, and interact with the web at scale. 🔥",
         "license": "AGPL-3.0",
-        "updated_at": "2026-07-13T08:39:31Z",
+        "updated_at": "2026-07-13T09:00:43Z",
         "community_source": "github",
-        "github_stars": "150091",
+        "github_stars": "150102",
         "github_pushed_at": "2026-07-13T07:17:30Z"
       }
     },
@@ -258,7 +342,7 @@
       "topic": "생성형 AI, AI 에이전트, GitHub 프로젝트, AI 모델링",
       "title": "langgenius/dify",
       "url": "https://github.com/langgenius/dify",
-      "published_at": "2026-07-13T17:40:32+09:00",
+      "published_at": "2026-07-13T18:03:40+09:00",
       "summary": "Production-ready platform for agentic workflow development.",
       "listing_url": "https://github.com/langgenius/dify",
       "introduced_at": "",
@@ -271,10 +355,10 @@
         "project_owner": "langgenius",
         "project_description": "Production-ready platform for agentic workflow development.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-13T08:32:23Z",
+        "updated_at": "2026-07-13T09:06:11Z",
         "community_source": "github",
-        "github_stars": "148658",
-        "github_pushed_at": "2026-07-13T08:40:32Z"
+        "github_stars": "148660",
+        "github_pushed_at": "2026-07-13T09:03:40Z"
       }
     },
     {
@@ -322,34 +406,9 @@
         "license": "",
         "updated_at": "2026-07-12T09:57:41+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "2055",
+        "huggingface_likes": "2056",
         "huggingface_downloads": "1985221",
         "pipeline_tag": "image-text-to-text"
-      }
-    },
-    {
-      "id": "huggingface-community-9ec90332da9eec1d",
-      "source": "Hugging Face 커뮤니티",
-      "topic": "오픈소스, Hugging Face, AI 모델링",
-      "title": "zai-org/GLM-5.2",
-      "url": "https://huggingface.co/zai-org/GLM-5.2",
-      "published_at": "2026-07-02T17:08:14+09:00",
-      "summary": "Hugging Face에서 최근 주목받는 text-generation 모델 저장소입니다.",
-      "listing_url": "https://huggingface.co/zai-org/GLM-5.2",
-      "introduced_at": "",
-      "image_url": "https://huggingface.co/zai-org/GLM-5.2/resolve/main/thumbnail.png",
-      "official_url": "https://huggingface.co/zai-org/GLM-5.2",
-      "canonical_key": "https://huggingface.co/zai-org/glm-5.2",
-      "verification": {
-        "project_kind": "huggingface",
-        "project_name": "zai-org/GLM-5.2",
-        "project_owner": "zai-org",
-        "license": "",
-        "updated_at": "2026-07-02T17:08:14+09:00",
-        "community_source": "huggingface",
-        "huggingface_likes": "3869",
-        "huggingface_downloads": "464914",
-        "pipeline_tag": "text-generation"
       }
     },
     {
@@ -397,7 +456,7 @@
         "license": "",
         "updated_at": "2026-07-09T22:51:08+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "221",
+        "huggingface_likes": "222",
         "huggingface_downloads": "0",
         "pipeline_tag": ""
       }
@@ -422,7 +481,7 @@
         "license": "",
         "updated_at": "2026-07-09T10:14:45+09:00",
         "community_source": "huggingface",
-        "huggingface_likes": "513",
+        "huggingface_likes": "514",
         "huggingface_downloads": "29801",
         "pipeline_tag": "text-generation"
       }
@@ -498,9 +557,9 @@
         "project_owner": "f",
         "project_description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-13T08:26:49Z",
+        "updated_at": "2026-07-13T09:07:47Z",
         "community_source": "github",
-        "github_stars": "165591",
+        "github_stars": "165597",
         "github_pushed_at": "2026-07-13T07:50:13Z"
       }
     },
@@ -514,7 +573,7 @@
       "summary": "Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents. - kenn-io/agentsview",
       "listing_url": "https://news.hada.io/topic?id=31370",
       "introduced_at": "2026-07-13T09:31:01+09:00",
-      "image_url": "https://opengraph.githubassets.com/9867e3d3067ced868a423ff76d01477a699502c41307c17393cf674a319a4621/kenn-io/agentsview",
+      "image_url": "https://opengraph.githubassets.com/29dcbcc5b5ad240cad8089d9409e6a8c1a84b8c5d334d668f303e13142c261a2/kenn-io/agentsview",
       "official_url": "https://github.com/kenn-io/agentsview",
       "canonical_key": "https://github.com/kenn-io/agentsview",
       "verification": {
@@ -528,55 +587,71 @@
         "project_owner": "kenn-io",
         "project_description": "Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents. ",
         "license": "MIT",
-        "updated_at": "2026-07-13T08:28:01Z",
+        "updated_at": "2026-07-13T09:05:23Z",
         "project_kind": "github"
       }
     },
     {
-      "id": "geeknews-72f28014a0a68514",
-      "source": "www.youtube.com",
-      "topic": "AI 에이전트",
-      "title": "- YouTube",
-      "url": "https://www.youtube.com/watch?v=83fWzQSWB10",
-      "published_at": "2026-07-13T10:02:01+09:00",
-      "summary": "YouTube에서 마음에 드는 동영상과 음악을 감상하고, 직접 만든 콘텐츠를 업로드하여 친구, 가족뿐 아니라 전 세계 사람들과 콘텐츠를 공유할 수 있습니다.",
-      "listing_url": "https://news.hada.io/topic?id=31376",
-      "introduced_at": "2026-07-13T10:02:01+09:00",
-      "image_url": "https://social.news.hada.io/topic/31376",
-      "official_url": "",
-      "canonical_key": "https://www.youtube.com/watch",
+      "id": "hacker-news-2e3f6d613d415836",
+      "source": "Systima",
+      "topic": "생성형 AI, AI 에이전트, 개발 도구",
+      "title": "Claude Code Sends 4.7x More Tokens Than OpenCode Before Reading Your Prompt",
+      "url": "https://systima.ai/blog/claude-code-vs-opencode-token-overhead",
+      "published_at": "2026-07-13T02:36:18.269000+09:00",
+      "summary": "Claude Code vs OpenCode token overhead measured at the API boundary. Out-of-the-box baselines, instruction file weight, MCP schema tax, subagent multipliers, and cache-write behaviour.",
+      "listing_url": "https://news.ycombinator.com/item?id=48883275",
+      "introduced_at": "2026-07-13T03:25:51+09:00",
+      "image_url": "https://systima.ai/images/claude-code-vs-opencode-banner.png",
+      "official_url": "https://github.com/rynfar/meridian",
+      "canonical_key": "https://github.com/rynfar/meridian",
       "verification": {
-        "article_title_verified": "- YouTube",
-        "article_source_verified": "www.youtube.com",
-        "article_published_verified": "2026-07-13T10:02:01+09:00",
-        "article_url_verified": "https://www.youtube.com/watch?v=83fWzQSWB10",
-        "geeknews_listing_url": "https://news.hada.io/topic?id=31376"
+        "article_title_verified": "Claude Code Sends 4.7x More Tokens Than OpenCode Before Reading Your Prompt",
+        "article_source_verified": "Systima",
+        "article_published_verified": "2026-07-13T02:36:18.269000+09:00",
+        "article_url_verified": "https://systima.ai/blog/claude-code-vs-opencode-token-overhead",
+        "geeknews_listing_url": "",
+        "official_url": "https://github.com/rynfar/meridian",
+        "project_name": "rynfar/meridian",
+        "project_owner": "rynfar",
+        "project_description": "Use your Claude Max subscription with OpenCode, Pi, Droid, Aider, Crush, Cline. Proxy that bridges Anthropic's official SDK to enable Claude Max in third-party tools.",
+        "license": "",
+        "updated_at": "2026-07-13T07:56:05Z",
+        "project_kind": "github"
       }
     },
     {
-      "id": "geeknews-35ec77961ea7f10b",
-      "source": "www.thevccorner.com",
-      "topic": "AI 에이전트",
-      "title": "This Is the New SaaS Playbook",
-      "url": "https://www.thevccorner.com/p/the-new-saas-playbook-ai-agent-era",
-      "published_at": "2026-07-02T23:16:11+09:00",
-      "summary": "SaaS just got demoted from the prize to the packaging and the value moved somewhere else entirely.",
-      "listing_url": "https://news.hada.io/topic?id=31387",
-      "introduced_at": "2026-07-13T11:26:01+09:00",
-      "image_url": "https://substackcdn.com/image/fetch/$s_!Djsj!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F52531c0b-7f06-4cba-937c-504ab2c46d72_1600x1050.webp",
-      "official_url": "",
-      "canonical_key": "https://www.thevccorner.com/p/the-new-saas-playbook-ai-agent-era",
+      "id": "hacker-news-41c61f1cbfb7febb",
+      "source": "the singularity is nearer",
+      "topic": "AI 에이전트, Hugging Face",
+      "title": "I love LLMs, I hate hype",
+      "url": "https://geohot.github.io//blog/jekyll/update/2026/07/12/i-love-llms.html",
+      "published_at": "2026-07-12T16:00:00+09:00",
+      "summary": "I think from this blog you may misunderestimate how absolutely giddy I am about AI. I did hacking from 2007-2014, after that my whole career has been devoted to AI. I love the progress. I’m so excited for the new LLMs, self driving cars, video generation models, and coding agents. I set up a Linux box with opencode on my local GLM-5.2 last week and wow like just saying install tmux with the geohot configuration works; the Year of the Linux Desktop is finally here!",
+      "listing_url": "https://news.ycombinator.com/item?id=48883343",
+      "introduced_at": "2026-07-13T03:31:56+09:00",
+      "image_url": "",
+      "official_url": "https://huggingface.co/zai-org/GLM-5.2",
+      "canonical_key": "https://huggingface.co/zai-org/glm-5.2",
       "verification": {
-        "article_title_verified": "This Is the New SaaS Playbook",
-        "article_source_verified": "www.thevccorner.com",
-        "article_published_verified": "2026-07-02T23:16:11+09:00",
-        "article_url_verified": "https://www.thevccorner.com/p/the-new-saas-playbook-ai-agent-era",
-        "geeknews_listing_url": "https://news.hada.io/topic?id=31387"
+        "article_title_verified": "I love LLMs, I hate hype",
+        "article_source_verified": "the singularity is nearer",
+        "article_published_verified": "2026-07-12T16:00:00+09:00",
+        "article_url_verified": "https://geohot.github.io//blog/jekyll/update/2026/07/12/i-love-llms.html",
+        "geeknews_listing_url": "",
+        "official_url": "https://huggingface.co/zai-org/GLM-5.2",
+        "project_name": "zai-org/GLM-5.2",
+        "project_owner": "zai-org",
+        "project_description": "",
+        "license": "mit",
+        "updated_at": "2026-07-02T08:08:14.000Z",
+        "project_kind": "huggingface"
       }
     }
   ],
   "collector_errors": [
+    "수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
     "검증 제외: https://news.hada.io/topic?id=31372 (페이지 확인 실패: https://addyo.substack.com/p/own-the-outer-loop (HTTP Error 403: Forbidden))",
-    "검증 제외: https://news.hada.io/topic?id=31372&go=comments (페이지 확인 실패: https://addyo.substack.com/p/own-the-outer-loop (HTTP Error 403: Forbidden))"
+    "검증 제외: https://news.hada.io/topic?id=31372&go=comments (페이지 확인 실패: https://addyo.substack.com/p/own-the-outer-loop (HTTP Error 403: Forbidden))",
+    "검증 제외: https://news.ycombinator.com/item?id=48881874 (페이지 확인 실패: https://www.economist.com/leaders/2026/07/09/a-no-brainer-for-protecting-your-brain (HTTP Error 403: Forbidden))"
   ]
 }

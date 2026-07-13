@@ -1,64 +1,78 @@
 {
   "date": "2026-07-13",
-  "title": "f/prompts.chat과 kenn-io/agentsview로 설계하는 에이전트 시대의 통제권",
+  "title": "에이전트 비용 폭탄과 보안 우려 속에서 찾는 로컬·경량화 대안",
   "title_candidates": [
-    "f/prompts.chat과 kenn-io/agentsview로 설계하는 에이전트 시대의 통제권",
-    "프롬프트 격리와 로컬 모니터링으로 대비하는 결과 중심 SaaS의 시대",
-    "에이전트가 가져올 소프트웨어 패러다임 변화와 실무적 관리 방안",
-    "[AI 뉴스룸] | prompts.chat, agentsview, YouTube"
+    "에이전트 비용 폭탄과 보안 우려 속에서 찾는 로컬·경량화 대안",
+    "Claude Code의 숨겨진 토큰 비용과 GLM-5.2 로컬 에이전트의 실용성 분석",
+    "프롬프트 자체 호스팅부터 에이전트 토큰 추적까지, 비용 효율적인 AI 개발 환경 구축하기",
+    "[AI 뉴스룸] | prompts.chat, agentsview, meridian"
   ],
   "tags": [
+    "코딩에이전트",
+    "토큰최적화",
+    "로컬LLM",
     "프롬프트엔지니어링",
-    "AI에이전트",
-    "SaaS비즈니스",
-    "오픈소스",
-    "agentsview",
-    "prompts.chat"
+    "오픈소스AI",
+    "GLM모델",
+    "개발도구"
   ],
-  "meta_description": "f/prompts.chat을 통한 프롬프트 자산화, kenn-io/agentsview를 활용한 코딩 에이전트 로컬 모니터링, 그리고 AI 에이전트 시대의 새로운 SaaS 비즈니스 모델 변화를 심층 분석하여 실무적인 도입 전략을 제시합니다.",
-  "intro": "개발 조직이 인공지능을 실무에 도입할 때 직면하는 가장 큰 고민은 통제권의 상실과 비용의 불확실성입니다. f/prompts.chat처럼 프롬프트를 사내 자산으로 격리하여 관리하려는 시도나, kenn-io/agentsview를 통해 로컬 환경에서 코딩 에이전트의 동작을 추적하려는 흐름은 모두 이러한 불확실성을 통제하려는 실무적 요구에서 출발합니다. 이는 단순한 도구의 변화를 넘어, 소프트웨어가 제공하는 가치의 중심이 도구 자체에서 실행 결과물로 이동한다는 This Is the New SaaS Playbook의 관찰과도 궤를 같이합니다. 사용자가 직접 조작하던 소프트웨어에서 에이전트가 결과를 배달하는 구조로 전환되는 지금, 기업은 새로운 관리 방식과 비즈니스 모델을 정립해야 하는 기로에 서 있습니다.",
+  "meta_description": "Claude Code의 토큰 오버헤드 분석부터 GLM-5.2 로컬 에이전트 활용법, agentsview를 통한 세션 추적, f/prompts.chat 자체 호스팅까지 비용 효율적인 AI 개발 환경 구축 전략을 살펴봅니다.",
+  "intro": "코딩 에이전트의 편리함 뒤에 숨은 막대한 API 비용과 프라이버시 침해 우려는 개발 환경의 통제권을 어디까지 유지해야 하는가에 대한 질문을 던집니다. 외부 서버로 나가는 토큰 소모를 감시하는 kenn-io/agentsview 같은 도구를 도입하거나, 보안을 위해 f/prompts.chat을 사내에 직접 구축하려는 움직임은 이러한 현실적 타협의 결과물입니다. 성능과 비용, 그리고 데이터 주권 사이에서 최적의 균형점을 찾으려는 시도들을 짚어봅니다.",
   "sections": [
     {
-      "headline": "프롬프트 자산의 안전한 사내 자산화, f/prompts.chat 오픈소스 프로젝트",
+      "headline": "프라이버시 확보를 위한 프롬프트 관리 플랫폼 f/prompts.chat의 자체 호스팅 전환",
       "source_ids": [
         "github-community-1643157b768c76e7"
       ],
-      "what_happened": "오픈소스 프롬프트 공유 플랫폼 f/prompts.chat(구 Awesome ChatGPT Prompts)이 커뮤니티 중심의 프롬프트 공유를 넘어, 기업이 완전한 프라이버시를 유지하며 자체 호스팅할 수 있는 기능을 제공합니다.",
-      "plain_explanation": "인공지능에게 원하는 결과물을 얻기 위해 입력하는 지시어인 프롬프트를 조직 내부에서 안전하게 관리하고 공유할 수 있게 돕는 도구입니다. 외부 클라우드에 데이터를 올리지 않고 기업 자체 서버에 설치하여 직원들끼리만 프롬프트를 공유하는 환경을 구축할 수 있습니다.",
-      "why_it_matters": "개별 작업자의 임시 메모장이나 개인 저장소에 흩어져 있던 프롬프트 작성 노하우를 기업의 공식 자산으로 축적할 수 있습니다. 외부 유출 걱정 없이 사내 보안 가이드라인을 준수하며 협업할 수 있는 기반이 마련됩니다.",
+      "what_happened": "GitHub 커뮤니티에 따르면, 기존 Awesome ChatGPT Prompts에서 이름을 변경한 f/prompts.chat 프로젝트는 사용자가 프롬프트를 수집하고 공유할 수 있는 오픈소스 플랫폼을 제공하며, 조직 내부의 완전한 보안 유지를 위해 자체 호스팅 기능을 지원합니다.",
+      "plain_explanation": "효과적인 AI 지시문들을 한데 모아 관리하는 오픈소스 도구입니다. 외부 클라우드 서비스를 거치지 않고 기업 내부 서버에 직접 설치하여 구동할 수 있으므로, 민감한 비즈니스 로직이나 내부 자산이 외부로 유출될 우려를 방지합니다.",
+      "why_it_matters": "프롬프트가 단순한 팁을 넘어 기업의 지적 자산으로 취급되면서, 외부 유출 없이 안전하게 통제할 수 있는 독립적인 관리 인프라의 필요성이 커졌기 때문입니다.",
       "technical_details": "",
-      "editorial_take": "단순히 프롬프트를 모아두는 저장소를 구축하는 것만으로는 실질적인 자산화가 어렵습니다. 거대 언어 모델의 자체 업데이트에 따라 기존 프롬프트의 작동 결과가 수시로 달라지기 때문에, 등록된 프롬프트의 유효성을 주기적으로 평가하고 버전을 관리하는 운영 프로세스가 반드시 결합되어야 합니다. 또한, 장기적으로는 단순 텍스트 복사 단계를 넘어 프롬프트 템플릿을 API 형태로 호출해 사내 시스템과 동적으로 연동할 수 있는 확장성까지 고려해야 도구 도입의 장기적인 효용을 얻게 됩니다.",
-      "reader_action": "현재 팀원들이 각자 자주 사용하는 프롬프트를 어떤 방식으로 기록하고 공유하는지 파악하고, 이를 중앙에서 안전하게 관리할 때 필요한 최소한의 보안 요구사항을 정리해 봅니다.",
+      "editorial_take": "자체 호스팅은 보안 규정이 까다로운 환경에서 확실한 대안이 되지만, 단순한 정적 저장소 역할에 그치면 실무 적용률이 떨어지기 쉽습니다. 실제 개발 파이프라인에서 프롬프트의 버전 관리나 변경 이력이 유기적으로 연동되지 않으면 관리 비용만 늘어나는 결과를 초래하므로, 도입 전에 CI/CD 도구와의 연동 규격을 미리 설계해 두는 편이 안전합니다.",
+      "reader_action": "사내 인프라에 직접 배포하여 외부 프롬프트 관리 툴을 대체할 수 있을지 기술적 타당성을 검토하는 과정을 추천합니다.",
       "verification_notes": ""
     },
     {
-      "headline": "코딩 에이전트의 동작과 비용을 로컬에서 추적하는 kenn-io/agentsview",
+      "headline": "로컬 우선 에이전트 분석 도구 kenn-io/agentsview의 등장",
       "source_ids": [
         "geeknews-68551dc8cb2a5ed6"
       ],
-      "what_happened": "GitHub 출처에 따르면, Claude Code와 Codex를 포함한 20개 이상의 코딩 에이전트를 대상으로 세션 검색, 분석, 실행 로그 추적 및 토큰 사용량 통계를 제공하는 로컬 퍼스트 모니터링 도구 kenn-io/agentsview가 공개되었습니다.",
-      "plain_explanation": "개발을 보조하는 인공지능 에이전트가 컴퓨터 내부에서 어떤 코드를 수정하고 얼마나 많은 데이터를 소모했는지 실시간으로 감시하는 도구입니다. 모든 작업 기록과 토큰 사용 통계를 외부 서버로 전송하지 않고 개발자의 개인 컴퓨터 안에서 안전하게 처리하고 시각화합니다.",
-      "why_it_matters": "에이전트가 자율적으로 코드를 작성하는 과정에서 무한 루프에 빠지거나 불필요한 API 호출로 과도한 비용을 발생시키는 문제를 방지합니다. 소스 코드와 세션 데이터가 외부로 유출되지 않아 기업의 보안 규정을 위반하지 않고도 에이전트의 동작을 통제하는 데 유리합니다.",
+      "what_happened": "GitHub에 공개된 kenn-io/agentsview는 Claude Code와 Codex를 비롯한 20개 이상의 코딩 에이전트를 지원하며, 로컬 우선 방식으로 세션 검색, 분석, 토큰 사용량 통계를 제공합니다.",
+      "plain_explanation": "개발용 AI 에이전트가 백그라운드에서 어떤 명령을 수행하고 토큰을 얼마나 소비하는지 실시간으로 추적하는 분석 도구입니다. 모든 데이터 처리가 개발자의 로컬 컴퓨터 내에서 이루어지므로, 작업 로그나 소스 코드가 외부 분석 서버로 전송되지 않습니다.",
+      "why_it_matters": "에이전트의 무한 루프 호출이나 불필요한 컨텍스트 전송으로 인한 API 비용 폭탄을 방지하기 위해, 로컬 단에서 실시간 감시 체계를 구축할 수 있습니다.",
       "technical_details": "",
-      "editorial_take": "에이전트의 자율성이 높아질수록 개발자가 그 내부 동작 과정을 파악하기 힘든 블랙박스 문제가 심화됩니다. 이 도구는 로컬 환경에서 실행 로그를 직접 파싱하여 시각화함으로써 개발자에게 제어권을 돌려준다는 점에서 실용적입니다. 다만 다양한 에이전트의 서로 다른 로그 포맷을 얼마나 왜곡 없이 일관되게 분석해 주는지 개별적인 검증이 필요합니다. 더불어 개별 개발자 단위를 넘어 팀 전체의 에이전트 사용 현황과 누적 비용을 통합 관리할 수 있는 거버넌스 체계로의 확장 방안도 장기적으로 고민해야 합니다.",
-      "reader_action": "현재 도입을 검토 중이거나 사용하고 있는 코딩 에이전트가 한 번의 명령 수행 과정에서 평균적으로 소모하는 토큰 양과 비용을 추적할 수 있는 모니터링 장치가 마련되어 있는지 점검해 봅니다.",
+      "editorial_take": "로컬 우선 방식은 프라이버시 확보에 유리하지만, 다양한 에이전트 도구들의 빈번한 업데이트에 맞춰 파싱 규칙을 지속적으로 유지보수해야 하는 부담이 따릅니다. 분석 도구 자체의 리소스 점유율이 개발 장비의 성능에 미치는 영향도 간과할 수 없으므로, 대규모 코드베이스에 전면 도입하기 전에 리소스 경량화 수준을 먼저 측정하는 과정이 필요합니다.",
+      "reader_action": "로컬 개발 환경에 설치하여 현재 구동 중인 코딩 에이전트가 실제로 소모하는 토큰 추이를 직접 모니터링하기 바랍니다.",
       "verification_notes": ""
     },
     {
-      "headline": "소프트웨어 패키징에서 가치 창출 중심으로 전환되는 AI 에이전트 시대의 SaaS",
+      "headline": "Claude Code의 초기 토큰 오버헤드와 OpenCode의 효율성 비교",
       "source_ids": [
-        "geeknews-35ec77961ea7f10b"
+        "hacker-news-2e3f6d613d415836"
       ],
-      "what_happened": "www.thevccorner.com에 따르면, AI 에이전트의 등장으로 인해 기존 SaaS 비즈니스의 가치가 단순한 소프트웨어 기능 제공에서 실제 비즈니스 결과물을 직접 생성하는 영역으로 이동하고 있습니다. 이에 따라 소프트웨어 인터페이스 자체는 가치를 담는 껍데기로 격하되고, 에이전트가 완료한 작업의 결과물이 핵심 상품이 되는 구조적 변화가 일어납니다.",
-      "plain_explanation": "기존에는 매달 구독료를 내고 소프트웨어 화면을 직접 조작해 일했다면, 앞으로는 인공지능이 업무 결과를 알아서 완성해 주는 방식으로 바뀝니다. 사용자는 복잡한 프로그램 사용법을 배우는 대신, 인공지능이 최종적으로 도출해 낸 업무 결과물의 가치에 대해서만 비용을 지불하게 됩니다.",
-      "why_it_matters": "사용자 수 기준의 전통적인 구독 모델이 에이전트의 작업 성공률과 성과 기반 과금 모델로 재편됩니다. 소프트웨어 개발사들은 화면의 편의성을 개선하는 것보다 에이전트가 수행하는 작업의 정확도와 신뢰성을 높이는 데 개발 역량을 집중하는 구조로 재편됩니다.",
+      "what_happened": "Systima에 따르면, API 경계에서 측정했을 때 Claude Code는 사용자가 실제 프롬프트를 입력하기도 전에 OpenCode보다 4.7배 더 많은 토큰을 전송하는 오버헤드가 발생하는 것으로 나타났으며, rynfar/meridian은 서드파티 도구에서 Claude Max 구독을 연동할 수 있도록 돕는 프록시 프로젝트입니다.",
+      "plain_explanation": "AI 개발 비서인 클로드 코드가 작동할 때, 본격적인 명령을 내리기 전 단계에서 기본적으로 전송하는 배경 데이터의 양이 오픈코드에 비해 네 배 이상 많다는 분석입니다. 이는 에이전트 구동을 위한 초기 설정과 시스템 프롬프트의 비중이 매우 크다는 점을 보여줍니다.",
+      "why_it_matters": "상용 에이전트가 제공하는 편의성의 이면에 숨겨진 비용 구조를 정량적으로 밝혀냄으로써, 대규모 프로젝트에서 상시 가동할 때 누적될 재정적 부담을 경고하는 지표가 됩니다.",
       "technical_details": "",
-      "editorial_take": "결과 중심의 과금 모델은 고객에게 확실한 효용을 제공하지만, 에이전트가 잘못된 판단을 내리거나 예외 상황에서 작업을 실패했을 때의 책임 소재와 비용 정산 기준을 마련하기가 매우 까다롭습니다. 따라서 에이전트 기반의 서비스를 기획하거나 도입할 때는 완전 자동화에 의존하기보다 인간의 검토와 승인 단계를 워크플로우 내에 어떻게 유기적으로 배치할지 설계해야 합니다. 아울러 기존의 구독 모델을 성급하게 폐기하기보다는, 인프라 유지 비용을 보전하는 기본료와 에이전트 성과 수수료를 결합한 하이브리드 요금제를 대안으로 검토하는 편이 비즈니스 안정성 측면에서 현실적입니다.",
-      "reader_action": "현재 사내에서 구독 중인 소프트웨어 가운데, 사람이 직접 화면을 조작하지 않고 에이전트의 자동화 결과물로 완전히 대체할 수 있는 업무 영역이 있는지 분류하고 그에 따른 비용 절감 효과를 가늠해 봅니다.",
+      "editorial_take": "클로드 코드의 높은 초기 토큰 소모는 도구 통합이나 캐싱 제어 등 고도화된 기능을 안정적으로 수행하기 위한 트레이드오프입니다. 그러나 예산이 한정된 환경에서는 이러한 숨은 비용이 진입 장벽이 되므로, rynfar/meridian 같은 프록시를 활용해 경량화된 오픈소스 에이전트 환경과 상용 모델을 조합하는 대안적 파이프라인을 구축하는 것도 현실적인 돌파구입니다.",
+      "reader_action": "사용 중인 에이전트의 첫 API 호출 로그를 열어 시스템 프롬프트가 차지하는 토큰 비율을 직접 계산해 볼 것을 권합니다.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "로컬 GLM-5.2 모델과 OpenCode를 활용한 오프라인 시스템 제어 실증",
+      "source_ids": [
+        "hacker-news-41c61f1cbfb7febb"
+      ],
+      "what_happened": "the singularity is nearer 블로그에 따르면, 개발자 geohot은 로컬 환경에 구축한 zai-org/GLM-5.2 모델과 OpenCode를 연동하여 리눅스 시스템 상에서 tmux 설정을 자동으로 완료하는 등 로컬 에이전트의 실용성을 확인했습니다.",
+      "plain_explanation": "인터넷 연결 없이 개인 컴퓨터 내부에서만 작동하는 인공지능 모델인 GLM-5.2를 개발 도구와 결합하여 복잡한 운영체제 설정 작업을 수행하는 데 성공한 사례입니다. 외부 서버에 의존하지 않고도 개발자가 원하는 복잡한 시스템 명령어를 로컬 환경에서 안전하게 실행할 수 있음을 보여줍니다.",
+      "why_it_matters": "민감한 소스 코드나 시스템 제어 권한을 외부 클라우드 서버로 전송하지 않고도, 로컬 인프라만으로 고성능 에이전트 환경을 구축할 수 있다는 가능성을 입증한 지점입니다.",
+      "technical_details": "",
+      "editorial_take": "로컬 모델과 에이전트의 조합은 보안성과 비용 절감 측면에서 이상적인 지향점이지만, 이를 매끄럽게 구동하려면 고성능 GPU 등 하드웨어 자원이 전제되어야 합니다. 또한 상용 클라우드 모델에 비해 복잡한 예외 상황에서의 추론 능력이 부족할 수 있으므로, 초기에는 시스템 설정이나 정형화된 반복 코딩 작업 등 범위를 좁혀 적용하는 접근이 현실적입니다.",
+      "reader_action": "오픈소스 모델인 GLM-5.2를 로컬 환경에 구성하고 간단한 터미널 자동화 작업을 수행하여 구동 속도와 정확도를 측정해 보십시오.",
       "verification_notes": ""
     }
   ],
-  "closing": "프롬프트를 사내 자산으로 격리하여 보안을 강화하는 일과 에이전트의 실행 로그를 로컬에서 투명하게 추적하는 일은 결국 기술의 통제권을 확보하려는 시도입니다. 소프트웨어 비즈니스의 중심이 도구 사용에서 결과물 획득으로 이동하는 흐름 속에서, 무작정 자동화 범위를 넓히는 것보다 시스템의 신뢰성과 비용 효율성을 검증할 수 있는 장치를 마련하는 일이 선행되어야 합니다.",
+  "closing": "에이전트 기술이 고도화될수록 엔지니어들의 관심은 단순한 기능 구현에서 운영 효율성과 비용 통제라는 현실적인 영역으로 이동하기 마련입니다. 화려한 데모 뒤에 숨겨진 토큰 오버헤드를 추적하고, 프라이빗한 프롬프트 관리 체계를 세우며, 로컬 환경에서 오픈소스 모델을 직접 구동해 보는 시도들은 모두 이러한 흐름을 대변합니다. 기술의 외형적인 편리함에 매몰되지 않고 실제 인프라 비용과 보안 요구사항을 냉정하게 따져보는 엔지니어링적 접근이 필요한 시점입니다.",
   "editorial_disclosure": "",
   "model": "gemini-3.5-flash",
   "article_count_note": "",
@@ -83,9 +97,9 @@
         "project_owner": "f",
         "project_description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-13T08:26:49Z",
+        "updated_at": "2026-07-13T09:07:47Z",
         "community_source": "github",
-        "github_stars": "165591",
+        "github_stars": "165597",
         "github_pushed_at": "2026-07-13T07:50:13Z"
       }
     },
@@ -99,7 +113,7 @@
       "summary": "Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents. - kenn-io/agentsview",
       "listing_url": "https://news.hada.io/topic?id=31370",
       "introduced_at": "2026-07-13T09:31:01+09:00",
-      "image_url": "https://opengraph.githubassets.com/9867e3d3067ced868a423ff76d01477a699502c41307c17393cf674a319a4621/kenn-io/agentsview",
+      "image_url": "https://opengraph.githubassets.com/29dcbcc5b5ad240cad8089d9409e6a8c1a84b8c5d334d668f303e13142c261a2/kenn-io/agentsview",
       "official_url": "https://github.com/kenn-io/agentsview",
       "canonical_key": "https://github.com/kenn-io/agentsview",
       "verification": {
@@ -113,50 +127,64 @@
         "project_owner": "kenn-io",
         "project_description": "Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents. ",
         "license": "MIT",
-        "updated_at": "2026-07-13T08:28:01Z",
+        "updated_at": "2026-07-13T09:05:23Z",
         "project_kind": "github"
       }
     },
     {
-      "id": "geeknews-72f28014a0a68514",
-      "source": "www.youtube.com",
-      "topic": "AI 에이전트",
-      "title": "- YouTube",
-      "url": "https://www.youtube.com/watch?v=83fWzQSWB10",
-      "published_at": "2026-07-13T10:02:01+09:00",
-      "summary": "YouTube에서 마음에 드는 동영상과 음악을 감상하고, 직접 만든 콘텐츠를 업로드하여 친구, 가족뿐 아니라 전 세계 사람들과 콘텐츠를 공유할 수 있습니다.",
-      "listing_url": "https://news.hada.io/topic?id=31376",
-      "introduced_at": "2026-07-13T10:02:01+09:00",
-      "image_url": "https://social.news.hada.io/topic/31376",
-      "official_url": "",
-      "canonical_key": "https://www.youtube.com/watch",
+      "id": "hacker-news-2e3f6d613d415836",
+      "source": "Systima",
+      "topic": "생성형 AI, AI 에이전트, 개발 도구",
+      "title": "Claude Code Sends 4.7x More Tokens Than OpenCode Before Reading Your Prompt",
+      "url": "https://systima.ai/blog/claude-code-vs-opencode-token-overhead",
+      "published_at": "2026-07-13T02:36:18.269000+09:00",
+      "summary": "Claude Code vs OpenCode token overhead measured at the API boundary. Out-of-the-box baselines, instruction file weight, MCP schema tax, subagent multipliers, and cache-write behaviour.",
+      "listing_url": "https://news.ycombinator.com/item?id=48883275",
+      "introduced_at": "2026-07-13T03:25:51+09:00",
+      "image_url": "https://systima.ai/images/claude-code-vs-opencode-banner.png",
+      "official_url": "https://github.com/rynfar/meridian",
+      "canonical_key": "https://github.com/rynfar/meridian",
       "verification": {
-        "article_title_verified": "- YouTube",
-        "article_source_verified": "www.youtube.com",
-        "article_published_verified": "2026-07-13T10:02:01+09:00",
-        "article_url_verified": "https://www.youtube.com/watch?v=83fWzQSWB10",
-        "geeknews_listing_url": "https://news.hada.io/topic?id=31376"
+        "article_title_verified": "Claude Code Sends 4.7x More Tokens Than OpenCode Before Reading Your Prompt",
+        "article_source_verified": "Systima",
+        "article_published_verified": "2026-07-13T02:36:18.269000+09:00",
+        "article_url_verified": "https://systima.ai/blog/claude-code-vs-opencode-token-overhead",
+        "geeknews_listing_url": "",
+        "official_url": "https://github.com/rynfar/meridian",
+        "project_name": "rynfar/meridian",
+        "project_owner": "rynfar",
+        "project_description": "Use your Claude Max subscription with OpenCode, Pi, Droid, Aider, Crush, Cline. Proxy that bridges Anthropic's official SDK to enable Claude Max in third-party tools.",
+        "license": "",
+        "updated_at": "2026-07-13T07:56:05Z",
+        "project_kind": "github"
       }
     },
     {
-      "id": "geeknews-35ec77961ea7f10b",
-      "source": "www.thevccorner.com",
-      "topic": "AI 에이전트",
-      "title": "This Is the New SaaS Playbook",
-      "url": "https://www.thevccorner.com/p/the-new-saas-playbook-ai-agent-era",
-      "published_at": "2026-07-02T23:16:11+09:00",
-      "summary": "SaaS just got demoted from the prize to the packaging and the value moved somewhere else entirely.",
-      "listing_url": "https://news.hada.io/topic?id=31387",
-      "introduced_at": "2026-07-13T11:26:01+09:00",
-      "image_url": "https://substackcdn.com/image/fetch/$s_!Djsj!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F52531c0b-7f06-4cba-937c-504ab2c46d72_1600x1050.webp",
-      "official_url": "",
-      "canonical_key": "https://www.thevccorner.com/p/the-new-saas-playbook-ai-agent-era",
+      "id": "hacker-news-41c61f1cbfb7febb",
+      "source": "the singularity is nearer",
+      "topic": "AI 에이전트, Hugging Face",
+      "title": "I love LLMs, I hate hype",
+      "url": "https://geohot.github.io//blog/jekyll/update/2026/07/12/i-love-llms.html",
+      "published_at": "2026-07-12T16:00:00+09:00",
+      "summary": "I think from this blog you may misunderestimate how absolutely giddy I am about AI. I did hacking from 2007-2014, after that my whole career has been devoted to AI. I love the progress. I’m so excited for the new LLMs, self driving cars, video generation models, and coding agents. I set up a Linux box with opencode on my local GLM-5.2 last week and wow like just saying install tmux with the geohot configuration works; the Year of the Linux Desktop is finally here!",
+      "listing_url": "https://news.ycombinator.com/item?id=48883343",
+      "introduced_at": "2026-07-13T03:31:56+09:00",
+      "image_url": "",
+      "official_url": "https://huggingface.co/zai-org/GLM-5.2",
+      "canonical_key": "https://huggingface.co/zai-org/glm-5.2",
       "verification": {
-        "article_title_verified": "This Is the New SaaS Playbook",
-        "article_source_verified": "www.thevccorner.com",
-        "article_published_verified": "2026-07-02T23:16:11+09:00",
-        "article_url_verified": "https://www.thevccorner.com/p/the-new-saas-playbook-ai-agent-era",
-        "geeknews_listing_url": "https://news.hada.io/topic?id=31387"
+        "article_title_verified": "I love LLMs, I hate hype",
+        "article_source_verified": "the singularity is nearer",
+        "article_published_verified": "2026-07-12T16:00:00+09:00",
+        "article_url_verified": "https://geohot.github.io//blog/jekyll/update/2026/07/12/i-love-llms.html",
+        "geeknews_listing_url": "",
+        "official_url": "https://huggingface.co/zai-org/GLM-5.2",
+        "project_name": "zai-org/GLM-5.2",
+        "project_owner": "zai-org",
+        "project_description": "",
+        "license": "mit",
+        "updated_at": "2026-07-02T08:08:14.000Z",
+        "project_kind": "huggingface"
       }
     }
   ]

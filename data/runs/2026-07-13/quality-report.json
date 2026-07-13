@@ -1,18 +1,20 @@
 {
   "status": "BLOCKED",
   "errors": [
-    "각 이슈는 출처 ID와 1:1로 추적 가능해야 하며, 선택된 모든 출처를 다뤄야 합니다."
+    "상투적인 AI 요약 표현을 걷어내고, 출처에 근거한 구체적인 편집 문장으로 다시 작성해야 합니다: '~을 보여줍니다' 식 결론 표현이 2회 나타납니다(허용 1회). 관찰한 사실과 조건, 트레이드오프를 담은 문장으로 바꾸세요."
   ],
   "warnings": [
+    "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
     "수집 경고: 검증 제외: https://news.hada.io/topic?id=31372 (페이지 확인 실패: https://addyo.substack.com/p/own-the-outer-loop (HTTP Error 403: Forbidden))",
-    "수집 경고: 검증 제외: https://news.hada.io/topic?id=31372&go=comments (페이지 확인 실패: https://addyo.substack.com/p/own-the-outer-loop (HTTP Error 403: Forbidden))"
+    "수집 경고: 검증 제외: https://news.hada.io/topic?id=31372&go=comments (페이지 확인 실패: https://addyo.substack.com/p/own-the-outer-loop (HTTP Error 403: Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=48881874 (페이지 확인 실패: https://www.economist.com/leaders/2026/07/09/a-no-brainer-for-protecting-your-brain (HTTP Error 403: Forbidden))"
   ],
   "checks": {
     "three_distinct_title_candidates": true,
     "reasonable_title_length": true,
     "tag_count_and_uniqueness": true,
     "sufficient_sources": true,
-    "all_sections_trace_to_source": false,
+    "all_sections_trace_to_source": true,
     "secondary_source_attribution": true,
     "plain_language_and_engineering_value": true,
     "original_value_added": true,
@@ -23,7 +25,7 @@
     "no_click_inducement": true,
     "no_empty_technical_inventory": true,
     "no_volatile_community_metrics": true,
-    "natural_editorial_voice": true,
+    "natural_editorial_voice": false,
     "specific_intro": true,
     "no_restricted_topic_signal": true,
     "contact_configured": true,
