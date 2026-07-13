@@ -198,7 +198,8 @@ class PipelineStateTest(unittest.TestCase):
             self.assertTrue((root / f"docs/tistory/assets/{day}/hero.png").is_file())
             self.assertFalse((root / f"docs/tistory/assets/{day}/thumbnail.png").exists())
             article_html = (root / f"docs/tistory/{day}.html").read_text(encoding="utf-8")
-            self.assertIn("hero.png", article_html)
+            # 대표 이미지는 티스토리 썸네일 전용이라 본문에는 들어가지 않는다.
+            self.assertNotIn("hero.png", article_html)
             self.assertNotIn("thumbnail.png", article_html)
 
     def test_pruning_removes_old_detail_artifacts_but_not_the_history_index(self):

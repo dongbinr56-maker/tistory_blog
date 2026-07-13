@@ -60,9 +60,9 @@ def render_article_html(draft: Draft, site: dict[str, Any]) -> str:
     # No fixed sub-headings and no issue numbering on purpose: identical
     # scaffolding on every post is what makes an archive read as machine
     # output. The section fields flow as ordinary prose paragraphs.
+    # The hero card is registered as Tistory's own 대표 이미지(썸네일) and is
+    # deliberately absent from the body, so the post never shows it twice.
     sources = {source.id: source for source in draft.source_items}
-    hero = draft.images.get("hero", {})
-    hero_image = f'<img class="hero-image" src="{esc(hero.get("url"))}" alt="{esc(draft.title)} 대표 이미지">' if hero.get("url") else ""
     sections: list[str] = []
     for section in draft.sections:
         source_image = next((draft.images.get(source_id, {}) for source_id in section.source_ids if draft.images.get(source_id, {}).get("url")), {})
@@ -91,8 +91,7 @@ def render_article_html(draft: Draft, site: dict[str, Any]) -> str:
   <style>
     .tistory-newsroom {{max-width:760px;margin:0 auto;color:#1f2937;font-family:Apple SD Gothic Neo,Malgun Gothic,sans-serif;line-height:1.85}}
     .tistory-newsroom .hero {{padding:30px 26px;border:1px solid #dbe4ee;border-radius:18px;background:#f8fafc}}
-    .tistory-newsroom .hero-image,.tistory-newsroom .issue-image {{display:block;width:100%;margin:0 0 20px;border-radius:14px;object-fit:cover;background:#e2e8f0}}
-    .tistory-newsroom .hero-image {{max-height:380px}} .tistory-newsroom .issue-image {{max-height:330px}}
+    .tistory-newsroom .issue-image {{display:block;width:100%;max-height:330px;margin:0 0 20px;border-radius:14px;object-fit:cover;background:#e2e8f0}}
     .tistory-newsroom h1 {{margin:0 0 16px;color:#111827;font-size:30px;line-height:1.38}}
     .tistory-newsroom h2 {{color:#111827;font-size:23px;line-height:1.45}}
     .tistory-newsroom p {{margin:0 0 14px}}
@@ -105,7 +104,6 @@ def render_article_html(draft: Draft, site: dict[str, Any]) -> str:
     .tistory-newsroom a {{color:#0f766e}}
   </style>
   <header class="hero">
-    {hero_image}
     <p class="eyebrow">{esc(draft.date)} · {esc(site.get('default_category', 'IT·개발'))}</p>
     <h1>{esc(draft.title)}</h1>
     {paragraphs(draft.intro)}
@@ -211,7 +209,7 @@ function renderDetail(raw){
   const d={title:escapeHtml(raw.title),date:escapeHtml(raw.date),tags:values(raw.tags).map(escapeHtml),candidates:values(raw.title_candidates).map(escapeHtml),quality:escapeHtml(raw.quality_status),checks:values(raw.publish_checklist).map(escapeHtml)};
   const warningItems=values(raw.warnings).map(escapeHtml);
   const warningsBlock=warningItems.length?`<div class="field warnings"><b>실행 경고</b><ul>${warningItems.map(item=>`<li>${item}</li>`).join('')}</ul></div>`:'';
-  const heroDownload=raw.images?.hero?.url?`<div class="field"><b>본문 대표 이미지</b><p>본문 맨 위에 들어가는 제목 텍스트 포함 PNG 원본입니다.</p><button class="copy" id="download-hero" type="button">본문 대표 이미지 다운로드</button></div>`:'';
+  const heroDownload=raw.images?.hero?.url?`<div class="field"><b>대표 이미지 (티스토리 썸네일)</b><p>본문에는 들어가지 않습니다. 다운로드한 뒤 티스토리 글쓰기의 대표 이미지로 등록하세요.</p><button class="copy" id="download-hero" type="button">대표 이미지 다운로드</button></div>`:'';
   const factReview=values(raw.fact_review).map(item=>{const facts=values(item.verified_facts).map(fact=>`<li><b>${escapeHtml(fact.label)}</b> ${escapeHtml(fact.value)}</li>`).join('');const links=[item.source_url?`<a href="${escapeHtml(item.source_url)}" target="_blank" rel="noopener noreferrer">원문</a>`:'',item.official_url?`<a href="${escapeHtml(item.official_url)}" target="_blank" rel="noopener noreferrer">공식 페이지</a>`:''].filter(Boolean).join(' · ');return `<details class="fact-review"><summary>${escapeHtml(item.source)} · ${escapeHtml(item.title)}</summary><p>${escapeHtml(item.manual_review_note)}</p><p>${escapeHtml(item.summary)}</p>${facts?`<ul>${facts}</ul>`:''}<p>${links}</p></details>`;}).join('')||'<p>검토할 사실 근거가 없습니다.</p>';
   const regeneration=automationReady?`<div class="field regenerate"><b>원문 재생성</b><p>같은 날짜의 초안을 새로 작성합니다. 품질 검토를 통과한 경우에만 기존 본문을 덮어씁니다.</p><button class="copy" type="button" id="open-regeneration">원문 재생성</button><div class="regenerate-panel" id="regeneration-panel" hidden><label for="github-token">GitHub fine-grained PAT (Actions 쓰기 권한)</label><input id="github-token" type="password" autocomplete="off" placeholder="github_pat_..." aria-describedby="token-note"><p id="token-note">토큰은 GitHub API로만 전송되며 브라우저 저장소에 보관하지 않습니다.</p><button class="copy" type="button" id="confirm-regeneration">재생성 실행</button><a class="workflow-link" id="workflow-link" href="${escapeHtml(workflowUrl())}" target="_blank" rel="noopener" hidden>Actions 실행 보기</a><span class="regenerate-status" id="regeneration-status"></span></div></div>`:`<div class="field regenerate"><b>원문 재생성</b><p>GitHub 저장소 설정이 없어 재생성 기능을 사용할 수 없습니다.</p><button class="copy" type="button" disabled>원문 재생성</button></div>`;
   detail.innerHTML=`<h2>${d.title}</h2>${warningsBlock}<div class="field"><b>제목 후보</b>${d.candidates.map(item=>`• ${item}`).join('<br>')}<br><button class="copy" id="copy-title" type="button">제목 복사</button></div><div class="field"><b>태그</b>${d.tags.join(', ')}<br><button class="copy" id="copy-tags" type="button">태그 복사</button></div>${heroDownload}<div class="field"><b>품질 상태</b>${d.quality} · 사람 검토 필수</div><div class="field"><b>사실·수치 검토</b><p>본문에 넣지 않은 변동 수치와 출처 근거입니다. 발행 전에 원문·공식 페이지를 직접 대조하세요.</p>${factReview}</div>${regeneration}<div class="field"><b>발행 전 확인</b><ul>${d.checks.map(item=>`<li>${item}</li>`).join('')}</ul></div><div class="field"><b>작성자 코멘트 (복사 전 필수)</b><p>발행 전 자신의 경험이나 판단 한 문단(60자 이상)을 직접 쓰세요. 복사할 때 본문 도입부 바로 아래에 삽입됩니다.</p><textarea id="editor-note" placeholder="예: 셋 중 하나는 이번 주에 직접 붙여 봤는데, 문서와 달리 …"></textarea></div><div class="tabs" role="tablist" aria-label="본문 표시 방식"><button class="tab" role="tab" aria-selected="true" aria-controls="html-pane" id="html-tab" data-tab="html">HTML</button><button class="tab" role="tab" aria-selected="false" aria-controls="view-pane" id="view-tab" data-tab="view" tabindex="-1">View</button></div><section class="tab-pane" id="html-pane" data-pane="html" role="tabpanel" aria-labelledby="html-tab"><div class="pane-head"><p>아래 소스를 티스토리 글쓰기의 HTML 모드에 바로 붙여넣으세요.</p><button class="copy" id="copy-html" type="button">본문 HTML 복사</button></div><textarea id="html-code" aria-label="티스토리 본문 HTML" readonly>불러오는 중...</textarea></section><section class="tab-pane" id="view-pane" data-pane="view" role="tabpanel" aria-labelledby="view-tab" hidden><div class="pane-head"><p>HTML 탭의 동일한 원본을 렌더링한 미리보기입니다.</p></div><iframe id="article-view" title="${d.date} 블로그 본문 미리보기" referrerpolicy="no-referrer"></iframe></section><p class="status" id="status"></p>`;

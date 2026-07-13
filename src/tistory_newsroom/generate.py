@@ -49,7 +49,7 @@ def make_prompt(date: str, sources: list[SourceItem], site: dict[str, Any]) -> s
 - 출처에 없는 숫자, 인용, 사건, 제품 기능을 지어내지 않습니다. 불확실하면 단정하지 않습니다.
 - 선정적 제목, 광고 클릭 유도, 의료·법률·투자 조언, 타사 비방을 쓰지 않습니다.
 - sections는 [입력 출처]의 항목마다 정확히 하나씩, 총 {len(sources)}개를 만듭니다. 어떤 출처도 빠뜨리거나 한 섹션에 합치지 않으며, 각 섹션의 source_ids에는 해당 입력의 id를 넣습니다.
-- 제목 후보 3개는 문장 구조가 서로 다르게 만들되 과장·낚시를 피하고, 오늘 다루는 핵심 모델·프로젝트 이름을 자연스럽게 포함합니다. "[AI 뉴스룸]" 같은 고정 머리말·대괄호 접두사·날짜는 붙이지 않습니다. 태그는 5~8개, # 없이 작성하되 전날과 똑같은 조합이 되지 않게 그날 내용에서 뽑습니다.
+- 제목 후보 3개는 문장 구조가 서로 다르게 만들되 과장·낚시를 피하고, 오늘 다루는 핵심 모델·프로젝트 이름을 자연스럽게 포함해 그날의 긴장이나 관점을 담습니다(예: "GLM-5.2와 OpenCode로 구축하는 탈클라우드 로컬 개발 환경의 명암"). "[AI 뉴스룸]" 머리말은 시스템이 자동으로 붙이므로 직접 쓰지 말고, 머리말 제외 15~60자로 만듭니다. 태그는 5~8개, # 없이 작성하되 전날과 똑같은 조합이 되지 않게 그날 내용에서 뽑습니다.
 - 전체 본문은 밀도 있게 쓰고, 각 editorial_take은 3문장 이상입니다. 뜬구름 잡는 생산성 조언, 억지로 모든 이슈를 AI 모델과 연결하는 설명, 일반론은 금지합니다.
 - `editorial_disclosure`는 빈 문자열로 반환합니다. 이 값은 공개 본문에 표시하지 않는 내부 호환 필드입니다. AI 작성·검토 과정에 관한 문구나 변명은 본문, 도입, 마무리에 넣지 않습니다.
 
@@ -298,28 +298,34 @@ def newsroom_title_candidates(sources: list[SourceItem]) -> list[str]:
     ]
 
 
-def merge_title_candidates(raw_draft: dict[str, Any], sources: list[SourceItem]) -> list[str]:
-    """Prefer the model's daily titles; the fixed newsroom format is only a fallback.
+NEWSROOM_TITLE_PREFIX = "[AI 뉴스룸] "
 
-    Publishing every post as "[AI 뉴스룸] | A, B, C" made the archive read as
-    machine output, and the permuted candidates defeated the distinct-titles
-    gate. The reviewer still gets one fixed-format option to choose from.
+
+def merge_title_candidates(raw_draft: dict[str, Any], sources: list[SourceItem]) -> list[str]:
+    """Brand the model's editorial titles with the newsroom prefix.
+
+    Requested format: "[AI 뉴스룸] <그날 내용을 요약한 편집형 제목>". The
+    comma-list variants remain only as a deterministic filler when the model
+    returns fewer than three usable titles.
     """
     merged: list[str] = []
     seen: set[str] = set()
 
     def push(candidate: str) -> None:
-        value = candidate.strip()
-        if value and 15 <= len(value) <= 75 and value.casefold() not in seen:
-            seen.add(value.casefold())
-            merged.append(value)
+        value = re.sub(r"^\[AI 뉴스룸\]\s*\|?\s*", "", candidate.strip())
+        if not value:
+            return
+        branded = f"{NEWSROOM_TITLE_PREFIX}{value}"
+        key = branded.casefold()
+        if 15 <= len(branded) <= 75 and key not in seen:
+            seen.add(key)
+            merged.append(branded)
 
     for candidate in [str(raw_draft.get("title") or ""), *(str(value) for value in raw_draft.get("title_candidates") or [])]:
+        if len(merged) >= 3:
+            break
         push(candidate)
-    del merged[3:]
-    fallbacks = newsroom_title_candidates(sources)
-    push(fallbacks[0])
-    for fallback in fallbacks[1:]:
+    for fallback in newsroom_title_candidates(sources):
         if len(merged) >= 3:
             break
         push(fallback)
@@ -395,11 +401,14 @@ def generate_demo(date: str, sources: list[SourceItem], site: dict[str, Any]) ->
     aliases = project_aliases(sources)
     first = aliases[0] if aliases else "오늘의 프로젝트"
     second = aliases[1] if len(aliases) > 1 else "함께 살펴본 프로젝트"
-    titles = [
-        f"{first}부터 {second}까지, 오늘 확인한 개발 흐름",
-        f"{first}와 {second}, 도입 전에 따져 볼 조건들",
-        f"{first} 중심으로 본 오늘의 AI 프로젝트 점검",
-    ]
+    titles = merge_title_candidates({
+        "title": f"{first}부터 {second}까지, 오늘 확인한 개발 흐름",
+        "title_candidates": [
+            f"{first}부터 {second}까지, 오늘 확인한 개발 흐름",
+            f"{first}와 {second}, 도입 전에 따져 볼 조건들",
+            f"{first} 중심으로 본 오늘의 AI 프로젝트 점검",
+        ],
+    }, sources)
     lead_projects = ", ".join(aliases[:2])
     raw = {
         "date": date,

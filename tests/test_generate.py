@@ -151,7 +151,7 @@ class GeneratePromptTest(unittest.TestCase):
         self.assertTrue(all(candidate.startswith("[AI 뉴스룸] | ") for candidate in candidates))
         self.assertIn("first-project", candidates[0])
 
-    def test_merged_titles_prefer_the_model_and_keep_one_fixed_format_fallback(self):
+    def test_merged_titles_brand_the_editorial_titles_with_the_prefix(self):
         merged = merge_title_candidates({
             "title": "first-project가 바꾸는 에이전트 평가 흐름",
             "title_candidates": [
@@ -161,17 +161,19 @@ class GeneratePromptTest(unittest.TestCase):
             ],
         }, self._sources())
 
-        self.assertEqual(merged[0], "first-project가 바꾸는 에이전트 평가 흐름")
-        self.assertEqual(len(merged), 4)
-        self.assertEqual(sum(candidate.startswith("[AI 뉴스룸] | ") for candidate in merged), 1)
+        self.assertEqual(merged[0], "[AI 뉴스룸] first-project가 바꾸는 에이전트 평가 흐름")
+        self.assertEqual(len(merged), 3)
+        self.assertTrue(all(candidate.startswith("[AI 뉴스룸] ") for candidate in merged))
+        self.assertFalse(any("[AI 뉴스룸] | " in candidate for candidate in merged))
         self.assertTrue(all(15 <= len(candidate) <= 75 for candidate in merged))
 
     def test_merged_titles_skip_invalid_model_output_and_fill_from_the_fallback(self):
         merged = merge_title_candidates({
             "title": "AI 에이전트 성능과 복잡한 운영 환경, 배포 보안, 규제 이슈, 서비스 안정성, 모델 활용 전략까지 모두 한 번에 설명하는 지나치게 긴 제목입니다",
-            "title_candidates": ["짧은 제목", "ECC와 HimitsuShell: AI 배포에서 먼저 볼 두 가지"],
+            "title_candidates": ["짧다", "ECC와 HimitsuShell: AI 배포에서 먼저 볼 두 가지"],
         }, self._sources())
 
-        self.assertEqual(merged[0], "ECC와 HimitsuShell: AI 배포에서 먼저 볼 두 가지")
-        self.assertGreaterEqual(len(merged), 3)
+        self.assertEqual(merged[0], "[AI 뉴스룸] ECC와 HimitsuShell: AI 배포에서 먼저 볼 두 가지")
+        self.assertEqual(len(merged), 3)
+        self.assertTrue(all(candidate.startswith("[AI 뉴스룸] ") for candidate in merged))
         self.assertEqual(len({candidate.casefold() for candidate in merged}), len(merged))

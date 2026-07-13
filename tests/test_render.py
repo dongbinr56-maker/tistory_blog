@@ -44,7 +44,7 @@ class RenderTest(unittest.TestCase):
     def test_article_has_no_fixed_section_scaffolding(self):
         draft = generate_demo("2026-07-11", self.sources, self.site)
         article = render_article_html(draft, self.site)
-        for label in ("이번 변화의 요점", "쉽게 풀어 보면", "실무에서 달라지는 점", "먼저 볼 지점", "확인해 볼 것", "ISSUE 0", "<h3>", "마무리</h2>"):
+        for label in ("이번 변화의 요점", "쉽게 풀어 보면", "실무에서 달라지는 점", "먼저 볼 지점", "확인해 볼 것", "ISSUE 0", "<h3>", "마무리</h2>", 'class="hero-image"'):
             self.assertNotIn(label, article)
         self.assertIn('class="action"', article)
         self.assertIn('class="sources"', article)
@@ -148,13 +148,14 @@ class RenderTest(unittest.TestCase):
             self.assertIn("사실·수치 검토", page)
             self.assertIn("fact_review", page)
 
-    def test_copy_page_offers_the_body_hero_image_download(self):
+    def test_copy_page_offers_the_hero_thumbnail_download(self):
         page = _copy_page([{
             "date": "2026-07-11", "title": "초안", "title_candidates": [], "tags": [], "quality_status": "OK",
             "publish_checklist": [], "html_path": "tistory/2026-07-11.html",
             "images": {"hero": {"url": "tistory/assets/2026-07-11/hero.png"}},
         }])
-        self.assertIn("본문 대표 이미지 다운로드", page)
+        self.assertIn("대표 이미지 다운로드", page)
+        self.assertIn("본문에는 들어가지 않습니다", page)
         self.assertIn("downloadHero", page)
         self.assertIn("tistory-대표이미지-", page)
         self.assertNotIn("const thumbnail=current?.images?.thumbnail", page)
