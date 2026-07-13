@@ -22,8 +22,28 @@ class GateRepairTest(unittest.TestCase):
             )
         ]
 
+    def test_flags_a_source_no_section_covers(self):
+        sources = self._secondary_source() + [
+            SourceItem(
+                id="b", source="GitHub 커뮤니티", topic="AI 에이전트", title="owner/tool",
+                url="https://github.com/owner/tool", published_at="", summary="에이전트 도구",
+                official_url="https://github.com/owner/tool",
+            )
+        ]
+        draft = {"tags": ["하나", "둘", "셋", "넷", "다섯"], "sections": [{
+            "source_ids": ["a"],
+            "what_happened": "thevccorner.com의 분석에 따르면 SaaS의 가치가 이동하고 있습니다.",
+            "plain_explanation": "설" * 90,
+            "why_it_matters": "영" * 60,
+            "editorial_take": "판" * 130,
+            "reader_action": "행" * 45,
+        }]}
+        reasons = _gate_repair_reasons(draft, sources)
+        self.assertTrue(any("owner/tool" in reason for reason in reasons))
+        self.assertTrue(any("연결되지 않았습니다" in reason for reason in reasons))
+
     def test_flags_short_fields_and_missing_attribution(self):
-        draft = {"sections": [{
+        draft = {"tags": ["하나", "둘", "셋", "넷", "다섯"], "sections": [{
             "source_ids": ["a"],
             "what_happened": "귀속 없이 쓴 사실 요약입니다.",
             "plain_explanation": "짧은 설명",
@@ -36,7 +56,7 @@ class GateRepairTest(unittest.TestCase):
         self.assertTrue(any("www.thevccorner.com" in reason for reason in reasons))
 
     def test_accepts_attribution_written_without_the_www_prefix(self):
-        draft = {"sections": [{
+        draft = {"tags": ["하나", "둘", "셋", "넷", "다섯"], "sections": [{
             "source_ids": ["a"],
             "what_happened": "thevccorner.com의 분석에 따르면 SaaS의 가치가 업무 완결로 이동하고 있습니다.",
             "plain_explanation": "설" * 90,

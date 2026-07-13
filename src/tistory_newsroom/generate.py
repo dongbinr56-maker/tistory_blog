@@ -48,7 +48,7 @@ def make_prompt(date: str, sources: list[SourceItem], site: dict[str, Any]) -> s
 - 표, JSON, 사전, 체크리스트 형태로 "모델: 해당 없음" 같은 빈 항목을 나열하지 않습니다. 모델과 직접 관련 없는 도구라면 그 도구가 해결하는 개발 문제와 사용 흐름만 설명합니다.
 - 출처에 없는 숫자, 인용, 사건, 제품 기능을 지어내지 않습니다. 불확실하면 단정하지 않습니다.
 - 선정적 제목, 광고 클릭 유도, 의료·법률·투자 조언, 타사 비방을 쓰지 않습니다.
-- 모든 섹션의 source_ids에는 아래 입력의 id를 하나 이상 넣습니다.
+- sections는 [입력 출처]의 항목마다 정확히 하나씩, 총 {len(sources)}개를 만듭니다. 어떤 출처도 빠뜨리거나 한 섹션에 합치지 않으며, 각 섹션의 source_ids에는 해당 입력의 id를 넣습니다.
 - 제목 후보 3개는 문장 구조가 서로 다르게 만들되 과장·낚시를 피하고, 오늘 다루는 핵심 모델·프로젝트 이름을 자연스럽게 포함합니다. "[AI 뉴스룸]" 같은 고정 머리말·대괄호 접두사·날짜는 붙이지 않습니다. 태그는 5~8개, # 없이 작성하되 전날과 똑같은 조합이 되지 않게 그날 내용에서 뽑습니다.
 - 전체 본문은 밀도 있게 쓰고, 각 editorial_take은 3문장 이상입니다. 뜬구름 잡는 생산성 조언, 억지로 모든 이슈를 AI 모델과 연결하는 설명, 일반론은 금지합니다.
 - `editorial_disclosure`는 빈 문자열로 반환합니다. 이 값은 공개 본문에 표시하지 않는 내부 호환 필드입니다. AI 작성·검토 과정에 관한 문구나 변명은 본문, 도입, 마무리에 넣지 않습니다.
@@ -109,7 +109,7 @@ def make_rewrite_prompt(date: str, sources: list[SourceItem], draft: dict[str, A
 - why_it_matters와 editorial_take가 같은 내용을 반복하면 안 됩니다. 마크다운 문법(백틱 등)은 쓰지 않습니다.
 - 필드 최소 분량(공백 포함)을 지킵니다: plain_explanation 90자, why_it_matters 60자, editorial_take 130자, reader_action 45자. 공식 페이지가 없는 2차 출처 이슈는 what_happened 첫 문장에 입력의 source 값을 표기 그대로 넣어 귀속을 유지합니다.
 - `editorial_disclosure`는 빈 문자열로 둡니다. 공개 글 안에 작성 방식이나 검토 과정에 관한 언급을 넣지 않습니다.
-- JSON 구조와 모든 section의 source_ids는 유지합니다. 다른 문장 없이 JSON 하나만 반환합니다.
+- JSON 구조를 유지하고, [확인된 출처]의 모든 항목이 정확히 한 섹션씩 다뤄지게 합니다. 누락된 출처가 있으면 그 출처를 다루는 섹션을 새로 추가하고, 기존 섹션의 source_ids는 유지합니다. 다른 문장 없이 JSON 하나만 반환합니다.
 
 날짜: {date}
 
@@ -193,6 +193,20 @@ def _gate_repair_reasons(draft: dict[str, Any], sources: list[SourceItem]) -> li
     reasons: list[str] = []
     sections = draft.get("sections") if isinstance(draft.get("sections"), list) else []
     source_by_id = {source.id: source for source in sources}
+    linked_ids = {
+        str(source_id)
+        for section in sections
+        if isinstance(section, dict)
+        for source_id in section.get("source_ids") or []
+    }
+    for source in sources:
+        if source.id not in linked_ids:
+            reasons.append(
+                f"입력 출처 '{source.title}'(id: {source.id})가 어떤 섹션에도 연결되지 않았습니다. 이 출처를 다루는 섹션을 추가하고 source_ids에 id를 넣으세요."
+            )
+    tags = [str(tag).strip() for tag in draft.get("tags") or [] if str(tag).strip()]
+    if not 5 <= len(set(tag.lower() for tag in tags)) <= 10:
+        reasons.append(f"태그가 중복 없이 5~10개여야 하는데 현재 {len(tags)}개입니다.")
     for number, section in enumerate([item for item in sections if isinstance(item, dict)], start=1):
         for field, minimum in SECTION_MINIMUM_LENGTHS:
             length = len(str(section.get(field) or ""))

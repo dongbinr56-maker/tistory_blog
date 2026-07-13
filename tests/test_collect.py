@@ -119,6 +119,20 @@ class HackerNewsTest(unittest.TestCase):
         self.assertEqual(item.introduced_at, "2026-07-13T06:00:00+09:00")
 
 
+class VideoGuardTest(unittest.TestCase):
+    def test_video_pages_are_rejected_as_articles(self):
+        candidate = ListingCandidate(
+            source="Hacker News",
+            listing_url="https://news.ycombinator.com/item?id=9",
+            listing_title="Some conference talk",
+            article_url="https://www.youtube.com/watch?v=abc",
+            introduced_at="2026-07-13T06:00:00+09:00",
+        )
+        now = dt.datetime(2026, 7, 13, 7, 0, tzinfo=KST)
+        with patch("tistory_newsroom.collect._fetch_text", return_value="<html></html>"):
+            self.assertIsNone(_verify_listing(candidate, now, 24))
+
+
 class _FakeResponse:
     def __init__(self, body: bytes, content_type: str = "image/png") -> None:
         self._body = body

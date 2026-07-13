@@ -482,6 +482,16 @@ def _canonical(url: str, official_url: str) -> str:
     return urllib.parse.urlunparse(clean).rstrip("/").lower()
 
 
+def _unverifiable_video(url: str) -> bool:
+    """A video page cannot be fact-checked from og metadata alone.
+
+    One slipped through as a candidate titled "- YouTube"; writing analysis
+    about a video the pipeline never watched is fabrication by construction.
+    """
+    host = urllib.parse.urlparse(url).netloc.lower().removeprefix("www.")
+    return host in {"youtube.com", "m.youtube.com", "youtu.be", "vimeo.com"}
+
+
 def _verify_listing(candidate: ListingCandidate, now: dt.datetime, lookback_hours: int) -> SourceItem | None:
     introduced_at = candidate.introduced_at
     if candidate.article_url:
@@ -505,6 +515,8 @@ def _verify_listing(candidate: ListingCandidate, now: dt.datetime, lookback_hour
                 return None
             source_page = _fetch_text(article_url)
             source_meta = _metadata(source_page)
+    if _unverifiable_video(article_url):
+        return None
     published = source_meta["published"] or introduced_at
     recent_time = _parse_datetime(introduced_at or published)
     if recent_time is None or recent_time < now - dt.timedelta(hours=lookback_hours) or recent_time > now + dt.timedelta(minutes=10):
