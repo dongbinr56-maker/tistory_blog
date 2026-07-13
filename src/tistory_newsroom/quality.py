@@ -142,6 +142,10 @@ def inspect_draft(draft: Draft, site: dict[str, object]) -> QualityReport:
     if not checks["no_volatile_community_metrics"]:
         errors.append("변동 가능한 커뮤니티 수치는 본문이 아닌 검토 화면의 사실·수치 근거에서 확인해야 합니다.")
 
+    # Style findings warn instead of block: every draft is human-reviewed
+    # before publishing anyway, and killing a whole day over one extra
+    # "~을 보여줍니다" wastes the run. The rewrite loop still tries to fix
+    # these during generation; whatever survives lands here for the reviewer.
     style_problems = (
         generic_editorial_markers(body)
         + generic_pattern_reasons(body)
@@ -149,11 +153,11 @@ def inspect_draft(draft: Draft, site: dict[str, object]) -> QualityReport:
     )
     checks["natural_editorial_voice"] = not style_problems
     if not checks["natural_editorial_voice"]:
-        errors.append("상투적인 AI 요약 표현을 걷어내고, 출처에 근거한 구체적인 편집 문장으로 다시 작성해야 합니다: " + " / ".join(style_problems))
+        warnings.extend("문체 경고: " + problem for problem in style_problems)
 
     checks["specific_intro"] = len(mentioned_projects(draft.intro, draft.source_items)) >= 2
     if not checks["specific_intro"]:
-        errors.append("도입부에는 그날 다루는 실제 프로젝트·모델 이름을 최소 두 개 넣어 일반론을 피해야 합니다.")
+        warnings.append("문체 경고: 도입부가 그날 다루는 실제 프로젝트·모델 이름을 두 개 미만으로 언급합니다. 발행 전에 도입부를 다듬어 주세요.")
 
     blocked = [term for term in BLOCKED_TERMS if term in body]
     checks["no_restricted_topic_signal"] = not blocked

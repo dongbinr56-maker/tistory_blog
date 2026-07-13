@@ -62,44 +62,49 @@ class QualityGateTest(unittest.TestCase):
         self.assertEqual(report.status, "BLOCKED")
         self.assertFalse(report.checks["no_empty_technical_inventory"])
 
-    def test_generic_ai_summary_phrase_blocks_draft(self):
+    def test_generic_ai_summary_phrase_warns_without_blocking(self):
         draft = generate_demo("2026-07-11", sources(), SITE)
-        draft.intro = "오늘 살펴본 소식들은 AI 엔지니어링이 단순히 모델을 만드는 일이 아님을 보여줍니다."
+        draft.intro = "오늘 살펴본 소식들은 AI 엔지니어링이 단순히 모델을 만드는 일이 아님을 보여줍니다. affaan-m/ECC와 test/model을 함께 봅니다."
         report = inspect_draft(draft, SITE)
-        self.assertEqual(report.status, "BLOCKED")
+        self.assertEqual(report.status, "READY_FOR_MANUAL_REVIEW")
         self.assertFalse(report.checks["natural_editorial_voice"])
+        self.assertTrue(any(warning.startswith("문체 경고:") for warning in report.warnings))
 
-    def test_repeated_analogies_block_draft(self):
+    def test_repeated_analogies_warn_without_blocking(self):
         draft = generate_demo("2026-07-11", sources(), SITE)
         draft.sections[0].plain_explanation += " 마치 요리 레시피를 모아둔 웹사이트처럼 쓸 수 있습니다."
         draft.sections[1].plain_explanation += " 마치 부품을 조립해 로봇을 만드는 것처럼 구성합니다."
         report = inspect_draft(draft, SITE)
-        self.assertEqual(report.status, "BLOCKED")
+        self.assertEqual(report.status, "READY_FOR_MANUAL_REVIEW")
         self.assertFalse(report.checks["natural_editorial_voice"])
+        self.assertTrue(any("비유" in warning for warning in report.warnings))
 
-    def test_generic_conclusion_pattern_blocks_draft(self):
+    def test_generic_conclusion_pattern_warns_without_blocking(self):
         draft = generate_demo("2026-07-11", sources(), SITE)
         draft.sections[0].why_it_matters += " 전체 품질을 향상시키는 데 기여합니다."
         draft.sections[1].why_it_matters += " 생태계 활성화에 기여합니다."
         report = inspect_draft(draft, SITE)
-        self.assertEqual(report.status, "BLOCKED")
+        self.assertEqual(report.status, "READY_FOR_MANUAL_REVIEW")
         self.assertFalse(report.checks["natural_editorial_voice"])
+        self.assertTrue(any("기여합니다" in warning for warning in report.warnings))
 
-    def test_near_duplicate_impact_and_take_block_draft(self):
+    def test_near_duplicate_impact_and_take_warn_without_blocking(self):
         draft = generate_demo("2026-07-11", sources(), SITE)
         duplicated = "데이터 수집 과정을 간소화하여 개발자가 모델 개발에 집중할 수 있게 돕습니다."
         draft.sections[0].why_it_matters = duplicated + " 영향은 배포 파이프라인 전체에 미칩니다."
         draft.sections[0].editorial_take = "도입 전에 확인할 점이 있습니다. " + duplicated + " 다만 청소 규칙과 요금제를 먼저 검토해야 하고, 대상 사이트의 약관도 살펴야 합니다. 소규모 실험으로 시작하는 편이 안전합니다."
         report = inspect_draft(draft, SITE)
-        self.assertEqual(report.status, "BLOCKED")
+        self.assertEqual(report.status, "READY_FOR_MANUAL_REVIEW")
         self.assertFalse(report.checks["natural_editorial_voice"])
+        self.assertTrue(any("반복" in warning for warning in report.warnings))
 
-    def test_intro_without_actual_projects_blocks_draft(self):
+    def test_intro_without_actual_projects_warns_without_blocking(self):
         draft = generate_demo("2026-07-11", sources(), SITE)
-        draft.intro = "새로운 기술의 흐름을 정리합니다."
+        draft.intro = "새로운 기술의 흐름을 짚고 세부 조건을 하나씩 확인합니다."
         report = inspect_draft(draft, SITE)
-        self.assertEqual(report.status, "BLOCKED")
+        self.assertEqual(report.status, "READY_FOR_MANUAL_REVIEW")
         self.assertFalse(report.checks["specific_intro"])
+        self.assertTrue(any("도입부" in warning for warning in report.warnings))
 
     def test_names_source_tolerates_the_www_prefix_and_case(self):
         self.assertTrue(names_source("thevccorner.com의 분석에 따르면 가치가 이동하고 있습니다.", "www.thevccorner.com"))
