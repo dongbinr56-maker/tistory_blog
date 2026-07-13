@@ -1,78 +1,64 @@
 {
   "date": "2026-07-13",
-  "title": "도구의 대여에서 결과의 판매로: 에이전트 실행 환경의 통제력과 비용의 트레이드오프",
+  "title": "f/prompts.chat과 kenn-io/agentsview로 설계하는 에이전트 시대의 통제권",
   "title_candidates": [
-    "도구의 대여에서 결과의 판매로: 에이전트 실행 환경의 통제력과 비용의 트레이드오프",
-    "프롬프트 보안부터 데이터센터 통신 최적화까지, 에이전트 실행 환경의 실질적 과제들",
-    "로컬 모니터링과 인프라 최적화가 이끄는 에이전트 중심의 소프트웨어 생태계",
-    "[AI 뉴스룸] | prompts.chat, agentsview, DeepEP"
+    "f/prompts.chat과 kenn-io/agentsview로 설계하는 에이전트 시대의 통제권",
+    "프롬프트 격리와 로컬 모니터링으로 대비하는 결과 중심 SaaS의 시대",
+    "에이전트가 가져올 소프트웨어 패러다임 변화와 실무적 관리 방안",
+    "[AI 뉴스룸] | prompts.chat, agentsview, YouTube"
   ],
   "tags": [
-    "prompts.chat",
-    "agentsview",
-    "DeepEP",
-    "AI에이전트",
-    "SaaS플레이북",
     "프롬프트엔지니어링",
-    "데이터센터추론"
+    "AI에이전트",
+    "SaaS비즈니스",
+    "오픈소스",
+    "agentsview",
+    "prompts.chat"
   ],
-  "meta_description": "f/prompts.chat을 통한 프롬프트 자산화, kenn-io/agentsview 기반의 로컬 에이전트 분석, deepseek-ai/DeepEP의 데이터센터 통신 최적화, 그리고 This Is the New SaaS Playbook이 제시하는 성과 중심 비즈니스 모델을 다룹니다.",
-  "intro": "프롬프트 유출을 막기 위해 f/prompts.chat을 사내에 직접 구축하려는 시도와, 로컬 터미널에서 실행되는 에이전트의 토큰 소모량을 감시하기 위해 kenn-io/agentsview를 도입하는 움직임은 동일한 고민에서 출발합니다. 인프라를 직접 통제하며 비용을 최적화할 것인가, 아니면 외부 플랫폼에 제어권을 넘기고 결과물만 받아볼 것인가의 선택입니다. 이러한 기술적 제어권 확보 노력은 단순한 도구 도입을 넘어, 소프트웨어 비즈니스의 과금 모델과 데이터센터 네트워크 아키처 자체를 재검토하게 만듭니다.",
+  "meta_description": "f/prompts.chat을 통한 프롬프트 자산화, kenn-io/agentsview를 활용한 코딩 에이전트 로컬 모니터링, 그리고 AI 에이전트 시대의 새로운 SaaS 비즈니스 모델 변화를 심층 분석하여 실무적인 도입 전략을 제시합니다.",
+  "intro": "개발 조직이 인공지능을 실무에 도입할 때 직면하는 가장 큰 고민은 통제권의 상실과 비용의 불확실성입니다. f/prompts.chat처럼 프롬프트를 사내 자산으로 격리하여 관리하려는 시도나, kenn-io/agentsview를 통해 로컬 환경에서 코딩 에이전트의 동작을 추적하려는 흐름은 모두 이러한 불확실성을 통제하려는 실무적 요구에서 출발합니다. 이는 단순한 도구의 변화를 넘어, 소프트웨어가 제공하는 가치의 중심이 도구 자체에서 실행 결과물로 이동한다는 This Is the New SaaS Playbook의 관찰과도 궤를 같이합니다. 사용자가 직접 조작하던 소프트웨어에서 에이전트가 결과를 배달하는 구조로 전환되는 지금, 기업은 새로운 관리 방식과 비즈니스 모델을 정립해야 하는 기로에 서 있습니다.",
   "sections": [
     {
-      "headline": "사내 보안을 위한 프롬프트 자산화와 f/prompts.chat의 자체 호스팅 도입 방안",
+      "headline": "프롬프트 자산의 안전한 사내 자산화, f/prompts.chat 오픈소스 프로젝트",
       "source_ids": [
         "github-community-1643157b768c76e7"
       ],
-      "what_happened": "f/prompts.chat 프로젝트는 커뮤니티가 검증한 프롬프트를 공유하고 수집하는 오픈소스 플랫폼으로, 외부 유출 없이 조직 내부망에서 독립적으로 구동할 수 있는 셀프 호스팅 기능을 제공합니다.",
-      "plain_explanation": "인공지능 모델의 답변 품질을 높이는 지시어 템플릿을 한데 모아 관리하는 저장소입니다. 외부 클라우드가 아닌 기업 내부 인프라에 직접 설치해 기밀 유출 걱정 없이 운영할 수 있습니다.",
-      "why_it_matters": "사내에서 개별적으로 작성되어 파편화되기 쉬운 프롬프트 자산을 중앙에서 관리하고, 외부 API로의 무단 유출 경로를 기술적으로 차단하는 기준점이 됩니다.",
+      "what_happened": "오픈소스 프롬프트 공유 플랫폼 f/prompts.chat(구 Awesome ChatGPT Prompts)이 커뮤니티 중심의 프롬프트 공유를 넘어, 기업이 완전한 프라이버시를 유지하며 자체 호스팅할 수 있는 기능을 제공합니다.",
+      "plain_explanation": "인공지능에게 원하는 결과물을 얻기 위해 입력하는 지시어인 프롬프트를 조직 내부에서 안전하게 관리하고 공유할 수 있게 돕는 도구입니다. 외부 클라우드에 데이터를 올리지 않고 기업 자체 서버에 설치하여 직원들끼리만 프롬프트를 공유하는 환경을 구축할 수 있습니다.",
+      "why_it_matters": "개별 작업자의 임시 메모장이나 개인 저장소에 흩어져 있던 프롬프트 작성 노하우를 기업의 공식 자산으로 축적할 수 있습니다. 외부 유출 걱정 없이 사내 보안 가이드라인을 준수하며 협업할 수 있는 기반이 마련됩니다.",
       "technical_details": "",
-      "editorial_take": "공유 플랫폼을 통한 프롬프트 표준화는 초기 템플릿 배포 속도를 높여주지만, 거대언어모델의 API 버전 변경이나 파라미터 미세조정에 따른 응답 가변성까지 해결해주지는 못합니다. 단순한 텍스트 저장소 관리를 넘어, 실제 모델의 응답 일관성을 검증하는 평가 파이프라인과 프롬프트 버전 제어 시스템을 연계해야 실무 환경에서 오동작을 방지하는 것이 필수적입니다.",
-      "reader_action": "prompts.chat 저장소를 로컬 환경에 복제하여 사내 보안 규정에 맞춘 셀프 호스팅 버전을 검토하고, 내부 프롬프트 자산의 분류 체계를 설계하는 방안이 권장됩니다.",
+      "editorial_take": "단순히 프롬프트를 모아두는 저장소를 구축하는 것만으로는 실질적인 자산화가 어렵습니다. 거대 언어 모델의 자체 업데이트에 따라 기존 프롬프트의 작동 결과가 수시로 달라지기 때문에, 등록된 프롬프트의 유효성을 주기적으로 평가하고 버전을 관리하는 운영 프로세스가 반드시 결합되어야 합니다. 또한, 장기적으로는 단순 텍스트 복사 단계를 넘어 프롬프트 템플릿을 API 형태로 호출해 사내 시스템과 동적으로 연동할 수 있는 확장성까지 고려해야 도구 도입의 장기적인 효용을 얻게 됩니다.",
+      "reader_action": "현재 팀원들이 각자 자주 사용하는 프롬프트를 어떤 방식으로 기록하고 공유하는지 파악하고, 이를 중앙에서 안전하게 관리할 때 필요한 최소한의 보안 요구사항을 정리해 봅니다.",
       "verification_notes": ""
     },
     {
-      "headline": "kenn-io/agentsview를 통한 로컬 환경 기반 AI 코딩 에이전트의 동작 분석",
+      "headline": "코딩 에이전트의 동작과 비용을 로컬에서 추적하는 kenn-io/agentsview",
       "source_ids": [
         "geeknews-68551dc8cb2a5ed6"
       ],
-      "what_happened": "kenn-io/agentsview는 Claude Code와 Codex를 포함한 20개 이상의 코딩 에이전트를 대상으로 로컬 환경에서 세션 검색, 분석, 토큰 사용량 통계를 제공하는 오픈소스 도구입니다.",
-      "plain_explanation": "개발 지원 에이전트가 로컬 PC에서 수행하는 작업 세션을 추적하고, 소모되는 토큰 양과 동작 로그를 외부 서버 전송 없이 로컬에서 모니터링하는 도구입니다.",
-      "why_it_matters": "에이전트가 백그라운드에서 자율적으로 동작할 때 발생할 수 있는 무한 루프나 비효율적인 반복 API 호출을 실시간으로 감지하여 예상치 못한 비용 청구를 방지합니다.",
+      "what_happened": "GitHub 출처에 따르면, Claude Code와 Codex를 포함한 20개 이상의 코딩 에이전트를 대상으로 세션 검색, 분석, 실행 로그 추적 및 토큰 사용량 통계를 제공하는 로컬 퍼스트 모니터링 도구 kenn-io/agentsview가 공개되었습니다.",
+      "plain_explanation": "개발을 보조하는 인공지능 에이전트가 컴퓨터 내부에서 어떤 코드를 수정하고 얼마나 많은 데이터를 소모했는지 실시간으로 감시하는 도구입니다. 모든 작업 기록과 토큰 사용 통계를 외부 서버로 전송하지 않고 개발자의 개인 컴퓨터 안에서 안전하게 처리하고 시각화합니다.",
+      "why_it_matters": "에이전트가 자율적으로 코드를 작성하는 과정에서 무한 루프에 빠지거나 불필요한 API 호출로 과도한 비용을 발생시키는 문제를 방지합니다. 소스 코드와 세션 데이터가 외부로 유출되지 않아 기업의 보안 규정을 위반하지 않고도 에이전트의 동작을 통제하는 데 유리합니다.",
       "technical_details": "",
-      "editorial_take": "로컬 우선 방식의 분석은 소스코드나 개발 세션 데이터가 외부 SaaS 플랫폼으로 전송되는 보안 리스크를 차단하는 데 유용합니다. 다만 다수의 엔지니어가 협업하는 환경에서는 개별 로컬 데이터를 취합해 전사적인 토큰 소모 흐름을 파악하기 어렵기 때문에, 로컬 디버깅용 도구와 중앙 집중식 비용 관리 거버넌스를 이원화하여 설계해야 합니다.",
-      "reader_action": "Claude Code나 Codex 등의 에이전트를 개발 환경에 도입할 때 agentsview를 병행 설치하여, 로컬 세션 검색과 토큰 통계가 디버깅 속도에 미치는 영향을 정량적으로 측정해 보는 것이 좋습니다.",
+      "editorial_take": "에이전트의 자율성이 높아질수록 개발자가 그 내부 동작 과정을 파악하기 힘든 블랙박스 문제가 심화됩니다. 이 도구는 로컬 환경에서 실행 로그를 직접 파싱하여 시각화함으로써 개발자에게 제어권을 돌려준다는 점에서 실용적입니다. 다만 다양한 에이전트의 서로 다른 로그 포맷을 얼마나 왜곡 없이 일관되게 분석해 주는지 개별적인 검증이 필요합니다. 더불어 개별 개발자 단위를 넘어 팀 전체의 에이전트 사용 현황과 누적 비용을 통합 관리할 수 있는 거버넌스 체계로의 확장 방안도 장기적으로 고민해야 합니다.",
+      "reader_action": "현재 도입을 검토 중이거나 사용하고 있는 코딩 에이전트가 한 번의 명령 수행 과정에서 평균적으로 소모하는 토큰 양과 비용을 추적할 수 있는 모니터링 장치가 마련되어 있는지 점검해 봅니다.",
       "verification_notes": ""
     },
     {
-      "headline": "데이터센터 내 토큰 이동 경로와 deepseek-ai/DeepEP의 네트워크 통신 최적화",
-      "source_ids": [
-        "geeknews-469ab1ad253f7c9c"
-      ],
-      "what_happened": "datagravity.dev의 분석에 따르면 프롬프트 입력부터 답변 생성까지 토큰은 게이트웨이, 스케줄러, KV 캐시, GPU, 네트워크를 거치며, 이 과정에서 deepseek-ai/DeepEP 라이브러리는 효율적인 엑스퍼트 패러렐 통신을 수행합니다.",
-      "plain_explanation": "사용자가 보낸 질문이 데이터센터 내부에서 처리되는 전체 경로를 추적한 결과입니다. 여러 대의 GPU가 협업하는 환경에서 병목을 줄이고 데이터를 고속으로 주고받도록 돕는 전용 통신 라이브러리의 중요성을 다룹니다.",
-      "why_it_matters": "대규모 추론 시스템에서 연산 자체보다 GPU 간 데이터 전송이 병목이 되는 물리적 한계를 짚어내고, 이를 해결하기 위한 네트워크 최적화의 구체적인 대안을 제시합니다.",
-      "technical_details": "",
-      "editorial_take": "DeepEP가 제공하는 엑스퍼트 패러렐 통신 최적화는 Mixture of Experts 모델의 네트워크 오버헤드를 줄이는 실질적인 해법이지만, 특정 하드웨어 아키텍처와 네트워크 토폴로지에 강하게 종속되는 한계가 있습니다. 전용 인프라를 직접 튜닝하는 비용과 관리형 API를 사용하는 비용 간의 손익분기점을 먼저 계산해야 합니다.",
-      "reader_action": "데이터센터 내부의 토큰 이동 경로 분석을 바탕으로, 현재 운영 중인 추론 서버의 KV 캐시 관리 정책과 네트워크 병목 지점을 모니터링 도구로 점검할 필요가 있습니다.",
-      "verification_notes": ""
-    },
-    {
-      "headline": "도구 제공에서 업무 완결로 전환되는 This Is the New SaaS Playbook의 비즈니스 모델",
+      "headline": "소프트웨어 패키징에서 가치 창출 중심으로 전환되는 AI 에이전트 시대의 SaaS",
       "source_ids": [
         "geeknews-35ec77961ea7f10b"
       ],
-      "what_happened": "thevccorner.com의 분석에 따르면 AI 에이전트의 등장으로 인해 SaaS의 가치가 단순한 소프트웨어 기능 제공에서 실질적인 업무의 최종 해결 자체로 이동하는 패러다임 전환이 일어나고 있습니다.",
-      "plain_explanation": "사용자가 소프트웨어를 직접 조작해 일하던 방식에서 벗어나, 에이전트에게 업무를 위임하고 최종 완성된 결과물을 구매하는 형태로 소프트웨어 비즈니스 모델이 변화하고 있습니다.",
-      "why_it_matters": "기존의 시트(Seat) 수 기준 구독 모델이 무력화되고, 에이전트가 완수해낸 업무 성과나 처리 건수 단위로 과금하는 새로운 가격 책정 전략이 요구됩니다.",
+      "what_happened": "www.thevccorner.com에 따르면, AI 에이전트의 등장으로 인해 기존 SaaS 비즈니스의 가치가 단순한 소프트웨어 기능 제공에서 실제 비즈니스 결과물을 직접 생성하는 영역으로 이동하고 있습니다. 이에 따라 소프트웨어 인터페이스 자체는 가치를 담는 껍데기로 격하되고, 에이전트가 완료한 작업의 결과물이 핵심 상품이 되는 구조적 변화가 일어납니다.",
+      "plain_explanation": "기존에는 매달 구독료를 내고 소프트웨어 화면을 직접 조작해 일했다면, 앞으로는 인공지능이 업무 결과를 알아서 완성해 주는 방식으로 바뀝니다. 사용자는 복잡한 프로그램 사용법을 배우는 대신, 인공지능이 최종적으로 도출해 낸 업무 결과물의 가치에 대해서만 비용을 지불하게 됩니다.",
+      "why_it_matters": "사용자 수 기준의 전통적인 구독 모델이 에이전트의 작업 성공률과 성과 기반 과금 모델로 재편됩니다. 소프트웨어 개발사들은 화면의 편의성을 개선하는 것보다 에이전트가 수행하는 작업의 정확도와 신뢰성을 높이는 데 개발 역량을 집중하는 구조로 재편됩니다.",
       "technical_details": "",
-      "editorial_take": "결과물 중심의 과금 모델은 고객의 초기 도입 부담을 경감시키지만, 에이전트가 수행한 업무에서 오류가 발생했을 때의 법적 책임 소재와 손실 보상 기준이 모호해지는 문제를 낳습니다. 기술적 완성도를 높이는 작업과 병행하여, 오동작 시의 인간 개입(Human-in-the-loop) 절차와 책임 분담에 관한 계약적 안전장치를 선제적으로 설계해야 비즈니스의 지속 가능성을 담보하게 됩니다.",
-      "reader_action": "현재 기획 중인 소프트웨어 서비스의 과금 모델이 단순 기능 대여에 머물러 있는지 검토하고, 에이전트가 최종 결과물을 직접 납품하여 가치를 입증하는 구조로 전환 가능한 영역을 식별해 봅니다.",
+      "editorial_take": "결과 중심의 과금 모델은 고객에게 확실한 효용을 제공하지만, 에이전트가 잘못된 판단을 내리거나 예외 상황에서 작업을 실패했을 때의 책임 소재와 비용 정산 기준을 마련하기가 매우 까다롭습니다. 따라서 에이전트 기반의 서비스를 기획하거나 도입할 때는 완전 자동화에 의존하기보다 인간의 검토와 승인 단계를 워크플로우 내에 어떻게 유기적으로 배치할지 설계해야 합니다. 아울러 기존의 구독 모델을 성급하게 폐기하기보다는, 인프라 유지 비용을 보전하는 기본료와 에이전트 성과 수수료를 결합한 하이브리드 요금제를 대안으로 검토하는 편이 비즈니스 안정성 측면에서 현실적입니다.",
+      "reader_action": "현재 사내에서 구독 중인 소프트웨어 가운데, 사람이 직접 화면을 조작하지 않고 에이전트의 자동화 결과물로 완전히 대체할 수 있는 업무 영역이 있는지 분류하고 그에 따른 비용 절감 효과를 가늠해 봅니다.",
       "verification_notes": ""
     }
   ],
-  "closing": "프롬프트를 사내 자산으로 통제하려는 시도부터 에이전트의 로컬 모니터링, 데이터센터 내부의 통신 최적화, 그리고 성과 기반 비즈니스 모델로의 전환은 모두 기술적 통제력 확보라는 하나의 축으로 연결되어 있습니다. 엔지니어링의 역할은 단순히 외부 모델의 API를 호출하는 수준을 넘어, 인프라 비용 구조를 깊이 이해하고 비즈니스 모델의 변화에 기밀하게 대응하는 아키처 설계로 확장되는 국면입니다.",
+  "closing": "프롬프트를 사내 자산으로 격리하여 보안을 강화하는 일과 에이전트의 실행 로그를 로컬에서 투명하게 추적하는 일은 결국 기술의 통제권을 확보하려는 시도입니다. 소프트웨어 비즈니스의 중심이 도구 사용에서 결과물 획득으로 이동하는 흐름 속에서, 무작정 자동화 범위를 넓히는 것보다 시스템의 신뢰성과 비용 효율성을 검증할 수 있는 장치를 마련하는 일이 선행되어야 합니다.",
   "editorial_disclosure": "",
   "model": "gemini-3.5-flash",
   "article_count_note": "",
@@ -84,7 +70,7 @@
       "topic": "생성형 AI, 오픈소스, GitHub 프로젝트, AI 모델링",
       "title": "f/prompts.chat",
       "url": "https://github.com/f/prompts.chat",
-      "published_at": "2026-07-13T13:17:18+09:00",
+      "published_at": "2026-07-13T16:50:13+09:00",
       "summary": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
       "listing_url": "https://github.com/f/prompts.chat",
       "introduced_at": "",
@@ -97,10 +83,10 @@
         "project_owner": "f",
         "project_description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
         "license": "NOASSERTION",
-        "updated_at": "2026-07-13T06:58:52Z",
+        "updated_at": "2026-07-13T08:26:49Z",
         "community_source": "github",
-        "github_stars": "165586",
-        "github_pushed_at": "2026-07-13T04:17:18Z"
+        "github_stars": "165591",
+        "github_pushed_at": "2026-07-13T07:50:13Z"
       }
     },
     {
@@ -113,7 +99,7 @@
       "summary": "Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents. - kenn-io/agentsview",
       "listing_url": "https://news.hada.io/topic?id=31370",
       "introduced_at": "2026-07-13T09:31:01+09:00",
-      "image_url": "https://opengraph.githubassets.com/c44cd1a6acff4df01ca7e0cc69cf165f7469eed5f5749a098afb5397a9d3da81/kenn-io/agentsview",
+      "image_url": "https://opengraph.githubassets.com/9867e3d3067ced868a423ff76d01477a699502c41307c17393cf674a319a4621/kenn-io/agentsview",
       "official_url": "https://github.com/kenn-io/agentsview",
       "canonical_key": "https://github.com/kenn-io/agentsview",
       "verification": {
@@ -127,36 +113,29 @@
         "project_owner": "kenn-io",
         "project_description": "Local-first session search, analytics, insights, and token use statistics for coding agents, supporting Claude Code, Codex, and more than 20 other agents. ",
         "license": "MIT",
-        "updated_at": "2026-07-13T06:55:36Z",
+        "updated_at": "2026-07-13T08:28:01Z",
         "project_kind": "github"
       }
     },
     {
-      "id": "geeknews-469ab1ad253f7c9c",
-      "source": "www.datagravity.dev",
-      "topic": "AI 모델링, NPU·GPU·엣지 AI",
-      "title": "How an AI Token Travels Through a Data Center",
-      "url": "https://www.datagravity.dev/p/how-an-ai-token-travels-through-a",
-      "published_at": "2026-07-02T04:14:22+09:00",
-      "summary": "Trace one prompt from gateway to scheduler, KV cache, GPU, and network — every component that powers AI inference.",
-      "listing_url": "https://news.hada.io/topic?id=31381",
-      "introduced_at": "2026-07-13T10:11:02+09:00",
-      "image_url": "https://substackcdn.com/image/fetch/$s_!jS5q!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faad09364-980a-40d0-b66a-b262696effbe_2078x1304.png",
-      "official_url": "https://github.com/deepseek-ai/DeepEP",
-      "canonical_key": "https://github.com/deepseek-ai/deepep",
+      "id": "geeknews-72f28014a0a68514",
+      "source": "www.youtube.com",
+      "topic": "AI 에이전트",
+      "title": "- YouTube",
+      "url": "https://www.youtube.com/watch?v=83fWzQSWB10",
+      "published_at": "2026-07-13T10:02:01+09:00",
+      "summary": "YouTube에서 마음에 드는 동영상과 음악을 감상하고, 직접 만든 콘텐츠를 업로드하여 친구, 가족뿐 아니라 전 세계 사람들과 콘텐츠를 공유할 수 있습니다.",
+      "listing_url": "https://news.hada.io/topic?id=31376",
+      "introduced_at": "2026-07-13T10:02:01+09:00",
+      "image_url": "https://social.news.hada.io/topic/31376",
+      "official_url": "",
+      "canonical_key": "https://www.youtube.com/watch",
       "verification": {
-        "article_title_verified": "How an AI Token Travels Through a Data Center",
-        "article_source_verified": "www.datagravity.dev",
-        "article_published_verified": "2026-07-02T04:14:22+09:00",
-        "article_url_verified": "https://www.datagravity.dev/p/how-an-ai-token-travels-through-a",
-        "geeknews_listing_url": "https://news.hada.io/topic?id=31381",
-        "official_url": "https://github.com/deepseek-ai/DeepEP",
-        "project_name": "deepseek-ai/DeepEP",
-        "project_owner": "deepseek-ai",
-        "project_description": "DeepEP: an efficient expert-parallel communication library",
-        "license": "MIT",
-        "updated_at": "2026-07-11T16:14:35Z",
-        "project_kind": "github"
+        "article_title_verified": "- YouTube",
+        "article_source_verified": "www.youtube.com",
+        "article_published_verified": "2026-07-13T10:02:01+09:00",
+        "article_url_verified": "https://www.youtube.com/watch?v=83fWzQSWB10",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=31376"
       }
     },
     {
