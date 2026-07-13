@@ -151,7 +151,10 @@ def _request_json(endpoint: str, api_key: str, prompt: str, temperature: float) 
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {
             "temperature": temperature,
-            "maxOutputTokens": 8192,
+            # Thinking tokens count against this cap on current Gemini models,
+            # and a four-section Korean draft alone can pass 8k tokens — the
+            # old 8192 cap truncated the JSON mid-response (MAX_TOKENS).
+            "maxOutputTokens": 32768,
             "responseMimeType": "application/json",
         },
     }

@@ -80,12 +80,16 @@ class ResponseParsingTest(unittest.TestCase):
         def fake_urlopen(request, timeout=None):
             captured["url"] = request.full_url
             captured["key"] = request.get_header("X-goog-api-key")
+            captured["body"] = json.loads(request.data.decode("utf-8"))
             return _FakeResponse()
 
         with patch("tistory_newsroom.generate.urllib.request.urlopen", side_effect=fake_urlopen):
             _request_json("https://example.googleapis.com/v1beta/models/m:generateContent", "secret-key", "프롬프트", 0.2)
         self.assertEqual(captured["key"], "secret-key")
         self.assertNotIn("secret-key", captured["url"])
+        # A four-section Korean draft plus thinking tokens overflowed the old
+        # 8192 cap; keep the ceiling high enough that MAX_TOKENS cannot recur.
+        self.assertGreaterEqual(captured["body"]["generationConfig"]["maxOutputTokens"], 16384)
 
 
 class GeneratePromptTest(unittest.TestCase):
