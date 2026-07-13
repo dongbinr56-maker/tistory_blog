@@ -1,7 +1,56 @@
+import json
 import unittest
+from unittest.mock import patch
 
-from tistory_newsroom.generate import make_rewrite_prompt, merge_title_candidates, newsroom_title_candidates
+from tistory_newsroom.generate import (
+    _request_json,
+    _response_text,
+    make_rewrite_prompt,
+    merge_title_candidates,
+    newsroom_title_candidates,
+)
 from tistory_newsroom.models import SourceItem
+
+
+class ResponseParsingTest(unittest.TestCase):
+    def test_blocked_response_reports_the_block_reason(self):
+        with self.assertRaises(ValueError) as context:
+            _response_text({"promptFeedback": {"blockReason": "SAFETY"}})
+        self.assertIn("SAFETY", str(context.exception))
+
+    def test_truncated_response_reports_the_finish_reason(self):
+        result = {"candidates": [{"finishReason": "MAX_TOKENS", "content": {"parts": [{"text": '{"partial": '}]}}]}
+        with self.assertRaises(ValueError) as context:
+            _response_text(result)
+        self.assertIn("MAX_TOKENS", str(context.exception))
+
+    def test_multi_part_text_is_joined(self):
+        result = {"candidates": [{"finishReason": "STOP", "content": {"parts": [{"text": '{"a"'}, {"text": ": 1}"}]}}]}
+        self.assertEqual(_response_text(result), '{"a": 1}')
+
+    def test_api_key_travels_in_a_header_not_the_url(self):
+        captured = {}
+
+        class _FakeResponse:
+            def read(self):
+                payload = {"candidates": [{"finishReason": "STOP", "content": {"parts": [{"text": "{}"}]}}]}
+                return json.dumps(payload).encode("utf-8")
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                return False
+
+        def fake_urlopen(request, timeout=None):
+            captured["url"] = request.full_url
+            captured["key"] = request.get_header("X-goog-api-key")
+            return _FakeResponse()
+
+        with patch("tistory_newsroom.generate.urllib.request.urlopen", side_effect=fake_urlopen):
+            _request_json("https://example.googleapis.com/v1beta/models/m:generateContent", "secret-key", "프롬프트", 0.2)
+        self.assertEqual(captured["key"], "secret-key")
+        self.assertNotIn("secret-key", captured["url"])
 
 
 class GeneratePromptTest(unittest.TestCase):

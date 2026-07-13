@@ -21,19 +21,32 @@ from .models import SourceItem
 # datacenter networks with HTTP 405, so identify as a regular browser.
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 KST = dt.timezone(dt.timedelta(hours=9))
+# A GitHub link or the bare word "github" says nothing about AI relevance —
+# it let a shell-obfuscation tool pass the filter — so host mentions are no
+# longer relevance topics. Community collectors label their items directly.
 TOPIC_TERMS: dict[str, tuple[str, ...]] = {
     "생성형 AI": ("생성형 ai", "generative ai", "llm", "언어 모델", "foundation model", "claude", "anthropic", "gemini", "chatgpt", "openai"),
     "AI 에이전트": ("ai 에이전트", "agentic", "agent", "에이전트", "멀티 에이전트"),
     "컴퓨터 비전": ("컴퓨터 비전", "computer vision", "vision model", "비전 모델", "이미지 모델"),
-    "AI 모델링": ("모델 학습", "파인튜닝", "fine-tuning", "추론", "inference", "훈련", "training"),
+    "AI 모델링": ("모델 학습", "파인튜닝", "fine-tuning", "추론", "inference", "훈련", "training", "모델 평가"),
     "오픈소스": ("오픈소스", "open source", "라이선스", "license"),
     "개발 도구": ("개발 도구", "developer tool", "claude code", "codex", "cursor", "ide"),
-    "GitHub 프로젝트": ("github.com", "github", "깃허브"),
-    "Hugging Face": ("huggingface.co", "hugging face", "허깅페이스", "hf model", "hf space", "데이터셋"),
+    "Hugging Face": ("huggingface.co", "hugging face", "허깅페이스", "hf model", "hf space"),
     "온디바이스 AI": ("온디바이스", "on-device", "on device", "로컬 ai", "local ai"),
     "NPU·GPU·엣지 AI": ("npu", "gpu", "edge ai", "엣지 ai", "tpu", "가속기"),
 }
 MODEL_TERMS = ("model", "모델", "llm", "transformer", "추론", "inference", "학습", "training", "파인튜닝", "fine-tuning", "checkpoint", "dataset", "데이터셋")
+
+
+def _matches_term(lowered: str, term: str) -> bool:
+    """Substring match, except short ASCII terms which need token boundaries.
+
+    Plain substring matching made "ide" match "sidedock" and "provide", so
+    unrelated articles slipped through the relevance filter.
+    """
+    if len(term) <= 4 and re.fullmatch(r"[a-z0-9.+-]+", term):
+        return re.search(rf"(?<![a-z0-9]){re.escape(term)}(?![a-z0-9])", lowered) is not None
+    return term in lowered
 
 
 @dataclass(frozen=True)
@@ -112,13 +125,15 @@ def _fetch_headers(url: str, accept: str) -> dict[str, str]:
     return headers
 
 
-def _fetch_bytes(url: str, accept: str = "text/html,*/*", attempts: int = 3) -> tuple[bytes, str]:
+def _fetch_bytes(url: str, accept: str = "text/html,*/*", attempts: int = 3, max_bytes: int = 3_000_000) -> tuple[bytes, str]:
+    # One byte over the limit is read so a caller can tell "fits exactly"
+    # apart from "was cut off" — silent truncation corrupted large images.
     last_error: Exception | None = None
     for attempt in range(attempts):
         try:
             request = urllib.request.Request(url, headers=_fetch_headers(url, accept))
             with urllib.request.urlopen(request, timeout=45) as response:
-                return response.read(3_000_000), response.headers.get("Content-Type", "")
+                return response.read(max_bytes + 1), response.headers.get("Content-Type", "")
         except Exception as error:
             last_error = error
             if attempt + 1 < attempts:
@@ -200,9 +215,14 @@ def _geeknews_listings(url: str, source: str, limit: int) -> list[ListingCandida
 
 
 def _extract_geeknews_original(page: str, listing_url: str) -> str:
-    matched = re.search(r'"sharedContent"\s*:\s*\{.*?"url"\s*:\s*"([^"]+)"', page, flags=re.DOTALL)
-    if matched:
-        return html.unescape(matched.group(1).replace("\\/", "/"))
+    # Constrain the url lookup to the sharedContent object itself. A DOTALL
+    # ".*?" bridge would grab the document's next "url" key when the object
+    # has none, publishing an unrelated link as the original article.
+    block = re.search(r'"sharedContent"\s*:\s*\{([^{}]*)\}', page)
+    if block:
+        matched = re.search(r'"url"\s*:\s*"([^"]+)"', block.group(1))
+        if matched:
+            return html.unescape(matched.group(1).replace("\\/", "/"))
     parser = _PageParser()
     parser.feed(page)
     for href, _ in parser.links:
@@ -213,12 +233,52 @@ def _extract_geeknews_original(page: str, listing_url: str) -> str:
     return ""
 
 
+_RESERVED_GITHUB_SEGMENTS = {
+    "about", "apps", "blog", "collections", "contact", "customer-stories", "events", "features",
+    "images", "join", "login", "marketplace", "notifications", "orgs", "pricing", "readme",
+    "resources", "search", "settings", "site", "sponsors", "topics", "trending",
+}
+_RESERVED_HUGGINGFACE_SEGMENTS = {
+    "blog", "chat", "collections", "docs", "join", "learn", "login", "new", "papers",
+    "posts", "pricing", "settings", "tasks", "welcome",
+}
+_ASSET_SUFFIXES = (".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp", ".ico", ".css", ".js")
+
+
+def _project_shaped_url(candidate: str) -> str:
+    """Normalize a link to its project page, or reject page noise.
+
+    The first github.com URL on an article page is frequently a footer link,
+    an avatar (github.com/fluidicon.png), or a related-article link — treating
+    it as the article's official project corrupted attribution and the
+    dedup keys.
+    """
+    cleaned = candidate.rstrip(".,);]}\"'")
+    parsed = urllib.parse.urlparse(cleaned)
+    host = parsed.netloc.lower()
+    parts = [part for part in parsed.path.split("/") if part]
+    if any(part.lower().endswith(_ASSET_SUFFIXES) for part in parts[:3]):
+        return ""
+    if host in {"github.com", "www.github.com"}:
+        if len(parts) < 2 or parts[0].lower() in _RESERVED_GITHUB_SEGMENTS:
+            return ""
+        return f"https://github.com/{parts[0]}/{parts[1]}"
+    if host in {"huggingface.co", "www.huggingface.co"}:
+        if parts and parts[0].lower() in {"datasets", "spaces"}:
+            return f"https://huggingface.co/{parts[0]}/{parts[1]}/{parts[2]}" if len(parts) >= 3 else ""
+        if len(parts) < 2 or parts[0].lower() in _RESERVED_HUGGINGFACE_SEGMENTS or parts[0].lower() == "models":
+            return ""
+        return f"https://huggingface.co/{parts[0]}/{parts[1]}"
+    return ""
+
+
 def _find_official_url(*pages: str) -> str:
-    pattern = r'https?://(?:www\.)?(?:github\.com|huggingface\.co)/(?:[^\s"<>?#]+)(?:/[^\s"<>?#]+)?'
+    pattern = r'https?://(?:www\.)?(?:github\.com|huggingface\.co)/[^\s"<>?#)\]]+'
     for page in pages:
-        match = re.search(pattern, html.unescape(page), flags=re.IGNORECASE)
-        if match:
-            return match.group(0).rstrip(".,);]}")
+        for match in re.finditer(pattern, html.unescape(page), flags=re.IGNORECASE):
+            shaped = _project_shaped_url(match.group(0))
+            if shaped:
+                return shaped
     return ""
 
 
@@ -249,7 +309,7 @@ def _official_facts(url: str) -> dict[str, str]:
             data = json.loads(api.decode("utf-8"))
             facts.update({
                 "project_name": str(data.get("id") or model_id),
-                "project_owner": str(data.get("author") or (data.get("cardData") or {}).get("license") or ""),
+                "project_owner": str(data.get("author") or model_id.split("/", 1)[0]),
                 "project_description": str(data.get("description") or ""),
                 "license": str((data.get("cardData") or {}).get("license") or data.get("license") or ""),
                 "updated_at": str(data.get("lastModified") or ""),
@@ -364,7 +424,7 @@ def _huggingface_community_items(source: dict[str, Any], now: dt.datetime, days:
 
 def _topics(text: str, official_url: str) -> list[str]:
     lowered = (text + " " + official_url).lower()
-    return [topic for topic, terms in TOPIC_TERMS.items() if any(term in lowered for term in terms)]
+    return [topic for topic, terms in TOPIC_TERMS.items() if any(_matches_term(lowered, term) for term in terms)]
 
 
 def identifying_query(query: str) -> str:
@@ -409,6 +469,11 @@ def _verify_listing(candidate: ListingCandidate, now: dt.datetime, lookback_hour
         return None
     official_url = _find_official_url(source_page, listing_page)
     facts = _official_facts(official_url) if official_url else {}
+    if official_url and not facts.get("project_kind"):
+        # A link the GitHub/HF API cannot confirm as a real project is page
+        # noise (footer, avatar, related article), not this article's official
+        # page. Dropping it keeps attribution and dedup keys honest.
+        official_url, facts = "", {}
     # Body HTML contains navigation, social links and CSS terms such as
     # "space". Only metadata verified for this actual article may determine
     # topical relevance; otherwise unrelated links get selected as AI news.
@@ -488,8 +553,8 @@ def collect_candidates(config: dict[str, Any], now: dt.datetime | None = None) -
 
 def _score(item: SourceItem) -> int:
     corpus = f"{item.title} {item.summary} {item.topic} {item.official_url}".lower()
-    score = sum(5 for terms in TOPIC_TERMS.values() if any(term in corpus for term in terms))
-    score += sum(2 for term in MODEL_TERMS if term in corpus)
+    score = sum(5 for terms in TOPIC_TERMS.values() if any(_matches_term(corpus, term) for term in terms))
+    score += sum(2 for term in MODEL_TERMS if _matches_term(corpus, term))
     if item.verification.get("project_kind") in {"github", "huggingface"}:
         score += 20
     if item.verification.get("community_source") in {"github", "huggingface"}:

@@ -310,7 +310,18 @@ def run(root: Path = ROOT, date: str | None = None, demo: bool = False, refresh:
         message = "초안 생성 중단: 티스토리에서 표시할 이미지 주소인 draft_assets_base_url을 config/site.json에 실제 GitHub Pages 주소로 설정하세요."
         _write_json(run_dir / "quality-report.json", {"status": "BLOCKED", "errors": [message], "collector_errors": collector_errors})
         raise RuntimeError(message)
-    draft = generate_demo(day, selected, site) if demo else generate_with_gemini(day, selected, site)
+    try:
+        draft = generate_demo(day, selected, site) if demo else generate_with_gemini(day, selected, site)
+    except Exception as error:
+        # The README promises a failure record for every aborted day; without
+        # this, a generation error left only the Actions log as evidence.
+        _write_json(run_dir / "quality-report.json", {
+            "status": "BLOCKED",
+            "errors": [str(error)],
+            "warnings": source_health_warnings(collector_errors, selected),
+            "collector_errors": collector_errors,
+        })
+        raise
     report = inspect_draft(draft, site)
     report.warnings.extend(source_health_warnings(collector_errors, selected))
     if report.status != "READY_FOR_MANUAL_REVIEW":

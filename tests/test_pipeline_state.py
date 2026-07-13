@@ -2,6 +2,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from tistory_newsroom.assets import create_image_assets
 from tistory_newsroom.generate import generate_demo
@@ -12,6 +13,7 @@ from tistory_newsroom.pipeline import (
     prune_expired_details,
     record_historical_url_keys,
     refresh_hero_image,
+    run,
     source_health_warnings,
 )
 from tistory_newsroom.render import write_outputs
@@ -69,6 +71,35 @@ class PipelineStateTest(unittest.TestCase):
 
         healthy = source_health_warnings([], [community, article])
         self.assertEqual(healthy, [])
+
+    def test_generation_failure_still_writes_a_blocked_quality_report(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            write_json(root / "config/site.json", {
+                "blog_name": "테스트", "author_name": "테스터", "contact_email": "writer@example.com",
+                "blog_url": "https://example.tistory.com",
+                "draft_assets_base_url": "https://example.github.io/repo/tistory/assets",
+            })
+            write_json(root / "config/sources.json", {"sources": [], "selection": {}})
+            items = [
+                SourceItem(
+                    id=f"s{number}", source="GitHub 커뮤니티", topic="AI 모델링", title=f"owner/p{number}",
+                    url=f"https://github.com/owner/p{number}", published_at="", summary="프로젝트",
+                    official_url=f"https://github.com/owner/p{number}", canonical_key=f"https://github.com/owner/p{number}",
+                    verification={"project_kind": "github", "community_source": "github"},
+                )
+                for number in range(1, 4)
+            ]
+            with patch("tistory_newsroom.pipeline.collect_candidates", return_value=(items, ["수집 실패: 요즘IT (HTTP 405)"])), \
+                    patch("tistory_newsroom.pipeline.generate_with_gemini", side_effect=RuntimeError("Gemini 초안 생성 실패: 테스트")):
+                with self.assertRaises(RuntimeError):
+                    run(root=root, date="2026-07-11")
+
+            report = json.loads((root / "data/runs/2026-07-11/quality-report.json").read_text(encoding="utf-8"))
+            self.assertEqual(report["status"], "BLOCKED")
+            self.assertIn("Gemini 초안 생성 실패: 테스트", report["errors"])
+            self.assertTrue(any("기사형 소스 0건" in warning for warning in report["warnings"]))
+            self.assertTrue(any("요즘IT" in warning for warning in report["warnings"]))
 
     def test_ready_daily_draft_is_reused_only_when_every_review_file_exists(self):
         with tempfile.TemporaryDirectory() as directory:

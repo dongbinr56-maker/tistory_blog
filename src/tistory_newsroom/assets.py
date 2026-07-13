@@ -154,9 +154,15 @@ def create_image_assets(root: Path, draft: Draft, asset_base_url: str) -> dict[s
         item: dict[str, str] = {"origin_url": source.image_url, "kind": "source-image"}
         if source.image_url.startswith(("https://", "http://")):
             try:
-                raw, content_type = _fetch_bytes(source.image_url, "image/*,*/*", attempts=2)
+                raw, content_type = _fetch_bytes(source.image_url, "image/*,*/*", attempts=2, max_bytes=10_000_000)
                 if len(raw) > 10_000_000:
                     raise ValueError("image exceeds 10 MB")
+                main_type = content_type.split(";")[0].strip().lower()
+                url_suffix = Path(urllib.parse.urlparse(source.image_url).path).suffix.lower()
+                if not main_type.startswith("image/") and url_suffix not in {".jpg", ".jpeg", ".png", ".webp", ".gif"}:
+                    # Hotlink-blocked hosts return an HTML error page with
+                    # HTTP 200; saving it as issue-N.jpg published broken files.
+                    raise ValueError(f"not an image response: {main_type or 'missing content-type'}")
                 filename = f"issue-{index}{_extension(source.image_url, content_type)}"
                 (directory / filename).write_bytes(raw)
                 item.update({"path": filename, "url": _public_url(asset_base_url, draft.date, filename)})

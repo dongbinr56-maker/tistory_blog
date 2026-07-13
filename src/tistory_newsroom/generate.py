@@ -4,7 +4,6 @@ import json
 import os
 import re
 import time
-import urllib.parse
 import urllib.request
 from typing import Any
 
@@ -115,7 +114,29 @@ def make_rewrite_prompt(date: str, sources: list[SourceItem], draft: dict[str, A
 """
 
 
-def _request_json(endpoint: str, prompt: str, temperature: float) -> dict[str, Any]:
+def _response_text(result: dict[str, Any]) -> str:
+    """Extract the model text with a diagnosable error for each failure shape.
+
+    Indexing result["candidates"][0]... raised a bare KeyError/IndexError on
+    safety blocks, empty responses and truncation, so every failure looked
+    identical after the retry loop.
+    """
+    candidates = result.get("candidates") or []
+    if not candidates:
+        feedback = result.get("promptFeedback") or {}
+        raise ValueError(f"Gemini가 응답 후보를 반환하지 않았습니다 (blockReason: {feedback.get('blockReason') or 'unknown'})")
+    candidate = candidates[0] or {}
+    finish_reason = str(candidate.get("finishReason") or "")
+    parts = (candidate.get("content") or {}).get("parts") or []
+    text = "".join(str(part.get("text") or "") for part in parts if isinstance(part, dict))
+    if not text.strip():
+        raise ValueError(f"Gemini가 텍스트 없이 응답했습니다 (finishReason: {finish_reason or 'unknown'})")
+    if finish_reason and finish_reason != "STOP":
+        raise ValueError(f"Gemini 응답이 완결되지 않았습니다 (finishReason: {finish_reason})")
+    return text
+
+
+def _request_json(endpoint: str, api_key: str, prompt: str, temperature: float) -> dict[str, Any]:
     body = {
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {
@@ -125,11 +146,16 @@ def _request_json(endpoint: str, prompt: str, temperature: float) -> dict[str, A
         },
     }
     payload = json.dumps(body).encode("utf-8")
-    request = urllib.request.Request(endpoint, data=payload, headers={"Content-Type": "application/json"})
+    # The key travels in a header, not the query string, so proxies, server
+    # logs and error messages never see it.
+    request = urllib.request.Request(
+        endpoint,
+        data=payload,
+        headers={"Content-Type": "application/json", "x-goog-api-key": api_key},
+    )
     with urllib.request.urlopen(request, timeout=180) as response:
         result = json.loads(response.read().decode("utf-8"))
-    text = result["candidates"][0]["content"]["parts"][0]["text"]
-    parsed = json.loads(_strip_json_fence(text))
+    parsed = json.loads(_strip_json_fence(_response_text(result)))
     if not isinstance(parsed, dict):
         raise ValueError("Gemini가 JSON 객체를 반환하지 않았습니다.")
     return parsed
@@ -170,10 +196,10 @@ def make_critic_prompt(draft: dict[str, Any]) -> str:
 """
 
 
-def _critic_reasons(endpoint: str, draft: dict[str, Any]) -> list[str]:
+def _critic_reasons(endpoint: str, api_key: str, draft: dict[str, Any]) -> list[str]:
     """A semantic second net behind the pattern rules; never blocks the run by itself."""
     try:
-        verdict = _request_json(endpoint, make_critic_prompt(draft), temperature=0.0)
+        verdict = _request_json(endpoint, api_key, make_critic_prompt(draft), temperature=0.0)
     except Exception:
         return []
     if verdict.get("reads_like_human_editor", True):
@@ -245,12 +271,11 @@ def generate_with_gemini(date: str, sources: list[SourceItem], site: dict[str, A
     if not api_key:
         raise RuntimeError("GEMINI_API_KEY가 없습니다. .env.example과 README의 설정 절차를 확인하세요.")
     model = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash").strip()
-    encoded_key = urllib.parse.quote(api_key, safe="")
-    endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={encoded_key}"
+    endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
     last_error: Exception | None = None
     for retry in range(3):
         try:
-            raw_draft = _request_json(endpoint, make_prompt(date, sources, site), temperature=0.35)
+            raw_draft = _request_json(endpoint, api_key, make_prompt(date, sources, site), temperature=0.35)
             raw_draft["date"] = date
             raw_draft["model"] = model
             raw_draft["editorial_disclosure"] = ""
@@ -259,10 +284,10 @@ def generate_with_gemini(date: str, sources: list[SourceItem], site: dict[str, A
                 if not reasons:
                     # Pattern rules are cheap but literal; consult the model
                     # critic only once they pass, as a deeper reading.
-                    reasons = _critic_reasons(endpoint, raw_draft)
+                    reasons = _critic_reasons(endpoint, api_key, raw_draft)
                 if not reasons:
                     break
-                raw_draft = _request_json(endpoint, make_rewrite_prompt(date, sources, raw_draft, reasons), temperature=0.5)
+                raw_draft = _request_json(endpoint, api_key, make_rewrite_prompt(date, sources, raw_draft, reasons), temperature=0.5)
                 raw_draft["date"] = date
                 raw_draft["model"] = model
                 raw_draft["editorial_disclosure"] = ""
