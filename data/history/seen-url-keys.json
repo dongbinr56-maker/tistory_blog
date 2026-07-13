@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-07-13T09:29:44.521993+00:00",
+  "updated_at": "2026-07-13T16:21:42.640723+00:00",
   "entries": {
     "https://geohot.github.io//blog/jekyll/update/2026/07/12/i-love-llms.html": "2026-07-13",
     "https://github.com/affaan-m/ecc": "2026-07-11",
@@ -14,12 +14,17 @@
     "https://github.com/rynfar/meridian": "2026-07-13",
     "https://github.com/significant-gravitas/autogpt": "2026-07-12",
     "https://himitsushell.com": "2026-07-11",
+    "https://huggingface.co/baidu/unlimited-ocr": "2026-07-14",
     "https://huggingface.co/empero-ai/qwythos-9b-claude-mythos-5-1m-gguf": "2026-07-12",
     "https://huggingface.co/zai-org/glm-5.2": "2026-07-13",
     "https://news.hada.io/topic?id=31321": "2026-07-11",
     "https://news.hada.io/topic?id=31370": "2026-07-13",
+    "https://news.hada.io/topic?id=31387": "2026-07-14",
+    "https://news.ycombinator.com/item?id=48882716": "2026-07-14",
     "https://news.ycombinator.com/item?id=48883275": "2026-07-13",
     "https://news.ycombinator.com/item?id=48883343": "2026-07-13",
-    "https://systima.ai/blog/claude-code-vs-opencode-token-overhead": "2026-07-13"
+    "https://ploy.ai/blog/migrating-a-production-ai-agent-to-gpt-5-6": "2026-07-14",
+    "https://systima.ai/blog/claude-code-vs-opencode-token-overhead": "2026-07-13",
+    "https://www.thevccorner.com/p/the-new-saas-playbook-ai-agent-era": "2026-07-14"
   }
 }
