@@ -3,6 +3,7 @@ import unittest
 from unittest.mock import patch
 
 from tistory_newsroom.generate import (
+    _gate_repair_reasons,
     _request_json,
     _response_text,
     make_rewrite_prompt,
@@ -10,6 +11,40 @@ from tistory_newsroom.generate import (
     newsroom_title_candidates,
 )
 from tistory_newsroom.models import SourceItem
+
+
+class GateRepairTest(unittest.TestCase):
+    def _secondary_source(self):
+        return [
+            SourceItem(
+                id="a", source="www.thevccorner.com", topic="생성형 AI", title="SaaS 기사",
+                url="https://www.thevccorner.com/post", published_at="", summary="AI 에이전트와 SaaS에 대한 분석 기사입니다.",
+            )
+        ]
+
+    def test_flags_short_fields_and_missing_attribution(self):
+        draft = {"sections": [{
+            "source_ids": ["a"],
+            "what_happened": "귀속 없이 쓴 사실 요약입니다.",
+            "plain_explanation": "짧은 설명",
+            "why_it_matters": "영" * 60,
+            "editorial_take": "판" * 130,
+            "reader_action": "행" * 45,
+        }]}
+        reasons = _gate_repair_reasons(draft, self._secondary_source())
+        self.assertTrue(any("plain_explanation" in reason for reason in reasons))
+        self.assertTrue(any("www.thevccorner.com" in reason for reason in reasons))
+
+    def test_accepts_attribution_written_without_the_www_prefix(self):
+        draft = {"sections": [{
+            "source_ids": ["a"],
+            "what_happened": "thevccorner.com의 분석에 따르면 SaaS의 가치가 업무 완결로 이동하고 있습니다.",
+            "plain_explanation": "설" * 90,
+            "why_it_matters": "영" * 60,
+            "editorial_take": "판" * 130,
+            "reader_action": "행" * 45,
+        }]}
+        self.assertEqual(_gate_repair_reasons(draft, self._secondary_source()), [])
 
 
 class ResponseParsingTest(unittest.TestCase):

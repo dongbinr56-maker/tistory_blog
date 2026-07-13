@@ -2,7 +2,7 @@ import unittest
 
 from tistory_newsroom.generate import generate_demo
 from tistory_newsroom.models import SourceItem
-from tistory_newsroom.quality import inspect_draft
+from tistory_newsroom.quality import inspect_draft, names_source
 
 
 SITE = {
@@ -100,6 +100,11 @@ class QualityGateTest(unittest.TestCase):
         report = inspect_draft(draft, SITE)
         self.assertEqual(report.status, "BLOCKED")
         self.assertFalse(report.checks["specific_intro"])
+
+    def test_names_source_tolerates_the_www_prefix_and_case(self):
+        self.assertTrue(names_source("thevccorner.com의 분석에 따르면 가치가 이동하고 있습니다.", "www.thevccorner.com"))
+        self.assertTrue(names_source("WWW.Example.COM 보도에 따르면 서비스가 바뀝니다.", "www.example.com"))
+        self.assertFalse(names_source("아무 귀속 없는 문장입니다.", "www.example.com"))
 
     def test_secondary_source_fact_summary_must_name_the_source(self):
         draft = generate_demo("2026-07-11", sources(), SITE)

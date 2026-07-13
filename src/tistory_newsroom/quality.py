@@ -18,6 +18,27 @@ UNNATURAL_TECH_MARKERS = (
 COMMUNITY_METRIC_MARKERS = (
     "GitHub 스타", "깃허브 스타", "Hugging Face 다운로드", "허깅페이스 다운로드", "다운로드 수", "좋아요 수",
 )
+# Shared with the generation rewrite loop so a shortfall is repaired before
+# the gate blocks the day over a few missing characters.
+SECTION_MINIMUM_LENGTHS = (
+    ("plain_explanation", 90),
+    ("why_it_matters", 60),
+    ("editorial_take", 130),
+    ("reader_action", 45),
+)
+
+
+def names_source(text: str, source_name: str) -> bool:
+    """Check that prose credits the medium, tolerating a www. prefix.
+
+    Gemini wrote "thevccorner.com의 분석에 따르면" for the source
+    "www.thevccorner.com" — correct attribution that an exact substring
+    match rejected.
+    """
+    lowered = text.lower()
+    name = source_name.strip().lower()
+    trimmed = name.removeprefix("www.")
+    return any(candidate and candidate in lowered for candidate in {name, trimmed})
 
 
 def _body_text(draft: Draft) -> str:
@@ -64,7 +85,7 @@ def inspect_draft(draft: Draft, site: dict[str, object]) -> QualityReport:
     ]
     checks["secondary_source_attribution"] = all(
         "원문" in section.what_happened
-        or any(source_by_id[source_id].source in section.what_happened for source_id in section.source_ids if source_id in source_by_id)
+        or any(names_source(section.what_happened, source_by_id[source_id].source) for source_id in section.source_ids if source_id in source_by_id)
         for section in secondary_sections
     )
     if not checks["secondary_source_attribution"]:
@@ -72,11 +93,22 @@ def inspect_draft(draft: Draft, site: dict[str, object]) -> QualityReport:
 
     # why_it_matters stays short on purpose: forcing 90+ characters pushed the
     # model to restate editorial_take, which reads as padded machine text.
-    checks["plain_language_and_engineering_value"] = all(len(section.plain_explanation) >= 90 and len(section.why_it_matters) >= 60 and len(section.editorial_take) >= 130 for section in draft.sections)
+    minimums = dict(SECTION_MINIMUM_LENGTHS)
+    checks["plain_language_and_engineering_value"] = all(
+        len(section.plain_explanation) >= minimums["plain_explanation"]
+        and len(section.why_it_matters) >= minimums["why_it_matters"]
+        and len(section.editorial_take) >= minimums["editorial_take"]
+        for section in draft.sections
+    )
     if not checks["plain_language_and_engineering_value"]:
         errors.append("각 이슈에는 일반인 설명과 엔지니어 관점의 충분한 분석이 필요합니다.")
 
-    checks["original_value_added"] = all(len(section.editorial_take) >= 130 and len(section.why_it_matters) >= 60 and len(section.reader_action) >= 45 for section in draft.sections)
+    checks["original_value_added"] = all(
+        len(section.editorial_take) >= minimums["editorial_take"]
+        and len(section.why_it_matters) >= minimums["why_it_matters"]
+        and len(section.reader_action) >= minimums["reader_action"]
+        for section in draft.sections
+    )
     if not checks["original_value_added"]:
         errors.append("각 이슈에는 충분한 영향 분석·독자적 해설·독자 행동 제안이 필요합니다.")
 

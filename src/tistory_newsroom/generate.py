@@ -8,6 +8,7 @@ import urllib.request
 from typing import Any
 
 from .models import Draft, SourceItem
+from .quality import SECTION_MINIMUM_LENGTHS, names_source
 from .style import (
     generic_editorial_markers,
     generic_pattern_reasons,
@@ -15,6 +16,13 @@ from .style import (
     project_aliases,
     section_overlap_reasons,
 )
+
+_FIELD_LABELS = {
+    "plain_explanation": "일반인 설명(plain_explanation)",
+    "why_it_matters": "영향 분석(why_it_matters)",
+    "editorial_take": "작성자 판단(editorial_take)",
+    "reader_action": "독자 행동 제안(reader_action)",
+}
 
 
 def _strip_json_fence(value: str) -> str:
@@ -33,9 +41,10 @@ def make_prompt(date: str, sources: list[SourceItem], site: dict[str, Any]) -> s
 - 독자는 AI를 처음 접하는 일반인부터 실무 AI 엔지니어까지다. plain_explanation에서는 일상어로 2~3문장 안에 풀어 씁니다. 비유("마치 ~처럼", "~와 같아서")는 글 전체를 통틀어 최대 한 번만 사용하고, 나머지 설명은 실제 동작과 사용 흐름으로 풀어냅니다.
 - 원문을 복제·번역·문장 치환하지 말고, 사실을 짧게 요약한 뒤 독자에게 새로운 가치를 주는 분석을 작성합니다.
 - 각 이슈에서 what_happened(확인된 사실), plain_explanation(일반인 설명), why_it_matters(영향), editorial_take(작성자 판단), reader_action(직접 해볼 점검)을 제공하되, 필드명 자체를 본문에서 되풀이하지 않습니다. why_it_matters는 이 사실이 실무 흐름에서 무엇을 바꾸는지 1~3문장으로 짧게 쓰고, editorial_take는 도입 전에 확인할 조건·한계·대안을 최소 하나 담은 작성자의 견해를 씁니다. 두 필드에 같은 내용이나 같은 문장을 반복하면 안 됩니다.
+- 필드 최소 분량(공백 포함): plain_explanation 90자, why_it_matters 60자, editorial_take 130자, reader_action 45자. 분량을 채우려 수식어를 덧붙이지 말고 사실과 조건을 하나 더 담으세요.
 - 마크다운 문법(백틱 `, 별표 강조, # 제목)을 어떤 필드에도 쓰지 않습니다. 프로젝트 이름은 기호 없이 그대로 씁니다.
 - GitHub 스타·포크·Hugging Face 좋아요·다운로드 수, 사용량 한도, 성능 수치처럼 시점에 따라 달라지거나 오독되기 쉬운 숫자는 본문에 쓰지 않습니다. 이 값은 별도 검토 화면의 사실·수치 근거로만 남깁니다.
-- official_url이 없는 항목은 2차 출처입니다. what_happened 첫 문장에서 반드시 실제 매체 이름을 넣어 "요즘IT에 따르면" 또는 "GeekNews는 …라고 소개한다"처럼 출처에 귀속하고, 규제·법률·서비스 중단·회사 관계·인과관계는 입력 summary에 있어도 독립 사실처럼 단정하거나 확대 해석하지 않습니다.
+- official_url이 없는 항목은 2차 출처입니다. what_happened 첫 문장에서 반드시 해당 입력의 source 값을 표기 그대로 넣어 "요즘IT에 따르면"처럼 출처에 귀속하고(예: source가 "www.example.com"이면 "www.example.com"이라고 쓰기), 규제·법률·서비스 중단·회사 관계·인과관계는 입력 summary에 있어도 독립 사실처럼 단정하거나 확대 해석하지 않습니다.
 - 표, JSON, 사전, 체크리스트 형태로 "모델: 해당 없음" 같은 빈 항목을 나열하지 않습니다. 모델과 직접 관련 없는 도구라면 그 도구가 해결하는 개발 문제와 사용 흐름만 설명합니다.
 - 출처에 없는 숫자, 인용, 사건, 제품 기능을 지어내지 않습니다. 불확실하면 단정하지 않습니다.
 - 선정적 제목, 광고 클릭 유도, 의료·법률·투자 조언, 타사 비방을 쓰지 않습니다.
@@ -98,6 +107,7 @@ def make_rewrite_prompt(date: str, sources: list[SourceItem], draft: dict[str, A
 - 비유("마치 ~처럼")는 글 전체에서 최대 한 번만 쓰고, 과장된 말투·강의안 말투·독자 호명은 피합니다. 문단을 "~에 기여합니다", "~할 수 있을 것입니다", "~을 보여줍니다"로 끝내지 않습니다.
 - "AI 기술이 빠르게 발전", "오늘 살펴볼 소식", "독자 여러분", "함께 살펴보", "실질적인 인사이트", "가치를 창출", "다음 주에도"는 절대 쓰지 않습니다.
 - why_it_matters와 editorial_take가 같은 내용을 반복하면 안 됩니다. 마크다운 문법(백틱 등)은 쓰지 않습니다.
+- 필드 최소 분량(공백 포함)을 지킵니다: plain_explanation 90자, why_it_matters 60자, editorial_take 130자, reader_action 45자. 공식 페이지가 없는 2차 출처 이슈는 what_happened 첫 문장에 입력의 source 값을 표기 그대로 넣어 귀속을 유지합니다.
 - `editorial_disclosure`는 빈 문자열로 둡니다. 공개 글 안에 작성 방식이나 검토 과정에 관한 언급을 넣지 않습니다.
 - JSON 구조와 모든 section의 source_ids는 유지합니다. 다른 문장 없이 JSON 하나만 반환합니다.
 
@@ -170,9 +180,42 @@ def _section_field_pairs(draft: dict[str, Any]) -> list[tuple[str, str]]:
     ]
 
 
+def _gate_repair_reasons(draft: dict[str, Any], sources: list[SourceItem]) -> list[str]:
+    """Mirror the mechanical quality-gate checks so a rewrite fixes them first.
+
+    Without this the gate blocked a whole day over a plain_explanation four
+    characters short of the minimum — a defect the rewrite loop repairs
+    trivially when told about it.
+    """
+    reasons: list[str] = []
+    sections = draft.get("sections") if isinstance(draft.get("sections"), list) else []
+    source_by_id = {source.id: source for source in sources}
+    for number, section in enumerate([item for item in sections if isinstance(item, dict)], start=1):
+        for field, minimum in SECTION_MINIMUM_LENGTHS:
+            length = len(str(section.get(field) or ""))
+            if length < minimum:
+                reasons.append(
+                    f"{number}번째 이슈의 {_FIELD_LABELS.get(field, field)}이 {length}자로 짧습니다. 내용을 더 구체화해 {minimum}자 이상으로 쓰세요."
+                )
+        section_sources = [source_by_id[source_id] for source_id in section.get("source_ids") or [] if source_id in source_by_id]
+        secondary = bool(section_sources) and all(not source.official_url for source in section_sources)
+        what_happened = str(section.get("what_happened") or "")
+        if secondary and "원문" not in what_happened and not any(names_source(what_happened, source.source) for source in section_sources):
+            names = ", ".join(source.source for source in section_sources)
+            reasons.append(
+                f"{number}번째 이슈는 공식 페이지가 없는 2차 출처입니다. what_happened 첫 문장에 매체 이름({names})을 그대로 넣어 귀속하세요."
+            )
+    return reasons
+
+
 def _rewrite_reasons(draft: dict[str, Any], sources: list[SourceItem]) -> list[str]:
     text = _draft_text(draft)
-    reasons = generic_editorial_markers(text) + generic_pattern_reasons(text) + section_overlap_reasons(_section_field_pairs(draft))
+    reasons = (
+        generic_editorial_markers(text)
+        + generic_pattern_reasons(text)
+        + section_overlap_reasons(_section_field_pairs(draft))
+        + _gate_repair_reasons(draft, sources)
+    )
     if len(mentioned_projects(str(draft.get("intro") or ""), sources)) < 2:
         reasons.append("도입부가 실제로 다루는 프로젝트 이름을 최소 두 개 직접 언급하지 않았습니다.")
     return reasons
