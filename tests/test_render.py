@@ -41,6 +41,44 @@ class RenderTest(unittest.TestCase):
         self.assertNotIn("발행 전 사람이", article)
         self.assertNotIn("<aside", article)
 
+    def test_article_has_no_fixed_section_scaffolding(self):
+        draft = generate_demo("2026-07-11", self.sources, self.site)
+        article = render_article_html(draft, self.site)
+        for label in ("이번 변화의 요점", "쉽게 풀어 보면", "실무에서 달라지는 점", "먼저 볼 지점", "확인해 볼 것", "ISSUE 0", "<h3>", "마무리</h2>"):
+            self.assertNotIn(label, article)
+        self.assertIn('class="action"', article)
+        self.assertIn('class="sources"', article)
+        self.assertIn('class="closing"', article)
+        self.assertIn(".editor-note", article)
+
+    def test_published_draft_page_is_noindex_wrapped(self):
+        draft = generate_demo("2026-07-11", self.sources, self.site)
+        report = inspect_draft(draft, self.site)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            write_outputs(root, draft, report, self.site)
+            page = (root / "docs" / "tistory" / "2026-07-11.html").read_text(encoding="utf-8")
+        self.assertTrue(page.startswith("<!doctype html"))
+        self.assertIn('<meta name="robots" content="noindex,nofollow">', page)
+        self.assertIn('<article class="tistory-newsroom"', page)
+        self.assertIn("</article>", page)
+
+    def test_copy_page_requires_a_manual_editor_note_before_copying(self):
+        page = _copy_page([{"date": "2026-07-11", "title": "초안", "title_candidates": [], "tags": [], "quality_status": "OK", "publish_checklist": [], "html_path": "tistory/2026-07-11.html"}])
+        self.assertIn("editor-note", page)
+        self.assertIn("작성자 코멘트", page)
+        self.assertIn("note.length<60", page)
+        self.assertIn("withEditorNote", page)
+
+    def test_copy_page_shows_run_warnings(self):
+        page = _copy_page([{"date": "2026-07-11", "title": "초안", "title_candidates": [], "tags": [], "quality_status": "OK", "publish_checklist": [], "warnings": ["수집 경고: 요즘IT 405"], "html_path": "tistory/2026-07-11.html"}])
+        self.assertIn("실행 경고", page)
+        self.assertIn("values(raw.warnings)", page)
+
+    def test_review_surfaces_are_noindex(self):
+        page = _copy_page([])
+        self.assertIn('<meta name="robots" content="noindex,nofollow">', page)
+
     def test_outputs_include_copy_page(self):
         draft = generate_demo("2026-07-11", self.sources, self.site)
         report = inspect_draft(draft, self.site)
@@ -55,6 +93,23 @@ class RenderTest(unittest.TestCase):
             self.assertIn("writer@myblog.kr", contact_page)
             self.assertNotIn("{{contact_email}}", contact_page)
 
+    def test_policy_pages_resolve_josa_and_are_noindex(self):
+        draft = generate_demo("2026-07-11", self.sources, self.site)
+        report = inspect_draft(draft, self.site)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            write_outputs(root, draft, report, self.site)
+            about = (root / "docs" / "tistory-pages" / "about.html").read_text(encoding="utf-8")
+            privacy = (root / "docs" / "tistory-pages" / "privacy.html").read_text(encoding="utf-8")
+        self.assertIn("테스터는", about)
+        self.assertIn("테스트 블로그를", about)
+        self.assertNotIn("은(는)", about)
+        self.assertNotIn("을(를)", about)
+        self.assertIn("테스트 블로그는", privacy)
+        self.assertNotIn("초안", privacy)
+        self.assertIn('<meta name="robots" content="noindex,nofollow">', privacy)
+        self.assertIn("본문 HTML 복사", about)
+
     def test_copy_page_escapes_dynamic_values(self):
         page = _copy_page([{"date": "2026-07-11", "title": "</script><img src=x onerror=alert(1)>", "title_candidates": [], "tags": [], "quality_status": "OK", "publish_checklist": [], "html_path": "tistory/2026-07-11.html"}])
         self.assertIn("function escapeHtml", page)
@@ -66,7 +121,8 @@ class RenderTest(unittest.TestCase):
         self.assertIn('data-tab="html"', page)
         self.assertIn('data-tab="view"', page)
         self.assertIn('frame.src=raw.html_path', page)
-        self.assertIn('currentHtml=await response.text()', page)
+        self.assertIn("pageText.indexOf('<article'", page)
+        self.assertIn("pageText.lastIndexOf('</article>')", page)
 
     def test_copy_page_can_dispatch_a_same_day_regeneration_without_storing_the_token(self):
         page = _copy_page(

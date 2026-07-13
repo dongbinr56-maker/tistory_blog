@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 
-from tistory_newsroom.collect import _fetch_headers, choose_diverse
+from tistory_newsroom.collect import _canonical, _fetch_headers, choose_diverse, identifying_query
 from tistory_newsroom.models import SourceItem
 
 
@@ -18,6 +18,32 @@ def item(number: int, project_kind: str = "", community: bool = False) -> Source
         canonical_key=f"project-{number}",
         verification={"project_kind": project_kind, **({"community_source": project_kind} if community else {})} if project_kind else {},
     )
+
+
+class UrlKeyTest(unittest.TestCase):
+    def test_canonical_key_keeps_the_identifying_id_but_drops_tracking_params(self):
+        self.assertEqual(
+            _canonical("https://news.hada.io/topic?id=31363", ""),
+            "https://news.hada.io/topic?id=31363",
+        )
+        self.assertEqual(
+            _canonical("https://news.hada.io/topic?id=31363&utm_source=rss#comments", ""),
+            "https://news.hada.io/topic?id=31363",
+        )
+        self.assertEqual(
+            _canonical("https://news.example.com/post?utm_source=x&utm_medium=y", ""),
+            "https://news.example.com/post",
+        )
+
+    def test_two_geeknews_articles_keep_distinct_keys(self):
+        first = _canonical("https://news.hada.io/topic?id=1", "")
+        second = _canonical("https://news.hada.io/topic?id=2", "")
+        self.assertNotEqual(first, second)
+
+    def test_identifying_query_only_keeps_id(self):
+        self.assertEqual(identifying_query("id=31363&utm_source=rss"), "id=31363")
+        self.assertEqual(identifying_query("utm_source=rss"), "")
+        self.assertEqual(identifying_query(""), "")
 
 
 class SelectionTest(unittest.TestCase):
@@ -37,6 +63,11 @@ class SelectionTest(unittest.TestCase):
         self.assertEqual(len(selected), 3)
         self.assertEqual(selected[0].verification["project_kind"], "github")
         self.assertEqual(selected[0].verification["community_source"], "github")
+
+    def test_a_day_rich_in_articles_earns_a_fourth_slot(self):
+        selected = choose_diverse([item(1, "github", community=True), item(2), item(3), item(4), item(5)], 3, [])
+        self.assertEqual(len(selected), 4)
+        self.assertEqual(sum(bool(chosen.verification.get("community_source")) for chosen in selected), 1)
 
     def test_excludes_a_previously_selected_official_project_url(self):
         prior_project = item(1, "github", community=True)

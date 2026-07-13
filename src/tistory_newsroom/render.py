@@ -57,29 +57,34 @@ def _fact_review_item(source: Any) -> dict[str, Any]:
 
 
 def render_article_html(draft: Draft, site: dict[str, Any]) -> str:
+    # No fixed sub-headings and no issue numbering on purpose: identical
+    # scaffolding on every post is what makes an archive read as machine
+    # output. The section fields flow as ordinary prose paragraphs.
     sources = {source.id: source for source in draft.source_items}
     hero = draft.images.get("hero", {})
     hero_image = f'<img class="hero-image" src="{esc(hero.get("url"))}" alt="{esc(draft.title)} 대표 이미지">' if hero.get("url") else ""
     sections: list[str] = []
-    for number, section in enumerate(draft.sections, start=1):
+    for section in draft.sections:
         source_image = next((draft.images.get(source_id, {}) for source_id in section.source_ids if draft.images.get(source_id, {}).get("url")), {})
         issue_image = f'<img class="issue-image" src="{esc(source_image.get("url"))}" alt="{esc(section.headline)} 관련 이미지">' if source_image else ""
-        links = "".join(
-            f'<li><a href="{esc(sources[source_id].url)}" rel="nofollow noopener noreferrer" target="_blank">{esc(sources[source_id].source)} 원문 보기</a></li>'
+        links = " · ".join(
+            f'<a href="{esc(sources[source_id].url)}" rel="nofollow noopener noreferrer" target="_blank">{esc(sources[source_id].source)} 원문</a>'
             for source_id in section.source_ids
             if source_id in sources
         )
+        source_line = f'<p class="sources">참고: {links}</p>' if links else ""
+        action = f'<p class="action">{esc(section.reader_action)}</p>' if section.reader_action.strip() else ""
+        body = "".join(
+            paragraphs(value)
+            for value in (section.what_happened, section.plain_explanation, section.why_it_matters, section.editorial_take)
+        )
         sections.append(
             f"""<section class="issue-card">
-  <p class="issue-number">ISSUE {number:02d}</p>
   <h2>{esc(section.headline)}</h2>
   {issue_image}
-  <h3>이번 변화의 요점</h3>{paragraphs(section.what_happened)}
-  <h3>쉽게 풀어 보면</h3>{paragraphs(section.plain_explanation)}
-  <h3>실무에서 달라지는 점</h3>{paragraphs(section.why_it_matters)}
-  <h3>먼저 볼 지점</h3>{paragraphs(section.editorial_take)}
-  <h3>확인해 볼 것</h3>{paragraphs(section.reader_action)}
-  <h3>출처</h3><ul class="sources">{links}</ul>
+  {body}
+  {action}
+  {source_line}
 </section>"""
         )
     return f"""<article class="tistory-newsroom" lang="ko">
@@ -90,11 +95,14 @@ def render_article_html(draft: Draft, site: dict[str, Any]) -> str:
     .tistory-newsroom .hero-image {{max-height:380px}} .tistory-newsroom .issue-image {{max-height:330px}}
     .tistory-newsroom h1 {{margin:0 0 16px;color:#111827;font-size:30px;line-height:1.38}}
     .tistory-newsroom h2 {{color:#111827;font-size:23px;line-height:1.45}}
-    .tistory-newsroom h3 {{margin:20px 0 6px;color:#334155;font-size:16px}}
     .tistory-newsroom p {{margin:0 0 14px}}
-    .tistory-newsroom .eyebrow,.tistory-newsroom .issue-number {{color:#0f766e;font-weight:700;font-size:13px;letter-spacing:.04em}}
+    .tistory-newsroom .eyebrow {{color:#0f766e;font-weight:700;font-size:13px;letter-spacing:.04em}}
     .tistory-newsroom .issue-card {{margin:28px 0;padding:24px;border:1px solid #e2e8f0;border-radius:16px;background:#fff}}
-    .tistory-newsroom .sources {{padding-left:20px}} .tistory-newsroom a {{color:#0f766e}}
+    .tistory-newsroom .action {{margin:18px 0 10px;padding:14px 16px;border-left:3px solid #0f766e;border-radius:0 10px 10px 0;background:#f0fdfa}}
+    .tistory-newsroom .sources {{margin:6px 0 0;color:#64748b;font-size:14px}}
+    .tistory-newsroom .editor-note {{margin:20px 0;padding:16px 18px;border-left:4px solid #334155;border-radius:0 12px 12px 0;background:#f8fafc;font-style:normal}}
+    .tistory-newsroom .closing {{margin-top:28px}}
+    .tistory-newsroom a {{color:#0f766e}}
   </style>
   <header class="hero">
     {hero_image}
@@ -103,8 +111,22 @@ def render_article_html(draft: Draft, site: dict[str, Any]) -> str:
     {paragraphs(draft.intro)}
   </header>
   {''.join(sections)}
-  <section><h2>마무리</h2>{paragraphs(draft.closing)}</section>
+  <section class="closing">{paragraphs(draft.closing)}</section>
 </article>"""
+
+
+def draft_review_page(article_html: str, title: str) -> str:
+    """Wrap the article fragment as a noindex review document.
+
+    The same article is later published on Tistory. Without noindex the GitHub
+    Pages copy is crawled first and the Tistory post reads as the duplicate.
+    """
+    return f"""<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>{esc(title)} — 검토용 초안</title></head>
+<body style="margin:0;padding:24px 12px;background:#f3f6fa">
+{article_html}
+</body></html>
+"""
 
 
 def _copy_page(drafts: list[dict[str, Any]], site: dict[str, Any] | None = None) -> str:
@@ -117,9 +139,9 @@ def _copy_page(drafts: list[dict[str, Any]], site: dict[str, Any] | None = None)
     }
     automation_payload = json.dumps(automation, ensure_ascii=False).replace("</", "<\\/")
     template = """<!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>티스토리 초안 검토</title>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>티스토리 초안 검토</title>
 <style>
-body{margin:0;background:#f3f6fa;color:#172033;font-family:Apple SD Gothic Neo,Malgun Gothic,sans-serif;line-height:1.6}main{width:min(1120px,calc(100% - 32px));margin:36px auto}header,.panel{border:1px solid #dbe4ee;border-radius:18px;background:#fff;box-shadow:0 10px 30px #0f17210b}header{padding:28px;margin-bottom:18px}h1,h2{margin:0 0 8px}.muted{color:#64748b}.layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:18px}.panel{padding:18px}.draft-button{width:100%;margin:5px 0;padding:12px;border:1px solid #dbe4ee;border-radius:10px;background:#fff;text-align:left;cursor:pointer}.draft-button:hover,.draft-button.active{background:#ecfdf5;border-color:#5eead4}.copy{width:auto;padding:9px 13px;border:0;border-radius:9px;background:#0f766e;color:#fff;font-weight:700;cursor:pointer}.copy:disabled{background:#94a3b8;cursor:not-allowed}.field{padding:12px;margin:10px 0;background:#f8fafc;border-radius:10px;overflow-wrap:anywhere}.field b{display:block;margin-bottom:5px}.field p{margin:4px 0 10px;color:#526174;font-size:14px}.fact-review{margin:8px 0;padding:10px;border:1px solid #dbe4ee;border-radius:8px;background:#fff}.fact-review summary{cursor:pointer;font-weight:700}.fact-review p,.fact-review li{font-size:13px}.fact-review ul{margin:8px 0;padding-left:20px}.fact-review a{color:#0f766e}.regenerate{border:1px solid #fed7aa;background:#fffaf5}.regenerate .copy{background:#c2410c}.regenerate-panel{margin-top:12px;padding:12px;border:1px solid #fed7aa;border-radius:9px;background:#fff}.regenerate-panel label{display:block;font-size:14px;font-weight:700}.regenerate-panel input{display:block;width:100%;margin:7px 0;padding:10px;border:1px solid #cbd5e1;border-radius:8px;box-sizing:border-box}.regenerate-status{display:block;min-height:20px;margin-top:9px;color:#9a3412;font-size:13px;font-weight:700}.workflow-link{color:#0f766e;font-size:13px}.tabs{display:flex;gap:8px;margin:22px 0 0;border-bottom:1px solid #dbe4ee}.tab{min-width:88px;padding:10px 15px;border:0;border-radius:10px 10px 0 0;background:#eef2f7;color:#526174;font-weight:800;cursor:pointer}.tab[aria-selected="true"]{background:#0f766e;color:#fff}.tab-pane{padding-top:16px}.tab-pane[hidden]{display:none}textarea{display:block;width:100%;min-height:520px;resize:vertical;padding:16px;border:1px solid #cbd5e1;border-radius:12px;background:#0b1220;color:#d9f99d;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;box-sizing:border-box}iframe{display:block;width:100%;height:620px;border:1px solid #dbe4ee;border-radius:12px;background:#fff}.pane-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.pane-head p{margin:0;color:#64748b;font-size:14px}.status{min-height:20px;margin-top:12px;color:#0f766e;font-size:14px;font-weight:700}.policy-link{color:#0f766e}@media(max-width:760px){main{width:min(100% - 20px,1120px);margin:12px auto}.layout{grid-template-columns:1fr}.pane-head{align-items:stretch;flex-direction:column}.copy{width:100%}textarea{min-height:400px}iframe{height:520px}}
+body{margin:0;background:#f3f6fa;color:#172033;font-family:Apple SD Gothic Neo,Malgun Gothic,sans-serif;line-height:1.6}main{width:min(1120px,calc(100% - 32px));margin:36px auto}header,.panel{border:1px solid #dbe4ee;border-radius:18px;background:#fff;box-shadow:0 10px 30px #0f17210b}header{padding:28px;margin-bottom:18px}h1,h2{margin:0 0 8px}.muted{color:#64748b}.layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:18px}.panel{padding:18px}.draft-button{width:100%;margin:5px 0;padding:12px;border:1px solid #dbe4ee;border-radius:10px;background:#fff;text-align:left;cursor:pointer}.draft-button:hover,.draft-button.active{background:#ecfdf5;border-color:#5eead4}.copy{width:auto;padding:9px 13px;border:0;border-radius:9px;background:#0f766e;color:#fff;font-weight:700;cursor:pointer}.copy:disabled{background:#94a3b8;cursor:not-allowed}.field{padding:12px;margin:10px 0;background:#f8fafc;border-radius:10px;overflow-wrap:anywhere}.field b{display:block;margin-bottom:5px}.field p{margin:4px 0 10px;color:#526174;font-size:14px}.fact-review{margin:8px 0;padding:10px;border:1px solid #dbe4ee;border-radius:8px;background:#fff}.fact-review summary{cursor:pointer;font-weight:700}.fact-review p,.fact-review li{font-size:13px}.fact-review ul{margin:8px 0;padding-left:20px}.fact-review a{color:#0f766e}.regenerate{border:1px solid #fed7aa;background:#fffaf5}.regenerate .copy{background:#c2410c}.regenerate-panel{margin-top:12px;padding:12px;border:1px solid #fed7aa;border-radius:9px;background:#fff}.regenerate-panel label{display:block;font-size:14px;font-weight:700}.regenerate-panel input{display:block;width:100%;margin:7px 0;padding:10px;border:1px solid #cbd5e1;border-radius:8px;box-sizing:border-box}.regenerate-status{display:block;min-height:20px;margin-top:9px;color:#9a3412;font-size:13px;font-weight:700}.workflow-link{color:#0f766e;font-size:13px}.tabs{display:flex;gap:8px;margin:22px 0 0;border-bottom:1px solid #dbe4ee}.tab{min-width:88px;padding:10px 15px;border:0;border-radius:10px 10px 0 0;background:#eef2f7;color:#526174;font-weight:800;cursor:pointer}.tab[aria-selected="true"]{background:#0f766e;color:#fff}.tab-pane{padding-top:16px}.tab-pane[hidden]{display:none}textarea{display:block;width:100%;min-height:520px;resize:vertical;padding:16px;border:1px solid #cbd5e1;border-radius:12px;background:#0b1220;color:#d9f99d;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;box-sizing:border-box}iframe{display:block;width:100%;height:620px;border:1px solid #dbe4ee;border-radius:12px;background:#fff}.pane-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.pane-head p{margin:0;color:#64748b;font-size:14px}.status{min-height:20px;margin-top:12px;color:#0f766e;font-size:14px;font-weight:700}.policy-link{color:#0f766e}.field.warnings{border:1px solid #fed7aa;background:#fffaf5}.field.warnings ul{margin:6px 0 0;padding-left:18px}.field.warnings li{margin:4px 0;color:#9a3412;font-size:13px}#editor-note{display:block;width:100%;min-height:96px;margin-top:8px;padding:10px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#172033;font:14px/1.6 Apple SD Gothic Neo,Malgun Gothic,sans-serif;box-sizing:border-box;resize:vertical}@media(max-width:760px){main{width:min(100% - 20px,1120px);margin:12px auto}.layout{grid-template-columns:1fr}.pane-head{align-items:stretch;flex-direction:column}.copy{width:100%}textarea{min-height:400px}iframe{height:520px}}
 </style></head><body><main><header><h1>티스토리 초안 검토</h1><p class="muted">기본 화면은 HTML 소스입니다. 티스토리 글쓰기의 HTML 모드에 그대로 붙여넣고, View에서 실제 렌더링 결과를 확인하세요.</p><a class="policy-link" href="tistory-pages/index.html">티스토리 정책 페이지 복사본</a> · <a class="policy-link" href="adsense-checklist.html">애드센스 발행 전 체크리스트</a></header><div class="layout"><aside class="panel" id="list" aria-label="초안 날짜 목록"></aside><section class="panel" id="detail" aria-live="polite"></section></div></main>
 <script>
 const drafts=__DRAFT_PAYLOAD__;
@@ -180,15 +202,27 @@ async function triggerRegeneration(){
     input.value='';regenerationStatus('재생성 작업을 시작했습니다. 품질 검토를 통과한 경우에만 기존 초안을 덮어씁니다.');pollRegeneration(token,startedAt);
   }catch(error){regenerationStatus(`재생성 요청에 실패했습니다: ${error.message}`);button.disabled=false;}
 }
+function withEditorNote(html,note){
+  const block=`\\n  <section class="editor-note"><p>${escapeHtml(note).replace(/\\n{2,}/g,'</p><p>').replace(/\\n/g,'<br>')}</p></section>`;
+  if(html.includes('</header>'))return html.replace('</header>',`</header>${block}`);
+  return html.includes('</article>')?html.replace('</article>',`${block}\\n</article>`):html+block;
+}
 function renderDetail(raw){
   const d={title:escapeHtml(raw.title),date:escapeHtml(raw.date),tags:values(raw.tags).map(escapeHtml),candidates:values(raw.title_candidates).map(escapeHtml),quality:escapeHtml(raw.quality_status),checks:values(raw.publish_checklist).map(escapeHtml)};
+  const warningItems=values(raw.warnings).map(escapeHtml);
+  const warningsBlock=warningItems.length?`<div class="field warnings"><b>실행 경고</b><ul>${warningItems.map(item=>`<li>${item}</li>`).join('')}</ul></div>`:'';
   const heroDownload=raw.images?.hero?.url?`<div class="field"><b>본문 대표 이미지</b><p>본문 맨 위에 들어가는 제목 텍스트 포함 PNG 원본입니다.</p><button class="copy" id="download-hero" type="button">본문 대표 이미지 다운로드</button></div>`:'';
   const factReview=values(raw.fact_review).map(item=>{const facts=values(item.verified_facts).map(fact=>`<li><b>${escapeHtml(fact.label)}</b> ${escapeHtml(fact.value)}</li>`).join('');const links=[item.source_url?`<a href="${escapeHtml(item.source_url)}" target="_blank" rel="noopener noreferrer">원문</a>`:'',item.official_url?`<a href="${escapeHtml(item.official_url)}" target="_blank" rel="noopener noreferrer">공식 페이지</a>`:''].filter(Boolean).join(' · ');return `<details class="fact-review"><summary>${escapeHtml(item.source)} · ${escapeHtml(item.title)}</summary><p>${escapeHtml(item.manual_review_note)}</p><p>${escapeHtml(item.summary)}</p>${facts?`<ul>${facts}</ul>`:''}<p>${links}</p></details>`;}).join('')||'<p>검토할 사실 근거가 없습니다.</p>';
   const regeneration=automationReady?`<div class="field regenerate"><b>원문 재생성</b><p>같은 날짜의 초안을 새로 작성합니다. 품질 검토를 통과한 경우에만 기존 본문을 덮어씁니다.</p><button class="copy" type="button" id="open-regeneration">원문 재생성</button><div class="regenerate-panel" id="regeneration-panel" hidden><label for="github-token">GitHub fine-grained PAT (Actions 쓰기 권한)</label><input id="github-token" type="password" autocomplete="off" placeholder="github_pat_..." aria-describedby="token-note"><p id="token-note">토큰은 GitHub API로만 전송되며 브라우저 저장소에 보관하지 않습니다.</p><button class="copy" type="button" id="confirm-regeneration">재생성 실행</button><a class="workflow-link" id="workflow-link" href="${escapeHtml(workflowUrl())}" target="_blank" rel="noopener" hidden>Actions 실행 보기</a><span class="regenerate-status" id="regeneration-status"></span></div></div>`:`<div class="field regenerate"><b>원문 재생성</b><p>GitHub 저장소 설정이 없어 재생성 기능을 사용할 수 없습니다.</p><button class="copy" type="button" disabled>원문 재생성</button></div>`;
-  detail.innerHTML=`<h2>${d.title}</h2><div class="field"><b>제목 후보</b>${d.candidates.map(item=>`• ${item}`).join('<br>')}<br><button class="copy" id="copy-title" type="button">제목 복사</button></div><div class="field"><b>태그</b>${d.tags.join(', ')}<br><button class="copy" id="copy-tags" type="button">태그 복사</button></div>${heroDownload}<div class="field"><b>품질 상태</b>${d.quality} · 사람 검토 필수</div><div class="field"><b>사실·수치 검토</b><p>본문에 넣지 않은 변동 수치와 출처 근거입니다. 발행 전에 원문·공식 페이지를 직접 대조하세요.</p>${factReview}</div>${regeneration}<div class="field"><b>발행 전 확인</b><ul>${d.checks.map(item=>`<li>${item}</li>`).join('')}</ul></div><div class="tabs" role="tablist" aria-label="본문 표시 방식"><button class="tab" role="tab" aria-selected="true" aria-controls="html-pane" id="html-tab" data-tab="html">HTML</button><button class="tab" role="tab" aria-selected="false" aria-controls="view-pane" id="view-tab" data-tab="view" tabindex="-1">View</button></div><section class="tab-pane" id="html-pane" data-pane="html" role="tabpanel" aria-labelledby="html-tab"><div class="pane-head"><p>아래 소스를 티스토리 글쓰기의 HTML 모드에 바로 붙여넣으세요.</p><button class="copy" id="copy-html" type="button">본문 HTML 복사</button></div><textarea id="html-code" aria-label="티스토리 본문 HTML" readonly>불러오는 중...</textarea></section><section class="tab-pane" id="view-pane" data-pane="view" role="tabpanel" aria-labelledby="view-tab" hidden><div class="pane-head"><p>HTML 탭의 동일한 원본을 렌더링한 미리보기입니다.</p></div><iframe id="article-view" title="${d.date} 블로그 본문 미리보기" referrerpolicy="no-referrer"></iframe></section><p class="status" id="status"></p>`;
+  detail.innerHTML=`<h2>${d.title}</h2>${warningsBlock}<div class="field"><b>제목 후보</b>${d.candidates.map(item=>`• ${item}`).join('<br>')}<br><button class="copy" id="copy-title" type="button">제목 복사</button></div><div class="field"><b>태그</b>${d.tags.join(', ')}<br><button class="copy" id="copy-tags" type="button">태그 복사</button></div>${heroDownload}<div class="field"><b>품질 상태</b>${d.quality} · 사람 검토 필수</div><div class="field"><b>사실·수치 검토</b><p>본문에 넣지 않은 변동 수치와 출처 근거입니다. 발행 전에 원문·공식 페이지를 직접 대조하세요.</p>${factReview}</div>${regeneration}<div class="field"><b>발행 전 확인</b><ul>${d.checks.map(item=>`<li>${item}</li>`).join('')}</ul></div><div class="field"><b>작성자 코멘트 (복사 전 필수)</b><p>발행 전 자신의 경험이나 판단 한 문단(60자 이상)을 직접 쓰세요. 복사할 때 본문 도입부 바로 아래에 삽입됩니다.</p><textarea id="editor-note" placeholder="예: 셋 중 하나는 이번 주에 직접 붙여 봤는데, 문서와 달리 …"></textarea></div><div class="tabs" role="tablist" aria-label="본문 표시 방식"><button class="tab" role="tab" aria-selected="true" aria-controls="html-pane" id="html-tab" data-tab="html">HTML</button><button class="tab" role="tab" aria-selected="false" aria-controls="view-pane" id="view-tab" data-tab="view" tabindex="-1">View</button></div><section class="tab-pane" id="html-pane" data-pane="html" role="tabpanel" aria-labelledby="html-tab"><div class="pane-head"><p>아래 소스를 티스토리 글쓰기의 HTML 모드에 바로 붙여넣으세요.</p><button class="copy" id="copy-html" type="button">본문 HTML 복사</button></div><textarea id="html-code" aria-label="티스토리 본문 HTML" readonly>불러오는 중...</textarea></section><section class="tab-pane" id="view-pane" data-pane="view" role="tabpanel" aria-labelledby="view-tab" hidden><div class="pane-head"><p>HTML 탭의 동일한 원본을 렌더링한 미리보기입니다.</p></div><iframe id="article-view" title="${d.date} 블로그 본문 미리보기" referrerpolicy="no-referrer"></iframe></section><p class="status" id="status"></p>`;
   detail.querySelector('#copy-title').onclick=()=>copyText(raw.title,'제목');
   detail.querySelector('#copy-tags').onclick=()=>copyText(values(raw.tags).join(','),'태그');
-  detail.querySelector('#copy-html').onclick=()=>copyText(currentHtml,'본문 HTML');
+  detail.querySelector('#copy-html').onclick=()=>{
+    const noteField=detail.querySelector('#editor-note');
+    const note=(noteField?.value||'').trim();
+    if(note.length<60){status(`작성자 코멘트를 60자 이상 직접 작성해야 복사할 수 있습니다. (현재 ${note.length}자)`);noteField?.focus();return;}
+    copyText(withEditorNote(currentHtml,note),'작성자 코멘트를 포함한 본문 HTML');
+  };
   detail.querySelector('#download-hero')?.addEventListener('click',downloadHero);
   detail.querySelector('#open-regeneration')?.addEventListener('click',showRegenerationPanel);
   detail.querySelector('#confirm-regeneration')?.addEventListener('click',triggerRegeneration);
@@ -200,7 +234,7 @@ async function selectDraft(raw){
   document.querySelectorAll('[data-date]').forEach(item=>item.classList.toggle('active',item.dataset.date===raw.date));
   renderDetail(raw);
   const code=detail.querySelector('#html-code'),frame=detail.querySelector('#article-view');
-  try{const response=await fetch(raw.html_path+`?v=${Date.now()}`);if(!response.ok)throw new Error(`HTTP ${response.status}`);currentHtml=await response.text();code.value=currentHtml;frame.src=raw.html_path+`?v=${Date.now()}`;status(`${raw.date} 본문을 불러왔습니다. HTML 탭에서 복사할 수 있습니다.`);}catch(error){const message=`본문을 불러오지 못했습니다: ${error.message}`;code.value=message;frame.removeAttribute('src');status(message);}
+  try{const response=await fetch(raw.html_path+`?v=${Date.now()}`);if(!response.ok)throw new Error(`HTTP ${response.status}`);const pageText=await response.text();const start=pageText.indexOf('<article');const end=pageText.lastIndexOf('</article>');currentHtml=start>=0&&end>start?pageText.slice(start,end+'</article>'.length):pageText;code.value=currentHtml;frame.src=raw.html_path+`?v=${Date.now()}`;status(`${raw.date} 본문을 불러왔습니다. 작성자 코멘트를 쓴 뒤 HTML 탭에서 복사하세요.`);}catch(error){const message=`본문을 불러오지 못했습니다: ${error.message}`;code.value=message;frame.removeAttribute('src');status(message);}
 }
 drafts.forEach((draft,index)=>{const button=document.createElement('button');button.className='draft-button';button.dataset.date=draft.date;button.textContent=`${draft.date} — ${draft.title}`;button.onclick=()=>selectDraft(draft);list.append(button);if(!index)selectDraft(draft);});
 if(!drafts.length)detail.innerHTML='<p>아직 생성된 초안이 없습니다.</p>';
@@ -222,7 +256,33 @@ def _checklist_page(site: dict[str, Any]) -> str:
         "발행 전 사람이 원문·출처·사실·표현을 최종 검토했다.",
     ]
     rows = ''.join(f'<li><label><input type="checkbox"> {esc(item)}</label></li>' for item in items)
-    return f"""<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>애드센스 발행 전 체크리스트</title><style>body{{max-width:800px;margin:40px auto;padding:0 20px;color:#1f2937;font-family:Apple SD Gothic Neo,Malgun Gothic,sans-serif;line-height:1.7}}li{{margin:13px 0;padding:13px;background:#f8fafc;border-radius:9px;list-style:none}}ul{{padding:0}}input{{width:18px;height:18px;vertical-align:middle}}.note{{padding:16px;border-left:4px solid #0f766e;background:#f0fdfa}}</style></head><body><h1>애드센스 발행 전 체크리스트</h1><p>{esc(site.get('blog_name'))} · {today}</p><p class="note">이 목록은 자동 승인을 보장하지 않습니다. Google 정책은 바뀔 수 있으므로 발행 전 공식 정책과 정책 센터를 확인하세요.</p><ul>{rows}</ul><h2>티스토리 페이지 템플릿</h2><p><a href="tistory-pages/index.html">실제 설정값이 반영된 소개·문의·개인정보처리방침·편집 원칙 HTML</a>을 각각 복사해 티스토리 페이지로 등록하세요.</p><p><a href="https://support.google.com/adsense/answer/10008391?hl=ko">Google 게시자 정책</a> · <a href="https://support.google.com/publisherpolicies/answer/11190248?hl=ko">복제 콘텐츠 정책</a> · <a href="https://support.google.com/adsense/answer/12171612?hl=ko">ads.txt 가이드</a></p></body></html>"""
+    return f"""<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>애드센스 발행 전 체크리스트</title><style>body{{max-width:800px;margin:40px auto;padding:0 20px;color:#1f2937;font-family:Apple SD Gothic Neo,Malgun Gothic,sans-serif;line-height:1.7}}li{{margin:13px 0;padding:13px;background:#f8fafc;border-radius:9px;list-style:none}}ul{{padding:0}}input{{width:18px;height:18px;vertical-align:middle}}.note{{padding:16px;border-left:4px solid #0f766e;background:#f0fdfa}}</style></head><body><h1>애드센스 발행 전 체크리스트</h1><p>{esc(site.get('blog_name'))} · {today}</p><p class="note">이 목록은 자동 승인을 보장하지 않습니다. Google 정책은 바뀔 수 있으므로 발행 전 공식 정책과 정책 센터를 확인하세요.</p><ul>{rows}</ul><h2>티스토리 페이지 템플릿</h2><p><a href="tistory-pages/index.html">실제 설정값이 반영된 소개·문의·개인정보처리방침·편집 원칙 HTML</a>을 각각 복사해 티스토리 페이지로 등록하세요.</p><p><a href="https://support.google.com/adsense/answer/10008391?hl=ko">Google 게시자 정책</a> · <a href="https://support.google.com/publisherpolicies/answer/11190248?hl=ko">복제 콘텐츠 정책</a> · <a href="https://support.google.com/adsense/answer/12171612?hl=ko">ads.txt 가이드</a></p></body></html>"""
+
+
+_JOSA_PAIRS = {
+    "은(는)": ("은", "는"),
+    "이(가)": ("이", "가"),
+    "을(를)": ("을", "를"),
+    "과(와)": ("과", "와"),
+}
+_JOSA_PATTERN = re.compile("(.)(" + "|".join(re.escape(token) for token in _JOSA_PAIRS) + ")")
+
+
+def _resolve_josa(text: str) -> str:
+    """Pick 은/는·이/가·을/를·과/와 from the final consonant of the substituted word.
+
+    Templates write "{{author_name}}은(는)"; leaving the pair form in a published
+    page ("덩베은(는)") reads as broken text.
+    """
+    def pick(match: re.Match[str]) -> str:
+        previous, token = match.group(1), match.group(2)
+        code = ord(previous)
+        if 0xAC00 <= code <= 0xD7A3:
+            with_final, without_final = _JOSA_PAIRS[token]
+            return previous + (with_final if (code - 0xAC00) % 28 else without_final)
+        return match.group(0)
+
+    return _JOSA_PATTERN.sub(pick, text)
 
 
 def _render_policy_html(markdown: str, site: dict[str, Any]) -> str:
@@ -234,7 +294,9 @@ def _render_policy_html(markdown: str, site: dict[str, Any]) -> str:
     }
     for token, value in replacements.items():
         markdown = markdown.replace(token, value)
+    markdown = _resolve_josa(markdown)
     rows: list[str] = []
+    page_title = ""
     list_open = False
     for raw_line in markdown.splitlines():
         line = raw_line.strip()
@@ -251,13 +313,28 @@ def _render_policy_html(markdown: str, site: dict[str, Any]) -> str:
         if not line:
             continue
         if line.startswith("# "):
+            page_title = page_title or line[2:]
             rows.append(f"<h1>{esc(line[2:])}</h1>")
         else:
             rows.append(f"<p>{esc(line)}</p>")
     if list_open:
         rows.append("</ol>")
-    return """<article style="max-width:760px;margin:0 auto;color:#1f2937;font-family:Apple SD Gothic Neo,Malgun Gothic,sans-serif;line-height:1.8">
-""" + "\n".join(rows) + "\n</article>"
+    article = (
+        """<article style="max-width:760px;margin:0 auto;color:#1f2937;font-family:Apple SD Gothic Neo,Malgun Gothic,sans-serif;line-height:1.8">
+"""
+        + "\n".join(rows)
+        + "\n</article>"
+    )
+    copy_button = (
+        '<p style="max-width:760px;margin:0 auto 16px"><button type="button" '
+        'style="padding:9px 14px;border:0;border-radius:9px;background:#0f766e;color:#fff;font-weight:700;cursor:pointer" '
+        "onclick=\"navigator.clipboard.writeText(document.querySelector('article').outerHTML).then(()=>{this.textContent='복사 완료';})\">"
+        "본문 HTML 복사</button></p>"
+    )
+    return f"""<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>{esc(page_title or "티스토리 페이지")}</title></head><body style="margin:0;padding:24px 12px;background:#f3f6fa">
+{copy_button}
+{article}
+</body></html>"""
 
 
 def _write_tistory_pages(root: Path, site: dict[str, Any]) -> None:
@@ -272,7 +349,7 @@ def _write_tistory_pages(root: Path, site: dict[str, Any]) -> None:
         output_path = output_dir / f"{page_name}.html"
         output_path.write_text(_render_policy_html(source_path.read_text(encoding="utf-8"), site), encoding="utf-8")
         links.append(f'<li><a href="{esc(output_path.name)}">{esc(page_name)}.html</a> — 티스토리 HTML 모드에 복사</li>')
-    index = """<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>티스토리 정책 페이지 복사</title><style>body{max-width:760px;margin:40px auto;padding:0 20px;color:#1f2937;font-family:Apple SD Gothic Neo,Malgun Gothic,sans-serif;line-height:1.7}li{margin:12px 0;padding:12px;background:#f8fafc;border-radius:9px}a{color:#0f766e;font-weight:700}</style></head><body><h1>티스토리 정책 페이지 복사</h1><p>각 링크를 열어 내용을 복사한 뒤, 티스토리의 페이지 작성 화면 HTML 모드에 붙여넣으세요.</p><ul>""" + "".join(links) + "</ul></body></html>"
+    index = """<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>티스토리 정책 페이지 복사</title><style>body{max-width:760px;margin:40px auto;padding:0 20px;color:#1f2937;font-family:Apple SD Gothic Neo,Malgun Gothic,sans-serif;line-height:1.7}li{margin:12px 0;padding:12px;background:#f8fafc;border-radius:9px}a{color:#0f766e;font-weight:700}</style></head><body><h1>티스토리 정책 페이지 복사</h1><p>각 링크를 열어 <b>본문 HTML 복사</b> 버튼을 누른 뒤, 티스토리의 페이지 작성 화면 HTML 모드에 붙여넣으세요.</p><ul>""" + "".join(links) + "</ul></body></html>"
     (output_dir / "index.html").write_text(index, encoding="utf-8")
 
 
@@ -281,7 +358,7 @@ def write_outputs(root: Path, draft: Draft, report: QualityReport, site: dict[st
     tistory = docs / "tistory"
     tistory.mkdir(parents=True, exist_ok=True)
     article_path = tistory / f"{draft.date}.html"
-    article_path.write_text(render_article_html(draft, site), encoding="utf-8")
+    article_path.write_text(draft_review_page(render_article_html(draft, site), draft.title), encoding="utf-8")
     metadata = {
         "date": draft.date,
         "title": draft.title,
@@ -290,6 +367,7 @@ def write_outputs(root: Path, draft: Draft, report: QualityReport, site: dict[st
         "meta_description": draft.meta_description,
         "article_count_note": draft.article_count_note,
         "quality_status": report.status,
+        "warnings": report.warnings,
         "manual_review_required": True,
         "publish_checklist": [
             "원문 링크와 사실관계를 확인합니다.",

@@ -9,7 +9,13 @@ import urllib.request
 from typing import Any
 
 from .models import Draft, SourceItem
-from .style import generic_editorial_markers, mentioned_projects, project_aliases
+from .style import (
+    generic_editorial_markers,
+    generic_pattern_reasons,
+    mentioned_projects,
+    project_aliases,
+    section_overlap_reasons,
+)
 
 
 def _strip_json_fence(value: str) -> str:
@@ -25,16 +31,17 @@ def make_prompt(date: str, sources: list[SourceItem], site: dict[str, Any]) -> s
 가장 중요한 규칙:
 - 글은 실제로 이 소식을 읽고 선별한 기술 블로그 편집자가 쓴 것처럼 작성합니다. 보도자료, AI 요약문, 강의안처럼 쓰지 말고, 첫 문장에서 오늘 이슈들을 함께 묶는 구체적인 관찰이나 판단을 제시합니다. "오늘의 초점은", "함께 살펴보겠습니다", "독자 여러분", "핵심적인", "중요한", "혁신", "실질적인 인사이트" 같은 상투어는 쓰지 않습니다.
 - 문장을 일정한 길이·형식으로 반복하지 않습니다. 각 이슈마다 도입 방식과 문장 리듬을 다르게 하고, 모든 문단을 "~을 보여줍니다", "~에 기여합니다", "~가 중요합니다"로 끝내지 않습니다. 확인된 사실 다음에는 왜 그렇게 판단하는지 원인과 조건을 붙입니다.
-- 독자는 AI를 처음 접하는 일반인부터 실무 AI 엔지니어까지다. plain_explanation에서는 일상어로 2~3문장 안에 풀어 쓰되, 억지 비유를 반복하지 않습니다. why_it_matters와 editorial_take에서는 모델·에이전트·배포·오픈소스 관점의 실무적 의미와 트레이드오프를 자연스러운 문장으로 설명합니다.
+- 독자는 AI를 처음 접하는 일반인부터 실무 AI 엔지니어까지다. plain_explanation에서는 일상어로 2~3문장 안에 풀어 씁니다. 비유("마치 ~처럼", "~와 같아서")는 글 전체를 통틀어 최대 한 번만 사용하고, 나머지 설명은 실제 동작과 사용 흐름으로 풀어냅니다.
 - 원문을 복제·번역·문장 치환하지 말고, 사실을 짧게 요약한 뒤 독자에게 새로운 가치를 주는 분석을 작성합니다.
-- 각 이슈에서 what_happened(확인된 사실), plain_explanation(일반인 설명), why_it_matters(영향), editorial_take(엔지니어 관점), reader_action(직접 해볼 점검)을 제공하되, 필드명 자체를 본문에서 되풀이하지 않습니다. editorial_take에는 단순 칭찬 대신 도입 전에 확인할 조건·한계·대안을 최소 하나 포함합니다.
+- 각 이슈에서 what_happened(확인된 사실), plain_explanation(일반인 설명), why_it_matters(영향), editorial_take(작성자 판단), reader_action(직접 해볼 점검)을 제공하되, 필드명 자체를 본문에서 되풀이하지 않습니다. why_it_matters는 이 사실이 실무 흐름에서 무엇을 바꾸는지 1~3문장으로 짧게 쓰고, editorial_take는 도입 전에 확인할 조건·한계·대안을 최소 하나 담은 작성자의 견해를 씁니다. 두 필드에 같은 내용이나 같은 문장을 반복하면 안 됩니다.
+- 마크다운 문법(백틱 `, 별표 강조, # 제목)을 어떤 필드에도 쓰지 않습니다. 프로젝트 이름은 기호 없이 그대로 씁니다.
 - GitHub 스타·포크·Hugging Face 좋아요·다운로드 수, 사용량 한도, 성능 수치처럼 시점에 따라 달라지거나 오독되기 쉬운 숫자는 본문에 쓰지 않습니다. 이 값은 별도 검토 화면의 사실·수치 근거로만 남깁니다.
 - official_url이 없는 항목은 2차 출처입니다. what_happened 첫 문장에서 반드시 실제 매체 이름을 넣어 "요즘IT에 따르면" 또는 "GeekNews는 …라고 소개한다"처럼 출처에 귀속하고, 규제·법률·서비스 중단·회사 관계·인과관계는 입력 summary에 있어도 독립 사실처럼 단정하거나 확대 해석하지 않습니다.
 - 표, JSON, 사전, 체크리스트 형태로 "모델: 해당 없음" 같은 빈 항목을 나열하지 않습니다. 모델과 직접 관련 없는 도구라면 그 도구가 해결하는 개발 문제와 사용 흐름만 설명합니다.
 - 출처에 없는 숫자, 인용, 사건, 제품 기능을 지어내지 않습니다. 불확실하면 단정하지 않습니다.
 - 선정적 제목, 광고 클릭 유도, 의료·법률·투자 조언, 타사 비방을 쓰지 않습니다.
 - 모든 섹션의 source_ids에는 아래 입력의 id를 하나 이상 넣습니다.
-- 제목 후보 3개는 서로 다르게 만들되 과장·낚시를 피하고, 오늘 다루는 핵심 모델·프로젝트 이름을 자연스럽게 포함합니다. 태그는 5~8개, # 없이 작성합니다.
+- 제목 후보 3개는 문장 구조가 서로 다르게 만들되 과장·낚시를 피하고, 오늘 다루는 핵심 모델·프로젝트 이름을 자연스럽게 포함합니다. "[AI 뉴스룸]" 같은 고정 머리말·대괄호 접두사·날짜는 붙이지 않습니다. 태그는 5~8개, # 없이 작성하되 전날과 똑같은 조합이 되지 않게 그날 내용에서 뽑습니다.
 - 전체 본문은 밀도 있게 쓰고, 각 editorial_take은 3문장 이상입니다. 뜬구름 잡는 생산성 조언, 억지로 모든 이슈를 AI 모델과 연결하는 설명, 일반론은 금지합니다.
 - `editorial_disclosure`는 빈 문자열로 반환합니다. 이 값은 공개 본문에 표시하지 않는 내부 호환 필드입니다. AI 작성·검토 과정에 관한 문구나 변명은 본문, 도입, 마무리에 넣지 않습니다.
 
@@ -89,8 +96,9 @@ def make_rewrite_prompt(date: str, sources: list[SourceItem], draft: dict[str, A
 - 제목과 도입부는 "AI가 빠르게 발전한다" 같은 배경 설명으로 시작하지 않습니다. 세 개 항목을 관통하는 구체적인 긴장, 선택지, 또는 관찰로 바로 시작합니다. 도입부에는 아래 프로젝트 이름 가운데 둘 이상을 직접 넣습니다: {", ".join(project_aliases(sources)[:6])}.
 - 출처에 없는 관계·수치·기능을 추가하지 않습니다. 특히 서로 무관한 회사·프로젝트를 연결하거나 추측을 사실처럼 쓰지 않습니다.
 - 각 이슈에서 확인된 사실은 짧고 명확하게, 해석은 조건과 트레이드오프를 담아 씁니다. 막연한 생산성 향상, 혁신, 중요성, 기여 같은 결론으로 끝내지 않습니다.
-- 일반인 설명에는 비유를 최대 한 번만 쓰고, 과장된 말투·강의안 말투·독자 호명은 피합니다.
+- 비유("마치 ~처럼")는 글 전체에서 최대 한 번만 쓰고, 과장된 말투·강의안 말투·독자 호명은 피합니다. 문단을 "~에 기여합니다", "~할 수 있을 것입니다", "~을 보여줍니다"로 끝내지 않습니다.
 - "AI 기술이 빠르게 발전", "오늘 살펴볼 소식", "독자 여러분", "함께 살펴보", "실질적인 인사이트", "가치를 창출", "다음 주에도"는 절대 쓰지 않습니다.
+- why_it_matters와 editorial_take가 같은 내용을 반복하면 안 됩니다. 마크다운 문법(백틱 등)은 쓰지 않습니다.
 - `editorial_disclosure`는 빈 문자열로 둡니다. 공개 글 안에 작성 방식이나 검토 과정에 관한 언급을 넣지 않습니다.
 - JSON 구조와 모든 section의 source_ids는 유지합니다. 다른 문장 없이 JSON 하나만 반환합니다.
 
@@ -127,23 +135,50 @@ def _request_json(endpoint: str, prompt: str, temperature: float) -> dict[str, A
     return parsed
 
 
+def _section_field_pairs(draft: dict[str, Any]) -> list[tuple[str, str]]:
+    sections = draft.get("sections") if isinstance(draft.get("sections"), list) else []
+    return [
+        (str(section.get("why_it_matters") or ""), str(section.get("editorial_take") or ""))
+        for section in sections
+        if isinstance(section, dict)
+    ]
+
+
 def _rewrite_reasons(draft: dict[str, Any], sources: list[SourceItem]) -> list[str]:
-    reasons = generic_editorial_markers(_draft_text(draft))
+    text = _draft_text(draft)
+    reasons = generic_editorial_markers(text) + generic_pattern_reasons(text) + section_overlap_reasons(_section_field_pairs(draft))
     if len(mentioned_projects(str(draft.get("intro") or ""), sources)) < 2:
         reasons.append("도입부가 실제로 다루는 프로젝트 이름을 최소 두 개 직접 언급하지 않았습니다.")
     return reasons
 
 
-def _publication_title(raw_draft: dict[str, Any]) -> str:
-    """Prefer a valid title candidate over failing a complete draft on length alone."""
-    candidates = [str(raw_draft.get("title") or "").strip()]
-    candidates.extend(str(value).strip() for value in raw_draft.get("title_candidates", []) if str(value).strip())
-    for candidate in candidates:
-        if 15 <= len(candidate) <= 75:
-            return candidate
-    title = candidates[0] if candidates else "오늘의 AI·개발 데일리 다이제스트"
-    shortened = title[:75].rstrip(" ,:|-–—")
-    return shortened if len(shortened) >= 15 else "오늘의 AI·개발 데일리 다이제스트"
+def make_critic_prompt(draft: dict[str, Any]) -> str:
+    draft_payload = json.dumps(
+        {key: draft.get(key) for key in ("title", "intro", "sections", "closing")},
+        ensure_ascii=False,
+        indent=2,
+    )
+    return f"""당신은 한국어 기술 블로그의 외부 감수자입니다. 아래 초안이 사람 편집자가 직접 읽고 판단해 쓴 글로 읽히는지 엄격하게 평가하세요.
+
+기계 생성 신호의 예: 모든 문단이 비슷한 길이와 리듬으로 반복됨, "~에 기여합니다"·"~할 수 있을 것입니다" 같은 결론 어미의 반복, 출처 없이 일반론으로 채운 문단, 비유 남용, 이슈마다 똑같은 문장 구조, 사실 대신 수식어가 많은 문장.
+
+다른 문장 없이 JSON 하나만 반환합니다:
+{{"reads_like_human_editor": true 또는 false, "problems": ["문제가 있는 문장과 이유를 구체적으로, 최대 5개"]}}
+
+[평가할 초안]
+{draft_payload}
+"""
+
+
+def _critic_reasons(endpoint: str, draft: dict[str, Any]) -> list[str]:
+    """A semantic second net behind the pattern rules; never blocks the run by itself."""
+    try:
+        verdict = _request_json(endpoint, make_critic_prompt(draft), temperature=0.0)
+    except Exception:
+        return []
+    if verdict.get("reads_like_human_editor", True):
+        return []
+    return [str(problem).strip() for problem in verdict.get("problems", []) if str(problem).strip()][:5]
 
 
 def _issue_title_label(source: SourceItem, number: int) -> str:
@@ -177,6 +212,34 @@ def newsroom_title_candidates(sources: list[SourceItem]) -> list[str]:
     ]
 
 
+def merge_title_candidates(raw_draft: dict[str, Any], sources: list[SourceItem]) -> list[str]:
+    """Prefer the model's daily titles; the fixed newsroom format is only a fallback.
+
+    Publishing every post as "[AI 뉴스룸] | A, B, C" made the archive read as
+    machine output, and the permuted candidates defeated the distinct-titles
+    gate. The reviewer still gets one fixed-format option to choose from.
+    """
+    merged: list[str] = []
+    seen: set[str] = set()
+
+    def push(candidate: str) -> None:
+        value = candidate.strip()
+        if value and 15 <= len(value) <= 75 and value.casefold() not in seen:
+            seen.add(value.casefold())
+            merged.append(value)
+
+    for candidate in [str(raw_draft.get("title") or ""), *(str(value) for value in raw_draft.get("title_candidates") or [])]:
+        push(candidate)
+    del merged[3:]
+    fallbacks = newsroom_title_candidates(sources)
+    push(fallbacks[0])
+    for fallback in fallbacks[1:]:
+        if len(merged) >= 3:
+            break
+        push(fallback)
+    return merged
+
+
 def generate_with_gemini(date: str, sources: list[SourceItem], site: dict[str, Any]) -> Draft:
     api_key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not api_key:
@@ -194,12 +257,16 @@ def generate_with_gemini(date: str, sources: list[SourceItem], site: dict[str, A
             for _ in range(2):
                 reasons = _rewrite_reasons(raw_draft, sources)
                 if not reasons:
+                    # Pattern rules are cheap but literal; consult the model
+                    # critic only once they pass, as a deeper reading.
+                    reasons = _critic_reasons(endpoint, raw_draft)
+                if not reasons:
                     break
                 raw_draft = _request_json(endpoint, make_rewrite_prompt(date, sources, raw_draft, reasons), temperature=0.5)
                 raw_draft["date"] = date
                 raw_draft["model"] = model
                 raw_draft["editorial_disclosure"] = ""
-            raw_draft["title_candidates"] = newsroom_title_candidates(sources)
+            raw_draft["title_candidates"] = merge_title_candidates(raw_draft, sources)
             raw_draft["title"] = raw_draft["title_candidates"][0]
             return Draft.from_dict(raw_draft, sources)
         except Exception as error:
@@ -240,8 +307,15 @@ def generate_demo(date: str, sources: list[SourceItem], site: dict[str, Any]) ->
                 ),
             }
         )
-    titles = newsroom_title_candidates(sources)
-    lead_projects = ", ".join(project_aliases(sources)[:2])
+    aliases = project_aliases(sources)
+    first = aliases[0] if aliases else "오늘의 프로젝트"
+    second = aliases[1] if len(aliases) > 1 else "함께 살펴본 프로젝트"
+    titles = [
+        f"{first}부터 {second}까지, 오늘 확인한 개발 흐름",
+        f"{first}와 {second}, 도입 전에 따져 볼 조건들",
+        f"{first} 중심으로 본 오늘의 AI 프로젝트 점검",
+    ]
+    lead_projects = ", ".join(aliases[:2])
     raw = {
         "date": date,
         "title": titles[0],

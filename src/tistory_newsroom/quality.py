@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from .models import Draft, QualityReport
-from .style import generic_editorial_markers, mentioned_projects
+from .style import generic_editorial_markers, generic_pattern_reasons, mentioned_projects, section_overlap_reasons
 
 BLOCKED_TERMS = (
     "성인", "음란", "도박", "마약", "총기", "폭력 선동", "혐오",
@@ -70,11 +70,13 @@ def inspect_draft(draft: Draft, site: dict[str, object]) -> QualityReport:
     if not checks["secondary_source_attribution"]:
         errors.append("공식 출처가 없는 이슈의 사실 요약은 원문 매체에 귀속해 작성해야 합니다.")
 
-    checks["plain_language_and_engineering_value"] = all(len(section.plain_explanation) >= 90 and len(section.why_it_matters) >= 90 and len(section.editorial_take) >= 130 for section in draft.sections)
+    # why_it_matters stays short on purpose: forcing 90+ characters pushed the
+    # model to restate editorial_take, which reads as padded machine text.
+    checks["plain_language_and_engineering_value"] = all(len(section.plain_explanation) >= 90 and len(section.why_it_matters) >= 60 and len(section.editorial_take) >= 130 for section in draft.sections)
     if not checks["plain_language_and_engineering_value"]:
         errors.append("각 이슈에는 일반인 설명과 엔지니어 관점의 충분한 분석이 필요합니다.")
 
-    checks["original_value_added"] = all(len(section.editorial_take) >= 130 and len(section.why_it_matters) >= 90 and len(section.reader_action) >= 45 for section in draft.sections)
+    checks["original_value_added"] = all(len(section.editorial_take) >= 130 and len(section.why_it_matters) >= 60 and len(section.reader_action) >= 45 for section in draft.sections)
     if not checks["original_value_added"]:
         errors.append("각 이슈에는 충분한 영향 분석·독자적 해설·독자 행동 제안이 필요합니다.")
 
@@ -108,10 +110,14 @@ def inspect_draft(draft: Draft, site: dict[str, object]) -> QualityReport:
     if not checks["no_volatile_community_metrics"]:
         errors.append("변동 가능한 커뮤니티 수치는 본문이 아닌 검토 화면의 사실·수치 근거에서 확인해야 합니다.")
 
-    generic_markers = generic_editorial_markers(body)
-    checks["natural_editorial_voice"] = not generic_markers
+    style_problems = (
+        generic_editorial_markers(body)
+        + generic_pattern_reasons(body)
+        + section_overlap_reasons((section.why_it_matters, section.editorial_take) for section in draft.sections)
+    )
+    checks["natural_editorial_voice"] = not style_problems
     if not checks["natural_editorial_voice"]:
-        errors.append("상투적인 AI 요약 표현을 걷어내고, 출처에 근거한 구체적인 편집 문장으로 다시 작성해야 합니다: " + ", ".join(generic_markers))
+        errors.append("상투적인 AI 요약 표현을 걷어내고, 출처에 근거한 구체적인 편집 문장으로 다시 작성해야 합니다: " + " / ".join(style_problems))
 
     checks["specific_intro"] = len(mentioned_projects(draft.intro, draft.source_items)) >= 2
     if not checks["specific_intro"]:

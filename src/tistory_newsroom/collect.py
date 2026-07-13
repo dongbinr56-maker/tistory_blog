@@ -17,7 +17,9 @@ from typing import Any
 
 from .models import SourceItem
 
-USER_AGENT = "TistoryNewsroom/0.2 (+https://github.com/)"
+# Some Korean publishers (yozm.wishket.com) reject non-browser agents from
+# datacenter networks with HTTP 405, so identify as a regular browser.
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 KST = dt.timezone(dt.timedelta(hours=9))
 TOPIC_TERMS: dict[str, tuple[str, ...]] = {
     "생성형 AI": ("생성형 ai", "generative ai", "llm", "언어 모델", "foundation model", "claude", "anthropic", "gemini", "chatgpt", "openai"),
@@ -365,10 +367,22 @@ def _topics(text: str, official_url: str) -> list[str]:
     return [topic for topic, terms in TOPIC_TERMS.items() if any(term in lowered for term in terms)]
 
 
+def identifying_query(query: str) -> str:
+    """Keep only query parameters that identify a distinct page.
+
+    GeekNews addresses every article as /topic?id=N, so dropping the whole query
+    string would collapse all of its articles into one URL key and permanently
+    exclude the source after a single selection. Tracking parameters are still
+    removed.
+    """
+    kept = [(key, value) for key, value in urllib.parse.parse_qsl(query) if key.lower() == "id"]
+    return urllib.parse.urlencode(kept)
+
+
 def _canonical(url: str, official_url: str) -> str:
     value = official_url or url
     parsed = urllib.parse.urlparse(value)
-    clean = parsed._replace(query="", fragment="")
+    clean = parsed._replace(query=identifying_query(parsed.query), fragment="")
     return urllib.parse.urlunparse(clean).rstrip("/").lower()
 
 
@@ -510,7 +524,7 @@ def choose_diverse(
     excluded_terms: list[str],
     excluded_canonical_keys: set[str] | None = None,
 ) -> list[SourceItem]:
-    """Fill three slots with a community project while excluding prior URL identities."""
+    """Fill the daily slots with one community project while excluding prior URL identities."""
     blocked = [term.lower() for term in excluded_terms]
     history_keys = {_canonical(value, "") for value in (excluded_canonical_keys or set()) if value}
     eligible = [
@@ -527,6 +541,9 @@ def choose_diverse(
     seen_keys = {project.canonical_key}
     editorial = [item for item in ordered if not item.verification.get("community_source")]
     community = [item for item in ordered if item.verification.get("community_source")]
+    # A day rich in verified editorial articles earns one extra slot, so real
+    # news is never crowded out by the mandatory community project.
+    target = count + 1 if len(editorial) >= count else count
     for item in editorial + community:
         if item in selected:
             continue
@@ -534,7 +551,7 @@ def choose_diverse(
             continue
         selected.append(item)
         seen_keys.add(item.canonical_key)
-        if len(selected) == count:
+        if len(selected) == target:
             break
     return selected
 
@@ -551,7 +568,7 @@ def collection_payload(
     return {
         "date": date,
         "collected_at": dt.datetime.now(dt.timezone.utc).isoformat(),
-        "selection_rule": "최근 24시간 요즘IT·GeekNews 기사와 최근 14일 GitHub/Hugging Face 커뮤니티 활성 프로젝트를 조합해 3건을 구성하며, 커뮤니티 프로젝트 1건 이상 필수. 이전 날짜에 선택한 원문·공식 프로젝트 URL은 제외",
+        "selection_rule": "최근 24시간 요즘IT·GeekNews 기사와 최근 14일 GitHub/Hugging Face 커뮤니티 활성 프로젝트를 조합해 3건(검증된 기사가 3건 이상인 날은 4건)을 구성하며, 커뮤니티 프로젝트 1건 이상 필수. 이전 날짜에 선택한 원문·공식 프로젝트 URL은 제외",
         "history_exclusion": {
             "past_url_key_count": historical_url_key_count,
             "excluded_candidate_count": historically_excluded_candidate_count,

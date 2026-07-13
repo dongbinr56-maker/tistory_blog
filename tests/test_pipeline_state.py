@@ -6,7 +6,14 @@ from pathlib import Path
 from tistory_newsroom.assets import create_image_assets
 from tistory_newsroom.generate import generate_demo
 from tistory_newsroom.models import QualityReport, SourceItem
-from tistory_newsroom.pipeline import _existing_ready_draft, historical_url_keys, prune_expired_details, record_historical_url_keys, refresh_hero_image
+from tistory_newsroom.pipeline import (
+    _existing_ready_draft,
+    historical_url_keys,
+    prune_expired_details,
+    record_historical_url_keys,
+    refresh_hero_image,
+    source_health_warnings,
+)
 from tistory_newsroom.render import write_outputs
 
 
@@ -36,9 +43,32 @@ class PipelineStateTest(unittest.TestCase):
 
             self.assertIn("https://github.com/openai/example", keys)
             self.assertIn("https://news.example.com/announcement", keys)
-            self.assertIn("https://news.hada.io/topic", keys)
+            # GeekNews identifies articles only by their id query parameter.
+            # Collapsing it to /topic once excluded every future GeekNews
+            # candidate after a single selection.
+            self.assertIn("https://news.hada.io/topic?id=1", keys)
+            self.assertNotIn("https://news.hada.io/topic", keys)
             self.assertNotIn("https://same-day.example.com", keys)
             self.assertNotIn("https://should-not-be-in-history.example.com", keys)
+
+    def test_source_health_warnings_surface_outages_and_news_starved_days(self):
+        community = SourceItem(
+            id="repo", source="GitHub 커뮤니티", topic="AI 모델링", title="owner/project",
+            url="https://github.com/owner/project", published_at="", summary="프로젝트",
+            verification={"community_source": "github"},
+        )
+        article = SourceItem(
+            id="article", source="GeekNews", topic="생성형 AI", title="검증 기사",
+            url="https://example.org/article", published_at="", summary="기사",
+        )
+
+        starved = source_health_warnings(["수집 실패: 요즘IT (HTTP Error 405)"], [community])
+        self.assertEqual(len(starved), 2)
+        self.assertIn("수집 경고: 수집 실패: 요즘IT (HTTP Error 405)", starved[0])
+        self.assertIn("기사형 소스 0건", starved[1])
+
+        healthy = source_health_warnings([], [community, article])
+        self.assertEqual(healthy, [])
 
     def test_ready_daily_draft_is_reused_only_when_every_review_file_exists(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -131,7 +161,6 @@ class PipelineStateTest(unittest.TestCase):
 
             refreshed = json.loads((root / f"data/runs/{day}/draft.json").read_text(encoding="utf-8"))
             self.assertEqual(result["hero"]["path"], "hero.png")
-            self.assertTrue(refreshed["title"].startswith("[AI 뉴스룸] | "))
             self.assertEqual(refreshed["title"], original_title)
             self.assertEqual(refreshed["images"]["hero"]["path"], "hero.png")
             self.assertNotIn("thumbnail", refreshed["images"])

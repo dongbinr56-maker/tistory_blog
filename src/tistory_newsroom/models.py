@@ -4,6 +4,15 @@ from dataclasses import asdict, dataclass, field
 from typing import Any
 
 
+def _prose(value: Any) -> str:
+    """Normalize a model-written text field.
+
+    Gemini occasionally wraps project names in markdown backticks, which the
+    escaped Tistory HTML then shows literally. Strip them at the boundary.
+    """
+    return str(value or "").replace("`", "")
+
+
 @dataclass(frozen=True)
 class SourceItem:
     id: str
@@ -57,15 +66,15 @@ class ArticleSection:
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "ArticleSection":
         return cls(
-            headline=str(value.get("headline") or ""),
+            headline=_prose(value.get("headline")),
             source_ids=[str(item) for item in value.get("source_ids", [])],
-            what_happened=str(value.get("what_happened") or ""),
-            plain_explanation=str(value.get("plain_explanation") or ""),
-            why_it_matters=str(value.get("why_it_matters") or ""),
-            technical_details=str(value.get("technical_details") or ""),
-            editorial_take=str(value.get("editorial_take") or ""),
-            reader_action=str(value.get("reader_action") or ""),
-            verification_notes=str(value.get("verification_notes") or ""),
+            what_happened=_prose(value.get("what_happened")),
+            plain_explanation=_prose(value.get("plain_explanation")),
+            why_it_matters=_prose(value.get("why_it_matters")),
+            technical_details=_prose(value.get("technical_details")),
+            editorial_take=_prose(value.get("editorial_take")),
+            reader_action=_prose(value.get("reader_action")),
+            verification_notes=_prose(value.get("verification_notes")),
         )
 
     def to_dict(self) -> dict[str, Any]:
@@ -92,13 +101,13 @@ class Draft:
     def from_dict(cls, value: dict[str, Any], source_items: list[SourceItem]) -> "Draft":
         return cls(
             date=str(value["date"]),
-            title=str(value.get("title") or ""),
-            title_candidates=[str(item) for item in value.get("title_candidates", [])],
-            tags=[str(item).strip().lstrip("#") for item in value.get("tags", []) if str(item).strip()],
-            meta_description=str(value.get("meta_description") or ""),
-            intro=str(value.get("intro") or ""),
+            title=_prose(value.get("title")),
+            title_candidates=[_prose(item) for item in value.get("title_candidates", [])],
+            tags=[str(item).strip().lstrip("#").replace("`", "") for item in value.get("tags", []) if str(item).strip()],
+            meta_description=_prose(value.get("meta_description")),
+            intro=_prose(value.get("intro")),
             sections=[ArticleSection.from_dict(item) for item in value.get("sections", [])],
-            closing=str(value.get("closing") or ""),
+            closing=_prose(value.get("closing")),
             editorial_disclosure=str(value.get("editorial_disclosure") or ""),
             model=str(value.get("model") or "unknown"),
             article_count_note=str(value.get("article_count_note") or ""),

@@ -1,6 +1,6 @@
 import unittest
 
-from tistory_newsroom.generate import _publication_title, make_rewrite_prompt, newsroom_title_candidates
+from tistory_newsroom.generate import make_rewrite_prompt, merge_title_candidates, newsroom_title_candidates
 from tistory_newsroom.models import SourceItem
 
 
@@ -21,16 +21,8 @@ class GeneratePromptTest(unittest.TestCase):
         self.assertIn("도입부가 일반적입니다.", prompt)
         self.assertIn("ECC", prompt)
 
-    def test_uses_a_valid_title_candidate_when_the_selected_title_is_too_long(self):
-        selected = _publication_title({
-            "title": "AI 에이전트 성능과 복잡한 운영 환경, 배포 보안, 규제 이슈, 서비스 안정성, 모델 활용 전략까지 모두 한 번에 설명하는 지나치게 긴 제목입니다",
-            "title_candidates": ["ECC와 HimitsuShell: AI 배포에서 먼저 볼 두 가지"],
-        })
-        self.assertEqual(selected, "ECC와 HimitsuShell: AI 배포에서 먼저 볼 두 가지")
-        self.assertLessEqual(len(selected), 75)
-
-    def test_title_candidates_always_use_the_newsroom_format(self):
-        sources = [
+    def _sources(self):
+        return [
             SourceItem(
                 id="first", source="GitHub", topic="AI 모델링", title="owner/first-project",
                 url="https://github.com/owner/first-project", published_at="", summary="공식 프로젝트입니다.",
@@ -43,9 +35,35 @@ class GeneratePromptTest(unittest.TestCase):
             ),
         ]
 
-        candidates = newsroom_title_candidates(sources)
+    def test_fallback_titles_keep_the_newsroom_format(self):
+        candidates = newsroom_title_candidates(self._sources())
 
         self.assertEqual(len(candidates), 3)
         self.assertEqual(len({candidate.casefold() for candidate in candidates}), 3)
         self.assertTrue(all(candidate.startswith("[AI 뉴스룸] | ") for candidate in candidates))
         self.assertIn("first-project", candidates[0])
+
+    def test_merged_titles_prefer_the_model_and_keep_one_fixed_format_fallback(self):
+        merged = merge_title_candidates({
+            "title": "first-project가 바꾸는 에이전트 평가 흐름",
+            "title_candidates": [
+                "first-project가 바꾸는 에이전트 평가 흐름",
+                "second-project 도입 전에 확인할 세 가지",
+                "에이전트 평가와 배포, 이번 주에 짚어볼 지점",
+            ],
+        }, self._sources())
+
+        self.assertEqual(merged[0], "first-project가 바꾸는 에이전트 평가 흐름")
+        self.assertEqual(len(merged), 4)
+        self.assertEqual(sum(candidate.startswith("[AI 뉴스룸] | ") for candidate in merged), 1)
+        self.assertTrue(all(15 <= len(candidate) <= 75 for candidate in merged))
+
+    def test_merged_titles_skip_invalid_model_output_and_fill_from_the_fallback(self):
+        merged = merge_title_candidates({
+            "title": "AI 에이전트 성능과 복잡한 운영 환경, 배포 보안, 규제 이슈, 서비스 안정성, 모델 활용 전략까지 모두 한 번에 설명하는 지나치게 긴 제목입니다",
+            "title_candidates": ["짧은 제목", "ECC와 HimitsuShell: AI 배포에서 먼저 볼 두 가지"],
+        }, self._sources())
+
+        self.assertEqual(merged[0], "ECC와 HimitsuShell: AI 배포에서 먼저 볼 두 가지")
+        self.assertGreaterEqual(len(merged), 3)
+        self.assertEqual(len({candidate.casefold() for candidate in merged}), len(merged))

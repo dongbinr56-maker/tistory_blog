@@ -8,9 +8,9 @@ from typing import Any
 import urllib.parse
 
 from .assets import create_hero_image_asset, create_image_assets
-from .collect import choose_diverse, collect_candidates, collection_payload
+from .collect import choose_diverse, collect_candidates, collection_payload, identifying_query
 from .config import ROOT, load_site_config, load_sources_config
-from .generate import generate_demo, generate_with_gemini, newsroom_title_candidates
+from .generate import generate_demo, generate_with_gemini
 from .models import Draft, QualityReport, SourceItem
 from .quality import inspect_draft
 from .render import build_site, write_outputs
@@ -38,7 +38,7 @@ def _url_key(value: object) -> str:
     clean = parsed._replace(
         scheme=parsed.scheme.lower(),
         netloc=parsed.netloc.lower(),
-        query="",
+        query=identifying_query(parsed.query),
         fragment="",
     )
     return urllib.parse.urlunparse(clean).rstrip("/").lower()
@@ -187,6 +187,22 @@ def _existing_ready_draft(root: Path, day: str) -> dict[str, Any] | None:
     }
 
 
+def source_health_warnings(collector_errors: list[str], selected: list[SourceItem]) -> list[str]:
+    """Surface source outages that a successful run would otherwise hide.
+
+    All three primary-source failures observed in production (yozm 405, the
+    GeekNews history collapse) went unnoticed because the run still succeeded
+    with trending repositories only.
+    """
+    warnings = [f"수집 경고: {error}" for error in collector_errors]
+    if selected and all(item.verification.get("community_source") for item in selected):
+        warnings.append(
+            "기사형 소스 0건: 오늘 초안은 GitHub/Hugging Face 트렌딩 프로젝트 소개만으로 구성되어 뉴스 가치가 낮습니다. "
+            "발행 대신 직접 사용해 본 프로젝트 하나를 깊게 다루는 글로 대체하는 것을 검토하세요."
+        )
+    return warnings
+
+
 def _quality_report_from_dict(value: dict[str, Any]) -> QualityReport:
     return QualityReport(
         status=str(value.get("status") or "BLOCKED"),
@@ -217,8 +233,6 @@ def refresh_hero_image(root: Path = ROOT, date: str | None = None) -> dict[str, 
     draft = Draft.from_dict(raw_draft, source_items)
     site = load_site_config(root)
     asset_base_url = str(site.get("draft_assets_base_url", ""))
-    draft.title_candidates = newsroom_title_candidates(draft.source_items)
-    draft.title = draft.title_candidates[0]
     draft.images["hero"] = create_hero_image_asset(root, draft, asset_base_url)
     draft.images.pop("thumbnail", None)
     legacy_thumbnail = root / "docs" / "tistory" / "assets" / day / "thumbnail.png"
@@ -297,12 +311,17 @@ def run(root: Path = ROOT, date: str | None = None, demo: bool = False, refresh:
         _write_json(run_dir / "quality-report.json", {"status": "BLOCKED", "errors": [message], "collector_errors": collector_errors})
         raise RuntimeError(message)
     draft = generate_demo(day, selected, site) if demo else generate_with_gemini(day, selected, site)
+    report = inspect_draft(draft, site)
+    report.warnings.extend(source_health_warnings(collector_errors, selected))
+    if report.status != "READY_FOR_MANUAL_REVIEW":
+        # Keep the audit record of the blocked attempt, but never touch the
+        # image assets or published outputs an earlier approved run created.
+        _write_json(run_dir / "draft.json", draft.to_dict())
+        _write_json(run_dir / "quality-report.json", report.to_dict())
+        raise RuntimeError("초안 품질 게이트가 차단했습니다: " + " / ".join(report.errors))
     draft.images = create_image_assets(root, draft, asset_base_url)
     _write_json(run_dir / "draft.json", draft.to_dict())
-    report = inspect_draft(draft, site)
     _write_json(run_dir / "quality-report.json", report.to_dict())
-    if report.status != "READY_FOR_MANUAL_REVIEW":
-        raise RuntimeError("초안 품질 게이트가 차단했습니다: " + " / ".join(report.errors))
     record_historical_url_keys(root, day, selected)
     write_outputs(root, draft, report, site)
     retention_days = int(sources_config.get("selection", {}).get("detail_retention_days", 180))
