@@ -1,0 +1,220 @@
+{
+  "date": "2026-07-15",
+  "title": "[AI 뉴스룸] 로컬 런타임의 확장과 온디바이스 모델의 한계 극복, 그리고 지속 가능한 오픈소스 생태계의 조건",
+  "title_candidates": [
+    "[AI 뉴스룸] 로컬 런타임의 확장과 온디바이스 모델의 한계 극복, 그리고 지속 가능한 오픈소스 생태계의 조건",
+    "[AI 뉴스룸] 서버 없는 인공지능을 향한 기술적 시도와 개발자 도구 커스텀이 마주한 과제",
+    "[AI 뉴스룸] Ollama와 Claude Code가 보여주는 개발자 경험의 개인화와 오픈소스 기부 모델의 현실"
+  ],
+  "tags": [
+    "Ollama",
+    "ClaudeCode",
+    "Bonsai27B",
+    "오픈소스",
+    "온디바이스AI",
+    "FOSS"
+  ],
+  "meta_description": "Ollama의 최신 오픈소스 모델 지원 확장, 모바일 구동을 겨냥한 Bonsai 27B 모델, Claude Code의 출력 커스텀 팁, 그리고 FOSS for All의 소액 기부 프로그램까지 개발 환경의 변화와 오픈소스 생태계의 흐름을 짚어봅니다.",
+  "intro": "로컬 하드웨어의 자원 한계와 클라우드 의존성 사이의 긴장은 개발 환경의 독립성을 확보하려는 시도에서 늘 핵심 쟁점입니다. ollama/ollama를 통한 로컬 모델 다변화나 anthropics/claude-code의 터미널 환경 커스텀은 이러한 제약을 극복하려는 개인의 노력을 대변하며, 모바일 기기 구동을 겨냥한 초경량 모델의 등장은 인프라 비용과 성능 사이의 타협점을 재정의합니다.",
+  "sections": [
+    {
+      "headline": "로컬 LLM 실행기 Ollama의 최신 오픈소스 모델 지원 확장",
+      "source_ids": [
+        "github-community-77b4be38215d4c71"
+      ],
+      "what_happened": "Kimi-K2.6, GLM-5.1, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma 등 다양한 최신 오픈소스 모델을 로컬에서 즉시 실행할 수 있도록 Ollama 프로젝트에 관련 지원이 추가되었습니다.",
+      "plain_explanation": "Ollama는 복잡한 인프라 설정이나 클라우드 API 연동 과정 없이 개인 PC의 터미널 명령어로 인공지능 모델을 내려받아 구동하는 도구입니다. 네트워크 연결이 차단된 오프라인 환경에서도 다양한 오픈소스 모델을 실행하고 테스트할 수 있는 환경을 제공합니다.",
+      "why_it_matters": "클라우드 API 호출에 따르는 지속적인 비용 부담과 데이터 외부 유출 우려를 덜어내고, 로컬 개발 파이프라인 내부에서 다양한 대안 모델을 자유롭게 교체하며 성능을 검증하는 독립적인 개발 환경을 구축하게 만듭니다.",
+      "technical_details": "",
+      "editorial_take": "로컬 실행 도구의 사용 편의성이 대폭 개선되더라도 고성능 모델을 원활하게 구동하려면 결국 고사양 GPU 하드웨어가 필요합니다. 개인 개발 환경의 메모리 한계를 극복하기 위해 양자화 모델을 선택할 때 발생하는 미세한 성능 저하와, 장시간 추론 시 발생하는 발열 및 전력 소모량은 실무 도입 전에 반드시 계산해야 할 현실적인 제약 사항입니다.",
+      "reader_action": "로컬 개발 장비에 Ollama를 설치하고 최신 Qwen이나 Gemma 모델을 구동하여 하드웨어 자원 점유율과 추론 속도를 직접 측정해 봅니다.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "터미널 기반 코딩 에이전트 Claude Code의 텍스트 출력 커스텀",
+      "source_ids": [
+        "hacker-news-13d96f6971fff698"
+      ],
+      "what_happened": "jola.dev에 따르면, 터미널 기반 코딩 에이전트 도구인 Claude Code의 텍스트 출력을 임의로 수정하여 특정 상투적인 표현을 사용자가 원하는 단어로 대체하는 우회 방법이 공유되었습니다.",
+      "plain_explanation": "Claude Code는 터미널 창에서 자연어로 명령을 내려 코드 작성과 깃 워크플로우를 처리하는 개발 도구입니다. 이번에 공유된 팁은 이 에이전트가 답변 과정에서 자주 반복하여 사용하는 인위적이거나 딱딱한 특정 단어를 사용자가 원하는 다른 표현으로 강제 변환하여 출력하는 기술적 우회책입니다.",
+      "why_it_matters": "매일 사용하는 개발 도구의 사소한 사용자 경험을 개인의 취향에 맞춰 미세 조정함으로써, 획일적인 인공지능 답변에서 오는 피로감을 줄이고 도구에 대한 몰입감을 높이는 개인화가 가능해집니다.",
+      "technical_details": "",
+      "editorial_take": "바이너리나 내부 스크립트를 직접 수정하는 임시방편은 도구가 업데이트될 때마다 수동으로 설정을 다시 적용해야 하는 번거로움이 따릅니다. 공식 설정 기능이 아닌 우회 경로를 이용한 조작은 예상치 못한 구문 분석 오류나 오작동을 유발할 수 있으므로, 실제 프로젝트 환경에 적용하기 전에 설정 파일의 백업을 확보하고 작동 안정성을 충분히 검증해야 안전합니다.",
+      "reader_action": "Claude Code를 활용하는 과정에서 지나치게 반복되어 눈에 거슬리는 특정 시스템 메시지 패턴이 있는지 확인하고 이를 필터링하는 스크립트를 적용해 봅니다.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "모바일 기기 구동을 목표로 하는 Bonsai 27B 모델 공개",
+      "source_ids": [
+        "hacker-news-59ed971014c76c32"
+      ],
+      "what_happened": "prismml.com에 따르면, 모바일 기기에서 직접 실행할 수 있도록 설계된 270억 매개변수 규모의 Bonsai 27B 모델이 공개되었으며 Hugging Face를 통해 관련 파일이 배포되었습니다.",
+      "plain_explanation": "Bonsai 27B는 고성능 서버급 장비가 필요한 대규모 언어 모델을 스마트폰과 같은 개인 모바일 기기에서도 구동할 수 있도록 경량화한 모델입니다. 외부 네트워크 연결 없이 기기 자체의 연산력만으로 인공지능 추론 작업을 수행합니다.",
+      "why_it_matters": "서버 유지 비용이나 네트워크 지연 시간, 오프라인 환경에서의 작동 제약 없이 모바일 애플리케이션 내부에 온디바이스 AI 기능을 완전히 이식할 수 있는 가능성을 열어 줍니다.",
+      "technical_details": "",
+      "editorial_take": "27B급 모델을 모바일 기기에서 원활하게 구동하려면 극단적인 양자화가 필수적이며, 이는 필연적으로 답변의 정확도 저하라는 트레이드오프를 동반합니다. 또한 모바일 AP의 지속적인 연산으로 인한 배터리 소모와 발열 제어 문제가 상용화의 가장 큰 걸림돌이 되므로, 실제 서비스 도입에 앞서 기기별 발열 프로파일을 정밀하게 측정해야 실효성을 거둡니다.",
+      "reader_action": "Hugging Face에 공개된 Bonsai 27B 관련 GGUF 파일을 다운로드하여 보유한 모바일 기기나 로컬 환경에서 추론 속도와 메모리 점유율을 테스트해 봅니다.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "오픈소스 생태계 지원을 위한 FOSS for All 소액 기부 프로그램 시동",
+      "source_ids": [
+        "geeknews-3d4a6430f2550473"
+      ],
+      "what_happened": "FOSS for All에 따르면, 오픈소스 프로젝트 메인테이너와 커뮤니티 운영진의 지속 가능한 활동을 지원하기 위한 FOSS for All Microgrants 2026 프로그램의 참여 및 기부 접수가 시작되었습니다.",
+      "plain_explanation": "이 프로그램은 오픈소스 소프트웨어 생태계를 유지하는 개발자들을 돕기 위해 소액의 기부금을 모금하고 배분하는 캠페인입니다. 일반 참여자의 소액 기부, 메인테이너의 지원금 신청, 그리고 공정한 심사를 위한 심사위원 추천 과정으로 구성됩니다.",
+      "why_it_matters": "거대 기업의 일방적인 후원에만 의존하지 않고, 개별 개발자와 커뮤니티 구성원들이 직접 참여하여 오픈소스 생태계의 재정적 자립을 돕는 대안적 지원 모델을 실험한다는 의미가 있습니다.",
+      "technical_details": "",
+      "editorial_take": "소액 기부 프로그램은 대형 재단의 혜택을 받기 어려운 소규모 라이브러리나 지역 커뮤니티에 실질적인 도움을 줄 수 있는 유용한 수단입니다. 다만 기부금 배분의 공정성과 투명한 집행 내역이 담보되지 않으면 장기적인 참여를 이끌어내기 어려우므로, 심사위원 선정 기준과 자금 집행 과정에 대한 커뮤니티 차원의 지속적인 모니터링이 병행되어야 신뢰를 유지합니다.",
+      "reader_action": "평소 업무나 개인 프로젝트에서 유용하게 사용 중인 오픈소스 도구 중 재정적 지원이 필요한 대상을 발굴하여 이번 프로그램의 수혜 후보로 신청해 봅니다.",
+      "verification_notes": ""
+    }
+  ],
+  "closing": "로컬 환경에서의 모델 구동 기술과 온디바이스 AI의 진화는 개발자들에게 클라우드 인프라의 제약에서 벗어날 수 있는 기술적 자립의 기회를 제공합니다. 그러나 이러한 기술적 시도가 실질적인 가치로 이어지기 위해서는 개별 도구의 세밀한 커뮤니티 참여와 오픈소스 생태계를 지탱하는 자발적인 후원 체계가 함께 작동해야 합니다. 기술적 내재화와 생태계의 상생 노력이 균형을 이룰 때 비로소 지속 가능한 개발 환경이 완성됩니다.",
+  "editor_comment": "로컬 환경에 가벼운 모델을 직접 올려 구동해 보고, 평소 의존하던 오픈소스 프로젝트의 지속 가능성을 위해 소액 기부나 기여 방안을 고민해 보는 계기가 되기를 바랍니다.",
+  "editorial_disclosure": "",
+  "model": "gemini-3.5-flash",
+  "article_count_note": "",
+  "images": {
+    "hero": {
+      "path": "hero.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-15/hero.png",
+      "kind": "generated-hero"
+    },
+    "github-community-77b4be38215d4c71": {
+      "origin_url": "https://opengraph.githubassets.com/1/ollama/ollama",
+      "kind": "source-image",
+      "path": "issue-1.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-15/issue-1.png"
+    },
+    "hacker-news-13d96f6971fff698": {
+      "origin_url": "https://jola.dev/images/og/posts/how-to-stop-claude-from-saying-load-bearing.png",
+      "kind": "source-image",
+      "path": "issue-2.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-15/issue-2.png"
+    },
+    "hacker-news-59ed971014c76c32": {
+      "origin_url": "",
+      "kind": "source-image",
+      "path": "issue-3.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-15/issue-3.svg"
+    },
+    "geeknews-3d4a6430f2550473": {
+      "origin_url": "https://forum.fossforall.org/uploads/default/original/1X/5e3231adb7578400bd84576d9b2349286df669cc.png",
+      "kind": "source-image",
+      "path": "issue-4.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-15/issue-4.png"
+    }
+  },
+  "source_items": [
+    {
+      "id": "github-community-77b4be38215d4c71",
+      "source": "GitHub 커뮤니티",
+      "topic": "생성형 AI, GitHub 프로젝트, AI 모델링",
+      "title": "ollama/ollama",
+      "url": "https://github.com/ollama/ollama",
+      "published_at": "2026-07-15T07:42:04+09:00",
+      "summary": "Get up and running with Kimi-K2.6, GLM-5.1, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
+      "listing_url": "https://github.com/ollama/ollama",
+      "introduced_at": "",
+      "image_url": "https://opengraph.githubassets.com/1/ollama/ollama",
+      "official_url": "https://github.com/ollama/ollama",
+      "canonical_key": "https://github.com/ollama/ollama",
+      "verification": {
+        "project_kind": "github",
+        "project_name": "ollama/ollama",
+        "project_owner": "ollama",
+        "project_description": "Get up and running with Kimi-K2.6, GLM-5.1, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
+        "license": "MIT",
+        "updated_at": "2026-07-14T22:42:10Z",
+        "community_source": "github",
+        "github_stars": "176114",
+        "github_pushed_at": "2026-07-14T22:42:04Z"
+      }
+    },
+    {
+      "id": "hacker-news-13d96f6971fff698",
+      "source": "jola.dev",
+      "topic": "생성형 AI, AI 에이전트, 개발 도구",
+      "title": "How to stop Claude from saying load-bearing | jola.dev",
+      "url": "https://jola.dev/posts/how-to-stop-claude-from-saying-load-bearing",
+      "published_at": "2026-07-14T09:00:00+09:00",
+      "summary": "Hack the text output of Claude Code to make life a little bit sillier.",
+      "listing_url": "https://news.ycombinator.com/item?id=48905248",
+      "introduced_at": "2026-07-14T20:46:02+09:00",
+      "image_url": "https://jola.dev/images/og/posts/how-to-stop-claude-from-saying-load-bearing.png",
+      "official_url": "https://github.com/anthropics/claude-code",
+      "canonical_key": "https://github.com/anthropics/claude-code",
+      "verification": {
+        "article_title_verified": "How to stop Claude from saying load-bearing | jola.dev",
+        "article_source_verified": "jola.dev",
+        "article_published_verified": "2026-07-14T09:00:00+09:00",
+        "article_url_verified": "https://jola.dev/posts/how-to-stop-claude-from-saying-load-bearing",
+        "geeknews_listing_url": "",
+        "official_url": "https://github.com/anthropics/claude-code",
+        "project_name": "anthropics/claude-code",
+        "project_owner": "anthropics",
+        "project_description": "Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands.",
+        "license": "",
+        "updated_at": "2026-07-14T22:30:20Z",
+        "project_kind": "github"
+      }
+    },
+    {
+      "id": "hacker-news-59ed971014c76c32",
+      "source": "prismml.com",
+      "topic": "Hugging Face",
+      "title": "PrismML — Announcing Bonsai 27B: The First 27B-Class Model to Run on a Phone",
+      "url": "https://prismml.com/news/bonsai-27b",
+      "published_at": "2026-07-14T00:00:00+09:00",
+      "summary": "",
+      "listing_url": "https://news.ycombinator.com/item?id=48910545",
+      "introduced_at": "2026-07-15T02:50:48+09:00",
+      "image_url": "",
+      "official_url": "https://huggingface.co/prism-ml/Ternary-Bonsai-8B-gguf",
+      "canonical_key": "https://huggingface.co/prism-ml/ternary-bonsai-8b-gguf",
+      "verification": {
+        "article_title_verified": "PrismML — Announcing Bonsai 27B: The First 27B-Class Model to Run on a Phone",
+        "article_source_verified": "prismml.com",
+        "article_published_verified": "2026-07-14T00:00:00+09:00",
+        "article_url_verified": "https://prismml.com/news/bonsai-27b",
+        "geeknews_listing_url": "",
+        "official_url": "https://huggingface.co/prism-ml/Ternary-Bonsai-8B-gguf",
+        "project_name": "prism-ml/Ternary-Bonsai-8B-gguf",
+        "project_owner": "prism-ml",
+        "project_description": "",
+        "license": "apache-2.0",
+        "updated_at": "2026-06-10T22:41:30.000Z",
+        "project_kind": "huggingface"
+      }
+    },
+    {
+      "id": "geeknews-3d4a6430f2550473",
+      "source": "FOSS for All",
+      "topic": "오픈소스",
+      "title": "FOSS for All Microgrants (2026) 참여 방법",
+      "url": "https://forum.fossforall.org/t/foss-for-all-microgrants-2026/105",
+      "published_at": "2026-07-12T14:09:35+09:00",
+      "summary": "기부자로 참여하기 기부자로 참여하려면, 아래 링크를 확인하여 5천원 ~ 10만원 사이 원하는 금액을 기부하실 수 있습니다. 프로젝트 메인테이너 혹은 커뮤니티 운영진 기부금 수혜를 받기를 희망한다면, 아래 공지를 확인하여 신청 해 주세요 심사위원 추천 혹은 지원 수혜 프로젝트/커뮤니티 선정에 참여할 심사위원을 추천하고 싶다면 아래 공지를 확인 해 주세요. 9월까지 심사위원 합류가 진행됩니다.",
+      "listing_url": "https://news.hada.io/topic?id=31436",
+      "introduced_at": "2026-07-14T22:27:59+09:00",
+      "image_url": "https://forum.fossforall.org/uploads/default/original/1X/5e3231adb7578400bd84576d9b2349286df669cc.png",
+      "official_url": "https://github.com/discourse/discourse",
+      "canonical_key": "https://github.com/discourse/discourse",
+      "verification": {
+        "article_title_verified": "FOSS for All Microgrants (2026) 참여 방법",
+        "article_source_verified": "FOSS for All",
+        "article_published_verified": "2026-07-12T14:09:35+09:00",
+        "article_url_verified": "https://forum.fossforall.org/t/foss-for-all-microgrants-2026/105",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=31436",
+        "official_url": "https://github.com/discourse/discourse",
+        "project_name": "discourse/discourse",
+        "project_owner": "discourse",
+        "project_description": "A platform for community discussion. Free, open, simple.",
+        "license": "GPL-2.0",
+        "updated_at": "2026-07-14T21:42:31Z",
+        "project_kind": "github"
+      }
+    }
+  ]
+}
