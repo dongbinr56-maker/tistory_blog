@@ -1,0 +1,212 @@
+{
+  "date": "2026-07-16",
+  "title": "[AI 뉴스룸] 경량화 추론의 비용 효율성과 보안 패치가 가로막은 시스템 가시성의 딜레마",
+  "title_candidates": [
+    "[AI 뉴스룸] 경량화 추론의 비용 효율성과 보안 패치가 가로막은 시스템 가시성의 딜레마",
+    "[AI 뉴스룸] 구형 하드웨어 최적화와 에이전트 암호화 부작용이 던지는 시스템 설계의 교훈",
+    "[AI 뉴스룸] Ternary-Bonsai와 Inkling의 자원 통제, 그리고 Codex 암호화 패치의 가시성 유실"
+  ],
+  "tags": [
+    "온디바이스AI",
+    "GGUF",
+    "양자화",
+    "멀티에이전트",
+    "오픈소스모델",
+    "Codex"
+  ],
+  "meta_description": "구형 CPU 기반 Gemma 4 추론과 Inkling의 가중치 공개 사례로 본 로컬 최적화 경로, 그리고 Codex 멀티에이전트 암호화 패치로 인한 감사 로그 유실 문제를 분석합니다.",
+  "article_count_note": "",
+  "quality_status": "READY_FOR_MANUAL_REVIEW",
+  "warnings": [
+    "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "수집 경고: 검증 제외: https://news.hada.io/topic?id=31455 (페이지 확인 실패: https://melodykoh.substack.com/p/wrapping-the-unpredictable-genius (HTTP Error 403: Forbidden))",
+    "수집 경고: 검증 제외: https://news.hada.io/topic?id=31455&go=comments (페이지 확인 실패: https://melodykoh.substack.com/p/wrapping-the-unpredictable-genius (HTTP Error 403: Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=48919363 (페이지 확인 실패: https://academic.oup.com/sleep/article/47/1/zsad253/7280269 (HTTP Error 403: Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=48920181 (페이지 확인 실패: https://www.ft.com/content/3a023b95-66c3-41e1-b0ce-df752a499541 (HTTP Error 403: Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=48915953 (페이지 확인 실패: https://www.reuters.com/business/finance/stripe-advent-offer-buy-paypal-more-than-53-billion-sources-say-2026-07-15/ (HTTP Error 401: HTTP Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=48923079 (페이지 확인 실패: https://openai.com/supply/co-lab/work-louder/ (HTTP Error 403: Forbidden))"
+  ],
+  "manual_review_required": true,
+  "publish_checklist": [
+    "원문 링크와 사실관계를 확인합니다.",
+    "작성자 분석이 자신의 실제 관점인지 검토합니다.",
+    "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요.",
+    "소개·문의·개인정보 페이지가 실제 값으로 공개됐는지 확인합니다.",
+    "티스토리 HTML 모드에 붙여넣은 뒤 모바일 화면을 확인합니다."
+  ],
+  "sources": [
+    {
+      "name": "Hugging Face 커뮤니티",
+      "title": "prism-ml/Ternary-Bonsai-27B-gguf",
+      "url": "https://huggingface.co/prism-ml/Ternary-Bonsai-27B-gguf"
+    },
+    {
+      "name": "www.neomindlabs.com",
+      "title": "Running Gemma 4 26B at 5 tokens/sec on a 13-year-old Xeon with no GPU | Neomind",
+      "url": "https://www.neomindlabs.com/2026/06/08/running-gemma-4-26b-at-5-tokens-sec-on-a-13-year-old-xeon-with-no-gpu/"
+    },
+    {
+      "name": "Thinking Machines Lab",
+      "title": "Inkling: Our open-weights model",
+      "url": "https://thinkingmachines.ai/news/introducing-inkling/"
+    },
+    {
+      "name": "GitHub",
+      "title": "Regression: encrypted MultiAgentV2 messages remove readable task audit trail · Issue #28058 · openai/codex",
+      "url": "https://github.com/openai/codex/issues/28058"
+    }
+  ],
+  "fact_review": [
+    {
+      "source": "Hugging Face 커뮤니티",
+      "title": "prism-ml/Ternary-Bonsai-27B-gguf",
+      "source_url": "https://huggingface.co/prism-ml/Ternary-Bonsai-27B-gguf",
+      "official_url": "https://huggingface.co/prism-ml/Ternary-Bonsai-27B-gguf",
+      "summary": "Hugging Face에서 최근 주목받는 text-generation 모델 저장소입니다.",
+      "verified_facts": [
+        {
+          "label": "프로젝트·모델",
+          "value": "prism-ml/Ternary-Bonsai-27B-gguf"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "prism-ml"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-07-15T06:37:19+09:00"
+        },
+        {
+          "label": "Hugging Face 좋아요 (수집 시점)",
+          "value": "453"
+        },
+        {
+          "label": "Hugging Face 다운로드 (수집 시점)",
+          "value": "23"
+        },
+        {
+          "label": "Hugging Face 파이프라인",
+          "value": "text-generation"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "www.neomindlabs.com",
+      "title": "Running Gemma 4 26B at 5 tokens/sec on a 13-year-old Xeon with no GPU | Neomind",
+      "source_url": "https://www.neomindlabs.com/2026/06/08/running-gemma-4-26b-at-5-tokens-sec-on-a-13-year-old-xeon-with-no-gpu/",
+      "official_url": "https://github.com/ikawrakow/ik_llama.cpp",
+      "summary": "A storage appliance that shipped before AVX2 existed now runs Google's Gemma 4 26B in my basement, no GPU. Here's how we got a modern MoE model onto a CPU older than the instructions its inference engine assumed were there.",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "www.neomindlabs.com"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-07-16T00:34:05+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "ikawrakow/ik_llama.cpp"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "ikawrakow"
+        },
+        {
+          "label": "라이선스",
+          "value": "MIT"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-07-15T22:04:34Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "Thinking Machines Lab",
+      "title": "Inkling: Our open-weights model",
+      "source_url": "https://thinkingmachines.ai/news/introducing-inkling/",
+      "official_url": "https://huggingface.co/thinkingmachines/inkling",
+      "summary": "Our first open-weights model: multimodal, Mixture-of-Experts, with controllable reasoning effort. Available to fine-tune on Tinker.",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "Thinking Machines Lab"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-07-16T03:12:45+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "thinkingmachines/Inkling"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "thinkingmachines"
+        },
+        {
+          "label": "라이선스",
+          "value": "apache-2.0"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-07-15T20:09:21.000Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "GitHub",
+      "title": "Regression: encrypted MultiAgentV2 messages remove readable task audit trail · Issue #28058 · openai/codex",
+      "source_url": "https://github.com/openai/codex/issues/28058",
+      "official_url": "",
+      "summary": "What version of Codex CLI is running? Upstream main after #26210 (Encrypt multi-agent v2 message payloads, merged 2026-06-05). This appears to affect versions that include that change and enable Mu...",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "GitHub"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-06-13T17:06:35+09:00"
+        }
+      ],
+      "manual_review_note": "공식 프로젝트·1차 출처가 연결되지 않은 항목입니다. 숫자, 규제, 회사 관계, 인과관계 주장은 원문을 열어 직접 확인하세요."
+    }
+  ],
+  "images": {
+    "hero": {
+      "path": "hero.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-16/hero.png",
+      "kind": "generated-hero"
+    },
+    "huggingface-community-27ffa53840f08319": {
+      "origin_url": "https://huggingface.co/prism-ml/Ternary-Bonsai-27B-gguf/resolve/main/thumbnail.png",
+      "kind": "generated-fallback",
+      "path": "issue-1.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-16/issue-1.svg"
+    },
+    "hacker-news-46a61aed5b2cbf62": {
+      "origin_url": "",
+      "kind": "source-image",
+      "path": "issue-2.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-16/issue-2.svg"
+    },
+    "hacker-news-f8cc2e782f5e5a1e": {
+      "origin_url": "https://thinkingmachines.ai/news/introducing-inkling/images/cover-social-inkling-post.png",
+      "kind": "source-image",
+      "path": "issue-3.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-16/issue-3.png"
+    },
+    "geeknews-c619ed70fe60a039": {
+      "origin_url": "https://opengraph.githubassets.com/0a841c63b47b4ec497a6a4d32369844b0545bdba4ed9346bb7e1868fcfd1eea7/openai/codex/issues/28058",
+      "kind": "source-image",
+      "path": "issue-4.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-16/issue-4.png"
+    }
+  }
+}

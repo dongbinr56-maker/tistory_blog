@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Running Gemma 4 26B at 5 tokens/sec on a 13-year-old Xeon with no GPU | Neomind">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07142b"/><stop offset="0.52" stop-color="#0b4d63"/><stop offset="1" stop-color="#106b54"/></linearGradient></defs>
+<rect width="1200" height="630" fill="url(#g)"/><circle cx="1040" cy="115" r="220" fill="#5eead4" fill-opacity=".12"/><circle cx="1040" cy="115" r="145" fill="none" stroke="#99f6e4" stroke-opacity=".28" stroke-width="2"/>
+<text x="80" y="132" fill="#99f6e4" font-family="Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="3">AI 모델링, NPU·GPU·엣지 AI</text>
+<foreignObject x="80" y="185" width="900" height="330"><div xmlns="http://www.w3.org/1999/xhtml" style="color:#f8fafc;font:700 54px/1.25 Arial,sans-serif;word-break:keep-all">Running Gemma 4 26B at 5 tokens/sec on a 13-year-old Xeon with no GPU | Neomind</div></foreignObject>
+<text x="80" y="558" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="22">AI Engineering Daily Brief</text></svg>
