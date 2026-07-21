@@ -1,0 +1,33 @@
+{
+  "status": "READY_FOR_MANUAL_REVIEW",
+  "errors": [],
+  "warnings": [
+    "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=48997548 (페이지 확인 실패: https://openai.com/index/hugging-face-model-evaluation-security-incident/ (HTTP Error 403: Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=48996571 (페이지 확인 실패: https://ads.openai.com/ (HTTP Error 403: Forbidden))"
+  ],
+  "checks": {
+    "three_distinct_title_candidates": true,
+    "reasonable_title_length": true,
+    "tag_count_and_uniqueness": true,
+    "sufficient_sources": true,
+    "all_sections_trace_to_source": true,
+    "secondary_source_attribution": true,
+    "plain_language_and_engineering_value": true,
+    "original_value_added": true,
+    "substantive_body": true,
+    "github_or_huggingface_project_included": true,
+    "community_project_included": true,
+    "manual_review_required": true,
+    "no_click_inducement": true,
+    "no_empty_technical_inventory": true,
+    "no_volatile_community_metrics": true,
+    "natural_editorial_voice": true,
+    "specific_intro": true,
+    "no_restricted_topic_signal": true,
+    "contact_configured": true,
+    "author_configured": true,
+    "blog_url_configured": true
+  },
+  "manual_review_required": true
+}
