@@ -9,6 +9,7 @@ from typing import Any
 from .config import ROOT, load_local_env, load_site_config
 from .pipeline import refresh_hero_image, run
 from .render import build_site
+from .tistory_publish import prepare_tistory_publish_html
 
 
 def _write_step_summary(result: dict[str, Any]) -> None:
@@ -42,6 +43,11 @@ def main() -> None:
     hero_parser = commands.add_parser("refresh-hero", help="regenerate the Tistory thumbnail hero image for an approved draft")
     hero_parser.add_argument("--date", help="YYYY-MM-DD; defaults to today in Asia/Seoul")
     commands.add_parser("build-site", help="rebuild the GitHub Pages copy/review UI")
+    publish_parser = commands.add_parser("prepare-publish", help="write Tistory paste-ready HTML with hosted HTTPS images")
+    publish_parser.add_argument("--html", required=True, type=Path, help="local-preview HTML containing exactly three ./ PNG paths")
+    publish_parser.add_argument("--asset-dir", required=True, type=Path, help="GitHub Pages asset output directory")
+    publish_parser.add_argument("--asset-base-url", required=True, help="public HTTPS URL matching --asset-dir")
+    publish_parser.add_argument("--output", type=Path, help="paste-ready HTML output path")
     args = parser.parse_args()
     if args.command == "run":
         result = run(date=args.date, demo=args.demo, refresh=args.refresh)
@@ -49,6 +55,9 @@ def main() -> None:
         print(json.dumps(result, ensure_ascii=False, indent=2))
     elif args.command == "refresh-hero":
         print(json.dumps(refresh_hero_image(date=args.date), ensure_ascii=False, indent=2))
-    else:
+    elif args.command == "build-site":
         build_site(ROOT, load_site_config(ROOT))
         print("docs/index.html 과 docs/adsense-checklist.html을 생성했습니다.")
+    else:
+        result = prepare_tistory_publish_html(args.html, args.asset_dir, args.asset_base_url, args.output)
+        print(json.dumps(result, ensure_ascii=False, indent=2))
