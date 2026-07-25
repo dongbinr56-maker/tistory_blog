@@ -1,0 +1,209 @@
+{
+  "date": "2026-07-26",
+  "title": "[AI 뉴스룸] 자율형 에이전트와 플랫폼 통제 사이에서 엔지니어가 직면한 아키텍처 선택지",
+  "title_candidates": [
+    "[AI 뉴스룸] 자율형 에이전트와 플랫폼 통제 사이에서 엔지니어가 직면한 아키텍처 선택지",
+    "[AI 뉴스룸] Claude Opus 5 도입 시 고려해야 할 비용 통제와 안드로이드 ADB 제한 대응책",
+    "[AI 뉴스룸] Mage-Flow 이미지 모델 검증부터 Kimi K3 보안 평가가 시사하는 인프라 방어 전략"
+  ],
+  "tags": [
+    "ClaudeOpus5",
+    "MageFlow",
+    "안드로이드ADB",
+    "에이전트보안",
+    "온디바이스AI",
+    "오픈소스모델"
+  ],
+  "meta_description": "클로드 오푸스 5의 자율 에이전트 성능 향상 소식과 마이크로소프트의 Mage-Flow 이미지 모델 공개, 안드로이드의 ADB 제한 조치 및 Kimi K3 보안 평가 보고서까지 실무 엔지니어가 알아야 할 핵심 변화를 짚어봅니다.",
+  "article_count_note": "",
+  "quality_status": "READY_FOR_MANUAL_REVIEW",
+  "warnings": [
+    "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=49044074 (페이지 확인 실패: https://www.wsj.com/health/taylor-farms-cyclospora-recall-delay-call-41fef0bc (HTTP Error 401: HTTP Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=49048681 (페이지 확인 실패: https://kirwinhampshire.substack.com/p/the-dark-night-of-mathematics (HTTP Error 403: Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=49050152 (페이지 확인 실패: https://blog.adafruit.com/2026/03/05/tiles-security-is-so-bad-its-a-feature-for-stalkers/ (HTTP Error 403: Forbidden))"
+  ],
+  "manual_review_required": true,
+  "publish_checklist": [
+    "원문 링크와 사실관계를 확인합니다.",
+    "작성자 분석이 자신의 실제 관점인지 검토합니다.",
+    "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요.",
+    "소개·문의·개인정보 페이지가 실제 값으로 공개됐는지 확인합니다.",
+    "티스토리 HTML 모드에 붙여넣은 뒤 모바일 화면을 확인합니다."
+  ],
+  "sources": [
+    {
+      "name": "Hugging Face 커뮤니티",
+      "title": "microsoft/Mage-Flow",
+      "url": "https://huggingface.co/microsoft/Mage-Flow"
+    },
+    {
+      "name": "NIST",
+      "title": "UK AISI / CAISI Preliminary Assessment of Kimi K3's Cyber Capabilities",
+      "url": "https://www.nist.gov/news-events/news/2026/07/uk-aisi-caisi-preliminary-assessment-kimi-k3s-cyber-capabilities"
+    },
+    {
+      "name": "Kitsumed Blog",
+      "title": "Android May Soon Restrict On-Device ADB, Affecting Shizuku, libadb and Developers",
+      "url": "https://kitsumed.github.io/blog/posts/android-may-soon-restrict-on-device-adb/"
+    },
+    {
+      "name": "www.anthropic.com",
+      "title": "Introducing Claude Opus 5",
+      "url": "https://www.anthropic.com/news/claude-opus-5"
+    }
+  ],
+  "fact_review": [
+    {
+      "source": "Hugging Face 커뮤니티",
+      "title": "microsoft/Mage-Flow",
+      "source_url": "https://huggingface.co/microsoft/Mage-Flow",
+      "official_url": "https://huggingface.co/microsoft/Mage-Flow",
+      "summary": "Hugging Face에서 최근 주목받는 text-to-image 모델 저장소입니다.",
+      "verified_facts": [
+        {
+          "label": "프로젝트·모델",
+          "value": "microsoft/Mage-Flow"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "microsoft"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-07-23T12:15:05+09:00"
+        },
+        {
+          "label": "Hugging Face 좋아요 (수집 시점)",
+          "value": "272"
+        },
+        {
+          "label": "Hugging Face 다운로드 (수집 시점)",
+          "value": "1156"
+        },
+        {
+          "label": "Hugging Face 파이프라인",
+          "value": "text-to-image"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "NIST",
+      "title": "UK AISI / CAISI Preliminary Assessment of Kimi K3's Cyber Capabilities",
+      "source_url": "https://www.nist.gov/news-events/news/2026/07/uk-aisi-caisi-preliminary-assessment-kimi-k3s-cyber-capabilities",
+      "official_url": "https://github.com/newrelic/newrelic-browser-agent",
+      "summary": "The UK Artificial Intelligence Security Institute (UK AISI) and the U.S.",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "NIST"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-07-23T21:00:00+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "newrelic/newrelic-browser-agent"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "newrelic"
+        },
+        {
+          "label": "라이선스",
+          "value": "Apache-2.0"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-07-23T17:57:51Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "Kitsumed Blog",
+      "title": "Android May Soon Restrict On-Device ADB, Affecting Shizuku, libadb and Developers",
+      "source_url": "https://kitsumed.github.io/blog/posts/android-may-soon-restrict-on-device-adb/",
+      "official_url": "https://github.com/kitsumed/blog",
+      "summary": "Changes proposed for ADB could kill an entire ecosystem of open-source power-user apps, mobile developer setups, and rootless privacy tools based on Shizuku.",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "Kitsumed Blog"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-07-21T03:10:00+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "kitsumed/blog"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "kitsumed"
+        },
+        {
+          "label": "라이선스",
+          "value": "MIT"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-07-24T18:25:42Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "www.anthropic.com",
+      "title": "Introducing Claude Opus 5",
+      "source_url": "https://www.anthropic.com/news/claude-opus-5",
+      "official_url": "",
+      "summary": "Opus 5 is a step change improvement for the Opus tier powering long-running agents while delivering improvements in coding and professional work.",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "www.anthropic.com"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-07-25T07:48:13+09:00"
+        }
+      ],
+      "manual_review_note": "공식 프로젝트·1차 출처가 연결되지 않은 항목입니다. 숫자, 규제, 회사 관계, 인과관계 주장은 원문을 열어 직접 확인하세요."
+    }
+  ],
+  "images": {
+    "hero": {
+      "path": "hero.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-26/hero.png",
+      "kind": "generated-hero"
+    },
+    "huggingface-community-fef6cadb37fbc1bb": {
+      "origin_url": "https://huggingface.co/microsoft/Mage-Flow/resolve/main/thumbnail.png",
+      "kind": "generated-fallback",
+      "path": "issue-1.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-26/issue-1.svg"
+    },
+    "hacker-news-b25f474a2e30308c": {
+      "origin_url": "https://www.nist.gov/sites/default/files/styles/social/public/images/2026/07/23/image1.png?itok=QQ6h6QCy",
+      "kind": "source-image",
+      "path": "issue-2.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-26/issue-2.png"
+    },
+    "hacker-news-bc4111fcaf9e1181": {
+      "origin_url": "",
+      "kind": "source-image",
+      "path": "issue-3.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-26/issue-3.svg"
+    },
+    "geeknews-c34a327604b5be4a": {
+      "origin_url": "https://cdn.sanity.io/images/4zrzovbb/website/54b7ab1d2c2521f83ae5d2da5f9d99321c370d24-2880x1620.png",
+      "kind": "source-image",
+      "path": "issue-4.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-26/issue-4.png"
+    }
+  }
+}
