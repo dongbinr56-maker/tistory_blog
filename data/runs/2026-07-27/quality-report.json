@@ -1,0 +1,11 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    "초안 생성 중단: 요즘IT·GeekNews·Hacker News 기사와 GitHub/Hugging Face 커뮤니티 프로젝트를 합쳐 검증 가능한 3건을 만들지 못했습니다."
+  ],
+  "collector_errors": [
+    "수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "검증 제외: https://news.ycombinator.com/item?id=49057574 (페이지 확인 실패: https://www.wsj.com/tech/google-discloses-94-1-billion-in-spacex-stock-marking-6-stake-91655d7c (HTTP Error 401: HTTP Forbidden))",
+    "검증 제외: https://news.ycombinator.com/item?id=49052912 (페이지 확인 실패: https://github.com/demo-zexuan/liang-wenfeng-investor-meeting-2026-7-22/blob/master/%E6%A2%81%E6%96%87%E9%94%8B%E6%8A%95%E8%B5%84%E8%80%85%E4%BA%A4%E6%B5%81%E4%BC%9A-%E6%96%87%E5%AD%97%E7%A8%BF_1_18_translate_20260723201651.pdf (HTTP Error 404: Not Found))"
+  ]
+}
