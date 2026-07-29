@@ -1,0 +1,220 @@
+{
+  "date": "2026-07-30",
+  "title": "[AI 뉴스룸] 로컬 메모리 제약과 장문 규정 준수라는 양극단의 에이전트 개발 과제",
+  "title_candidates": [
+    "[AI 뉴스룸] 로컬 메모리 제약과 장문 규정 준수라는 양극단의 에이전트 개발 과제",
+    "[AI 뉴스룸] 2GB RAM의 Gemma 4 구동부터 수십 페이지 핸드북 준수 검증까지",
+    "[AI 뉴스룸] CLI 기반 에이전트 제어와 로컬 경량화가 마주한 실무적 타협점"
+  ],
+  "tags": [
+    "로컬AI",
+    "에이전트",
+    "Gemma4",
+    "KimiCode",
+    "벤치마크",
+    "오픈소스"
+  ],
+  "meta_description": "로컬 맥북 환경에서의 Gemma 4 경량 추론 도구 turbo-fieldfare부터 CLI 기반 에이전트 제어 도구 Kimi Code, 그리고 에이전트의 사내 규정 준수 능력을 평가하는 HANDBOOK.md 벤치마크까지 최신 AI 개발 트렌드를 분석합니다.",
+  "intro": "로컬 환경의 극단적인 자원 제약 속에서 대형 언어 모델을 구동하려는 시도와, 수십 페이지에 달하는 기업 규정을 한 치의 오차도 없이 수행해야 하는 에이전트의 신뢰성 요구는 서로 정반대의 엔지니어링 지향점을 가리킵니다. drumih/turbo-fieldfare처럼 하드웨어 한계를 쥐어짜는 최적화 기법이 등장하는 한편, surge-ai/handbook 같은 벤치마크는 에이전트가 긴 문맥 속에서 규칙을 얼마나 엄격히 준수하는지 시험대에 올립니다. 개발자는 터미널 창에서 MoonshotAI/kimi-code를 다루며 로컬 자원의 한계와 에이전트의 실행 정확도 사이에서 끊임없는 절충안을 찾아야 합니다.",
+  "sections": [
+    {
+      "headline": "Kwaipilot KAT-Coder-V2.5-Dev 오픈소스 코드 생성 모델의 등장",
+      "source_ids": [
+        "huggingface-community-fc888d2900daa33a"
+      ],
+      "what_happened": "Hugging Face 커뮤니티에 따르면, Kwaipilot이 텍스트 생성 기반의 코드 개발 특화 모델인 KAT-Coder-V2.5-Dev를 공개해 최근 해당 플랫폼에서 주목받고 있습니다.",
+      "plain_explanation": "개발자가 작성 중인 소스코드를 분석하여 다음 줄에 들어갈 코드를 자동으로 완성하거나 논리적 오류를 찾아내는 텍스트 생성 기반 모델입니다. 개발 환경에 플러그인 형태로 연동하여 실시간으로 코드 초안을 제안받는 방식으로 작동합니다.",
+      "why_it_matters": "외부 클라우드 API를 거치지 않고 로컬 환경이나 사내 독립 서버에 직접 탑재할 수 있어, 민감한 소스코드의 외부 유출 우려를 통제할 수 있습니다.",
+      "technical_details": "",
+      "editorial_take": "개발 전용 모델을 도입할 때는 단순한 벤치마크 점수보다 실제 개발 조직이 사용하는 언어와 프레임워크에 대한 미세조정 수준을 면밀히 따져야 합니다. 이 모델은 아직 개발 단계인 Dev 버전이므로 상용 서비스 개발에 즉시 도입하기보다는 샌드박스 환경에서 내부 API 호출 정확도를 검증하는 용도로 한정하는 편이 현실적입니다. 사내 고유 라이브러리를 인식시키기 위해 추가적인 파인튜닝 비용이 발생하는 점도 고려 대상입니다.",
+      "reader_action": "허깅페이스 저장소에 접속하여 모델 카드를 확인하고 로컬 테스트 환경에서 지원 언어 목록을 직접 테스트합니다.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "맥북에서 Gemma 4를 초경량으로 구동하는 turbo-fieldfare",
+      "source_ids": [
+        "hacker-news-7af3ac00212dbeff"
+      ],
+      "what_happened": "GitHub에 공개된 drumih/turbo-fieldfare 프로젝트를 통해 M시리즈 맥북의 제한된 메모리 환경에서도 Gemma 4 26B-A4B 모델을 약 2GB RAM 수준에서 추론할 수 있는 기술이 구현되었습니다.",
+      "plain_explanation": "애플의 M시리즈 맥북에서 시스템 메모리를 극도로 적게 점유하면서도 대형 언어 모델을 로컬 환경에서 실행할 수 있게 지원하는 추론 최적화 도구입니다. 별도의 외부 서버 연결 없이 개인 노트북 자원만으로 연산을 처리합니다.",
+      "why_it_matters": "고가의 GPU 클라우드 인프라를 구독하지 않고도 오프라인 환경에서 대형 모델을 개인 장비로 구동하며 비용을 통제하고 데이터 보안을 유지하는 대안이 됩니다.",
+      "technical_details": "",
+      "editorial_take": "맥북의 통합 메모리 아키텍처를 극대화한 최적화는 흥미롭지만, 2GB 수준으로 메모리 사용량을 낮추는 과정에서 발생하는 극단적인 양자화가 모델 본연의 추론 성능을 얼마나 훼손하는지 대조군과 비교해 검증해야 합니다. 복잡한 코딩이나 정밀한 논리 연산 작업에서는 답변의 왜곡 현상이 발생할 위험이 큽니다. 다중 사용자가 접근하는 프로덕션 서버용이 아닌 철저히 개인 개발자의 로컬 프로토타이핑 실험 도구로 정의하고 접근하는 편이 타당합니다.",
+      "reader_action": "프로젝트 깃허브 저장소의 설치 가이드를 참고하여 터미널에서 로컬 구동 시 실제 메모리 점유율을 측정해 봅니다.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "CLI 기반 차세대 에이전트 설정을 지원하는 Kimi Code",
+      "source_ids": [
+        "hacker-news-4934e004900693ce"
+      ],
+      "what_happened": "www.kimi.com에 게시된 문서에 따르면, MoonshotAI가 차세대 에이전트 구축의 시작점으로 활용할 수 있는 Kimi Code CLI 도구와 모델 구성 사양을 공개했습니다.",
+      "plain_explanation": "개발자가 터미널 환경에서 명령어를 직접 입력하여 인공지능 에이전트의 작동 방식을 설정하고 제어하는 도구입니다. 복잡한 그래픽 인터페이스 없이 텍스트 기반의 설정 파일로 다양한 모델의 연결 상태와 동작 규칙을 정의합니다.",
+      "why_it_matters": "터미널 중심의 개발 워크플로우에 에이전트 제어 권한을 직접 통합함으로써, 반복적인 스크립트 실행과 파이프라인 자동화의 효율을 높일 수 있습니다.",
+      "technical_details": "",
+      "editorial_take": "CLI 기반 도구는 숙련된 엔지니어에게 빠른 제어력을 제공하지만, 텍스트 설정 파일의 사소한 문법 오류나 API 토큰 노출 같은 보안 관리에 취약합니다. 에이전트가 로컬 시스템에 직접 명령을 실행할 수 있는 권한 범위를 최소한으로 제한하는 샌드박스 설정이 선행되어야 안전합니다. 시각적 모니터링 대시보드가 부재하므로 에이전트의 실행 로그를 실시간으로 수집하고 예외 상황 발생 시 즉각 차단하는 보완책을 별도로 마련해야 하는 번거로움이 따릅니다.",
+      "reader_action": "공식 문서의 모델 구성 가이드를 분석하고 로컬 터미널에서 기본 설정 파일을 작성하여 에이전트 구동을 테스트합니다.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "사내 규정 준수 능력을 검증하는 에이전트 벤치마크 HANDBOOK.md",
+      "source_ids": [
+        "hacker-news-a5c2df81029f58f8"
+      ],
+      "what_happened": "arXiv.org에 발표된 논문을 통해, 연구진은 모델 컨텍스트 프로토콜을 기반으로 장문의 사내 규정집을 준수하는 에이전트의 능력을 다각도로 평가하는 벤치마크인 HANDBOOK.md를 제안했습니다.",
+      "plain_explanation": "가상의 회사 환경에서 인공지능 에이전트가 수십 페이지 분량의 업무 규정집과 표준 운영 절차를 정확히 준수하며 메일, 메신저, 일정 관리 도구를 사용해 업무를 완수하는지 검증하는 평가 시스템입니다.",
+      "why_it_matters": "단순 질의응답 수준을 넘어 긴 문맥의 정책 문서를 바탕으로 도구를 연속적으로 제어하는 에이전트의 실질적인 업무 통제력을 객관적으로 측정하는 기준이 됩니다.",
+      "technical_details": "",
+      "editorial_take": "이 벤치마크는 에이전트가 장문 맥락 속에서 규칙을 우회하거나 망각하는 현상을 포착하는 데 유용한 도구입니다. 다만 가상 환경의 성공이 실제 복잡한 엔터프라이즈 시스템의 안정성을 완전히 보장하지는 않으므로, 도입 전 기업 자체의 예외 처리 규정을 반영한 커스텀 시나리오 설계가 요구됩니다. 모델 컨텍스트 프로토콜의 호환성 검증과 함께 에이전트가 규정을 위반했을 때 작동할 물리적 제어 장치 확보가 병행되어야 실효성이 있습니다.",
+      "reader_action": "공식 깃허브 저장소에 공개된 65가지 태스크 시나리오를 분석하여 자체 에이전트 평가 체계에 적용할 요소를 탐색합니다.",
+      "verification_notes": ""
+    }
+  ],
+  "closing": "로컬 환경에서의 극단적인 경량화 추론 시도부터 장문의 사내 규정을 준수하는 에이전트 평가 기법까지, 오픈소스 생태계는 실무 적용을 위한 구체적인 제어 장치들을 마련하는 방향으로 움직이고 있습니다. 무조건 무거운 클라우드 모델을 고집하기보다, 당면한 보안 요구사항과 인프라 한계에 맞춰 로컬 최적화 도구와 에이전트 통제 기술을 정교하게 조합하는 설계 능력이 핵심 경쟁력으로 부상하는 시점입니다.",
+  "editor_comment": "로컬 환경에서 가벼운 모델의 실제 메모리 사용량을 직접 측정하거나 터미널 기반 에이전트의 설정 파일을 구성해 보며 시스템 제어 한계를 직접 파악하는 과정이 필요합니다.",
+  "editorial_disclosure": "",
+  "model": "gemini-3.5-flash",
+  "article_count_note": "",
+  "images": {
+    "hero": {
+      "path": "hero.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-30/hero.png",
+      "kind": "generated-hero"
+    },
+    "huggingface-community-fc888d2900daa33a": {
+      "origin_url": "https://huggingface.co/Kwaipilot/KAT-Coder-V2.5-Dev/resolve/main/thumbnail.png",
+      "kind": "generated-fallback",
+      "path": "issue-1.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-30/issue-1.svg"
+    },
+    "hacker-news-7af3ac00212dbeff": {
+      "origin_url": "https://repository-images.githubusercontent.com/github-production-repository-image-32fea6/1304159264/d6c0493d-d97a-45fc-b20a-dd40d1b6e090?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20260729%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260729T225552Z&X-Amz-Expires=300&X-Amz-Signature=7915eafe4b7a5bfbfb1bd4c2660129796ceb9f3cf0d5235027ed41d60e3f7fad&X-Amz-SignedHeaders=host&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoiaHR0cHM6Ly9yZXBvc2l0b3J5LWltYWdlcy5naXRodWJ1c2VyY29udGVudC5jb20vIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4NTM2NjA1MiwibmJmIjoxNzg1MzY1NzUyLCJwYXRoIjoicmVwb3NpdG9yeS1pbWFnZXMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIn0.VpvlQMnpNLmFlzk83L2LmFTusnf-QtM-LBobn1lwVDE",
+      "kind": "source-image",
+      "path": "issue-2.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-30/issue-2.png"
+    },
+    "hacker-news-4934e004900693ce": {
+      "origin_url": "",
+      "kind": "source-image",
+      "path": "issue-3.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-30/issue-3.svg"
+    },
+    "hacker-news-a5c2df81029f58f8": {
+      "origin_url": "https://arxiv.org/static/browse/0.3.4/images/arxiv-logo-fb.png",
+      "kind": "source-image",
+      "path": "issue-4.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-07-30/issue-4.png"
+    }
+  },
+  "source_items": [
+    {
+      "id": "huggingface-community-fc888d2900daa33a",
+      "source": "Hugging Face 커뮤니티",
+      "topic": "AI 에이전트, 오픈소스, Hugging Face, AI 모델링",
+      "title": "Kwaipilot/KAT-Coder-V2.5-Dev",
+      "url": "https://huggingface.co/Kwaipilot/KAT-Coder-V2.5-Dev",
+      "published_at": "2026-07-28T13:35:27+09:00",
+      "summary": "Hugging Face에서 최근 주목받는 text-generation 모델 저장소입니다.",
+      "listing_url": "https://huggingface.co/Kwaipilot/KAT-Coder-V2.5-Dev",
+      "introduced_at": "",
+      "image_url": "https://huggingface.co/Kwaipilot/KAT-Coder-V2.5-Dev/resolve/main/thumbnail.png",
+      "official_url": "https://huggingface.co/Kwaipilot/KAT-Coder-V2.5-Dev",
+      "canonical_key": "https://huggingface.co/kwaipilot/kat-coder-v2.5-dev",
+      "verification": {
+        "project_kind": "huggingface",
+        "project_name": "Kwaipilot/KAT-Coder-V2.5-Dev",
+        "project_owner": "Kwaipilot",
+        "license": "",
+        "updated_at": "2026-07-28T13:35:27+09:00",
+        "community_source": "huggingface",
+        "huggingface_likes": "315",
+        "huggingface_downloads": "6275",
+        "pipeline_tag": "text-generation"
+      }
+    },
+    {
+      "id": "hacker-news-7af3ac00212dbeff",
+      "source": "GitHub",
+      "topic": "AI 모델링",
+      "title": "GitHub - drumih/turbo-fieldfare: Gemma 4 26B-A4B inference in ~2 GB of RAM on any M-series MacBook",
+      "url": "https://github.com/drumih/turbo-fieldfare",
+      "published_at": "2026-07-30T00:05:43+09:00",
+      "summary": "Gemma 4 26B-A4B inference in ~2 GB of RAM on any M-series MacBook - drumih/turbo-fieldfare",
+      "listing_url": "https://news.ycombinator.com/item?id=49098510",
+      "introduced_at": "2026-07-30T00:05:43+09:00",
+      "image_url": "https://repository-images.githubusercontent.com/github-production-repository-image-32fea6/1304159264/d6c0493d-d97a-45fc-b20a-dd40d1b6e090?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20260729%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260729T225552Z&X-Amz-Expires=300&X-Amz-Signature=7915eafe4b7a5bfbfb1bd4c2660129796ceb9f3cf0d5235027ed41d60e3f7fad&X-Amz-SignedHeaders=host&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoiaHR0cHM6Ly9yZXBvc2l0b3J5LWltYWdlcy5naXRodWJ1c2VyY29udGVudC5jb20vIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4NTM2NjA1MiwibmJmIjoxNzg1MzY1NzUyLCJwYXRoIjoicmVwb3NpdG9yeS1pbWFnZXMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIn0.VpvlQMnpNLmFlzk83L2LmFTusnf-QtM-LBobn1lwVDE",
+      "official_url": "https://github.com/drumih/turbo-fieldfare",
+      "canonical_key": "https://github.com/drumih/turbo-fieldfare",
+      "verification": {
+        "article_title_verified": "GitHub - drumih/turbo-fieldfare: Gemma 4 26B-A4B inference in ~2 GB of RAM on any M-series MacBook",
+        "article_source_verified": "GitHub",
+        "article_published_verified": "2026-07-30T00:05:43+09:00",
+        "article_url_verified": "https://github.com/drumih/turbo-fieldfare",
+        "geeknews_listing_url": "",
+        "official_url": "https://github.com/drumih/turbo-fieldfare",
+        "project_name": "drumih/turbo-fieldfare",
+        "project_owner": "drumih",
+        "project_description": "Gemma 4 26B-A4B inference in ~2 GB of RAM on any M-series MacBook",
+        "license": "Apache-2.0",
+        "updated_at": "2026-07-29T22:54:38Z",
+        "project_kind": "github"
+      }
+    },
+    {
+      "id": "hacker-news-4934e004900693ce",
+      "source": "www.kimi.com",
+      "topic": "AI 에이전트",
+      "title": "Model Configuration | Kimi Code Docs",
+      "url": "https://www.kimi.com/code/docs/en/kimi-code/models",
+      "published_at": "2026-07-30T04:25:33+09:00",
+      "summary": "Kimi Code Documentation",
+      "listing_url": "https://news.ycombinator.com/item?id=49101852",
+      "introduced_at": "2026-07-30T04:25:33+09:00",
+      "image_url": "",
+      "official_url": "https://github.com/MoonshotAI/kimi-code",
+      "canonical_key": "https://github.com/moonshotai/kimi-code",
+      "verification": {
+        "article_title_verified": "Model Configuration | Kimi Code Docs",
+        "article_source_verified": "www.kimi.com",
+        "article_published_verified": "2026-07-30T04:25:33+09:00",
+        "article_url_verified": "https://www.kimi.com/code/docs/en/kimi-code/models",
+        "geeknews_listing_url": "",
+        "official_url": "https://github.com/MoonshotAI/kimi-code",
+        "project_name": "MoonshotAI/kimi-code",
+        "project_owner": "MoonshotAI",
+        "project_description": "Kimi Code CLI  —  The Starting Point for Next-Gen Agents",
+        "license": "MIT",
+        "updated_at": "2026-07-29T22:21:02Z",
+        "project_kind": "github"
+      }
+    },
+    {
+      "id": "hacker-news-a5c2df81029f58f8",
+      "source": "arXiv.org",
+      "topic": "AI 에이전트",
+      "title": "HANDBOOK.md: A Benchmark for Long-Context Agentic Instruction Following",
+      "url": "https://arxiv.org/abs/2607.25398",
+      "published_at": "2026-07-29T22:01:57+09:00",
+      "summary": "Language-model agents are increasingly deployed under standing instructions: a system prompt, a policy file, or a skills document is placed in context, and the agent is trusted to let it govern every action that follows. Existing benchmarks rarely test this deployment pattern directly; they measure whether an agent can complete a task, not whether a long, binding policy document actually constrains its behavior over an extended tool-use horizon. We present HANDBOOK.md, a benchmark of 65 agentic tasks modeled on how enterprise employees follow company handbooks. Each task places an agent in a self-contained company environment, a file workspace together with mock email, chat, calendar, issue-tracking, and commerce services exposed over the Model Context Protocol, and instructs it to carry out routine professional work governed by an expert-written standard operating procedure of 20 to 124 pages. Tasks span five domains (finance, medical billing, insurance, logistics, and HR) and ten fictional companies. To resist memorization, every task modifies one of ten base handbooks, altering the specific rules and thresholds on which grading turns, so no two tasks share a policy. Grading is f",
+      "listing_url": "https://news.ycombinator.com/item?id=49096969",
+      "introduced_at": "2026-07-29T22:01:57+09:00",
+      "image_url": "https://arxiv.org/static/browse/0.3.4/images/arxiv-logo-fb.png",
+      "official_url": "https://github.com/surge-ai/handbook",
+      "canonical_key": "https://github.com/surge-ai/handbook",
+      "verification": {
+        "article_title_verified": "HANDBOOK.md: A Benchmark for Long-Context Agentic Instruction Following",
+        "article_source_verified": "arXiv.org",
+        "article_published_verified": "2026-07-29T22:01:57+09:00",
+        "article_url_verified": "https://arxiv.org/abs/2607.25398",
+        "geeknews_listing_url": "",
+        "official_url": "https://github.com/surge-ai/handbook",
+        "project_name": "surge-ai/handbook",
+        "project_owner": "surge-ai",
+        "project_description": "",
+        "license": "Apache-2.0",
+        "updated_at": "2026-07-29T21:55:52Z",
+        "project_kind": "github"
+      }
+    }
+  ]
+}
