@@ -54,20 +54,18 @@ class SelectionTest(unittest.TestCase):
         self.assertEqual(github_headers["Authorization"], "Bearer test-token")
         self.assertNotIn("Authorization", web_headers)
 
-    def test_requires_one_github_or_huggingface_community_project(self):
+    def test_does_not_require_a_github_or_huggingface_project(self):
         selected = choose_diverse([item(1), item(2)], 3, [])
-        self.assertEqual(selected, [])
+        self.assertEqual(len(selected), 2)
 
-    def test_fills_three_slots_from_editorial_and_community_sources(self):
+    def test_fills_requested_slots_from_all_relevant_source_types(self):
         selected = choose_diverse([item(1, "github", community=True), item(2), item(3)], 3, [])
         self.assertEqual(len(selected), 3)
-        self.assertEqual(selected[0].verification["project_kind"], "github")
-        self.assertEqual(selected[0].verification["community_source"], "github")
+        self.assertIn(item(1, "github", community=True), selected)
 
-    def test_a_day_rich_in_articles_earns_a_fourth_slot(self):
+    def test_selection_does_not_add_a_slot_for_source_type_balancing(self):
         selected = choose_diverse([item(1, "github", community=True), item(2), item(3), item(4), item(5)], 3, [])
-        self.assertEqual(len(selected), 4)
-        self.assertEqual(sum(bool(chosen.verification.get("community_source")) for chosen in selected), 1)
+        self.assertEqual(len(selected), 3)
 
     def test_excludes_a_previously_selected_official_project_url(self):
         prior_project = item(1, "github", community=True)

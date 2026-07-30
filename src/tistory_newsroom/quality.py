@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 from .models import Draft, QualityReport
 from .style import generic_editorial_markers, generic_pattern_reasons, mentioned_projects, section_overlap_reasons
 
@@ -18,6 +20,15 @@ UNNATURAL_TECH_MARKERS = (
 COMMUNITY_METRIC_MARKERS = (
     "GitHub 스타", "깃허브 스타", "Hugging Face 다운로드", "허깅페이스 다운로드", "다운로드 수", "좋아요 수",
 )
+EVIDENCE_MODES = {"hands_on", "source_analysis"}
+EXECUTION_STATUSES = {"performed", "partial", "not_performed"}
+TEMPLATE_HEADINGS = {
+    "이번 변화의 요점",
+    "쉽게 풀어 보면",
+    "실무에서 달라지는 점",
+    "먼저 볼 지점",
+    "확인해 볼 것",
+}
 # Shared with the generation rewrite loop so a shortfall is repaired before
 # the gate blocks the day over a few missing characters.
 SECTION_MINIMUM_LENGTHS = (
@@ -71,7 +82,7 @@ def inspect_draft(draft: Draft, site: dict[str, object]) -> QualityReport:
     minimum_sources = int(site.get("required_source_count", 3))
     checks["sufficient_sources"] = len(draft.source_items) >= minimum_sources and all(item.url.startswith(("https://", "http://")) for item in draft.source_items)
     if not checks["sufficient_sources"]:
-        errors.append(f"신뢰 가능한 원문 링크를 가진 출처가 {minimum_sources}개 이상 필요합니다.")
+        warnings.append(f"출처 수 경고: 신뢰 가능한 원문 링크를 가진 출처가 권장치 {minimum_sources}개보다 적습니다.")
 
     checks["all_sections_trace_to_source"] = bool(draft.sections) and all(section.source_ids and set(section.source_ids) <= source_ids for section in draft.sections) and linked_ids == source_ids
     if not checks["all_sections_trace_to_source"]:
@@ -115,15 +126,40 @@ def inspect_draft(draft: Draft, site: dict[str, object]) -> QualityReport:
     minimum_body = int(site.get("minimum_body_characters", 1500))
     checks["substantive_body"] = len(body) >= minimum_body
     if not checks["substantive_body"]:
-        errors.append(f"본문은 최소 {minimum_body}자여야 합니다. 현재 {len(body)}자입니다.")
+        warnings.append(f"본문 길이 경고: 권장치 {minimum_body}자보다 짧습니다. 현재 {len(body)}자입니다.")
 
-    checks["github_or_huggingface_project_included"] = any(item.verification.get("project_kind") in {"github", "huggingface"} and item.official_url for item in draft.source_items)
-    if not checks["github_or_huggingface_project_included"]:
-        errors.append("GitHub 또는 Hugging Face 공식 프로젝트가 최소 1건 포함되어야 합니다.")
+    checks["valid_evidence_mode"] = draft.evidence_mode in EVIDENCE_MODES
+    if not checks["valid_evidence_mode"]:
+        errors.append("검증 방식은 hands_on 또는 source_analysis여야 합니다.")
 
-    checks["community_project_included"] = any(item.verification.get("community_source") in {"github", "huggingface"} for item in draft.source_items)
-    if not checks["community_project_included"]:
-        errors.append("GitHub 또는 Hugging Face 커뮤니티에서 최근 주목받는 프로젝트가 최소 1건 포함되어야 합니다.")
+    checks["valid_execution_status"] = draft.execution_status in EXECUTION_STATUSES
+    if not checks["valid_execution_status"]:
+        errors.append("실행 여부는 performed, partial, not_performed 중 하나여야 합니다.")
+
+    promises_hands_on = bool(re.search(r"(?:만들기|실습(?:하기)?|테스트(?:하기|해보기)?)\s*$", draft.title))
+    checks["hands_on_promise_is_performed"] = not promises_hands_on or draft.execution_status != "not_performed"
+    if not checks["hands_on_promise_is_performed"]:
+        errors.append("제목에서 만들기·실습·테스트를 약속한 글은 실제 실행 없이 발행할 수 없습니다.")
+
+    checks["hands_on_artifacts_present"] = (
+        draft.evidence_mode != "hands_on"
+        or draft.execution_status != "performed"
+        or bool(draft.evidence_artifacts)
+    )
+    if not checks["hands_on_artifacts_present"]:
+        errors.append("실사용 완료 글에는 스크린샷·출력·검증 메모 중 하나 이상의 증거 자료가 필요합니다.")
+
+    checks["source_limitations_documented"] = (
+        draft.evidence_mode != "source_analysis"
+        or all(section.verification_notes.strip() for section in draft.sections)
+    )
+    if not checks["source_limitations_documented"]:
+        errors.append("문서 기반 글은 각 출처에서 확인한 범위와 독립 검증하지 못한 한계를 기록해야 합니다.")
+
+    used_template_headings = {section.headline.strip() for section in draft.sections} & TEMPLATE_HEADINGS
+    checks["no_template_heading_scaffold"] = len(used_template_headings) < 3
+    if not checks["no_template_heading_scaffold"]:
+        errors.append("여러 글에서 반복되는 고정 소제목 템플릿 대신 주제에 맞는 소제목을 사용해야 합니다.")
 
     # Review is enforced by the workflow/report, rather than inserting an
     # automation disclaimer into the reader-facing article.

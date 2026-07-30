@@ -37,6 +37,7 @@ class GateRepairTest(unittest.TestCase):
             "why_it_matters": "영" * 60,
             "editorial_take": "판" * 130,
             "reader_action": "행" * 45,
+            "verification_notes": "공개 자료의 범위만 확인했으며 독립 실행은 재현하지 않았습니다.",
         }]}
         reasons = _gate_repair_reasons(draft, sources)
         self.assertTrue(any("owner/tool" in reason for reason in reasons))
@@ -50,6 +51,7 @@ class GateRepairTest(unittest.TestCase):
             "why_it_matters": "영" * 60,
             "editorial_take": "판" * 130,
             "reader_action": "행" * 45,
+            "verification_notes": "공개 자료의 범위만 확인했으며 독립 실행은 재현하지 않았습니다.",
         }]}
         reasons = _gate_repair_reasons(draft, self._secondary_source())
         self.assertTrue(any("plain_explanation" in reason for reason in reasons))
@@ -67,6 +69,7 @@ class GateRepairTest(unittest.TestCase):
             "why_it_matters": "영" * 60,
             "editorial_take": "판" * 130,
             "reader_action": "행" * 45,
+            "verification_notes": "공개 자료의 범위만 확인했으며 독립 실행은 재현하지 않았습니다.",
         }]}
         self.assertEqual(_gate_repair_reasons(draft, self._secondary_source()), [])
 

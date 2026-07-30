@@ -9,6 +9,7 @@ from typing import Any
 from .config import ROOT, load_local_env, load_site_config
 from .pipeline import refresh_hero_image, run
 from .render import build_site
+from .site_audit import audit_live_site
 from .tistory_publish import prepare_tistory_publish_html
 
 
@@ -43,6 +44,10 @@ def main() -> None:
     hero_parser = commands.add_parser("refresh-hero", help="regenerate the Tistory thumbnail hero image for an approved draft")
     hero_parser.add_argument("--date", help="YYYY-MM-DD; defaults to today in Asia/Seoul")
     commands.add_parser("build-site", help="rebuild the GitHub Pages copy/review UI")
+    audit_parser = commands.add_parser("audit-live", help="audit the live Tistory site before an AdSense review")
+    audit_parser.add_argument("--base-url", help="defaults to config/site.json blog_url")
+    audit_parser.add_argument("--expected-posts", type=int, default=20)
+    audit_parser.add_argument("--expected-notices", type=int, default=4)
     publish_parser = commands.add_parser("prepare-publish", help="write Tistory paste-ready HTML with hosted HTTPS images")
     publish_parser.add_argument("--html", required=True, type=Path, help="local-preview HTML containing exactly three ./ PNG paths")
     publish_parser.add_argument("--asset-dir", required=True, type=Path, help="GitHub Pages asset output directory")
@@ -58,6 +63,16 @@ def main() -> None:
     elif args.command == "build-site":
         build_site(ROOT, load_site_config(ROOT))
         print("docs/index.html 과 docs/adsense-checklist.html을 생성했습니다.")
+    elif args.command == "audit-live":
+        site = load_site_config(ROOT)
+        result = audit_live_site(
+            args.base_url or str(site["blog_url"]),
+            expected_post_count=args.expected_posts,
+            expected_notice_count=args.expected_notices,
+        )
+        print(json.dumps(result.to_dict(), ensure_ascii=False, indent=2))
+        if result.status != "READY_FOR_ADSENSE_REVIEW":
+            raise SystemExit(1)
     else:
         result = prepare_tistory_publish_html(args.html, args.asset_dir, args.asset_base_url, args.output)
         print(json.dumps(result, ensure_ascii=False, indent=2))

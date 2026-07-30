@@ -94,6 +94,9 @@ class Draft:
     editor_comment: str
     editorial_disclosure: str
     model: str
+    evidence_mode: str = "source_analysis"
+    execution_status: str = "not_performed"
+    evidence_artifacts: list[str] = field(default_factory=list)
     article_count_note: str = ""
     images: dict[str, dict[str, str]] = field(default_factory=dict)
     source_items: list[SourceItem] = field(default_factory=list)
@@ -112,6 +115,9 @@ class Draft:
             editor_comment=_prose(value.get("editor_comment")),
             editorial_disclosure=str(value.get("editorial_disclosure") or ""),
             model=str(value.get("model") or "unknown"),
+            evidence_mode=str(value.get("evidence_mode") or "source_analysis"),
+            execution_status=str(value.get("execution_status") or "not_performed"),
+            evidence_artifacts=[str(item).strip() for item in value.get("evidence_artifacts", []) if str(item).strip()],
             article_count_note=str(value.get("article_count_note") or ""),
             images={str(key): {str(image_key): str(image_value) for image_key, image_value in dict(image).items()} for key, image in dict(value.get("images") or {}).items()},
             source_items=source_items,
@@ -130,6 +136,9 @@ class Draft:
             "editor_comment": self.editor_comment,
             "editorial_disclosure": self.editorial_disclosure,
             "model": self.model,
+            "evidence_mode": self.evidence_mode,
+            "execution_status": self.execution_status,
+            "evidence_artifacts": self.evidence_artifacts,
             "article_count_note": self.article_count_note,
             "images": self.images,
             "source_items": [item.to_dict() for item in self.source_items],

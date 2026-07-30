@@ -48,6 +48,68 @@ class QualityGateTest(unittest.TestCase):
         self.assertEqual(report.status, "BLOCKED")
         self.assertFalse(report.checks["all_sections_trace_to_source"])
 
+    def test_hands_on_title_without_execution_blocks_draft(self):
+        draft = generate_demo("2026-07-11", sources(), SITE)
+        draft.title = "AI 문서 자동화 만들기 실습"
+        report = inspect_draft(draft, SITE)
+        self.assertEqual(report.status, "BLOCKED")
+        self.assertFalse(report.checks["hands_on_promise_is_performed"])
+
+    def test_performed_hands_on_draft_requires_evidence_artifacts(self):
+        draft = generate_demo("2026-07-11", sources(), SITE)
+        draft.evidence_mode = "hands_on"
+        draft.execution_status = "performed"
+        draft.evidence_artifacts = []
+        report = inspect_draft(draft, SITE)
+        self.assertEqual(report.status, "BLOCKED")
+        self.assertFalse(report.checks["hands_on_artifacts_present"])
+
+        draft.evidence_artifacts = ["입력 화면", "출력 대조표"]
+        report = inspect_draft(draft, SITE)
+        self.assertEqual(report.status, "READY_FOR_MANUAL_REVIEW")
+        self.assertTrue(report.checks["hands_on_artifacts_present"])
+
+    def test_source_analysis_requires_limitations_for_each_section(self):
+        draft = generate_demo("2026-07-11", sources(), SITE)
+        draft.sections[0].verification_notes = ""
+        report = inspect_draft(draft, SITE)
+        self.assertEqual(report.status, "BLOCKED")
+        self.assertFalse(report.checks["source_limitations_documented"])
+
+    def test_template_heading_scaffold_blocks_draft(self):
+        draft = generate_demo("2026-07-11", sources(), SITE)
+        for section, heading in zip(draft.sections, ("이번 변화의 요점", "쉽게 풀어 보면", "실무에서 달라지는 점")):
+            section.headline = heading
+        report = inspect_draft(draft, SITE)
+        self.assertEqual(report.status, "BLOCKED")
+        self.assertFalse(report.checks["no_template_heading_scaffold"])
+
+    def test_project_source_is_not_mandatory(self):
+        plain_sources = sources()
+        for source in plain_sources:
+            object.__setattr__(source, "official_url", "")
+            object.__setattr__(source, "verification", {})
+        draft = generate_demo("2026-07-11", plain_sources, SITE)
+        report = inspect_draft(draft, SITE)
+        self.assertEqual(report.status, "READY_FOR_MANUAL_REVIEW")
+        self.assertNotIn("github_or_huggingface_project_included", report.checks)
+
+    def test_source_count_is_an_advisory_warning(self):
+        draft = generate_demo("2026-07-11", sources(), SITE)
+        advisory_site = {**SITE, "required_source_count": 4}
+        report = inspect_draft(draft, advisory_site)
+        self.assertEqual(report.status, "READY_FOR_MANUAL_REVIEW")
+        self.assertFalse(report.checks["sufficient_sources"])
+        self.assertTrue(any(warning.startswith("출처 수 경고:") for warning in report.warnings))
+
+    def test_body_length_is_an_advisory_warning(self):
+        draft = generate_demo("2026-07-11", sources(), SITE)
+        advisory_site = {**SITE, "minimum_body_characters": 100_000}
+        report = inspect_draft(draft, advisory_site)
+        self.assertEqual(report.status, "READY_FOR_MANUAL_REVIEW")
+        self.assertFalse(report.checks["substantive_body"])
+        self.assertTrue(any(warning.startswith("본문 길이 경고:") for warning in report.warnings))
+
     def test_click_inducement_blocks_draft(self):
         draft = generate_demo("2026-07-11", sources(), SITE)
         draft.closing += " 광고를 클릭해서 응원해 주세요."

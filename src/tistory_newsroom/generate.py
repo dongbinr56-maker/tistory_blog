@@ -52,7 +52,10 @@ def make_prompt(date: str, sources: list[SourceItem], site: dict[str, Any]) -> s
 - 제목 후보 3개는 문장 구조가 서로 다르게 만들되 과장·낚시를 피하고, 오늘 다루는 핵심 모델·프로젝트 이름을 자연스럽게 포함해 그날의 긴장이나 관점을 담습니다(예: "GLM-5.2와 OpenCode로 구축하는 탈클라우드 로컬 개발 환경의 명암"). "[AI 뉴스룸]" 머리말은 시스템이 자동으로 붙이므로 직접 쓰지 말고, 머리말 제외 15~60자로 만듭니다. 태그는 5~8개, # 없이 작성하되 전날과 똑같은 조합이 되지 않게 그날 내용에서 뽑습니다.
 - 전체 본문은 밀도 있게 쓰고, 각 editorial_take은 3문장 이상입니다. 뜬구름 잡는 생산성 조언, 억지로 모든 이슈를 AI 모델과 연결하는 설명, 일반론은 금지합니다.
 - editor_comment는 도입부 아래에 들어가는 작성자 코멘트 한 문단(60~180자)입니다. 오늘 이슈에서 독자가 바로 해볼 만한 제안이나 작성자의 견해를 독자에게 말 걸듯 씁니다(예: "이번 주말에는 ○○로 △△를 직접 꾸려 보시는 건 어떨까요?"). 직접 사용해 봤다는 식의 경험 날조("직접 써봤는데", "제 프로젝트에 적용해 보니")는 절대 하지 않습니다.
-- `editorial_disclosure`는 빈 문자열로 반환합니다. 이 값은 공개 본문에 표시하지 않는 내부 호환 필드입니다. AI 작성·검토 과정에 관한 문구나 변명은 본문, 도입, 마무리에 넣지 않습니다.
+- 이 뉴스룸 초안의 `evidence_mode`는 `source_analysis`, `execution_status`는 `not_performed`로 반환합니다. 사용자가 제품이나 프로젝트를 직접 실행했다고 표현하지 않습니다.
+- 각 섹션의 `verification_notes`에는 해당 출처로 확인한 범위와 독립적으로 재현하지 못한 한계를 한두 문장으로 씁니다.
+- `evidence_artifacts`는 직접 실행 증거가 없으므로 빈 배열로 반환합니다.
+- `editorial_disclosure`는 빈 문자열로 반환합니다. 공개 본문에는 시스템이 검증 방식 상자를 별도로 표시합니다.
 
 블로그: {site['blog_name']}
 작성자: {site['author_name']}
@@ -72,11 +75,15 @@ def make_prompt(date: str, sources: list[SourceItem], site: dict[str, Any]) -> s
     "plain_explanation": "일반인도 이해할 쉬운 설명",
     "why_it_matters": "영향 분석",
     "editorial_take": "작성자 분석",
-    "reader_action": "독자 행동 제안"
+    "reader_action": "독자 행동 제안",
+    "verification_notes": "출처로 확인한 범위와 독립 검증하지 못한 한계"
   }}],
   "closing": "마무리",
   "editor_comment": "독자에게 건네는 작성자 코멘트 한 문단",
-  "editorial_disclosure": ""
+  "editorial_disclosure": "",
+  "evidence_mode": "source_analysis",
+  "execution_status": "not_performed",
+  "evidence_artifacts": []
 }}
 
 [입력 출처]
@@ -110,7 +117,9 @@ def make_rewrite_prompt(date: str, sources: list[SourceItem], draft: dict[str, A
 - "AI 기술이 빠르게 발전", "오늘 살펴볼 소식", "독자 여러분", "함께 살펴보", "실질적인 인사이트", "가치를 창출", "다음 주에도"는 절대 쓰지 않습니다.
 - why_it_matters와 editorial_take가 같은 내용을 반복하면 안 됩니다. 마크다운 문법(백틱 등)은 쓰지 않습니다.
 - 필드 최소 분량(공백 포함)을 지킵니다: plain_explanation 90자, why_it_matters 60자, editorial_take 130자, reader_action 45자. 공식 페이지가 없는 2차 출처 이슈는 what_happened 첫 문장에 입력의 source 값을 표기 그대로 넣어 귀속을 유지합니다.
-- `editorial_disclosure`는 빈 문자열로 둡니다. 공개 글 안에 작성 방식이나 검토 과정에 관한 언급을 넣지 않습니다.
+- `evidence_mode`는 `source_analysis`, `execution_status`는 `not_performed`, `evidence_artifacts`는 빈 배열로 유지합니다.
+- 모든 섹션의 `verification_notes`에 출처로 확인한 범위와 독립 재현하지 못한 한계를 유지하거나 보완합니다.
+- `editorial_disclosure`는 빈 문자열로 둡니다. 공개 글에는 시스템이 검증 방식 상자를 별도로 표시합니다.
 - JSON 구조를 유지하고, [확인된 출처]의 모든 항목이 정확히 한 섹션씩 다뤄지게 합니다. 누락된 출처가 있으면 그 출처를 다루는 섹션을 새로 추가하고, 기존 섹션의 source_ids는 유지합니다. 다른 문장 없이 JSON 하나만 반환합니다.
 
 날짜: {date}
@@ -228,6 +237,10 @@ def _gate_repair_reasons(draft: dict[str, Any], sources: list[SourceItem]) -> li
             names = ", ".join(source.source for source in section_sources)
             reasons.append(
                 f"{number}번째 이슈는 공식 페이지가 없는 2차 출처입니다. what_happened 첫 문장에 매체 이름({names})을 그대로 넣어 귀속하세요."
+            )
+        if not str(section.get("verification_notes") or "").strip():
+            reasons.append(
+                f"{number}번째 이슈의 verification_notes가 비어 있습니다. 출처로 확인한 범위와 독립 재현하지 못한 한계를 한두 문장으로 적으세요."
             )
     return reasons
 
@@ -352,6 +365,9 @@ def generate_with_gemini(date: str, sources: list[SourceItem], site: dict[str, A
             raw_draft["date"] = date
             raw_draft["model"] = model
             raw_draft["editorial_disclosure"] = ""
+            raw_draft["evidence_mode"] = "source_analysis"
+            raw_draft["execution_status"] = "not_performed"
+            raw_draft["evidence_artifacts"] = []
             for _ in range(2):
                 reasons = _rewrite_reasons(raw_draft, sources)
                 if not reasons:
@@ -364,6 +380,9 @@ def generate_with_gemini(date: str, sources: list[SourceItem], site: dict[str, A
                 raw_draft["date"] = date
                 raw_draft["model"] = model
                 raw_draft["editorial_disclosure"] = ""
+                raw_draft["evidence_mode"] = "source_analysis"
+                raw_draft["execution_status"] = "not_performed"
+                raw_draft["evidence_artifacts"] = []
             raw_draft["title_candidates"] = merge_title_candidates(raw_draft, sources)
             raw_draft["title"] = raw_draft["title_candidates"][0]
             return Draft.from_dict(raw_draft, sources)
@@ -403,6 +422,9 @@ def generate_demo(date: str, sources: list[SourceItem], site: dict[str, Any]) ->
                 "reader_action": (
                     "이번 주 모델 호출 하나만 골라 입력 예시 20개와 기대 출력, 실패 기준을 적어 보세요. 새 후보는 같은 조건에서 비교해야 판단이 흔들리지 않습니다."
                 ),
+                "verification_notes": (
+                    f"{source.source}의 공개 자료에서 기능과 배포 조건을 확인했습니다. 이 초안에서는 {project_name}을 직접 설치하거나 성능 수치를 독립적으로 재현하지 않았습니다."
+                ),
             }
         )
     aliases = project_aliases(sources)
@@ -438,6 +460,9 @@ def generate_demo(date: str, sources: list[SourceItem], site: dict[str, Any]) ->
             "도입 여부보다 그 비교 과정 자체가 평가 기준을 선명하게 만들어 줍니다."
         ),
         "editorial_disclosure": "",
+        "evidence_mode": "source_analysis",
+        "execution_status": "not_performed",
+        "evidence_artifacts": [],
         "model": "local-demo",
     }
     return Draft.from_dict(raw, sources)

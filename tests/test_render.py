@@ -39,7 +39,7 @@ class RenderTest(unittest.TestCase):
         self.assertNotIn("오늘은 기준을 충족한 기사", article)
         self.assertNotIn("AI는 초안 작성", article)
         self.assertNotIn("발행 전 사람이", article)
-        self.assertNotIn("<aside", article)
+        self.assertIn('<aside class="evidence-box"', article)
 
     def test_article_has_no_fixed_section_scaffolding(self):
         draft = generate_demo("2026-07-11", self.sources, self.site)
@@ -74,6 +74,16 @@ class RenderTest(unittest.TestCase):
         article = render_article_html(draft, self.site)
         self.assertIn('<section class="editor-note">', article)
         self.assertIn(draft.editor_comment[:20], article)
+
+    def test_article_discloses_evidence_mode_execution_and_sources(self):
+        draft = generate_demo("2026-07-11", self.sources, self.site)
+        article = render_article_html(draft, self.site)
+        self.assertIn('class="evidence-box"', article)
+        self.assertIn("<b>검증 방식</b> 문서 기반 분석", article)
+        self.assertIn("<b>실행 여부</b> 직접 실행하지 않음", article)
+        self.assertIn("<b>확인일</b> 2026-07-11", article)
+        self.assertIn("<b>사용한 자료</b>", article)
+        self.assertIn("<b>증거 자료</b>", article)
 
     def test_copy_page_shows_run_warnings(self):
         page = _copy_page([{"date": "2026-07-11", "title": "초안", "title_candidates": [], "tags": [], "quality_status": "OK", "publish_checklist": [], "warnings": ["수집 경고: 요즘IT 405"], "html_path": "tistory/2026-07-11.html"}])

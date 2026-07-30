@@ -63,6 +63,28 @@ def render_article_html(draft: Draft, site: dict[str, Any]) -> str:
     # The hero card is registered as Tistory's own 대표 이미지(썸네일) and is
     # deliberately absent from the body, so the post never shows it twice.
     sources = {source.id: source for source in draft.source_items}
+    mode_label = "직접 실행" if draft.evidence_mode == "hands_on" else "문서 기반 분석"
+    status_label = {
+        "performed": "실행 완료",
+        "partial": "일부 실행",
+        "not_performed": "직접 실행하지 않음",
+    }.get(draft.execution_status, draft.execution_status)
+    material_links = " · ".join(
+        f'<a href="{esc(source.url)}" rel="nofollow noopener noreferrer" target="_blank">{esc(source.source)}</a>'
+        for source in draft.source_items
+    )
+    artifacts = (
+        "<ul>" + "".join(f"<li>{esc(item)}</li>" for item in draft.evidence_artifacts) + "</ul>"
+        if draft.evidence_artifacts
+        else "<p>별도 실행 증거 없음</p>"
+    )
+    evidence_box = f"""<aside class="evidence-box" aria-label="글 검증 정보">
+    <p><b>검증 방식</b> {esc(mode_label)}</p>
+    <p><b>실행 여부</b> {esc(status_label)}</p>
+    <p><b>확인일</b> {esc(draft.date)}</p>
+    <p><b>사용한 자료</b> {material_links or "자료 링크 없음"}</p>
+    <div><b>증거 자료</b>{artifacts}</div>
+  </aside>"""
     sections: list[str] = []
     for section in draft.sections:
         source_image = next((draft.images.get(source_id, {}) for source_id in section.source_ids if draft.images.get(source_id, {}).get("url")), {})
@@ -100,6 +122,9 @@ def render_article_html(draft: Draft, site: dict[str, Any]) -> str:
     .tistory-newsroom .action {{margin:18px 0 10px;padding:14px 16px;border-left:3px solid #0f766e;border-radius:0 10px 10px 0;background:#f0fdfa}}
     .tistory-newsroom .sources {{margin:6px 0 0;color:#64748b;font-size:14px}}
     .tistory-newsroom .editor-note {{margin:20px 0;padding:16px 18px;border-left:4px solid #334155;border-radius:0 12px 12px 0;background:#f8fafc;font-style:normal}}
+    .tistory-newsroom .evidence-box {{margin:20px 0;padding:16px 18px;border:1px solid #b7ded1;border-radius:12px;background:#f0fdfa;font-size:14px}}
+    .tistory-newsroom .evidence-box p {{margin:4px 0}}
+    .tistory-newsroom .evidence-box ul {{margin:8px 0 0;padding-left:20px}}
     .tistory-newsroom .closing {{margin-top:28px}}
     .tistory-newsroom a {{color:#0f766e}}
   </style>
@@ -108,6 +133,7 @@ def render_article_html(draft: Draft, site: dict[str, Any]) -> str:
     <h1>{esc(draft.title)}</h1>
     {paragraphs(draft.intro)}
   </header>
+  {evidence_box}
   {f'<section class="editor-note"><p>{esc(draft.editor_comment)}</p></section>' if draft.editor_comment.strip() else ''}
   {''.join(sections)}
   <section class="closing">{paragraphs(draft.closing)}</section>
@@ -252,8 +278,13 @@ def _checklist_page(site: dict[str, Any]) -> str:
         "제목·본문·태그에 과장, 허위 정보, 광고 클릭 유도, 제한 가능성이 높은 콘텐츠가 없다.",
         "비어 있거나 공사 중인 페이지, 감사/로그인 페이지에는 광고 코드를 넣지 않았다.",
         "카테고리와 관련된 기존 글 내부 링크를 적절히 추가했고, 이미지와 링크의 권리를 확인했다.",
-        "애드센스 승인 후 실제 도메인 루트에 올바른 ads.txt를 배치했다.",
+        "모든 공개 글 상단에 검증 방식, 실행 여부, 확인일, 사용한 자료를 표시했다.",
+        "초기 약한 글 4개를 비공개로 전환했고, 소개·문의·개인정보·편집 원칙 링크에 내부 404가 없다.",
+        "대표 실사용 글 3개에는 실제 입력, 출력, 검증 결과와 개인정보를 제거한 증거 자료가 있다.",
+        "실사이트 감사 결과가 READY_FOR_ADSENSE_REVIEW다.",
+        "ads.txt 상태는 별도로 기록했으며, 저가치 콘텐츠 수정 완료 판단과 섞지 않았다.",
         "발행 전 사람이 원문·출처·사실·표현을 최종 검토했다.",
+        "위 조건을 모두 확인한 뒤에만 AdSense 재검토를 요청한다.",
     ]
     rows = ''.join(f'<li><label><input type="checkbox"> {esc(item)}</label></li>' for item in items)
     return f"""<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>애드센스 발행 전 체크리스트</title><style>body{{max-width:800px;margin:40px auto;padding:0 20px;color:#1f2937;font-family:Apple SD Gothic Neo,Malgun Gothic,sans-serif;line-height:1.7}}li{{margin:13px 0;padding:13px;background:#f8fafc;border-radius:9px;list-style:none}}ul{{padding:0}}input{{width:18px;height:18px;vertical-align:middle}}.note{{padding:16px;border-left:4px solid #0f766e;background:#f0fdfa}}</style></head><body><h1>애드센스 발행 전 체크리스트</h1><p>{esc(site.get('blog_name'))} · {today}</p><p class="note">이 목록은 자동 승인을 보장하지 않습니다. Google 정책은 바뀔 수 있으므로 발행 전 공식 정책과 정책 센터를 확인하세요.</p><ul>{rows}</ul><h2>티스토리 페이지 템플릿</h2><p><a href="tistory-pages/index.html">실제 설정값이 반영된 소개·문의·개인정보처리방침·편집 원칙 HTML</a>을 각각 복사해 티스토리 페이지로 등록하세요.</p><p><a href="https://support.google.com/adsense/answer/10008391?hl=ko">Google 게시자 정책</a> · <a href="https://support.google.com/publisherpolicies/answer/11190248?hl=ko">복제 콘텐츠 정책</a> · <a href="https://support.google.com/adsense/answer/12171612?hl=ko">ads.txt 가이드</a></p></body></html>"""
@@ -369,6 +400,9 @@ def write_outputs(root: Path, draft: Draft, report: QualityReport, site: dict[st
         "quality_status": report.status,
         "warnings": report.warnings,
         "manual_review_required": True,
+        "evidence_mode": draft.evidence_mode,
+        "execution_status": draft.execution_status,
+        "evidence_artifacts": draft.evidence_artifacts,
         "publish_checklist": [
             "원문 링크와 사실관계를 확인합니다.",
             "작성자 분석이 자신의 실제 관점인지 검토합니다.",

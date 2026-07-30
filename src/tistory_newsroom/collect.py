@@ -614,15 +614,6 @@ def _score(item: SourceItem) -> int:
     corpus = f"{item.title} {item.summary} {item.topic} {item.official_url}".lower()
     score = sum(5 for terms in TOPIC_TERMS.values() if any(_matches_term(corpus, term) for term in terms))
     score += sum(2 for term in MODEL_TERMS if _matches_term(corpus, term))
-    if item.verification.get("project_kind") in {"github", "huggingface"}:
-        score += 20
-    if item.verification.get("community_source") in {"github", "huggingface"}:
-        score += 25
-        try:
-            score += min(int(item.verification.get("github_stars", "0")) // 10_000, 25)
-            score += min(int(item.verification.get("huggingface_likes", "0")) // 100, 15)
-        except ValueError:
-            pass
     if item.official_url:
         score += 5
     return score
@@ -648,7 +639,7 @@ def choose_diverse(
     excluded_terms: list[str],
     excluded_canonical_keys: set[str] | None = None,
 ) -> list[SourceItem]:
-    """Fill the daily slots with one community project while excluding prior URL identities."""
+    """Fill the daily slots by relevance while excluding prior URL identities."""
     blocked = [term.lower() for term in excluded_terms]
     history_keys = {_canonical(value, "") for value in (excluded_canonical_keys or set()) if value}
     eligible = [
@@ -658,24 +649,14 @@ def choose_diverse(
         and not (_item_url_keys(item) & history_keys)
     ]
     ordered = sorted(eligible, key=lambda item: (_score(item), item.published_at, item.title), reverse=True)
-    project = next((item for item in ordered if item.verification.get("community_source") in {"github", "huggingface"}), None)
-    if project is None:
-        return []
-    selected = [project]
-    seen_keys = {project.canonical_key}
-    editorial = [item for item in ordered if not item.verification.get("community_source")]
-    community = [item for item in ordered if item.verification.get("community_source")]
-    # A day rich in verified editorial articles earns one extra slot, so real
-    # news is never crowded out by the mandatory community project.
-    target = count + 1 if len(editorial) >= count else count
-    for item in editorial + community:
-        if item in selected:
-            continue
+    selected: list[SourceItem] = []
+    seen_keys: set[str] = set()
+    for item in ordered:
         if item.canonical_key in seen_keys:
             continue
         selected.append(item)
         seen_keys.add(item.canonical_key)
-        if len(selected) == target:
+        if len(selected) == count:
             break
     return selected
 
@@ -692,7 +673,7 @@ def collection_payload(
     return {
         "date": date,
         "collected_at": dt.datetime.now(dt.timezone.utc).isoformat(),
-        "selection_rule": "최근 24시간 요즘IT·GeekNews·Hacker News 기사와 최근 14일 GitHub/Hugging Face 커뮤니티 활성 프로젝트를 조합해 3건(검증된 기사가 3건 이상인 날은 4건)을 구성하며, 커뮤니티 프로젝트 1건 이상 필수. 이전 날짜에 선택한 원문·공식 프로젝트 URL은 제외",
+        "selection_rule": "최근 24시간 요즘IT·GeekNews·Hacker News 기사와 최근 14일 GitHub/Hugging Face 커뮤니티 후보를 함께 비교해 관련성 순으로 필요한 수를 구성한다. 특정 출처 유형을 강제로 포함하지 않으며, 이전 날짜에 선택한 원문·공식 프로젝트 URL은 제외한다.",
         "history_exclusion": {
             "past_url_key_count": historical_url_key_count,
             "excluded_candidate_count": historically_excluded_candidate_count,
