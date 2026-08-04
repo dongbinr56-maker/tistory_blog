@@ -1,0 +1,220 @@
+{
+  "date": "2026-08-05",
+  "title": "[AI 뉴스룸] 경량화와 거대화의 양극단에서 마주하는 인프라의 현실과 자동화 실험",
+  "title_candidates": [
+    "[AI 뉴스룸] 경량화와 거대화의 양극단에서 마주하는 인프라의 현실과 자동화 실험",
+    "[AI 뉴스룸] Kanana와 Raon Speech가 보여주는 국내 오픈소스 모델의 극단적 이원화",
+    "[AI 뉴스룸] 인프라의 한계와 자가 향상 루프 사이에서 균형 잡기"
+  ],
+  "tags": [
+    "오픈소스",
+    "경량모델",
+    "음성AI",
+    "비디오생성",
+    "자가향상",
+    "AI에이전트"
+  ],
+  "meta_description": "카카오의 Kanana-2-1.3b-base와 크래프톤의 Raon Speech 음성 모델, MiniMax-H3 비디오 생성 모델 및 자가 향상 연구 에이전트의 흐름을 분석하여 실무 적용 조건과 한계를 짚어봅니다.",
+  "intro": "하드웨어 제약이 뚜렷한 온디바이스 환경을 겨냥해 kakaocorp/kanana-2-1.3b-base 같은 극단적인 경량 모델을 택할 것인지, 아니면 서비스 고유의 사용자 경험을 극대화하기 위해 KRAFTON/A.X-K2-Raon-Speech-21B-A3B 같은 고용량 특화 모델을 직접 운영할 것인지에 대한 엔지니어링적 고민은 날로 깊어집니다. 인프라 비용과 추론 지연 시간이라는 현실적인 벽 앞에서 무조건 성능이 높은 범용 모델만 쫓는 전략은 더 이상 유효하지 않습니다. 연산 자원의 한계와 비즈니스 시나리오의 요구사항을 정밀하게 조율하여 아키텍처를 설계하는 안목이 필요한 시점입니다.",
+  "sections": [
+    {
+      "headline": "이미지와 텍스트를 비디오로 변환하는 MiniMax-H3 모델의 등장",
+      "source_ids": [
+        "huggingface-community-1f0e60fded5cff01"
+      ],
+      "what_happened": "Hugging Face 커뮤니티에 따르면, MiniMaxAI가 이미지와 텍스트 입력을 동시에 처리하여 고해상도 영상을 생성하는 image-text-to-video 모델인 MiniMax-H3 저장소를 공개했습니다.",
+      "plain_explanation": "이 모델은 기준이 되는 정지 이미지와 묘사하는 문장을 동시에 입력받아 자연스러운 움직임을 가진 동영상으로 변환하는 기술을 제공합니다. 텍스트 프롬프트에만 의존할 때 발생하는 구도의 왜곡이나 대상의 비정상적인 변형을 방지하고 원본 이미지의 디테일을 유지하는 데 초점을 맞춥니다.",
+      "why_it_matters": "기존의 텍스트 기반 비디오 생성 방식과 달리 원본 이미지의 핵심 피사체나 배경 설정을 일관되게 유지할 수 있으므로, 영상 콘텐츠 제작 과정에서 제어력을 확보하는 데 유리합니다.",
+      "technical_details": "",
+      "editorial_take": "비디오 생성 모델은 추론 과정에서 다량의 프레임을 연속 연산해야 하므로 인프라 비용 부담이 매우 큽니다. 로컬 서버나 자체 클라우드에 올리기 전에 배치 크기별 렌더링 속도와 GPU 메모리 점유율을 정밀 측정해야 하며, 상용화 단계에서는 외부 API 호출 비용과의 손익분기점을 명확히 계산해야 손실을 막을 수 있습니다.",
+      "reader_action": "허깅페이스 저장소의 공식 가이드를 바탕으로 단일 이미지와 텍스트 프롬프트를 입력해 프레임 간 일관성이 얼마나 유지되는지 직접 추론 스크립트로 확인해 보길 권합니다.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "인공지능의 자가 향상 루프와 연구 자동화의 가능성",
+      "source_ids": [
+        "hacker-news-f226959a357fcf27"
+      ],
+      "what_happened": "lilianweng.github.io에 게재된 글에 따르면, 인공지능이 자체 가중치를 직접 수정하거나 학습 파이프라인 및 배포 시스템을 개선하여 더 우수한 후속 모델을 생산하는 재귀적 자가 향상 연구가 주목받고 있으며 안드레 카파시의 autoresearch 프로젝트가 이를 구체화하고 있습니다.",
+      "plain_explanation": "사람이 직접 코드를 수정하고 하이퍼파라미터를 튜닝하는 전통적인 방식에서 벗어나, 에이전트가 스스로 가설을 세우고 실험을 설계하여 더 높은 성능의 다음 세대 모델을 학습시키는 자동화 기술입니다. 단일 GPU 환경에서 스스로 학습 코드를 돌리며 성능을 개선하는 흐름을 가집니다.",
+      "why_it_matters": "연구원의 수동 실험 설계 프로세스를 에이전트가 자동화함으로써 하이퍼파라미터 탐색이나 기초 모델 튜닝에 소요되는 시간적 병목을 줄이고 실험 주기를 단축합니다.",
+      "technical_details": "",
+      "editorial_take": "자가 향상 시스템은 제어되지 않는 무한 루프에 빠지거나 편향된 데이터가 반복 학습되어 모델 성능이 급격히 무너지는 붕괴 현상을 겪기 쉽습니다. 실무 파이프라인에 적용하려면 각 실험 단계마다 인간 연구자가 개입하여 검증하는 하이브리드 안전장치를 설계해야 하며, 완전 자동화에 의존하는 방식은 아직 위험 부담이 큽니다.",
+      "reader_action": "안드레 카파시의 autoresearch 깃허브 저장소에 공개된 에이전트 실행 코드를 분석하여 단일 GPU 환경에서 작동하는 자동화 실험 흐름을 로컬 장비에 이식해 보는 것을 추천합니다.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "카카오의 경량 오픈소스 모델 kanana-2-1.3b-base 공개",
+      "source_ids": [
+        "geeknews-1395f41103b22094"
+      ],
+      "what_happened": "huggingface.co에 따르면 카카오가 오픈소스 생태계 활성화와 기술 대중화를 목표로 설계한 경량 언어 모델인 kanana-2-1.3b-base를 배포했습니다.",
+      "plain_explanation": "이 모델은 매개변수 크기를 13억 개 수준으로 대폭 줄여 연산 자원이 제한된 기기에서도 빠르게 동작하도록 만든 베이스 모델입니다. 스마트폰이나 저사양 로컬 서버 등에서 가볍게 구동하며 다양한 특화 작업을 수행하는 기초 뼈대 역할을 담당합니다.",
+      "why_it_matters": "대규모 인프라 운영 비용을 감당하기 어려운 스타트업이나 네트워크 연결 없이 로컬에서 한국어 텍스트를 처리해야 하는 온디바이스 서비스 구축 시 유용한 대안이 확보됩니다.",
+      "technical_details": "",
+      "editorial_take": "1.3B 규모의 초경량 모델은 복잡한 논리적 추론이나 다단계 연산이 필요한 태스크에서 성능적 한계를 드러냅니다. 따라서 범용 목적으로 쓰기보다는 특정 도메인의 단순 분류나 텍스트 정제 같은 단일 목적의 미세조정용으로 활용 범위를 제한하는 설계가 요구되며, 필요시 상위 모델로 요청을 넘기는 라우팅 구조를 결합해야 합니다.",
+      "reader_action": "허깅페이스에서 kanana-2-1.3b-base 모델의 가중치를 다운로드하여 로컬 CPU 및 GPU 환경에서 한국어 토큰 처리 속도와 메모리 점유율을 직접 측정해 보십시오.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "크래프톤의 대규모 음성 모델 A.X-K2-Raon-Speech-21B-A3B 배포",
+      "source_ids": [
+        "geeknews-9f18ebdd2c6027a5"
+      ],
+      "what_happened": "huggingface.co에 공개된 한국어 README 문서에 따르면, 크래프톤이 오픈소스 생태계 기여를 위해 대규모 음성 기술 모델인 A.X-K2-Raon-Speech-21B-A3B를 공개했습니다.",
+      "plain_explanation": "이 모델은 사람의 음성 데이터를 고도로 인식하고 처리할 수 있도록 설계된 210억 매개변수 규모의 대형 음성 인공지능 모델입니다. 게임 내 실시간 음성 상호작용이나 가상 캐릭터의 자연스러운 대화 시스템 등 소리 기반의 복잡한 연산 처리를 지원합니다.",
+      "why_it_matters": "외부 상용 음성 API에 의존할 때 발생하는 데이터 보안 우려와 지속적인 호출 비용 문제를 해결하고, 자체 인프라 내에 고성능 음성 처리 파이프라인을 내재화할 수 있는 기반이 마련됩니다.",
+      "technical_details": "",
+      "editorial_take": "21B 규모의 대형 모델을 실시간 서비스에 즉시 도입하는 것은 지연 시간 측면에서 심각한 병목을 유발합니다. 특히 즉각적인 반응이 필수적인 게임 환경에 적용하려면 FP8/INT8 수준의 양자화 기법을 적용하거나 TensorRT-LLM 같은 추론 가속 엔진과의 결합이 필수적이며 비상업적 라이선스 범위를 사전 점검해야 합니다.",
+      "reader_action": "크래프톤 허깅페이스 리포지토리의 한국어 가이드를 분석하여 모델 로드에 필요한 최소 VRAM 용량을 산정하고 음성 합성 및 인식 파이프라인을 테스트하는 코드를 작성해 보시기 바랍니다.",
+      "verification_notes": ""
+    }
+  ],
+  "closing": "오픈소스 모델의 다양화는 개발자에게 풍부한 선택지를 제공하지만, 동시에 인프라 한계와 운영 비용을 냉정하게 계산해야 하는 과제를 던집니다. 초경량 언어 모델부터 대규모 음성 및 비디오 생성 모델까지 각 기술의 한계점을 명확히 인지하고 비즈니스 구조에 맞는 최적의 조합을 설계해야 합니다.",
+  "editor_comment": "카카오의 경량 모델인 카나나를 로컬 환경에 배포하여 간단한 한국어 분류 태스크의 추론 속도와 정확도를 직접 측정해 보며 경량 모델의 실무 적용 가능성을 타진해 보기를 권합니다.",
+  "editorial_disclosure": "",
+  "model": "gemini-3.5-flash",
+  "article_count_note": "",
+  "images": {
+    "hero": {
+      "path": "hero.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-05/hero.png",
+      "kind": "generated-hero"
+    },
+    "huggingface-community-1f0e60fded5cff01": {
+      "origin_url": "https://huggingface.co/MiniMaxAI/MiniMax-H3/resolve/main/thumbnail.png",
+      "kind": "generated-fallback",
+      "path": "issue-1.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-05/issue-1.svg"
+    },
+    "hacker-news-f226959a357fcf27": {
+      "origin_url": "",
+      "kind": "source-image",
+      "path": "issue-2.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-05/issue-2.svg"
+    },
+    "geeknews-1395f41103b22094": {
+      "origin_url": "https://cdn-thumbnails.huggingface.co/social-thumbnails/models/kakaocorp/kanana-2-1.3b-base.png",
+      "kind": "source-image",
+      "path": "issue-3.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-05/issue-3.png"
+    },
+    "geeknews-9f18ebdd2c6027a5": {
+      "origin_url": "https://cdn-thumbnails.huggingface.co/social-thumbnails/models/KRAFTON/A.X-K2-Raon-Speech-21B-A3B.png",
+      "kind": "source-image",
+      "path": "issue-4.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-05/issue-4.png"
+    }
+  },
+  "source_items": [
+    {
+      "id": "huggingface-community-1f0e60fded5cff01",
+      "source": "Hugging Face 커뮤니티",
+      "topic": "오픈소스, Hugging Face, AI 모델링",
+      "title": "MiniMaxAI/MiniMax-H3",
+      "url": "https://huggingface.co/MiniMaxAI/MiniMax-H3",
+      "published_at": "2026-08-04T22:14:16+09:00",
+      "summary": "Hugging Face에서 최근 주목받는 image-text-to-video 모델 저장소입니다.",
+      "listing_url": "https://huggingface.co/MiniMaxAI/MiniMax-H3",
+      "introduced_at": "",
+      "image_url": "https://huggingface.co/MiniMaxAI/MiniMax-H3/resolve/main/thumbnail.png",
+      "official_url": "https://huggingface.co/MiniMaxAI/MiniMax-H3",
+      "canonical_key": "https://huggingface.co/minimaxai/minimax-h3",
+      "verification": {
+        "project_kind": "huggingface",
+        "project_name": "MiniMaxAI/MiniMax-H3",
+        "project_owner": "MiniMaxAI",
+        "license": "",
+        "updated_at": "2026-08-04T22:14:16+09:00",
+        "community_source": "huggingface",
+        "huggingface_likes": "1982",
+        "huggingface_downloads": "0",
+        "pipeline_tag": "image-text-to-video"
+      }
+    },
+    {
+      "id": "hacker-news-f226959a357fcf27",
+      "source": "lilianweng.github.io",
+      "topic": "생성형 AI, AI 에이전트, AI 모델링, NPU·GPU·엣지 AI",
+      "title": "Harness Engineering for Self-Improvement",
+      "url": "https://lilianweng.github.io/posts/2026-07-04-harness/",
+      "published_at": "2026-07-04T09:00:00+09:00",
+      "summary": "The concept of recursive self-improvement (RSI) dates back to I. J. Good (1965), where he defined an “ultraintelligent machine” as a system that can surpass humans in all intellectual activities and design better machines to improve itself. Yudkowsky (2008) used the phrase “recursive self-improvement” for a specific feedback loop: an AI uses its current intelligence to improve the cognitive machinery that produces its intelligence. This feedback loop in modern AI may indicate the model rewriting its own weights directly, or more broadly the model improves the training pipeline and the deployment system, which in turn enables a better successor model with improved performance across economically valuable tasks. The speed of research development in AI has been shown to drastically accelerated in frontier labs (Anthropic; OpenAI).",
+      "listing_url": "https://news.ycombinator.com/item?id=49164896",
+      "introduced_at": "2026-08-04T15:17:54+09:00",
+      "image_url": "",
+      "official_url": "https://github.com/karpathy/autoresearch",
+      "canonical_key": "https://github.com/karpathy/autoresearch",
+      "verification": {
+        "article_title_verified": "Harness Engineering for Self-Improvement",
+        "article_source_verified": "lilianweng.github.io",
+        "article_published_verified": "2026-07-04T09:00:00+09:00",
+        "article_url_verified": "https://lilianweng.github.io/posts/2026-07-04-harness/",
+        "geeknews_listing_url": "",
+        "official_url": "https://github.com/karpathy/autoresearch",
+        "project_name": "karpathy/autoresearch",
+        "project_owner": "karpathy",
+        "project_description": "AI agents running research on single-GPU nanochat training automatically",
+        "license": "",
+        "updated_at": "2026-08-04T22:31:06Z",
+        "project_kind": "github"
+      }
+    },
+    {
+      "id": "geeknews-1395f41103b22094",
+      "source": "huggingface.co",
+      "topic": "AI 모델링, 오픈소스, Hugging Face, NPU·GPU·엣지 AI",
+      "title": "kakaocorp/kanana-2-1.3b-base · Hugging Face",
+      "url": "https://huggingface.co/kakaocorp/kanana-2-1.3b-base",
+      "published_at": "2026-07-27T23:55:07+09:00",
+      "summary": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
+      "listing_url": "https://news.hada.io/topic?id=32124",
+      "introduced_at": "2026-08-04T09:46:02+09:00",
+      "image_url": "https://cdn-thumbnails.huggingface.co/social-thumbnails/models/kakaocorp/kanana-2-1.3b-base.png",
+      "official_url": "https://huggingface.co/kakaocorp/kanana-2-1.3b-base",
+      "canonical_key": "https://huggingface.co/kakaocorp/kanana-2-1.3b-base",
+      "verification": {
+        "article_title_verified": "kakaocorp/kanana-2-1.3b-base · Hugging Face",
+        "article_source_verified": "huggingface.co",
+        "article_published_verified": "2026-07-27T23:55:07+09:00",
+        "article_url_verified": "https://huggingface.co/kakaocorp/kanana-2-1.3b-base",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=32124",
+        "official_url": "https://huggingface.co/kakaocorp/kanana-2-1.3b-base",
+        "project_name": "kakaocorp/kanana-2-1.3b-base",
+        "project_owner": "kakaocorp",
+        "project_description": "",
+        "license": "other",
+        "updated_at": "2026-07-29T08:58:00.000Z",
+        "project_kind": "huggingface"
+      }
+    },
+    {
+      "id": "geeknews-9f18ebdd2c6027a5",
+      "source": "huggingface.co",
+      "topic": "오픈소스, Hugging Face",
+      "title": "README_ko.md · KRAFTON/A.X-K2-Raon-Speech-21B-A3B at main",
+      "url": "https://huggingface.co/KRAFTON/A.X-K2-Raon-Speech-21B-A3B/blob/main/README_ko.md",
+      "published_at": "2026-07-29T20:30:59+09:00",
+      "summary": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
+      "listing_url": "https://news.hada.io/topic?id=32125",
+      "introduced_at": "2026-08-04T10:01:01+09:00",
+      "image_url": "https://cdn-thumbnails.huggingface.co/social-thumbnails/models/KRAFTON/A.X-K2-Raon-Speech-21B-A3B.png",
+      "official_url": "https://huggingface.co/KRAFTON/A.X-K2-Raon-Speech-21B-A3B",
+      "canonical_key": "https://huggingface.co/krafton/a.x-k2-raon-speech-21b-a3b",
+      "verification": {
+        "article_title_verified": "README_ko.md · KRAFTON/A.X-K2-Raon-Speech-21B-A3B at main",
+        "article_source_verified": "huggingface.co",
+        "article_published_verified": "2026-07-29T20:30:59+09:00",
+        "article_url_verified": "https://huggingface.co/KRAFTON/A.X-K2-Raon-Speech-21B-A3B/blob/main/README_ko.md",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=32125",
+        "official_url": "https://huggingface.co/KRAFTON/A.X-K2-Raon-Speech-21B-A3B",
+        "project_name": "KRAFTON/A.X-K2-Raon-Speech-21B-A3B",
+        "project_owner": "KRAFTON",
+        "project_description": "",
+        "license": "cc-by-nc-4.0",
+        "updated_at": "2026-08-01T13:52:18.000Z",
+        "project_kind": "huggingface"
+      }
+    }
+  ]
+}
