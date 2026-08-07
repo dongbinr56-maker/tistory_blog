@@ -1,0 +1,188 @@
+{
+  "date": "2026-08-07",
+  "title": "[AI 뉴스룸] 실리콘에 새겨지는 알고리즘과 인간 승인 보안의 한계",
+  "title_candidates": [
+    "[AI 뉴스룸] 실리콘에 새겨지는 알고리즘과 인간 승인 보안의 한계",
+    "[AI 뉴스룸] 런타임 격리와 하드웨어 고정화가 마주한 자율형 에이전트의 보안 균열",
+    "[AI 뉴스룸] 에이전트의 폭주를 막는 샌드박스와 실리콘 기반 추론의 트레이드오프"
+  ],
+  "tags": [
+    "오픈소스",
+    "AI에이전트",
+    "반도체추론",
+    "보안가이드",
+    "ComfyUI",
+    "모델최적화"
+  ],
+  "meta_description": "AMD의 Taalas 인수를 통한 하드웨어 기반 AI 추론 최적화부터 herdrdev/herdr의 오픈소스 런타임 유지 결정, 그리고 인간 검토자의 보안 승인 한계를 지적한 실험 결과까지 최신 엔지니어링 동향을 분석합니다.",
+  "article_count_note": "",
+  "quality_status": "READY_FOR_MANUAL_REVIEW",
+  "warnings": [
+    "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=49191624 (페이지 확인 실패: https://www.costar.com/article/970809918/nashville-council-approves-eminent-domain-action-to-halt-data-center-project (HTTP Error 403: Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=49199357 (페이지 확인 실패: https://openai.com/index/improving-gpt-5-6-sol-in-chatgpt/ (HTTP Error 403: Forbidden))"
+  ],
+  "manual_review_required": true,
+  "publish_checklist": [
+    "원문 링크와 사실관계를 확인합니다.",
+    "작성자 분석이 자신의 실제 관점인지 검토합니다.",
+    "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요.",
+    "소개·문의·개인정보 페이지가 실제 값으로 공개됐는지 확인합니다.",
+    "티스토리 HTML 모드에 붙여넣은 뒤 모바일 화면을 확인합니다."
+  ],
+  "sources": [
+    {
+      "name": "Hugging Face 커뮤니티",
+      "title": "Comfy-Org/MiniMax-H3",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3"
+    },
+    {
+      "name": "Herdr",
+      "title": "Herdr is joining Y Combinator. The runtime stays open. — Herdr blog",
+      "url": "https://herdr.dev/blog/herdr-is-joining-y-combinator/"
+    },
+    {
+      "name": "theregister",
+      "title": "AMD acquires AI chip startup Taalas to boost inference performance by etching models into silicon",
+      "url": "https://www.theregister.com/systems/2026/08/06/amd-acquires-ai-chip-startup-taalas-to-boost-inference-performance-by-etching-models-into-silicon/5284344"
+    },
+    {
+      "name": "Scale X",
+      "title": "Humans missed 1 in 3 threats approving AI agent commands across 40,000 plays",
+      "url": "https://scalex.dev/blog/ai-agent-permissions-stats/"
+    }
+  ],
+  "fact_review": [
+    {
+      "source": "Hugging Face 커뮤니티",
+      "title": "Comfy-Org/MiniMax-H3",
+      "source_url": "https://huggingface.co/Comfy-Org/MiniMax-H3",
+      "official_url": "https://huggingface.co/Comfy-Org/MiniMax-H3",
+      "summary": "Hugging Face에서 최근 주목받는 AI 모델 저장소입니다.",
+      "verified_facts": [
+        {
+          "label": "프로젝트·모델",
+          "value": "Comfy-Org/MiniMax-H3"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "Comfy-Org"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-08-06T10:44:50+09:00"
+        },
+        {
+          "label": "Hugging Face 좋아요 (수집 시점)",
+          "value": "846"
+        },
+        {
+          "label": "Hugging Face 다운로드 (수집 시점)",
+          "value": "2295377"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "Herdr",
+      "title": "Herdr is joining Y Combinator. The runtime stays open. — Herdr blog",
+      "source_url": "https://herdr.dev/blog/herdr-is-joining-y-combinator/",
+      "official_url": "https://github.com/herdrdev/herdr",
+      "summary": "Herdr is joining Y Combinator. The runtime is Apache-2.0 and stays open, and here is what the funding is actually for.",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "Herdr"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-08-06T09:00:00+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "herdrdev/herdr"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "herdrdev"
+        },
+        {
+          "label": "라이선스",
+          "value": "Apache-2.0"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-08-07T01:26:53Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "theregister",
+      "title": "AMD acquires AI chip startup Taalas to boost inference performance by etching models into silicon",
+      "source_url": "https://www.theregister.com/systems/2026/08/06/amd-acquires-ai-chip-startup-taalas-to-boost-inference-performance-by-etching-models-into-silicon/5284344",
+      "official_url": "",
+      "summary": "Early tech demos show model-specific integrated circuits churning out up to 17,000 tokens a second",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "theregister"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-08-07T05:05:00+09:00"
+        }
+      ],
+      "manual_review_note": "공식 프로젝트·1차 출처가 연결되지 않은 항목입니다. 숫자, 규제, 회사 관계, 인과관계 주장은 원문을 열어 직접 확인하세요."
+    },
+    {
+      "source": "Scale X",
+      "title": "Humans missed 1 in 3 threats approving AI agent commands across 40,000 plays",
+      "source_url": "https://scalex.dev/blog/ai-agent-permissions-stats/",
+      "official_url": "",
+      "summary": "Results from AI agent permission game: which attacks beat human reviewers, and which safe commands got blocked instead.",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "Scale X"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-08-05T16:00:00+09:00"
+        }
+      ],
+      "manual_review_note": "공식 프로젝트·1차 출처가 연결되지 않은 항목입니다. 숫자, 규제, 회사 관계, 인과관계 주장은 원문을 열어 직접 확인하세요."
+    }
+  ],
+  "images": {
+    "hero": {
+      "path": "hero.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-07/hero.png",
+      "kind": "generated-hero"
+    },
+    "huggingface-community-9e46d458613f25bf": {
+      "origin_url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/thumbnail.png",
+      "kind": "generated-fallback",
+      "path": "issue-1.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-07/issue-1.svg"
+    },
+    "hacker-news-576c6507cbdd1cf3": {
+      "origin_url": "https://herdr.dev/assets/og-blog-yc-v1.png",
+      "kind": "source-image",
+      "path": "issue-2.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-07/issue-2.png"
+    },
+    "hacker-news-7c0d4eb2283cdad5": {
+      "origin_url": "https://image.theregister.com/5284365.jpg?imageId=5284365&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+      "kind": "source-image",
+      "path": "issue-3.jpg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-07/issue-3.jpg"
+    },
+    "hacker-news-a4f2be4eb8ff3459": {
+      "origin_url": "https://scalex.dev/img/permission_game_stats_card.png",
+      "kind": "source-image",
+      "path": "issue-4.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-07/issue-4.png"
+    }
+  }
+}
