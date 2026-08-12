@@ -1,5 +1,230 @@
 [
   {
+    "date": "2026-08-13",
+    "title": "[AI 뉴스룸] 로컬 추론의 경량화와 실시간 에이전트 협업이 마주한 실무적 타협점",
+    "title_candidates": [
+      "[AI 뉴스룸] 로컬 추론의 경량화와 실시간 에이전트 협업이 마주한 실무적 타협점",
+      "[AI 뉴스룸] API 의존도를 낮추는 로컬 실행 엔진과 실시간 협업 에이전트의 명암",
+      "[AI 뉴스룸] 도구의 로컬화와 협업의 자동화가 재편하는 개발 환경의 현실적 조건"
+    ],
+    "tags": [
+      "오픈소스",
+      "LLM추론",
+      "llama.cpp",
+      "ZedDelta",
+      "코딩에이전트",
+      "LTX-2.5",
+      "Qwen3.8"
+    ],
+    "meta_description": "llama.cpp의 공식 웹사이트 론칭부터 Zed의 실시간 에이전트 협업 환경 Delta, Qwen3.8 대형 모델 및 LTX-2.5 비디오 생성 모델까지, 로컬과 협업 중심으로 진화하는 최신 AI 기술 트렌드를 분석합니다.",
+    "article_count_note": "",
+    "quality_status": "READY_FOR_MANUAL_REVIEW",
+    "warnings": [
+      "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+      "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=49270726 (페이지 확인 실패: https://digitalescapetools.com/2026/08/ublock-origin-stops-chasing-facebook-ads.html (HTTP Error 403: Forbidden))"
+    ],
+    "manual_review_required": true,
+    "publish_checklist": [
+      "원문 링크와 사실관계를 확인합니다.",
+      "작성자 분석이 자신의 실제 관점인지 검토합니다.",
+      "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요.",
+      "소개·문의·개인정보 페이지가 실제 값으로 공개됐는지 확인합니다.",
+      "티스토리 HTML 모드에 붙여넣은 뒤 모바일 화면을 확인합니다."
+    ],
+    "sources": [
+      {
+        "name": "Hugging Face 커뮤니티",
+        "title": "Lightricks/LTX-2.5",
+        "url": "https://huggingface.co/Lightricks/LTX-2.5"
+      },
+      {
+        "name": "huggingface.co",
+        "title": "Qwen/Qwen3.8-2.4T-A95B · Hugging Face",
+        "url": "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B"
+      },
+      {
+        "name": "llama.app",
+        "title": "llama.app - Official home for llama.cpp",
+        "url": "https://llama.app"
+      },
+      {
+        "name": "zed.dev",
+        "title": "Introducing Delta - Zed Blog",
+        "url": "https://zed.dev/blog/introducing-delta"
+      }
+    ],
+    "fact_review": [
+      {
+        "source": "Hugging Face 커뮤니티",
+        "title": "Lightricks/LTX-2.5",
+        "source_url": "https://huggingface.co/Lightricks/LTX-2.5",
+        "official_url": "https://huggingface.co/Lightricks/LTX-2.5",
+        "summary": "Hugging Face에서 최근 주목받는 image-to-video 모델 저장소입니다.",
+        "verified_facts": [
+          {
+            "label": "프로젝트·모델",
+            "value": "Lightricks/LTX-2.5"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "Lightricks"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-08-12T23:20:43+09:00"
+          },
+          {
+            "label": "Hugging Face 좋아요 (수집 시점)",
+            "value": "551"
+          },
+          {
+            "label": "Hugging Face 다운로드 (수집 시점)",
+            "value": "39"
+          },
+          {
+            "label": "Hugging Face 파이프라인",
+            "value": "image-to-video"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      },
+      {
+        "source": "huggingface.co",
+        "title": "Qwen/Qwen3.8-2.4T-A95B · Hugging Face",
+        "source_url": "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B",
+        "official_url": "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B",
+        "summary": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
+        "verified_facts": [
+          {
+            "label": "기사 출처",
+            "value": "huggingface.co"
+          },
+          {
+            "label": "기사 게시 시각",
+            "value": "2026-08-13T00:01:17+09:00"
+          },
+          {
+            "label": "프로젝트·모델",
+            "value": "Qwen/Qwen3.8-2.4T-A95B"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "Qwen"
+          },
+          {
+            "label": "라이선스",
+            "value": "other"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-08-12T10:24:04.000Z"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      },
+      {
+        "source": "llama.app",
+        "title": "llama.app - Official home for llama.cpp",
+        "source_url": "https://llama.app",
+        "official_url": "https://github.com/ggml-org/llama.cpp",
+        "summary": "Official website for the llama.cpp project",
+        "verified_facts": [
+          {
+            "label": "기사 출처",
+            "value": "llama.app"
+          },
+          {
+            "label": "기사 게시 시각",
+            "value": "2026-08-12T13:51:59+09:00"
+          },
+          {
+            "label": "프로젝트·모델",
+            "value": "ggml-org/llama.cpp"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "ggml-org"
+          },
+          {
+            "label": "라이선스",
+            "value": "MIT"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-08-12T22:18:25Z"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      },
+      {
+        "source": "zed.dev",
+        "title": "Introducing Delta - Zed Blog",
+        "source_url": "https://zed.dev/blog/introducing-delta",
+        "official_url": "https://github.com/zed-industries/zed",
+        "summary": "From the Zed Blog: A multiplayer environment for coding with agents, from the creators of Zed.",
+        "verified_facts": [
+          {
+            "label": "기사 출처",
+            "value": "zed.dev"
+          },
+          {
+            "label": "기사 게시 시각",
+            "value": "2026-08-13T03:19:59+09:00"
+          },
+          {
+            "label": "프로젝트·모델",
+            "value": "zed-industries/zed"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "zed-industries"
+          },
+          {
+            "label": "라이선스",
+            "value": "NOASSERTION"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-08-12T22:20:10Z"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      }
+    ],
+    "images": {
+      "hero": {
+        "path": "hero.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-13/hero.png",
+        "kind": "generated-hero"
+      },
+      "huggingface-community-92c1824269f45469": {
+        "origin_url": "https://huggingface.co/Lightricks/LTX-2.5/resolve/main/thumbnail.png",
+        "kind": "generated-fallback",
+        "path": "issue-1.svg",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-13/issue-1.svg"
+      },
+      "hacker-news-19d96bac5031ccb8": {
+        "origin_url": "https://cdn-thumbnails.huggingface.co/social-thumbnails/models/Qwen/Qwen3.8-2.4T-A95B.png",
+        "kind": "source-image",
+        "path": "issue-2.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-13/issue-2.png"
+      },
+      "hacker-news-8f4d2163b5e697a7": {
+        "origin_url": "/og-image-llama-cpp.png",
+        "kind": "source-image",
+        "path": "issue-3.svg",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-13/issue-3.svg"
+      },
+      "hacker-news-b6bd2783a916c52e": {
+        "origin_url": "https://images.zed.dev/blog/introducing-delta/thumbnail.webp",
+        "kind": "source-image",
+        "path": "issue-4.webp",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-13/issue-4.webp"
+      }
+    },
+    "html_path": "tistory/2026-08-13.html"
+  },
+  {
     "date": "2026-08-11",
     "title": "[AI 뉴스룸] Muse Glimmer와 Claude Code가 제시하는 자율형 로컬 개발의 명암",
     "title_candidates": [
