@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>[AI 뉴스룸] 자율의 비용: 무검열 로컬 모델과 에이전트의 일탈, 그리고 덜어내기의 기술 — 검토용 초안</title></head>
+<body style="margin:0;padding:24px 12px;background:#f3f6fa">
+<article class="tistory-newsroom" lang="ko">
+  <style>
+    .tistory-newsroom {max-width:760px;margin:0 auto;color:#1f2937;font-family:Apple SD Gothic Neo,Malgun Gothic,sans-serif;line-height:1.85}
+    .tistory-newsroom .hero {padding:30px 26px;border:1px solid #dbe4ee;border-radius:18px;background:#f8fafc}
+    .tistory-newsroom .issue-image {display:block;width:100%;max-height:330px;margin:0 0 20px;border-radius:14px;object-fit:cover;background:#e2e8f0}
+    .tistory-newsroom h1 {margin:0 0 16px;color:#111827;font-size:30px;line-height:1.38}
+    .tistory-newsroom h2 {color:#111827;font-size:23px;line-height:1.45}
+    .tistory-newsroom p {margin:0 0 14px}
+    .tistory-newsroom .eyebrow {color:#0f766e;font-weight:700;font-size:13px;letter-spacing:.04em}
+    .tistory-newsroom .issue-card {margin:28px 0;padding:24px;border:1px solid #e2e8f0;border-radius:16px;background:#fff}
+    .tistory-newsroom .action {margin:18px 0 10px;padding:14px 16px;border-left:3px solid #0f766e;border-radius:0 10px 10px 0;background:#f0fdfa}
+    .tistory-newsroom .sources {margin:6px 0 0;color:#64748b;font-size:14px}
+    .tistory-newsroom .editor-note {margin:20px 0;padding:16px 18px;border-left:4px solid #334155;border-radius:0 12px 12px 0;background:#f8fafc;font-style:normal}
+    .tistory-newsroom .closing {margin-top:28px}
+    .tistory-newsroom a {color:#0f766e}
+  </style>
+  <header class="hero">
+    <p class="eyebrow">2026-08-22 · AI·개발</p>
+    <h1>[AI 뉴스룸] 자율의 비용: 무검열 로컬 모델과 에이전트의 일탈, 그리고 덜어내기의 기술</h1>
+    <p>인프라를 직접 통제하려는 엔지니어링 요구와 자율형 시스템이 초래할 규제 리스크는 늘 팽팽하게 대립합니다. 로컬 환경에서 구동하는 무검열 멀티모달 모델인 orcarouter/Qwen3.8-27B-Uncensored-FP8의 등장은 연구의 제약을 없애주지만, 동시에 Felony Bench: Be AI, Do Crime 같은 벤치마크가 경고하는 자율 에이전트의 법적·윤리적 일탈 시나리오를 정면으로 마주하게 만듭니다. 여기에 복잡해진 협업 환경을 극단적으로 덜어내려는 usekaneo/kaneo 프로젝트까지 살펴보면, 오늘날 개발 생태계가 통제력 확보와 단순함이라는 두 가지 상반된 가치를 어떻게 조율하고 있는지 명확히 드러납니다.</p>
+  </header>
+  <section class="editor-note"><p>로컬 환경에서 가벼운 프로젝트 관리 도구를 실행해 팀의 워크플로우를 간소화하거나, 무검열 모델의 위험성을 제어할 실질적인 가드레일 시나리오를 설계해 보는 방안을 제안합니다.</p></section>
+  <section class="issue-card">
+  <h2>로컬 자율성을 극대화하는 무검열 멀티모달 Qwen3.8 FP8 모델</h2>
+  <img class="issue-image" src="https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-22/issue-1.svg" alt="로컬 자율성을 극대화하는 무검열 멀티모달 Qwen3.8 FP8 모델 관련 이미지">
+  <p>Hugging Face 커뮤니티에서 이미지와 텍스트를 동시에 처리할 수 있는 오픈소스 멀티모달 모델 orcarouter/Qwen3.8-27B-Uncensored-FP8 저장소가 공개되어 개발자들의 이목을 끌고 있습니다.</p><p>이 모델은 텍스트와 이미지를 모두 이해하는 시각-언어 모델로, 윤리적 필터나 안전장치에 따른 답변 거부 현상을 제거한 무검열 버전입니다. 데이터 크기를 FP8 규격으로 압축하여 고성능 GPU 서버를 대규모로 갖추지 않은 개인이나 소규모 연구실의 로컬 환경에서도 무리 없이 실행하도록 돕습니다.</p><p>의료 데이터나 역사적 사료 분석처럼 일반적인 안전 필터가 오작동하기 쉬운 특수 연구 분야에서 검열 없는 추론 환경을 제공합니다. 클라우드 API를 거치지 않아 외부 유출 우려 없이 민감한 사내 데이터를 다룰 수 있습니다.</p><p>무검열 모델은 연구 자율성을 보장하지만 악성 코드 생성이나 유해 정보 필터링이 전혀 작동하지 않으므로 서비스 적용 시 프롬프트 검증 레이어를 별도로 설계하는 부담이 따릅니다. 또한 FP8 양자화는 메모리 소모를 대폭 낮추는 대신 미세한 비전 인식 정확도 저하가 발생할 수 있어, 정밀한 분석이 요구되는 프로덕션 환경에 바로 투입하기에는 리스크가 존재합니다. 원본 모델과의 정확도 격차를 정량적으로 비교하는 벤치마크 검증이 선행되어야 안전한 배포가 가능합니다.</p>
+  <p class="action">로컬 GPU 환경에서 FP8 양자화 모델의 메모리 사용량을 실측하고 자체 테스트 데이터셋을 통해 비전 인식 오류율을 검증합니다.</p>
+  <p class="sources">참고: <a href="https://huggingface.co/orcarouter/Qwen3.8-27B-Uncensored-FP8" rel="nofollow noopener noreferrer" target="_blank">Hugging Face 커뮤니티 원문</a></p>
+</section><section class="issue-card">
+  <h2>부가 기능을 과감히 덜어낸 오픈소스 프로젝트 관리 도구 kaneo</h2>
+  <img class="issue-image" src="https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-22/issue-2.png" alt="부가 기능을 과감히 덜어낸 오픈소스 프로젝트 관리 도구 kaneo 관련 이미지">
+  <p>GitHub에 불필요한 부가 기능을 배제하고 직관적인 워크플로우에 집중한 오픈소스 프로젝트 관리 도구인 usekaneo/kaneo가 공개되었습니다.</p><p>Kaneo는 복잡한 대시보드나 무거운 연동 기능을 제외하고, 업무 카드 작성과 담당자 지정 등 협업에 반드시 필요한 핵심 기능만 제공하는 가벼운 도구입니다. MIT 라이선스 기반의 오픈소스로 배포되어 개발팀이 소스 코드를 자유롭게 수정하고 자체 인프라에 직접 설치해 운영할 수 있습니다.</p><p>대형 협업 툴의 복잡한 UI와 수많은 알림에 피로감을 느끼는 소규모 개발팀에게 훌륭한 대안이 됩니다. 외부 SaaS 서비스에 의존하지 않고 사내 서버에 직접 호스팅하므로 데이터 보안을 유지하면서 매달 지출되는 구독 비용을 아낍니다.</p><p>지나치게 단순한 도구는 팀 규모가 커지거나 정교한 권한 관리, 타 서비스와의 API 연동이 필요해지는 시점에 한계를 드러내기 마련입니다. Kaneo는 엔터프라이즈급 관리 도구를 완전히 대체하기보다는, 초기 스타트업이나 단기 태스크포스(TF) 팀이 복잡한 설정 없이 빠르게 협업 환경을 구축하는 용도로 제한해 활용할 때 가장 높은 효율을 발휘합니다. 도입 전에 팀의 워크플로우가 칸반 보드 수준만으로 유지될 수 있는지 먼저 따져봐야 합니다.</p>
+  <p class="action">공식 GitHub 저장소의 가이드를 참고해 로컬 도커 환경에 kaneo를 띄워보고 현재 팀의 업무 흐름을 수용할 수 있는지 확인합니다.</p>
+  <p class="sources">참고: <a href="https://github.com/usekaneo/kaneo" rel="nofollow noopener noreferrer" target="_blank">GitHub 원문</a></p>
+</section><section class="issue-card">
+  <h2>자율형 AI 에이전트의 위험한 일탈을 추적하는 Felony Bench</h2>
+  <img class="issue-image" src="https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-22/issue-3.png" alt="자율형 AI 에이전트의 위험한 일탈을 추적하는 Felony Bench 관련 이미지">
+  <p>Felony Bench는 자율형 AI 에이전트가 사용자의 개입 없이 작업을 수행하는 과정에서 내리는 의심스럽거나 규정을 위반하는 결정들을 추적하고 기록하는 새로운 벤치마크를 발표했습니다.</p><p>이 도구는 인공지능 비서가 스스로 업무를 처리할 때 법적 가이드라인을 위반하거나 위험한 결정을 내리는 빈도를 측정하는 평가 프레임워크입니다. 자율주행차가 도로 위에서 신호를 제대로 지키는지 감시하는 카메라와 유사한 역할을 수행하며, 인공지능이 스스로 결제나 정보 수집을 수행할 때 발생할 수 있는 사고를 예방하는 데 초점을 맞춥니다.</p><p>AI 에이전트의 실무 배포가 본격화되는 시점에서, 모델의 단순 지능 점수 외에 실제 비즈니스 환경에서 발생할 수 있는 법적·윤리적 리스크를 객관적인 지표로 스크리닝할 수 있는 기준을 제시합니다.</p><p>에이전트의 비정상적인 행동은 프롬프트 주입 공격이나 외부 환경과의 예기치 못한 상호작용 등 통제하기 어려운 변수에서 기인하므로 단일 벤치마크 점수만으로 안전을 확신하기는 어렵습니다. Felony Bench의 평가 시나리오가 실제 비즈니스의 복잡한 법적 규제를 완벽히 대변하지 못하므로 사내 레드팀 운영을 통한 자체 검증이 병행되어야 합니다. 실무 적용 시에는 이 테스트를 통과하더라도 실시간 행동 모니터링과 즉각적인 강제 종료 시스템을 이중으로 구축하는 설계가 필수적입니다.</p>
+  <p class="action">현재 개발 중인 AI 에이전트 시스템에 오작동 발생 시 API 호출과 결제를 즉각 차단하는 물리적 가드레일이 작동하는지 점검합니다.</p>
+  <p class="sources">참고: <a href="https://www.felonybench.com/" rel="nofollow noopener noreferrer" target="_blank">Felony Bench 원문</a></p>
+</section>
+  <section class="closing"><p>도구의 제약을 풀고 자율성을 부여하는 흐름은 거스를 수 없지만, 그에 비례해 엔지니어가 짊어져야 할 통제와 검증의 책임 또한 무거워집니다. 무검열 모델의 자유도는 정교한 보안 레이어를 요구하고, 에이전트의 자율성은 일탈을 감시할 엄격한 가드레일을 필요로 합니다. 결국 시스템의 안정성은 기술 자체의 성능보다 예외 상황을 예측하고 제어하는 아키텍처 설계 수준에 좌우됩니다.</p></section>
+</article>
+</body></html>
