@@ -1,0 +1,206 @@
+{
+  "date": "2026-08-23",
+  "title": "[AI 뉴스룸] 로컬 인프라와 오픈소스가 제시하는 개발 통제권의 현실적 대안",
+  "title_candidates": [
+    "[AI 뉴스룸] 로컬 인프라와 오픈소스가 제시하는 개발 통제권의 현실적 대안",
+    "[AI 뉴스룸] 클라우드 종속성에서 벗어나기 위한 로컬 멀티 에이전트와 무검열 모델의 조합",
+    "[AI 뉴스룸] 서버 측 통제를 우회하여 로컬 자원의 독립성을 확보하는 개발 전략"
+  ],
+  "tags": [
+    "오픈소스",
+    "멀티에이전트",
+    "Qwen",
+    "음성에이전트",
+    "ClaudeCode",
+    "로컬LLM"
+  ],
+  "meta_description": "로컬 멀티 에이전트 도구 Munder Difflin, 무검열 Qwen3.8 GGUF 모델, Hugging Face의 오픈소스 음성 에이전트를 활용하여 개발 통제권을 확보하는 방안을 다룹니다.",
+  "article_count_note": "",
+  "quality_status": "READY_FOR_MANUAL_REVIEW",
+  "warnings": [
+    "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))"
+  ],
+  "manual_review_required": true,
+  "publish_checklist": [
+    "원문 링크와 사실관계를 확인합니다.",
+    "작성자 분석이 자신의 실제 관점인지 검토합니다.",
+    "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요.",
+    "소개·문의·개인정보 페이지가 실제 값으로 공개됐는지 확인합니다.",
+    "티스토리 HTML 모드에 붙여넣은 뒤 모바일 화면을 확인합니다."
+  ],
+  "sources": [
+    {
+      "name": "Hugging Face 커뮤니티",
+      "title": "JonathanColetti/Qwen3.8-27B-Uncensored-GGUF",
+      "url": "https://huggingface.co/JonathanColetti/Qwen3.8-27B-Uncensored-GGUF"
+    },
+    {
+      "name": "munderdiffl.in",
+      "title": "Munder Difflin — Agent harness to run an office of your clones",
+      "url": "https://munderdiffl.in/"
+    },
+    {
+      "name": "GitHub",
+      "title": "GitHub - huggingface/speech-to-speech: Build voice agents with open-source models",
+      "url": "https://github.com/huggingface/speech-to-speech"
+    },
+    {
+      "name": "X (formerly Twitter)",
+      "title": "X에서 🥔🥔🥔(@argofowl) 님",
+      "url": "https://twitter.com/argofowl/status/2091150597374537729"
+    }
+  ],
+  "fact_review": [
+    {
+      "source": "Hugging Face 커뮤니티",
+      "title": "JonathanColetti/Qwen3.8-27B-Uncensored-GGUF",
+      "source_url": "https://huggingface.co/JonathanColetti/Qwen3.8-27B-Uncensored-GGUF",
+      "official_url": "https://huggingface.co/JonathanColetti/Qwen3.8-27B-Uncensored-GGUF",
+      "summary": "Hugging Face에서 최근 주목받는 text-generation 모델 저장소입니다.",
+      "verified_facts": [
+        {
+          "label": "프로젝트·모델",
+          "value": "JonathanColetti/Qwen3.8-27B-Uncensored-GGUF"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "JonathanColetti"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-08-16T12:48:32+09:00"
+        },
+        {
+          "label": "Hugging Face 좋아요 (수집 시점)",
+          "value": "619"
+        },
+        {
+          "label": "Hugging Face 다운로드 (수집 시점)",
+          "value": "1223422"
+        },
+        {
+          "label": "Hugging Face 파이프라인",
+          "value": "text-generation"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "munderdiffl.in",
+      "title": "Munder Difflin — Agent harness to run an office of your clones",
+      "source_url": "https://munderdiffl.in/",
+      "official_url": "https://github.com/chaitanyagiri/munder-difflin",
+      "summary": "Free, open source and performant multi-agent harness, works with your existing subscriptions (uses hourly limits). It wraps the CLI agents you already use — Claude Code, Codex, Copilot and 9 more — and runs an office of your clones on your own machine.",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "munderdiffl.in"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-08-22T18:49:14+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "chaitanyagiri/munder-difflin"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "chaitanyagiri"
+        },
+        {
+          "label": "라이선스",
+          "value": "NOASSERTION"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-08-22T22:11:50Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "GitHub",
+      "title": "GitHub - huggingface/speech-to-speech: Build voice agents with open-source models",
+      "source_url": "https://github.com/huggingface/speech-to-speech",
+      "official_url": "https://github.com/huggingface/speech-to-speech",
+      "summary": "Build voice agents with open-source models. Contribute to huggingface/speech-to-speech development by creating an account on GitHub.",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "GitHub"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-08-22T09:30:02+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "huggingface/speech-to-speech"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "huggingface"
+        },
+        {
+          "label": "라이선스",
+          "value": "Apache-2.0"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-08-22T21:59:05Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "X (formerly Twitter)",
+      "title": "X에서 🥔🥔🥔(@argofowl) 님",
+      "source_url": "https://twitter.com/argofowl/status/2091150597374537729",
+      "official_url": "",
+      "summary": "update: it's server-side, not the app anthropic enrols fable 5 sessions on claude code 2.1.236+ into an experiment that shrinks the effort scale, older versions and opus 5 are left alone probably an a/b test, so not everyone will see it if \"high\" feels like \"low\" for you,",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "X (formerly Twitter)"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-08-22T22:08:48+09:00"
+        }
+      ],
+      "manual_review_note": "공식 프로젝트·1차 출처가 연결되지 않은 항목입니다. 숫자, 규제, 회사 관계, 인과관계 주장은 원문을 열어 직접 확인하세요."
+    }
+  ],
+  "images": {
+    "hero": {
+      "path": "hero.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-23/hero.png",
+      "kind": "generated-hero"
+    },
+    "huggingface-community-74d511b26275213d": {
+      "origin_url": "https://huggingface.co/JonathanColetti/Qwen3.8-27B-Uncensored-GGUF/resolve/main/thumbnail.png",
+      "kind": "generated-fallback",
+      "path": "issue-1.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-23/issue-1.svg"
+    },
+    "hacker-news-e5b23adc376a62a9": {
+      "origin_url": "https://munderdiffl.in/media/og.png",
+      "kind": "source-image",
+      "path": "issue-2.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-23/issue-2.png"
+    },
+    "geeknews-9207e699adc3a415": {
+      "origin_url": "https://opengraph.githubassets.com/698c5e29b843e3e634eea1889f5a839505cc12c5225831524547c8f8a1eedd20/huggingface/speech-to-speech",
+      "kind": "source-image",
+      "path": "issue-3.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-23/issue-3.png"
+    },
+    "hacker-news-33e354a2033bc20b": {
+      "origin_url": "https://pbs.twimg.com/profile_images/2046948500206940161/qOR9xYkA_400x400.jpg",
+      "kind": "source-image",
+      "path": "issue-4.jpg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-23/issue-4.jpg"
+    }
+  }
+}
