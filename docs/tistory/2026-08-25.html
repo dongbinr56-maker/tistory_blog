@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>[AI 뉴스룸] 비용과 통제권의 갈림길: 오픈소스 로컬 모델과 에이전트 역공학이 던지는 질문 — 검토용 초안</title></head>
+<body style="margin:0;padding:24px 12px;background:#f3f6fa">
+<article class="tistory-newsroom" lang="ko">
+  <style>
+    .tistory-newsroom {max-width:760px;margin:0 auto;color:#1f2937;font-family:Apple SD Gothic Neo,Malgun Gothic,sans-serif;line-height:1.85}
+    .tistory-newsroom .hero {padding:30px 26px;border:1px solid #dbe4ee;border-radius:18px;background:#f8fafc}
+    .tistory-newsroom .issue-image {display:block;width:100%;max-height:330px;margin:0 0 20px;border-radius:14px;object-fit:cover;background:#e2e8f0}
+    .tistory-newsroom h1 {margin:0 0 16px;color:#111827;font-size:30px;line-height:1.38}
+    .tistory-newsroom h2 {color:#111827;font-size:23px;line-height:1.45}
+    .tistory-newsroom p {margin:0 0 14px}
+    .tistory-newsroom .eyebrow {color:#0f766e;font-weight:700;font-size:13px;letter-spacing:.04em}
+    .tistory-newsroom .issue-card {margin:28px 0;padding:24px;border:1px solid #e2e8f0;border-radius:16px;background:#fff}
+    .tistory-newsroom .action {margin:18px 0 10px;padding:14px 16px;border-left:3px solid #0f766e;border-radius:0 10px 10px 0;background:#f0fdfa}
+    .tistory-newsroom .sources {margin:6px 0 0;color:#64748b;font-size:14px}
+    .tistory-newsroom .editor-note {margin:20px 0;padding:16px 18px;border-left:4px solid #334155;border-radius:0 12px 12px 0;background:#f8fafc;font-style:normal}
+    .tistory-newsroom .closing {margin-top:28px}
+    .tistory-newsroom a {color:#0f766e}
+  </style>
+  <header class="hero">
+    <p class="eyebrow">2026-08-25 · AI·개발</p>
+    <h1>[AI 뉴스룸] 비용과 통제권의 갈림길: 오픈소스 로컬 모델과 에이전트 역공학이 던지는 질문</h1>
+    <p>거대 상용 API의 비용 청구서를 마주할 때의 막막함과, 로컬 환경에서 직접 대형 모델을 제어하고 싶은 욕구는 오늘날 엔지니어링 현장의 가장 직접적인 갈등입니다. OBLITERATUS/Qwen3.8-27B-OBLITERATED 같은 오픈소스 모델이 허깅페이스에서 수십만 회 다운로드되며 대안으로 부상하는 반면, 한편에서는 schlarpc/re-shell 프로젝트처럼 AI 에이전트를 하드웨어 보안 분석 영역까지 밀어붙이는 극단적인 실험이 진행됩니다. 결국 핵심은 한정된 자원 속에서 상용 API의 비용 구조를 최적화할 것인가, 아니면 로컬 인프라의 통제권을 완전히 확보할 것인가의 선택으로 귀결됩니다.</p>
+  </header>
+  <section class="editor-note"><p>로컬 환경에서 대형 모델을 직접 구동하는 비용과 상용 API의 최적화 기법을 비교 분석하며 우리 서비스에 맞는 최적의 균형점을 찾아보시기 바랍니다.</p></section>
+  <section class="issue-card">
+  <h2>오픈소스 텍스트 생성 모델 Qwen3.8-27B-OBLITERATED의 등장</h2>
+  <img class="issue-image" src="https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-25/issue-1.svg" alt="오픈소스 텍스트 생성 모델 Qwen3.8-27B-OBLITERATED의 등장 관련 이미지">
+  <p>Hugging Face 커뮤니티에서 텍스트 생성을 지원하는 새로운 오픈소스 모델인 OBLITERATUS/Qwen3.8-27B-OBLITERATED 저장소가 공개되어 누적 다운로드 31만 회와 좋아요 690개 이상을 기록하며 개발자들의 주목을 받고 있습니다.</p><p>이 모델은 사용자가 외부 클라우드 서버에 데이터를 보내지 않고 자신의 컴퓨터에 직접 설치해 문장을 생성할 수 있게 돕는 대형 언어 모델입니다. 질문에 답하거나 긴 글을 작성하는 자연어 처리 작업을 로컬 환경에서 독립적으로 수행합니다.</p><p>상용 API 호출 비용을 절감하고 기업 내부의 민감한 데이터가 외부 서버로 유출되는 경로를 원천 차단하는 로컬 인프라 구축의 기반이 됩니다.</p><p>27B(270억 개) 규모의 매개변수를 가진 모델을 로컬에서 원활하게 구동하려면 고성능 GPU와 메모리 자원이 필수적입니다. 추론 속도를 높이기 위해 양자화 기술을 적용할 경우 답변의 정확도가 떨어지는 트레이드오프가 발생하므로, 상용 API를 쓸 때의 호출 비용과 자체 인프라의 하드웨어 감가상각 및 유지 보수 비용을 정량적으로 비교해 도입 여부를 결정해야 합니다.</p>
+  <p class="action">허깅페이스 저장소에 접속하여 보유한 하드웨어 사양으로 27B 모델의 원활한 추론이 가능한지 사전에 검증하십시오.</p>
+  <p class="sources">참고: <a href="https://huggingface.co/OBLITERATUS/Qwen3.8-27B-OBLITERATED" rel="nofollow noopener noreferrer" target="_blank">Hugging Face 커뮤니티 원문</a></p>
+</section><section class="issue-card">
+  <h2>AI 에이전트를 활용한 주변기기 펌웨어 역공학 실험</h2>
+  <img class="issue-image" src="https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-25/issue-2.jpg" alt="AI 에이전트를 활용한 주변기기 펌웨어 역공학 실험 관련 이미지">
+  <p>schlarp.com에 따르면 개발자 schlarpc는 Claude 에이전트를 다섯 개의 USB 및 와이파이 주변기기 펌웨어 분석에 투입하여 마이크의 명령 셸, 웹캠 LED 비활성화 취약점, 네트워크 무인증 메모리 쓰기 오류를 발견하고 이를 지원하는 Nix 기반 역공학 환경 re-shell을 공개했습니다.</p><p>보안 전문가 대신 인공지능 에이전트를 활용해 일상적인 전자기기의 내부 소프트웨어를 분석하고 해킹 위험이 있는 취약점을 찾아내는 기술입니다. 마이크나 웹캠 같은 기기 내부의 보안 허점을 자동으로 식별하여 경고하는 역할을 수행합니다.</p><p>수작업 위주였던 하드웨어 역공학 영역에 에이전트를 도입해 취약점 탐지 속도를 높이고, 제조사가 제품 출시 전에 보안 결함을 선제적으로 검증하는 자동화 파이프라인의 가능성을 제시합니다.</p><p>에이전트가 도출한 분석 결과에는 잘못된 취약점 판정(오탐)이 섞여 있을 확률이 높으므로, 반드시 도메인 전문가의 수동 검증 단계가 수반되어야 합니다. 또한 이러한 자동화 도구가 공격자에게 악용될 경우 대규모 제로데이 취약점 발굴 도구로 돌변할 위험이 존재하므로, 내부망과 격리된 안전한 샌드박스 환경에서만 실행하는 통제 장치가 전제되어야 합니다.</p>
+  <p class="action">깃허브의 schlarpc/re-shell 저장소에서 Nix 기반의 격리된 에이전트 실행 환경 설정을 검토하십시오.</p>
+  <p class="sources">참고: <a href="https://schlarp.com/posts/everything-i-own-owned/" rel="nofollow noopener noreferrer" target="_blank">schlarp.com 원문</a></p>
+</section><section class="issue-card">
+  <h2>OpenAI API 요금 체계와 효율적인 개발 가이드</h2>
+  <img class="issue-image" src="https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-08-25/issue-3.png" alt="OpenAI API 요금 체계와 효율적인 개발 가이드 관련 이미지">
+  <p>OpenAI Developers는 플랫폼의 최신 요금 정보를 업데이트하는 한편, 공식 예제와 가이드를 제공하는 깃허브 저장소인 openai-cookbook을 통해 개발자들이 API 호출 비용을 관리하고 최적화할 수 있는 구체적인 레시피를 공유하고 있습니다.</p><p>상용 인공지능 서비스를 애플리케이션에 연결해 쓸 때 발생하는 요금 기준을 확인하고, 불필요한 데이터 전송을 줄여 비용을 절약하는 개발 방법을 모아둔 공식 안내서입니다. 제공되는 코드 예제를 복사해 자신의 서비스에 바로 적용할 수 있습니다.</p><p>사용량에 비례해 비용이 급증하는 상용 API 환경에서 토큰 소모량을 예측하고, 캐싱이나 효율적인 프롬프트 구조를 설계해 운영 예산의 낭비를 방지하는 기준점이 됩니다.</p><p>단순히 단가가 저렴한 모델을 선택하는 임시방편을 넘어, 쿡북에서 제시하는 배치 처리 API나 토큰 계산기 로직을 백엔드 아키텍처에 내재화해야 장기적인 비용 통제가 가능합니다. 특정 기능의 단가 인하가 시스템 재설계 비용보다 실질적인 이득을 주는지 정량적으로 평가해야 하며, 장기적으로는 자체 구축한 로컬 모델과의 가성비 비교 분석을 병행해야 합니다.</p>
+  <p class="action">openai-cookbook 저장소의 비용 최적화 및 토큰 관리 예제 코드를 분석하여 현재 운영 중인 서비스의 API 호출 로직에 이식하십시오.</p>
+  <p class="sources">참고: <a href="https://developers.openai.com/api/docs/pricing" rel="nofollow noopener noreferrer" target="_blank">OpenAI Developers 원문</a></p>
+</section>
+  <section class="closing"><p>인프라를 직접 구축해 통제권을 쥘 것인가, 아니면 상용 API를 고도로 최적화해 비용 효율을 극대화할 것인가의 문제는 정답이 없는 저울질입니다. 하드웨어 보안 분석까지 에이전트의 영역으로 포섭되는 지금, 시스템의 경계를 명확히 이해하고 자원을 정밀하게 설계하는 엔지니어링 역량이 요구됩니다.</p></section>
+</article>
+</body></html>
