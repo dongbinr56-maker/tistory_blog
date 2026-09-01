@@ -1,0 +1,9 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    "초안 생성 중단: 요즘IT·GeekNews·Hacker News 기사와 GitHub/Hugging Face 커뮤니티 프로젝트를 합쳐 검증 가능한 3건을 만들지 못했습니다."
+  ],
+  "collector_errors": [
+    "수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))"
+  ]
+}
