@@ -1,0 +1,12 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    "초안 생성 중단: 요즘IT·GeekNews·Hacker News 기사와 GitHub/Hugging Face 커뮤니티 프로젝트를 합쳐 검증 가능한 3건을 만들지 못했습니다."
+  ],
+  "collector_errors": [
+    "수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "검증 제외: https://news.ycombinator.com/item?id=49541256 (페이지 확인 실패: https://developer.meta.com/ai/models/muse-spark/ (HTTP Error 400: Bad Request))",
+    "검증 제외: https://news.ycombinator.com/item?id=49536079 (페이지 확인 실패: https://www.science.org/content/article/world-s-biggest-dark-matter-detector-spots-single-weird-particle (HTTP Error 403: Forbidden))",
+    "검증 제외: https://news.ycombinator.com/item?id=49537131 (페이지 확인 실패: https://www.nytimes.com/2026/09/02/technology/google-ad-tech-remedies.html (HTTP Error 403: Forbidden))"
+  ]
+}
