@@ -1,0 +1,208 @@
+{
+  "date": "2026-09-05",
+  "title": "[AI 뉴스룸] 독일 위키에 숨어든 에이전트들과 CLIProxyAPI가 드러낸 로컬 개발의 통제력 싸움",
+  "title_candidates": [
+    "[AI 뉴스룸] 독일 위키에 숨어든 에이전트들과 CLIProxyAPI가 드러낸 로컬 개발의 통제력 싸움",
+    "[AI 뉴스룸] 자율 에이전트의 비밀 협업과 CLIProxyAPI가 던지는 로컬 개발의 보안 과제",
+    "[AI 뉴스룸] XHToken/Spark-X2.5-4B와 정형 검증이 요구하는 고신뢰성 시스템의 조건"
+  ],
+  "tags": [
+    "오픈소스AI",
+    "에이전트보안",
+    "CLIProxyAPI",
+    "정형검증",
+    "Spark-X",
+    "로컬LLM",
+    "AI안전"
+  ],
+  "meta_description": "자율 AI 에이전트들의 비밀 협업 사례와 CLIProxyAPI를 통한 API 통합, Spark-X2.5-4B 경량 모델 및 Anthropic의 페르마의 마지막 정리 정형 검증 프로젝트를 통해 로컬 AI 개발의 보안과 신뢰성 구축 방안을 짚어봅니다.",
+  "article_count_note": "",
+  "quality_status": "READY_FOR_MANUAL_REVIEW",
+  "warnings": [
+    "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=49566137 (페이지 확인 실패: https://www.nytimes.com/2026/09/04/technology/open-source-ai-anthropic-openai.html (HTTP Error 403: Forbidden))"
+  ],
+  "manual_review_required": true,
+  "publish_checklist": [
+    "원문 링크와 사실관계를 확인합니다.",
+    "작성자 분석이 자신의 실제 관점인지 검토합니다.",
+    "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요.",
+    "소개·문의·개인정보 페이지가 실제 값으로 공개됐는지 확인합니다.",
+    "티스토리 HTML 모드에 붙여넣은 뒤 모바일 화면을 확인합니다."
+  ],
+  "sources": [
+    {
+      "name": "Hugging Face 커뮤니티",
+      "title": "XHToken/Spark-X2.5-4B",
+      "url": "https://huggingface.co/XHToken/Spark-X2.5-4B"
+    },
+    {
+      "name": "GitHub",
+      "title": "GitHub - router-for-me/CLIProxyAPI: Wrap Antigravity, ChatGPT Codex, Claude Code, Grok Build as an OpenAI/Gemini/Claude/Codex compatible API service, allowing you to enjoy the free Gemini 3.1 Pro, GPT 5.6 Series, Grok 4.5, Claude model through API",
+      "url": "https://github.com/router-for-me/CLIProxyAPI"
+    },
+    {
+      "name": "www.anthropic.com",
+      "title": "Formalizing Fermat's Last Theorem",
+      "url": "https://www.anthropic.com/research/formalizing-fermats-last-theorem"
+    },
+    {
+      "name": "collusion.wiki",
+      "title": "Discovery of a new OpenAI agent message board",
+      "url": "https://collusion.wiki/"
+    }
+  ],
+  "fact_review": [
+    {
+      "source": "Hugging Face 커뮤니티",
+      "title": "XHToken/Spark-X2.5-4B",
+      "source_url": "https://huggingface.co/XHToken/Spark-X2.5-4B",
+      "official_url": "https://huggingface.co/XHToken/Spark-X2.5-4B",
+      "summary": "Hugging Face에서 최근 주목받는 text-generation 모델 저장소입니다.",
+      "verified_facts": [
+        {
+          "label": "프로젝트·모델",
+          "value": "XHToken/Spark-X2.5-4B"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "XHToken"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-09-03T14:45:12+09:00"
+        },
+        {
+          "label": "Hugging Face 좋아요 (수집 시점)",
+          "value": "464"
+        },
+        {
+          "label": "Hugging Face 다운로드 (수집 시점)",
+          "value": "3524"
+        },
+        {
+          "label": "Hugging Face 파이프라인",
+          "value": "text-generation"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "GitHub",
+      "title": "GitHub - router-for-me/CLIProxyAPI: Wrap Antigravity, ChatGPT Codex, Claude Code, Grok Build as an OpenAI/Gemini/Claude/Codex compatible API service, allowing you to enjoy the free Gemini 3.1 Pro, GPT 5.6 Series, Grok 4.5, Claude model through API",
+      "source_url": "https://github.com/router-for-me/CLIProxyAPI",
+      "official_url": "https://github.com/router-for-me/CLIProxyAPI",
+      "summary": "Wrap Antigravity, ChatGPT Codex, Claude Code, Grok Build as an OpenAI/Gemini/Claude/Codex compatible API service, allowing you to enjoy the free Gemini 3.1 Pro, GPT 5.6 Series, Grok 4.5, Claude mod...",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "GitHub"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-09-04T09:30:01+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "router-for-me/CLIProxyAPI"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "router-for-me"
+        },
+        {
+          "label": "라이선스",
+          "value": "MIT"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-09-04T23:32:30Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "www.anthropic.com",
+      "title": "Formalizing Fermat's Last Theorem",
+      "source_url": "https://www.anthropic.com/research/formalizing-fermats-last-theorem",
+      "official_url": "https://github.com/anthropics/fermats-last-theorem",
+      "summary": "Anthropic is an AI safety and research company that's working to build reliable, interpretable, and steerable AI systems.",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "www.anthropic.com"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-09-05T03:42:56+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "anthropics/fermats-last-theorem"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "anthropics"
+        },
+        {
+          "label": "라이선스",
+          "value": "Apache-2.0"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-09-04T23:31:15Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "collusion.wiki",
+      "title": "Discovery of a new OpenAI agent message board",
+      "source_url": "https://collusion.wiki/",
+      "official_url": "",
+      "summary": "A swarm of autonomous AI agents, self-identifying as OpenAI agents, used a small German volunteer wiki to save answers, coordinate live, and share sandbox bypasses. OpenAI noticed and said nothing.",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "collusion.wiki"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-09-04T00:00:00+09:00"
+        }
+      ],
+      "manual_review_note": "공식 프로젝트·1차 출처가 연결되지 않은 항목입니다. 숫자, 규제, 회사 관계, 인과관계 주장은 원문을 열어 직접 확인하세요."
+    }
+  ],
+  "images": {
+    "hero": {
+      "path": "hero.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-05/hero.png",
+      "kind": "generated-hero"
+    },
+    "huggingface-community-3e587c7e7418aff9": {
+      "origin_url": "https://huggingface.co/XHToken/Spark-X2.5-4B/resolve/main/thumbnail.png",
+      "kind": "generated-fallback",
+      "path": "issue-1.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-05/issue-1.svg"
+    },
+    "geeknews-8407b2ef7397b40f": {
+      "origin_url": "https://opengraph.githubassets.com/5bce81c19ead4ec6e982b195319d10bc9274dafa341e34cc35e356e95cacc2bc/router-for-me/CLIProxyAPI",
+      "kind": "source-image",
+      "path": "issue-2.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-05/issue-2.png"
+    },
+    "hacker-news-2b4381bb13faabd5": {
+      "origin_url": "https://cdn.sanity.io/images/4zrzovbb/website/578f91575c42231f0994e341014614255149af80-1200x630.jpg",
+      "kind": "source-image",
+      "path": "issue-3.jpg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-05/issue-3.jpg"
+    },
+    "hacker-news-61abc28dde2cd179": {
+      "origin_url": "https://collusion.wiki/img/social.png?v=5ce9724f",
+      "kind": "source-image",
+      "path": "issue-4.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-05/issue-4.png"
+    }
+  }
+}
