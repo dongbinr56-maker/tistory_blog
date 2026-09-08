@@ -1,0 +1,143 @@
+{
+  "date": "2026-09-09",
+  "title": "[AI 뉴스룸] AI 기능 배제와 로컬 통제권이 이끄는 새로운 소프트웨어 선택 기준",
+  "title_candidates": [
+    "[AI 뉴스룸] AI 기능 배제와 로컬 통제권이 이끄는 새로운 소프트웨어 선택 기준",
+    "[AI 뉴스룸] 무조건적인 AI 탑재에 맞서는 로컬 모델과 투명한 기록 장치",
+    "[AI 뉴스룸] 사용자 통제권을 중심으로 재편되는 오픈소스 생태계의 흐름"
+  ],
+  "tags": [
+    "MiniCPM5-2B",
+    "Apache Maka",
+    "LibreOffice",
+    "온디바이스 AI",
+    "에이전트 워크스페이스",
+    "데이터 프라이버시",
+    "오픈소스"
+  ],
+  "meta_description": "모든 소프트웨어에 인공지능을 강제 탑재하는 흐름에 피로감을 느낀 사용자들이 늘어나면서, 기술 통제권과 프라이버시를 직접 제어하려는 움직임이 뚜렷해지고 있습니다. openbmb/MiniCPM5-2B 경량 모델과 apache/maka 에이전트 워크스페이스를 통해 로컬 AI의 가능성을 짚어보고, LibreOffice breaks download records after declaring it has no AI features 사례가 주는 시사점을 분석합니다.",
+  "intro": "모든 소프트웨어에 인공지능을 강제 탑재하는 흐름에 피로감을 느낀 사용자들이 늘어나면서, 기술 통제권과 프라이버시를 직접 제어하려는 움직임이 뚜렷해지고 있습니다. 클라우드 의존도를 낮추고 기기 내부에서 동작하는 openbmb/MiniCPM5-2B 같은 경량 모델의 부상이나, 에이전트의 모든 실행 경로를 투명하게 기록하는 apache/maka의 등장은 이러한 맥락과 궤를 같이합니다. 심지어 LibreOffice breaks download records after declaring it has no AI features 사례처럼 인공지능 기능을 의도적으로 배제하여 사용자들의 전폭적인 선택을 받는 현상까지 나타나고 있습니다.",
+  "sections": [
+    {
+      "headline": "기기 내부에서 독립적으로 구동하는 텍스트 생성 모델 MiniCPM5-2B",
+      "source_ids": [
+        "huggingface-community-6db7a09f6b2d61e8"
+      ],
+      "what_happened": "Hugging Face 커뮤니티에서 텍스트 생성 작업을 처리할 수 있는 경량 언어 모델인 openbmb/MiniCPM5-2B 저장소가 등록되어 개발자들의 관심을 모으고 있습니다.",
+      "plain_explanation": "이 모델은 외부 클라우드 서버와의 통신 없이 개인용 컴퓨터나 모바일 기기 자체의 연산 자원만으로 문장을 생성하는 기술입니다. 네트워크 연결이 불가능한 오프라인 상태에서도 사용자가 입력한 질문에 답변하거나 필요한 텍스트를 기기 내부에서 직접 출력해 줍니다.",
+      "why_it_matters": "데이터가 외부 서버로 전송되지 않아 기업의 기밀 정보나 개인정보 유출 우려를 원천적으로 방지하며, API 호출에 따른 지속적인 비용 부담과 네트워크 지연 문제를 해소하는 기준이 됩니다.",
+      "technical_details": "",
+      "editorial_take": "2B 규모의 초경량 모델은 하드웨어 요구 사양이 낮아 온디바이스 환경에 쉽게 이식할 수 있다는 명확한 장점이 있습니다. 다만 매개변수 크기의 한계로 인해 복잡한 다단계 추론이나 고도의 다국어 맥락 파악에서는 대형 모델 대비 성능 저하가 불가피합니다. 특정 도메인에 특화된 미세조정 데이터가 부족하다면 실무 적용 시 왜곡된 정보를 출력할 위험이 크므로, 도입 전에 대상 기기의 메모리 점유율을 정밀하게 측정하고 상용 API와의 상호 보완적인 하이브리드 아키텍처를 설계하는 과정이 필요합니다.",
+      "reader_action": "로컬 개발 장비에 해당 모델을 직접 배포하여 가용 메모리 대비 추론 속도와 하드웨어 부하를 정량적으로 측정해 볼 필요가 있습니다.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "에이전트의 모든 실행 이력을 투명하게 기록하는 작업 공간 Apache Maka",
+      "source_ids": [
+        "geeknews-4d1450729e6ff44d"
+      ],
+      "what_happened": "GitHub에 아파치 재단의 인큐베이팅 프로젝트로 등록된 apache/maka는 에이전트가 수행한 모든 작업 이력을 완전히 보존하는 고성능 에이전트 워크스페이스를 공개했습니다.",
+      "plain_explanation": "자율적으로 동작하는 인공지능 에이전트가 시스템 내부에서 실행한 파일 변경, 명령어 입력, 외부 API 호출 등의 모든 세부 활동을 누락 없이 실시간으로 기록하는 전용 가상 환경입니다. 에이전트가 예기치 못한 비정상적 동작을 수행했을 때 그 원인을 추적할 수 있는 명확한 단서를 제공합니다.",
+      "why_it_matters": "블랙박스 상태로 동작하기 쉬운 자율 에이전트의 내부 의사결정 과정을 시각화하여, 오작동이나 보안 규정 위반 사고가 발생했을 때 신속한 디버깅과 사후 감사를 가능하게 만듭니다.",
+      "technical_details": "",
+      "editorial_take": "모든 행위를 실시간으로 기록하는 아키텍처는 시스템의 투명성을 극대화하지만, 대규모 트래픽이 발생하는 운영 환경에서는 디스크 I/O 병목 현상과 스토리지 비용의 급격한 상승을 유발하는 원인이 됩니다. 아직 인큐베이팅 단계에 있는 프로젝트인 만큼 즉각적인 상용 서비스 적용은 지양해야 하며, 격리된 샌드박스 환경에서 안정성을 먼저 평가해야 합니다. 기록되는 로그 내부의 민감 정보를 자동으로 마스킹하는 보안 기능과 데이터 보존 주기 설정 옵션이 갖추어져 있는지 검증하는 과정도 수반되어야 합니다.",
+      "reader_action": "공식 저장소의 가이드를 참고하여 격리된 컨테이너 환경에 워크스페이스를 구축하고 에이전트의 동작 로그가 생성되는 구조를 직접 확인해 보는 것이 좋습니다.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "생성형 AI 배제 선언 이후 다운로드 신기록을 달성한 리브레오피스",
+      "source_ids": [
+        "hacker-news-7820e8f414dc3361"
+      ],
+      "what_happened": "Manual do Usuário에 따르면, 리브레오피스는 생성형 인공지능 기능을 포함하지 않는다고 공식 선언한 최신 업데이트 버전 26.8을 출시한 이후 다운로드 수가 100만 건을 돌파하며 역대 최고 기록을 세웠습니다.",
+      "plain_explanation": "오픈소스 오피스 제품군인 리브레오피스가 프로그램 내부에 생성형 인공지능 기능을 일체 탑재하지 않겠다고 선언하자 오히려 사용자들의 선택이 집중되었습니다. 이는 사용자의 명시적 동의 없이 문서 내용이 인공지능 학습 데이터로 무단 수집될 것을 우려하는 사용자층의 불안감을 반영한 결과입니다.",
+      "why_it_matters": "무조건적인 인공지능 기능의 강제가 사용자들의 이탈을 부르는 역효과를 낼 수 있다는 경고이며, 데이터 프라이버시를 전면에 내세운 제품 설계가 시장에서 강력한 차별화 전략이 될 수 있음을 입증하는 대목입니다.",
+      "technical_details": "",
+      "editorial_take": "이번 다운로드 신기록은 기술의 일방적인 강요에 피로감을 느끼는 사용자들의 거부 반응이 실질적인 행동으로 나타난 사례입니다. 제품 기획자들은 트렌드 추종식 기능 추가에 급급하기보다 사용자가 신뢰할 수 있는 데이터 보호 환경을 구축하는 데 우선순위를 두어야 합니다. 다만 업무 효율성 측면에서 인공지능 보조 도구의 유용성을 완전히 배제하기는 어려우므로, 기능을 원천 차단하기보다는 데이터 전송 범위와 기능 활성화 여부를 사용자가 직접 선택할 수 있는 정교한 제어 옵션을 제공하는 설계가 합리적입니다.",
+      "reader_action": "현재 사내에서 활용 중인 업무용 소프트웨어의 데이터 수집 및 학습 활용 약관을 점검하고, 민감한 문서를 다루는 부서에 로컬 기반 도구를 도입할 수 있는지 검토해 보는 것을 권장합니다.",
+      "verification_notes": ""
+    }
+  ],
+  "closing": "기술의 지향점이 단순히 모델의 크기를 키우는 경쟁에서 벗어나 사용자의 실질적인 통제권을 보장하는 방향으로 전환되고 있습니다. 로컬 환경에서 구동하는 경량 모델을 채택하거나 에이전트의 실행 과정을 투명하게 기록하는 시도들은 모두 사용자가 신뢰할 수 있는 안전장치를 마련하려는 흐름입니다. 무조건적인 기능 주입보다는 사용자가 직접 제어할 수 있는 선택권을 제공하는 제품이 장기적인 신뢰를 얻게 됩니다.",
+  "editor_comment": "현재 개발 중인 서비스에서 사용자가 인공지능 기능을 수동으로 비활성화할 수 있는 옵션과 데이터 전송 범위를 직접 선택하는 제어 화면을 설계해 보는 방안을 검토합니다.",
+  "editorial_disclosure": "",
+  "model": "gemini-3.5-flash",
+  "article_count_note": "",
+  "images": {},
+  "source_items": [
+    {
+      "id": "huggingface-community-6db7a09f6b2d61e8",
+      "source": "Hugging Face 커뮤니티",
+      "topic": "AI 에이전트, AI 모델링, 오픈소스, 온디바이스 AI, Hugging Face",
+      "title": "openbmb/MiniCPM5-2B",
+      "url": "https://huggingface.co/openbmb/MiniCPM5-2B",
+      "published_at": "2026-09-08T18:08:22+09:00",
+      "summary": "Hugging Face에서 최근 주목받는 text-generation 모델 저장소입니다.",
+      "listing_url": "https://huggingface.co/openbmb/MiniCPM5-2B",
+      "introduced_at": "",
+      "image_url": "https://huggingface.co/openbmb/MiniCPM5-2B/resolve/main/thumbnail.png",
+      "official_url": "https://huggingface.co/openbmb/MiniCPM5-2B",
+      "canonical_key": "https://huggingface.co/openbmb/minicpm5-2b",
+      "verification": {
+        "project_kind": "huggingface",
+        "project_name": "openbmb/MiniCPM5-2B",
+        "project_owner": "openbmb",
+        "license": "",
+        "updated_at": "2026-09-08T18:08:22+09:00",
+        "community_source": "huggingface",
+        "huggingface_likes": "657",
+        "huggingface_downloads": "2879",
+        "pipeline_tag": "text-generation"
+      }
+    },
+    {
+      "id": "geeknews-4d1450729e6ff44d",
+      "source": "GitHub",
+      "topic": "AI 에이전트",
+      "title": "GitHub - apache/maka: Apache Maka (Incubating) is a high-performance agent workspace that keeps a complete record of everything it did.",
+      "url": "https://github.com/apache/maka",
+      "published_at": "2026-09-08T09:30:02+09:00",
+      "summary": "Apache Maka (Incubating) is a high-performance agent workspace that keeps a complete record of everything it did. - apache/maka",
+      "listing_url": "https://news.hada.io/topic?id=33336",
+      "introduced_at": "2026-09-08T09:30:02+09:00",
+      "image_url": "https://opengraph.githubassets.com/50c246fdc830caa690c0fccd03912b5b7d03387f29644f7952153342552d956c/apache/maka",
+      "official_url": "https://github.com/apache/maka",
+      "canonical_key": "https://github.com/apache/maka",
+      "verification": {
+        "article_title_verified": "GitHub - apache/maka: Apache Maka (Incubating) is a high-performance agent workspace that keeps a complete record of everything it did.",
+        "article_source_verified": "GitHub",
+        "article_published_verified": "2026-09-08T09:30:02+09:00",
+        "article_url_verified": "https://github.com/apache/maka",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=33336",
+        "official_url": "https://github.com/apache/maka",
+        "project_name": "apache/maka",
+        "project_owner": "apache",
+        "project_description": "Apache Maka (Incubating) is a high-performance agent workspace that keeps a complete record of everything it did.",
+        "license": "Apache-2.0",
+        "updated_at": "2026-09-08T23:22:27Z",
+        "project_kind": "github"
+      }
+    },
+    {
+      "id": "hacker-news-7820e8f414dc3361",
+      "source": "Manual do Usuário",
+      "topic": "생성형 AI",
+      "title": "LibreOffice breaks download records after declaring it has no AI features",
+      "url": "https://manualdousuario.net/en/libreoffice-download-record-no-ai/",
+      "published_at": "2026-09-08T21:07:37+09:00",
+      "summary": "LibreOffice 26.8 became the app’s most popular update, with over 1 million downloads, after the foundation behind it declared that LibreOffice doesn’t come with generative AI features due to the…",
+      "listing_url": "https://news.ycombinator.com/item?id=49610538",
+      "introduced_at": "2026-09-08T23:05:57+09:00",
+      "image_url": "https://manualdousuario.net/wp-content/uploads/2026/09/libreoffice.png",
+      "official_url": "",
+      "canonical_key": "https://manualdousuario.net/en/libreoffice-download-record-no-ai",
+      "verification": {
+        "article_title_verified": "LibreOffice breaks download records after declaring it has no AI features",
+        "article_source_verified": "Manual do Usuário",
+        "article_published_verified": "2026-09-08T21:07:37+09:00",
+        "article_url_verified": "https://manualdousuario.net/en/libreoffice-download-record-no-ai/",
+        "geeknews_listing_url": ""
+      }
+    }
+  ]
+}
