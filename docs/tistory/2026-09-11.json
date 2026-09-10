@@ -1,0 +1,223 @@
+{
+  "date": "2026-09-11",
+  "title": "[AI 뉴스룸] AI 에이전트가 앞당긴 모바일 네이티브 복귀와 경량화 모델의 실무 적용 조건",
+  "title_candidates": [
+    "[AI 뉴스룸] AI 에이전트가 앞당긴 모바일 네이티브 복귀와 경량화 모델의 실무 적용 조건",
+    "[AI 뉴스룸] DeepSeek-V4.1-Flash 출시와 Shopify의 네이티브 회귀가 시사하는 개발 패러다임의 변화",
+    "[AI 뉴스룸] 미공개 연구 유출 논란과 Qwen3.8 기반 로컬 멀티모달 모델이 던지는 보안 화두"
+  ],
+  "tags": [
+    "DeepSeek",
+    "Qwen",
+    "Shopify",
+    "로컬LLM",
+    "코딩에이전트",
+    "데이터보안"
+  ],
+  "meta_description": "DeepSeek-V4.1-Flash 출시와 Shopify의 네이티브 개발 회귀 소식을 통해 AI 에이전트가 바꾼 비용 구조를 분석합니다. 아울러 Qwen3.8 기반 로컬 멀티모달 모델의 활용법과 OpenAI 연구 데이터 유출 논란을 통해 본 로컬 LLM 도입의 필요성을 짚어봅니다.",
+  "article_count_note": "",
+  "quality_status": "READY_FOR_MANUAL_REVIEW",
+  "warnings": [
+    "문체 경고: '~을 보여줍니다' 식 결론 표현이 2회 나타납니다(허용 1회). 관찰한 사실과 조건, 트레이드오프를 담은 문장으로 바꾸세요.",
+    "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))"
+  ],
+  "manual_review_required": true,
+  "publish_checklist": [
+    "원문 링크와 사실관계를 확인합니다.",
+    "작성자 분석이 자신의 실제 관점인지 검토합니다.",
+    "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요.",
+    "소개·문의·개인정보 페이지가 실제 값으로 공개됐는지 확인합니다.",
+    "티스토리 HTML 모드에 붙여넣은 뒤 모바일 화면을 확인합니다."
+  ],
+  "sources": [
+    {
+      "name": "Hugging Face 커뮤니티",
+      "title": "ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF",
+      "url": "https://huggingface.co/ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF"
+    },
+    {
+      "name": "X (formerly Twitter)",
+      "title": "X에서 DeepSeek(@deepseek_ai) 님",
+      "url": "https://twitter.com/deepseek_ai/status/2097930608790167907"
+    },
+    {
+      "name": "Mathstodon",
+      "title": "Andreas Thom (@andreasthom@mathstodon.xyz)",
+      "url": "https://mathstodon.xyz/@andreasthom/117240535270608201"
+    },
+    {
+      "name": "Shopify",
+      "title": "Native is now the future of mobile at Shopify (2026) - Shopify",
+      "url": "https://shopify.engineering/back-to-native"
+    }
+  ],
+  "fact_review": [
+    {
+      "source": "Hugging Face 커뮤니티",
+      "title": "ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF",
+      "source_url": "https://huggingface.co/ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF",
+      "official_url": "https://huggingface.co/ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF",
+      "summary": "Hugging Face에서 최근 주목받는 image-text-to-text 모델 저장소입니다.",
+      "verified_facts": [
+        {
+          "label": "프로젝트·모델",
+          "value": "ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "ISTA-DASLab"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-09-02T18:11:34+09:00"
+        },
+        {
+          "label": "Hugging Face 좋아요 (수집 시점)",
+          "value": "793"
+        },
+        {
+          "label": "Hugging Face 다운로드 (수집 시점)",
+          "value": "614850"
+        },
+        {
+          "label": "Hugging Face 파이프라인",
+          "value": "image-text-to-text"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "X (formerly Twitter)",
+      "title": "X에서 DeepSeek(@deepseek_ai) 님",
+      "source_url": "https://twitter.com/deepseek_ai/status/2097930608790167907",
+      "official_url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+      "summary": "🚀 Introducing DeepSeek-V4.1-Flash: smarter, faster, more efficient. 🔹 Introducing the smallest model in our new architecture family, with native visual understanding. 🔹 Designed for greater capability, faster inference, higher throughput, and scaling to larger models. 1/6",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "X (formerly Twitter)"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-09-10T15:10:09+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "deepseek-ai/DeepSeek-V4.1-Flash"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "deepseek-ai"
+        },
+        {
+          "label": "라이선스",
+          "value": "mit"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-09-10T08:18:10.000Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "Mathstodon",
+      "title": "Andreas Thom (@andreasthom@mathstodon.xyz)",
+      "source_url": "https://mathstodon.xyz/@andreasthom/117240535270608201",
+      "official_url": "https://github.com/mastodon/mastodon",
+      "summary": "@tristanbuckmaster@mastodon.social 1/3 I want to record a number of points that I realized after reading up on the controversy. In fact it recalls an exchange I had with OpenAI after its non-sofic-group announcement. It exposes a serious, unanswered question about whether researchers can trust OpenAI with unpublished mathematics. I wrote in an email to Mark Sellke and Sebastien Bubeck shortly after the surprising finding of a non-sofic group using the methods of Kun and myself: “Another point is that I and a colleague in Dresden were discussing the expander matching problem and various extensions of the work with Gabor Kun actively over the last months with ChatGPT, so that we are of course curious if that was part of the training data or accessible to the reasoning process. There is a certain (frankly unacceptable) lack of transparency here; and I fear it will damage the communal process of math more than the new AI-generated results will benefit the subject.” Mark Sellke’s complete answer was: “Regarding your conversations with ChatGPT: that did not happen.” I had explicitly asked about two different things: (1) whether our conversations entered training data, and (2) whether the",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "Mathstodon"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-09-09T19:09:57+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "mastodon/mastodon"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "mastodon"
+        },
+        {
+          "label": "라이선스",
+          "value": "AGPL-3.0"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-09-10T17:56:48Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "Shopify",
+      "title": "Native is now the future of mobile at Shopify (2026) - Shopify",
+      "source_url": "https://shopify.engineering/back-to-native",
+      "official_url": "https://github.com/Shopify/react-native-skia",
+      "summary": "Coding agents changed what it costs to build mobile apps twice. Here’s why Shopify is moving from React Native back to Swift and Kotlin.",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "Shopify"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-09-10T23:09:31+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "Shopify/react-native-skia"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "Shopify"
+        },
+        {
+          "label": "라이선스",
+          "value": "MIT"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-09-10T23:06:33Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    }
+  ],
+  "images": {
+    "hero": {
+      "path": "hero.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-11/hero.png",
+      "kind": "generated-hero"
+    },
+    "huggingface-community-fcfbb6fadfe01384": {
+      "origin_url": "https://huggingface.co/ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF/resolve/main/thumbnail.png",
+      "kind": "generated-fallback",
+      "path": "issue-1.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-11/issue-1.svg"
+    },
+    "hacker-news-c55d71b912117784": {
+      "origin_url": "https://pbs.twimg.com/media/HR1UyHiaAAAtpqw?format=webp&name=large",
+      "kind": "source-image",
+      "path": "issue-2.webp",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-11/issue-2.webp"
+    },
+    "hacker-news-d4fbbf2fdfff1311": {
+      "origin_url": "",
+      "kind": "source-image",
+      "path": "issue-3.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-11/issue-3.svg"
+    },
+    "hacker-news-7cd3c79123c711ed": {
+      "origin_url": "https://cdn.shopify.com/b/shopify-brochure2-assets/74f109ae9b0c3034a78a3b63294ae2e6.png",
+      "kind": "source-image",
+      "path": "issue-4.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-11/issue-4.png"
+    }
+  }
+}
