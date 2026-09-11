@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-09-10T23:35:26.742329+00:00",
+  "updated_at": "2026-09-11T23:42:55.712693+00:00",
   "entries": {
     "https://anil.recoil.org/notes/rumour-is-the-exploit": "2026-08-29",
     "https://arxiv.org/abs/2510.26692": "2026-07-29",
@@ -133,6 +133,8 @@
     "https://huggingface.co/minimaxai/minimax-music3": "2026-08-18",
     "https://huggingface.co/moonshotai/kimi-k3": "2026-07-29",
     "https://huggingface.co/nanbeige/nanbeige4.2-3b": "2026-07-23",
+    "https://huggingface.co/nex-agi/nex-n2.5-mini": "2026-09-12",
+    "https://huggingface.co/nex-agi/nex-n2.5-pro": "2026-09-12",
     "https://huggingface.co/obliteratus/qwen3.8-27b-obliterated": "2026-08-25",
     "https://huggingface.co/openbmb/minicpm5-2b": "2026-09-10",
     "https://huggingface.co/orcarouter/qwen3.8-27b-uncensored-fp8": "2026-08-22",
@@ -283,6 +285,7 @@
     "https://news.ycombinator.com/item?id=49639090": "2026-09-11",
     "https://news.ycombinator.com/item?id=49639408": "2026-09-11",
     "https://news.ycombinator.com/item?id=49643982": "2026-09-11",
+    "https://news.ycombinator.com/item?id=49656225": "2026-09-12",
     "https://newsletter.semianalysis.com/p/openai-jalapeno-better-than-nvidia": "2026-08-26",
     "https://opensource.microsoft.com/blog/2026/07/16/microsoft-comic-chat-is-now-open-source": "2026-07-17",
     "https://ploy.ai/blog/migrating-a-production-ai-agent-to-gpt-5-6": "2026-07-14",
@@ -300,6 +303,7 @@
     "https://simonwillison.net/2026/jul/19/claude-code-in-bun-in-rust": "2026-07-20",
     "https://simonwillison.net/2026/jul/22/openai-cyberattack": "2026-07-24",
     "https://specification.website/spec/foundations/for-sale-dns": "2026-08-09",
+    "https://support.claude.com/en/articles/15171100-age-assurance-on-claude": "2026-09-12",
     "https://systima.ai/blog/claude-code-vs-opencode-token-overhead": "2026-07-13",
     "https://thinkingmachines.ai/news/introducing-inkling": "2026-07-16",
     "https://tombedor.dev/arguments-against-open-source-ai-are-very-bad": "2026-07-24",
