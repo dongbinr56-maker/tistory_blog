@@ -1,0 +1,168 @@
+{
+  "date": "2026-09-13",
+  "title": "[AI 뉴스룸] 오픈소스 라이선스 논란과 규제 장벽이 가리키는 거대 AI 기업의 이중성",
+  "title_candidates": [
+    "[AI 뉴스룸] 오픈소스 라이선스 논란과 규제 장벽이 가리키는 거대 AI 기업의 이중성",
+    "[AI 뉴스룸] 독립 개발자의 코드와 프론티어 모델의 가중치가 마주한 생태계의 균열",
+    "[AI 뉴스룸] 가중치 비공개 규제론과 무단 도용이 폭로한 거대 플랫폼의 민낯"
+  ],
+  "tags": [
+    "오픈소스",
+    "모델가중치",
+    "모바일유즈",
+    "앤트로픽",
+    "구글아르테미스",
+    "Edge0",
+    "AI에이전트",
+    "라이선스침해"
+  ],
+  "meta_description": "Edge0-35B 모델 출시와 구글의 모바일 유즈 오픈소스 도용 의혹, 그리고 앤트로픽 다리오 아모데이를 향한 모델 가중치 공개 요구 서한을 통해 오픈소스 생태계의 진정성과 지속 가능성을 심층 분석합니다.",
+  "intro": "기술을 모두에게 개방한다는 오픈소스의 명분은 거대 기업의 무단 도용과 안전을 빌미로 한 진입 장벽 구축이라는 현실 앞에서 시험대에 올랐습니다. minitap-ai/mobile-use 같은 독립 프로젝트의 성과가 대기업의 자체 시스템에 출처 표기 없이 흡수되는 한편, An open letter to Dario: if you mean it, open the weights!가 꼬집듯 안전 규제를 외치는 프론티어 기업들이 정작 핵심 자산인 가중치는 철저히 통제하는 이중성이 공존합니다. 개방의 가치가 강자의 편의대로 소비되는 현 상황은 기술 생태계의 지속 가능성에 근본적인 질문을 던집니다.",
+  "sections": [
+    {
+      "headline": "허깅페이스 커뮤니티에서 주목받는 중형 언어 모델 Edge0-35B-A3B-preview",
+      "source_ids": [
+        "huggingface-community-6f2a3553732373b6"
+      ],
+      "what_happened": "허깅페이스 커뮤니티에 텍스트 생성 모델인 Edge0/Edge0-35B-A3B-preview 저장소가 새로 공개되어 개발자들의 주목을 받고 있습니다.",
+      "plain_explanation": "이 모델은 35B 규모의 매개변수를 기반으로 문맥 이해와 자연어 생성 작업을 수행하는 텍스트 제너레이션 모델입니다. 로컬 환경이나 제한된 인프라에서도 특정 도메인에 맞춘 미세조정과 추론을 실행할 수 있도록 설계되었습니다.",
+      "why_it_matters": "거대 기업의 독점적 API에 의존하지 않고, 자체 인프라에서 제어 가능한 중형급 오픈 가중치 모델의 선택지가 늘어난다는 점에서 기술적 자립도를 높이려는 개발팀에게 대안이 됩니다.",
+      "technical_details": "",
+      "editorial_take": "프리뷰 단계의 모델인 만큼 상용 서비스에 즉시 도입하기에는 신뢰성 검증이 더 필요합니다. 특히 라이선스 규정이 명확히 기재되어 있지 않고 학습 데이터의 출처나 세부 아키텍처 정보가 누락되어 있어, 실제 프로덕션에 적용하기 전에 법적 리스크와 편향성 검증을 거치는 자체 평가 파이프라인 구축이 선행되어야 합니다.",
+      "reader_action": "허깅페이스 저장소에 방문하여 모델 명세를 확인하고, 로컬 테스트 환경에서 추론 속도와 메모리 점유율을 직접 측정하는 편이 좋습니다.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "구글 아르테미스의 오픈소스 라이선스 위반 의혹과 모바일 에이전트의 권리",
+      "source_ids": [
+        "hacker-news-a94fe742aa6660d5"
+      ],
+      "what_happened": "미니탭(Minitap)의 CEO 니코는 구글의 아르테미스(Artemis) 저장소에서 자사의 모바일 에이전트 프로젝트인 minitap-ai/mobile-use 코드가 원작자 표기 없이 무단 도용된 정황을 폭로했습니다.",
+      "plain_explanation": "minitap-ai/mobile-use는 인공지능이 사람처럼 안드로이드나 iOS 화면을 인식하고 직접 터치하며 앱을 조작할 수 있게 돕는 에이전트 프레임워크입니다. 오픈소스이지만 사용 시 원작자를 명시해야 하는 규칙이 존재합니다.",
+      "why_it_matters": "대기업이 독립 개발자들의 오픈소스 기여물을 무단으로 흡수해 자체 서비스로 포장하는 행태는 오픈소스 생태계의 신뢰 기반을 무너뜨리고 기여 의지를 꺾는 요인으로 작용합니다.",
+      "technical_details": "",
+      "editorial_take": "아파치 라이선스처럼 허용 범위가 넓은 오픈소스라 해도 저작자 표시 의무는 법적 의무이자 최소한의 윤리입니다. 기업 내부에서 외부 오픈소스를 활용해 에이전트 시스템을 구축할 때는, 내부 검증 프로세스를 강화하여 의존성 라이브러리의 라이선스 고지 누락으로 발생할 수 있는 법적 리스크를 사전에 차단하는 시스템이 요구됩니다.",
+      "reader_action": "깃허브의 minitap-ai/mobile-use 저장소에서 모바일 OS 제어 코드 구조를 분석하고 라이선스 고지 현황을 점검할 필요가 있습니다.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "안전 규제를 요구하는 프론티어 기업의 모순과 가중치 공개 요구",
+      "source_ids": [
+        "hacker-news-de912aa875468ced"
+      ],
+      "what_happened": "Jake Gold는 앤트로픽의 다리오 아모데이가 정부에 인공지능 개발 속도를 늦추는 규제를 제안한 것에 대해, 규제의 진정성을 증명하려면 모델 가중치를 오픈소스로 공개하라는 내용의 서한을 보냈습니다.",
+      "plain_explanation": "거대 AI 기업들이 안전을 구실로 정부에 강력한 규제 도입을 요구하면서도, 정작 인공지능의 핵심 설계도이자 가치 판단의 기준이 되는 모델 가중치는 철저히 비공개로 유지하는 이중적 태도를 비판하는 목소리입니다.",
+      "why_it_matters": "폐쇄형 모델을 고수하는 선두 기업들이 규제를 통해 후발 주자의 진입을 막는 장벽 구축을 방지하고, 모델의 안전성 검증을 제3의 학계와 독립 연구자들에게 개방하는 계기가 됩니다.",
+      "technical_details": "",
+      "editorial_take": "모델 가중치 공개는 악용 위험이라는 반론이 따르지만, 소수 대기업과 정부 규제 기관의 밀실 검증에만 의존하는 안전 대책은 필연적으로 한계를 지닙니다. 진정으로 안전한 AI를 지향한다면 전면 공개가 아니더라도 신뢰할 수 있는 외부 연구진에게 가중치 분석 권한을 부여하는 통제된 개방 모델을 적극적으로 검토해야 합니다.",
+      "reader_action": "제이크 골드의 블로그에서 공개 서한을 읽고, 안전 규제 옹호론의 이면에 숨은 시장 독점 논리를 다각도로 분석해 보기를 권합니다.",
+      "verification_notes": ""
+    }
+  ],
+  "closing": "오픈소스 생태계는 대기업의 일방적인 코드 흡수와 규제 장벽이라는 안팎의 도전에 직면했습니다. 기술의 민주화와 투명한 검증은 구호가 아닌 라이선스의 철저한 준수와 핵심 자산의 실질적 공유에서 시작됩니다.",
+  "editor_comment": "사내 프로젝트에 외부 코드를 도입할 때 라이선스 의무 사항을 자동으로 검증하는 파이프라인을 구축해 두는 것을 권장합니다.",
+  "editorial_disclosure": "",
+  "model": "gemini-3.5-flash",
+  "article_count_note": "",
+  "images": {
+    "hero": {
+      "path": "hero.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-13/hero.png",
+      "kind": "generated-hero"
+    },
+    "huggingface-community-6f2a3553732373b6": {
+      "origin_url": "https://huggingface.co/Edge0/Edge0-35B-A3B-preview/resolve/main/thumbnail.png",
+      "kind": "generated-fallback",
+      "path": "issue-1.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-13/issue-1.svg"
+    },
+    "hacker-news-a94fe742aa6660d5": {
+      "origin_url": "https://cdn.sanity.io/images/5b5hto6c/production/8a4a9cd2ceb3a1679ca5033e6209fc7d558e81a0-1360x980.png",
+      "kind": "source-image",
+      "path": "issue-2.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-13/issue-2.png"
+    },
+    "hacker-news-de912aa875468ced": {
+      "origin_url": "https://jacob.gold/images/open-letter-to-dario-amodei-about-open-weights.webp",
+      "kind": "source-image",
+      "path": "issue-3.webp",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-13/issue-3.webp"
+    }
+  },
+  "source_items": [
+    {
+      "id": "huggingface-community-6f2a3553732373b6",
+      "source": "Hugging Face 커뮤니티",
+      "topic": "AI 모델링, 오픈소스, Hugging Face",
+      "title": "Edge0/Edge0-35B-A3B-preview",
+      "url": "https://huggingface.co/Edge0/Edge0-35B-A3B-preview",
+      "published_at": "2026-09-10T12:21:18+09:00",
+      "summary": "Hugging Face에서 최근 주목받는 text-generation 모델 저장소입니다.",
+      "listing_url": "https://huggingface.co/Edge0/Edge0-35B-A3B-preview",
+      "introduced_at": "",
+      "image_url": "https://huggingface.co/Edge0/Edge0-35B-A3B-preview/resolve/main/thumbnail.png",
+      "official_url": "https://huggingface.co/Edge0/Edge0-35B-A3B-preview",
+      "canonical_key": "https://huggingface.co/edge0/edge0-35b-a3b-preview",
+      "verification": {
+        "project_kind": "huggingface",
+        "project_name": "Edge0/Edge0-35B-A3B-preview",
+        "project_owner": "Edge0",
+        "license": "",
+        "updated_at": "2026-09-10T12:21:18+09:00",
+        "community_source": "huggingface",
+        "huggingface_likes": "452",
+        "huggingface_downloads": "1596",
+        "pipeline_tag": "text-generation"
+      }
+    },
+    {
+      "id": "hacker-news-a94fe742aa6660d5",
+      "source": "minitap",
+      "topic": "AI 에이전트",
+      "title": "I expected better from Google",
+      "url": "https://www.minitap.ai/blog/i-expected-better-from-google",
+      "published_at": "2026-09-11T09:00:00+09:00",
+      "summary": "Nico, Minitap’s CEO, shares what the team found in Google’s Artemis repository and why attribution matters for the open-source community.",
+      "listing_url": "https://news.ycombinator.com/item?id=49668181",
+      "introduced_at": "2026-09-12T11:39:39+09:00",
+      "image_url": "https://cdn.sanity.io/images/5b5hto6c/production/8a4a9cd2ceb3a1679ca5033e6209fc7d558e81a0-1360x980.png",
+      "official_url": "https://github.com/minitap-ai/mobile-use",
+      "canonical_key": "https://github.com/minitap-ai/mobile-use",
+      "verification": {
+        "article_title_verified": "I expected better from Google",
+        "article_source_verified": "minitap",
+        "article_published_verified": "2026-09-11T09:00:00+09:00",
+        "article_url_verified": "https://www.minitap.ai/blog/i-expected-better-from-google",
+        "geeknews_listing_url": "",
+        "official_url": "https://github.com/minitap-ai/mobile-use",
+        "project_name": "minitap-ai/mobile-use",
+        "project_owner": "minitap-ai",
+        "project_description": "AI agents can now use real Android and iOS apps, just like a human.",
+        "license": "Apache-2.0",
+        "updated_at": "2026-09-12T22:45:26Z",
+        "project_kind": "github"
+      }
+    },
+    {
+      "id": "hacker-news-de912aa875468ced",
+      "source": "Jake Gold",
+      "topic": "생성형 AI",
+      "title": "An open letter to Dario: if you mean it, open the weights!",
+      "url": "https://jacob.gold/posts/open-letter-to-dario-amodei-about-open-weights/",
+      "published_at": "2026-09-13T03:22:08+09:00",
+      "summary": "Dear Dario, You published We Must Pace the Frontier today, which committed Anthropic to embedded third-party evaluators and asked governments to require every other frontier company to match. Sam Altman agreed within hours.1 The stated goal is to slow down the pace of AI progress. I believe you’re being sincere, so I’m asking you to call for a different law, one that would actually slow things down, even though it would require real sacrifice on your part.",
+      "listing_url": "https://news.ycombinator.com/item?id=49676085",
+      "introduced_at": "2026-09-13T04:15:32+09:00",
+      "image_url": "https://jacob.gold/images/open-letter-to-dario-amodei-about-open-weights.webp",
+      "official_url": "",
+      "canonical_key": "https://jacob.gold/posts/open-letter-to-dario-amodei-about-open-weights",
+      "verification": {
+        "article_title_verified": "An open letter to Dario: if you mean it, open the weights!",
+        "article_source_verified": "Jake Gold",
+        "article_published_verified": "2026-09-13T03:22:08+09:00",
+        "article_url_verified": "https://jacob.gold/posts/open-letter-to-dario-amodei-about-open-weights/",
+        "geeknews_listing_url": ""
+      }
+    }
+  ]
+}
