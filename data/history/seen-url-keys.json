@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-09-15T00:06:59.876865+00:00",
+  "updated_at": "2026-09-17T23:49:49.340578+00:00",
   "entries": {
     "https://anil.recoil.org/notes/rumour-is-the-exploit": "2026-08-29",
     "https://arxiv.org/abs/2510.26692": "2026-07-29",
@@ -36,6 +36,7 @@
     "https://github.com/cathrynlavery/diagram-design": "2026-09-15",
     "https://github.com/cerebras/cerebras-cloud-sdk-python": "2026-09-04",
     "https://github.com/chaitanyagiri/munder-difflin": "2026-08-23",
+    "https://github.com/cloudflare/security-audit-skill": "2026-09-18",
     "https://github.com/corsairdev/corsair": "2026-08-27",
     "https://github.com/cosmtrek/mindwalk": "2026-07-20",
     "https://github.com/deepseek-ai/deepseek-harness": "2026-08-14",
@@ -159,6 +160,7 @@
     "https://huggingface.co/tencent/hy4-preview": "2026-08-31",
     "https://huggingface.co/thinkingmachines/inkling": "2026-07-16",
     "https://huggingface.co/thinkingmachines/inkling-small": "2026-08-03",
+    "https://huggingface.co/tokenrhythm/neohorse-1-4b": "2026-09-18",
     "https://huggingface.co/unsloth/deepseek-v4-flash-0731-gguf": "2026-08-02",
     "https://huggingface.co/unsloth/kimi-k3-gguf": "2026-08-02",
     "https://huggingface.co/unsloth/qwen3.8-27b-gguf": "2026-08-15",
@@ -297,6 +299,8 @@
     "https://news.ycombinator.com/item?id=49676085": "2026-09-13",
     "https://news.ycombinator.com/item?id=49695409": "2026-09-15",
     "https://news.ycombinator.com/item?id=49695876": "2026-09-15",
+    "https://news.ycombinator.com/item?id=49736466": "2026-09-18",
+    "https://news.ycombinator.com/item?id=49737922": "2026-09-18",
     "https://newsletter.semianalysis.com/p/openai-jalapeno-better-than-nvidia": "2026-08-26",
     "https://opensource.microsoft.com/blog/2026/07/16/microsoft-comic-chat-is-now-open-source": "2026-07-17",
     "https://ploy.ai/blog/migrating-a-production-ai-agent-to-gpt-5-6": "2026-07-14",
@@ -342,6 +346,7 @@
     "https://www.wafer.ai/blog/kimi-k3-mi355x": "2026-08-03",
     "https://www.wiz.io/blog/red-agent-snowflake-copilot-cicd-bug": "2026-08-18",
     "https://x.com/appledelhi/status/2079022142663094356": "2026-07-23",
+    "https://z.ai/blog/glm-built-its-inference-infrastructure": "2026-09-18",
     "https://zed.dev/blog/introducing-delta": "2026-08-13"
   }
 }
