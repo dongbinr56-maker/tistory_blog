@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>[AI 뉴스룸] 로컬 추론의 기술적 자립과 클라우드 에이전트가 은폐한 보안·저작권의 이면 — 검토용 초안</title></head>
+<body style="margin:0;padding:24px 12px;background:#f3f6fa">
+<article class="tistory-newsroom" lang="ko">
+  <style>
+    .tistory-newsroom {max-width:760px;margin:0 auto;color:#1f2937;font-family:Apple SD Gothic Neo,Malgun Gothic,sans-serif;line-height:1.85}
+    .tistory-newsroom .hero {padding:30px 26px;border:1px solid #dbe4ee;border-radius:18px;background:#f8fafc}
+    .tistory-newsroom .issue-image {display:block;width:100%;max-height:330px;margin:0 0 20px;border-radius:14px;object-fit:cover;background:#e2e8f0}
+    .tistory-newsroom h1 {margin:0 0 16px;color:#111827;font-size:30px;line-height:1.38}
+    .tistory-newsroom h2 {color:#111827;font-size:23px;line-height:1.45}
+    .tistory-newsroom p {margin:0 0 14px}
+    .tistory-newsroom .eyebrow {color:#0f766e;font-weight:700;font-size:13px;letter-spacing:.04em}
+    .tistory-newsroom .issue-card {margin:28px 0;padding:24px;border:1px solid #e2e8f0;border-radius:16px;background:#fff}
+    .tistory-newsroom .action {margin:18px 0 10px;padding:14px 16px;border-left:3px solid #0f766e;border-radius:0 10px 10px 0;background:#f0fdfa}
+    .tistory-newsroom .sources {margin:6px 0 0;color:#64748b;font-size:14px}
+    .tistory-newsroom .editor-note {margin:20px 0;padding:16px 18px;border-left:4px solid #334155;border-radius:0 12px 12px 0;background:#f8fafc;font-style:normal}
+    .tistory-newsroom .closing {margin-top:28px}
+    .tistory-newsroom a {color:#0f766e}
+  </style>
+  <header class="hero">
+    <p class="eyebrow">2026-09-19 · AI·개발</p>
+    <h1>[AI 뉴스룸] 로컬 추론의 기술적 자립과 클라우드 에이전트가 은폐한 보안·저작권의 이면</h1>
+    <p>인프라의 통제권을 외부에 맡긴 개발 환경은 언제든 심각한 보안 침해와 자산 유출의 통로가 될 수 있다. ZCode uploads your git history; Z.ai holds the only key. 사태가 폭로한 무단 데이터 전송의 위험은, 개발자들이 왜 openbmb/MiniCPM5-2B-GGUF 같은 경량 모델을 로컬 브라우저로 가져와 직접 실행하려 하는지 그 이유를 명확히 설명한다. 편리함과 맞바꾼 클라우드 에이전트의 불투명한 동작 방식에 맞서, 로컬 자원을 활용한 독립적 추론 환경 구축은 이제 선택이 아닌 자구책이 되었다.</p>
+  </header>
+  <section class="editor-note"><p>외부 네트워크 연결을 완전히 차단한 상태에서 로컬 WebGPU 환경과 경량 모델을 활용해 안전하게 작동하는 격리된 개발 파이프라인을 직접 구축해 보는 방향을 권장한다.</p></section>
+  <section class="issue-card">
+  <h2>27B 규모 모델의 로컬 이식, Ternary-Bonsai GGUF의 실용성 검증</h2>
+  <img class="issue-image" src="https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-19/issue-1.svg" alt="27B 규모 모델의 로컬 이식, Ternary-Bonsai GGUF의 실용성 검증 관련 이미지">
+  <p>허깅페이스 커뮤니티에서 텍스트 생성을 지원하는 GGUF 포맷의 모델 저장소인 prism-ml/Ternary-Bonsai-2-27B-gguf가 등록되어 개발자들의 주목을 받고 있다.</p><p>이 모델은 270억 매개변수 크기의 대형 언어 모델을 일반적인 개인용 컴퓨터나 온디바이스 환경에서도 무리 없이 실행할 수 있도록 경량화한 GGUF 포맷 파일이다. 외부 클라우드 서버와의 통신 없이 로컬 시스템 내부에서 텍스트 생성 연산을 완결한다.</p><p>민감한 내부 기밀이나 개인 정보가 네트워크를 타고 외부로 유출될 가능성을 근본적으로 차단하므로, 보안이 극도로 중요한 폐쇄망 환경에서도 고성능 텍스트 생성 기능을 안전하게 구현할 수 있다.</p><p>27B 규모의 모델을 GGUF로 극단적으로 압축하더라도 로컬 시스템의 VRAM 용량이 부족하면 CPU 연산으로 전환되어 추론 속도가 현저히 느려진다. 양자화 과정에서 발생하는 정밀도 저하가 실제 업무 도메인 성능에 미치는 영향을 객관적으로 검증해야 하며, 무조건적인 대형 모델 도입보다는 특정 작업에 특화된 소형 모델과의 성능 및 비용 대비 효율을 면밀히 비교하는 과정이 필요하다.</p>
+  <p class="action">로컬 장비의 하드웨어 사양과 가용 VRAM을 점검한 뒤, GGUF 모델을 구동하여 실제 텍스트 생성 속도와 결과물의 정확도를 직접 측정한다.</p>
+  <p class="sources">참고: <a href="https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf" rel="nofollow noopener noreferrer" target="_blank">Hugging Face 커뮤니티 원문</a></p>
+</section><section class="issue-card">
+  <h2>WebGPU 기반 브라우저 로컬 추론과 SemIf의 구조화된 데이터 제어</h2>
+  <img class="issue-image" src="https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-19/issue-2.svg" alt="WebGPU 기반 브라우저 로컬 추론과 SemIf의 구조화된 데이터 제어 관련 이미지">
+  <p>웹 브라우저 내에서 WebGPU와 오픈소스 모델을 활용해 정형화된 JSON 출력과 오토레그레시브 의사결정을 로컬로 수행하는 도구인 SemIf가 공개되었으며, 이는 openbmb/MiniCPM5-2B-GGUF 모델 등을 지원한다.</p><p>사용자의 웹 브라우저 내부에서 인공지능 모델을 구동하고, 결과값을 개발자가 사전에 정의한 특정 JSON 구조나 선택지 범위 내로 강제 제한하는 기술이다. 외부 API 서버를 거치지 않고 오직 브라우저 자체 연산 자원만으로 정형화된 데이터를 즉시 얻는다.</p><p>중앙 서버에 지불하는 API 호출 비용을 완전히 없애는 동시에, 사용자 기기 내부에서 실시간으로 정형화된 데이터 분류 및 추출 작업을 처리하는 완전한 독립형 웹 애플리케이션을 설계할 수 있는 기반이 된다.</p><p>브라우저 기반 WebGPU 추론은 사용자 개개인의 하드웨어 성능에 전적으로 의존하므로, 저사양 기기에서 발생할 수 있는 지연 시간 편차를 세심하게 조율해야 한다. 수백 메가바이트 크기의 모델 파일을 초기에 내려받는 과정에서 발생하는 네트워크 부하와 브라우저 메모리 점유율 상승 문제를 해결하지 못하면 사용자 경험을 해치기 쉬우므로, 로컬 처리가 실패할 때를 대비한 서버 백업 전략을 미리 마련해 두어야 안전하다.</p>
+  <p class="action">SemIf 라이브러리로 간단한 JSON 필터링 프로토타입을 구현하고, 다양한 사양의 브라우저에서 초기 로딩 속도와 추론 성능을 비교 분석한다.</p>
+  <p class="sources">참고: <a href="https://openjev.com/" rel="nofollow noopener noreferrer" target="_blank">openjev.com 원문</a></p>
+</section><section class="issue-card">
+  <h2>마이크로소프트 내부 문건이 드러낸 AI 데이터 무단 스크래핑의 저작권 갈등</h2>
+  <img class="issue-image" src="https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-19/issue-3.jpg" alt="마이크로소프트 내부 문건이 드러낸 AI 데이터 무단 스크래핑의 저작권 갈등 관련 이미지">
+  <p>TechCrunch 보도에 따르면, 최근 공개된 법원 소송 문서에서 마이크로소프트 임원이 오픈AI의 데이터 수집 방식을 역사상 가장 큰 노동 착취라고 사적으로 언급한 사실이 밝혀졌다. 이 문서는 양사가 뉴욕타임스의 유료 장벽 뒤에 있는 콘텐츠를 무단으로 긁어모아 학습 데이터셋을 구축하면서도, 이것이 언론사의 생존을 위협할 것임을 인지하고 있었음을 명시하고 있다.</p><p>거대 기술 기업들이 인공지능 모델을 학습시키는 과정에서 창작자나 언론사의 허락 없이 유료 기사와 저작물을 무단으로 수집해 사용했다는 점을 내부적으로도 인지하고 있었음을 증명하는 법적 기록이다. 정당한 대가 지불 없이 타인의 저작물로 상업적 이득을 취했다는 도덕적, 법적 비판을 피하기 어렵다.</p><p>저작권 소송의 결과에 따라 기존에 학습된 모델의 폐기 처분이나 천문학적인 사후 라이선스 비용 청구로 이어질 수 있어, 해당 모델 기반의 상용 API 서비스 단가 상승 리스크가 존재한다.</p><p>외부 상용 API를 도입할 때는 모델 제공업체가 저작권 침해 소송 발생 시 완전한 법적 면책과 보상을 제공하는지 계약서상으로 명확히 규정해야 한다. 장기적으로는 데이터 출처의 투명성이 보장된 상용 모델을 선별적으로 채택하거나, 자체적으로 라이선스가 확보된 클린 데이터셋만을 활용해 미세조정하는 리스크 관리 체계를 수립해야 안정적인 서비스 운영을 담보할 수 있다.</p>
+  <p class="action">현재 사내에 도입된 외부 생성형 AI 서비스들의 이용약관과 계약서를 검토하여 저작권 분쟁 발생 시의 면책 조항과 보상 범위를 명확히 파악한다.</p>
+  <p class="sources">참고: <a href="https://techcrunch.com/2026/09/17/microsoft-exec-called-ai-scraping-the-largest-theft-of-labor-in-human-history-new-unredacted-filings-reveal/" rel="nofollow noopener noreferrer" target="_blank">TechCrunch 원문</a></p>
+</section><section class="issue-card">
+  <h2>ZCode 코딩 에이전트의 개발 작업 공간 및 깃 이력 무단 외부 전송 사태</h2>
+  <img class="issue-image" src="https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-19/issue-4.png" alt="ZCode 코딩 에이전트의 개발 작업 공간 및 깃 이력 무단 외부 전송 사태 관련 이미지">
+  <p>tokenstead.ai 보도에 따르면, Z.ai가 개발한 GLM 기반 코딩 에이전트 ZCode가 사용자의 전체 작업 공간과 .git 이력, LFS 캐시, 참조 로그를 사용자 동의나 UI 설정 차단 여부와 무관하게 알리윤 OSS로 무단 업로드하는 현상이 확인되었다.</p><p>개발을 보조하는 인공지능 프로그램이 로컬 컴퓨터에 보관된 소스코드뿐만 아니라, 과거의 모든 수정 이력과 보안 키, 자격 증명이 포함되어 있을 수 있는 .git 폴더 내부의 민감한 기록까지 사용자가 모르는 사이에 중국의 클라우드 서버로 강제 전송하는 보안 결함이다.</p><p>기업의 독점적인 소스코드 자산과 소스코드 제어 이력에 포함된 API 키, 비밀번호 등의 민감한 정보가 외부로 유출되어 심각한 지적 재산권 침해 및 2차 해킹 사고의 원인이 된다.</p><p>개발 편의성을 위해 검증되지 않은 외부 코딩 에이전트를 로컬 개발 환경에 무분별하게 설치하는 관행은 기업 보안 망에 치명적인 허점을 노출한다. 네트워크 아웃바운드 모니터링 시스템을 상시 가동하고 방화벽을 통해 인가되지 않은 외부 도메인으로의 데이터 전송을 차단하는 기술적 조치가 수반되어야 하며, 로컬 샌드박스 환경 내에서만 동작하는 오픈소스 코딩 도구로의 대체를 검토해야 안전하다.</p>
+  <p class="action">사내 개발 환경에서 ZCode의 실행을 즉시 전면 중단하고, 방화벽 로그를 분석하여 알리윤 OSS 도메인으로의 비정상적인 데이터 전송 이력이 존재하는지 전수 조사하여 유출 여부를 확인한다.</p>
+  <p class="sources">참고: <a href="https://tokenstead.ai/guides/zcode-silent-git-history-upload" rel="nofollow noopener noreferrer" target="_blank">tokenstead.ai 원문</a></p>
+</section>
+  <section class="closing"><p>외부 인프라에 의존하는 AI 도구들이 초래하는 보안 유출과 저작권 침해 리스크는 단순한 우려를 넘어 실질적인 위협으로 다가왔다. 로컬 환경에서 구동 가능한 오픈소스 모델을 검증하고, 사내 데이터가 외부로 흐르는 경로를 엄격하게 통제하는 보안 프로토콜을 확립하는 일만이 지속 가능한 기술 내재화의 유일한 경로다.</p></section>
+</article>
+</body></html>
