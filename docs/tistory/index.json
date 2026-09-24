@@ -1,5 +1,200 @@
 [
   {
+    "date": "2026-09-24",
+    "title": "[AI 뉴스룸] 로컬 제어 인터페이스의 확장과 자율적 추론 엔진의 경계",
+    "title_candidates": [
+      "[AI 뉴스룸] 로컬 제어 인터페이스의 확장과 자율적 추론 엔진의 경계",
+      "[AI 뉴스룸] open-webui/open-webui와 nobodywho-ooo/nobodywho가 던지는 로컬 AI의 화두",
+      "[AI 뉴스룸] Claude의 효소 발견과 Gemini 3.8 TTS가 요구하는 검증의 책임"
+    ],
+    "tags": [
+      "OpenWebUI",
+      "JevEngine",
+      "ClaudeAgent",
+      "GeminiTTS",
+      "LocalLLM",
+      "InferenceEngine",
+      "AIAgent"
+    ],
+    "meta_description": "Claude의 자율적 효소 발견과 Gemini 3.8 TTS 출시 소식부터, Open WebUI와 25줄의 Jev 추론 코드를 활용한 로컬 개발 환경 구축까지 최신 AI 기술의 흐름과 실무 적용 시 주의점을 깊이 있게 분석합니다.",
+    "article_count_note": "",
+    "quality_status": "READY_FOR_MANUAL_REVIEW",
+    "warnings": [
+      "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+      "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=49819221 (페이지 확인 실패: https://apnews.com/article/italy-nuclear-chernobyl-4891b6b7c7791ae84db6b0bf0f7cf567 (HTTP Error 403: Forbidden))",
+      "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=49811484 (페이지 확인 실패: https://www.reddit.com/r/sysadmin/comments/1wjdpgx/psa_grammarly_will_send_unhinged_messages_to_all/ (HTTP Error 403: Blocked))",
+      "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=49812975 (페이지 확인 실패: https://www.reddit.com/r/ClaudeAI/comments/1wm5c21/i_am_done_with_this_shit/ (HTTP Error 403: Blocked))"
+    ],
+    "manual_review_required": true,
+    "publish_checklist": [
+      "원문 링크와 사실관계를 확인합니다.",
+      "작성자 분석이 자신의 실제 관점인지 검토합니다.",
+      "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요.",
+      "소개·문의·개인정보 페이지가 실제 값으로 공개됐는지 확인합니다.",
+      "티스토리 HTML 모드에 붙여넣은 뒤 모바일 화면을 확인합니다."
+    ],
+    "sources": [
+      {
+        "name": "GitHub 커뮤니티",
+        "title": "open-webui/open-webui",
+        "url": "https://github.com/open-webui/open-webui"
+      },
+      {
+        "name": "NobodyWho",
+        "title": "Jev in 25 lines of Python - NobodyWho",
+        "url": "https://www.nobodywho.ai/posts/jev-in-25-lines/"
+      },
+      {
+        "name": "www.anthropic.com",
+        "title": "Claude discovers a novel enzyme system",
+        "url": "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system"
+      },
+      {
+        "name": "Google",
+        "title": "Gemini 3.8 text-to-speech says hello",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-text-to-speech/"
+      }
+    ],
+    "fact_review": [
+      {
+        "source": "GitHub 커뮤니티",
+        "title": "open-webui/open-webui",
+        "source_url": "https://github.com/open-webui/open-webui",
+        "official_url": "https://github.com/open-webui/open-webui",
+        "summary": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
+        "verified_facts": [
+          {
+            "label": "프로젝트·모델",
+            "value": "open-webui/open-webui"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "open-webui"
+          },
+          {
+            "label": "라이선스",
+            "value": "NOASSERTION"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-09-23T23:35:10Z"
+          },
+          {
+            "label": "GitHub 스타 (수집 시점)",
+            "value": "152944"
+          },
+          {
+            "label": "GitHub 최근 푸시",
+            "value": "2026-09-23T13:47:04Z"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      },
+      {
+        "source": "NobodyWho",
+        "title": "Jev in 25 lines of Python - NobodyWho",
+        "source_url": "https://www.nobodywho.ai/posts/jev-in-25-lines/",
+        "official_url": "https://github.com/nobodywho-ooo/nobodywho",
+        "summary": "Everyone is talking about Jev - here it is in 25 lines of Python.",
+        "verified_facts": [
+          {
+            "label": "기사 출처",
+            "value": "NobodyWho"
+          },
+          {
+            "label": "기사 게시 시각",
+            "value": "2026-09-22T00:00:00+09:00"
+          },
+          {
+            "label": "프로젝트·모델",
+            "value": "nobodywho-ooo/nobodywho"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "nobodywho-ooo"
+          },
+          {
+            "label": "라이선스",
+            "value": "EUPL-1.2"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-09-23T23:44:10Z"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      },
+      {
+        "source": "www.anthropic.com",
+        "title": "Claude discovers a novel enzyme system",
+        "source_url": "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system",
+        "official_url": "",
+        "summary": "In early results from our new life sciences research lab, Claude agents found an enzyme system whose function is still unknown.",
+        "verified_facts": [
+          {
+            "label": "기사 출처",
+            "value": "www.anthropic.com"
+          },
+          {
+            "label": "기사 게시 시각",
+            "value": "2026-09-24T03:06:47+09:00"
+          }
+        ],
+        "manual_review_note": "공식 프로젝트·1차 출처가 연결되지 않은 항목입니다. 숫자, 규제, 회사 관계, 인과관계 주장은 원문을 열어 직접 확인하세요."
+      },
+      {
+        "source": "Google",
+        "title": "Gemini 3.8 text-to-speech says hello",
+        "source_url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-text-to-speech/",
+        "official_url": "",
+        "summary": "Gemini 3.8 Flash-Lite TTS and Gemini 3.8 Flash TTS are our most expressive audio models yet.",
+        "verified_facts": [
+          {
+            "label": "기사 출처",
+            "value": "Google"
+          },
+          {
+            "label": "기사 게시 시각",
+            "value": "2026-09-23T00:00:00+09:00"
+          }
+        ],
+        "manual_review_note": "공식 프로젝트·1차 출처가 연결되지 않은 항목입니다. 숫자, 규제, 회사 관계, 인과관계 주장은 원문을 열어 직접 확인하세요."
+      }
+    ],
+    "images": {
+      "hero": {
+        "path": "hero.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-24/hero.png",
+        "kind": "generated-hero"
+      },
+      "github-community-7c94eb734f17ebfc": {
+        "origin_url": "https://opengraph.githubassets.com/1/open-webui/open-webui",
+        "kind": "source-image",
+        "path": "issue-1.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-24/issue-1.png"
+      },
+      "hacker-news-3094bfee38247a85": {
+        "origin_url": "https://www.nobodywho.ai/assets/images/blog/2026/jev-in-25-lines/jev.png",
+        "kind": "source-image",
+        "path": "issue-2.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-24/issue-2.png"
+      },
+      "hacker-news-ef1b3a4772eab837": {
+        "origin_url": "https://www-cdn.anthropic.com/images/4zrzovbb/website/394de337d8a5d8db93a1c048fa1cb53e16a09625-2048x1240.jpg",
+        "kind": "source-image",
+        "path": "issue-3.jpg",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-24/issue-3.jpg"
+      },
+      "hacker-news-c99106a5c97c0f28": {
+        "origin_url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/gemini-audio__keyword__metacard__light.width-1300.png",
+        "kind": "source-image",
+        "path": "issue-4.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-24/issue-4.png"
+      }
+    },
+    "html_path": "tistory/2026-09-24.html"
+  },
+  {
     "date": "2026-09-23",
     "title": "[AI 뉴스룸] 추론 비용의 임계점에서 고민하는 엔지니어를 위한 아키텍처 선택지",
     "title_candidates": [
