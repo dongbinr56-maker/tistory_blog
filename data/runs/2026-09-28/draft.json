@@ -1,0 +1,160 @@
+{
+  "date": "2026-09-28",
+  "title": "[AI 뉴스룸] 무단 학습의 법적 청구서와 에이전트 인터페이스의 붕괴",
+  "title_candidates": [
+    "[AI 뉴스룸] 무단 학습의 법적 청구서와 에이전트 인터페이스의 붕괴",
+    "[AI 뉴스룸] 공개 모델의 이면: 저작권 소송의 경고와 슬롭 UI의 한계",
+    "[AI 뉴스룸] 강화학습 모델 배포의 이면과 데이터 라이선스의 현실적 마찰"
+  ],
+  "tags": [
+    "XiaomiMiMo",
+    "AI에이전트",
+    "슬롭UI",
+    "저작권소송",
+    "강화학습",
+    "오픈소스모델",
+    "데이터라이선스"
+  ],
+  "meta_description": "강화학습 기반 오픈소스 모델 XiaomiMiMo의 특징을 살펴보고, AI 에이전트가 유발하는 저품질 슬롭 UI를 방지하기 위한 10가지 식별 기준을 분석합니다. 아울러 오픈AI와 마이크로소프트의 저작권 소송 내부 문건 공개가 향후 데이터 수집 파이프라인에 미칠 영향을 짚어봅니다.",
+  "intro": "엔지니어가 Hugging Face에서 XiaomiMiMo/MiMo-V2.6-Pro-RL 같은 강화학습 모델을 내려받아 로컬에서 구동하는 일은 간단하지만, 이를 실제 서비스로 구현하여 사용자에게 노출하는 단계에서는 전혀 다른 차원의 장벽을 마주합니다. 10 tells of a slop ui에서 지적하듯 통제되지 않은 에이전트가 화면을 무의미한 정보로 채워버리는 인터페이스의 붕괴를 막아야 하는 동시에, 그 이면에는 Unsealed Briefs in Authors’ Case v. Microsoft/OpenAI: Top Execs Knew Their Mass Book Piracy Was Illegal And Would Put Authors Out of Work 소송이 경고하는 원천 데이터의 불법성이라는 근본적인 법적 리스크가 도사리고 있습니다. 기술적 구현의 편리함 뒤에 가려진 설계상의 제약과 데이터 라이선스의 현실적인 마찰음을 직시해야 하는 이유입니다.",
+  "sections": [
+    {
+      "headline": "강화학습으로 텍스트 생성 성능을 조율한 오픈소스 모델 MiMo V2.6 Pro RL",
+      "source_ids": [
+        "huggingface-community-6f92c274a23e32dd"
+      ],
+      "what_happened": "Hugging Face 커뮤니티에 강화학습(RL) 기법을 적용하여 텍스트 생성 성능을 조율한 오픈소스 모델 저장소인 XiaomiMiMo/MiMo-V2.6-Pro-RL이 공개되었습니다.",
+      "plain_explanation": "이 모델은 사용자가 입력한 질문에 대해 기계가 스스로 문맥에 맞는 답변을 생성하도록 설계된 텍스트 생성 인공지능입니다. 사람이 직접 피드백을 주며 정답을 찾아가게 만드는 강화학습 방식을 활용하여 답변의 품질을 높인 것이 특징입니다.",
+      "why_it_matters": "외부 상용 API에 의존하지 않고 로컬 서버 환경에서 직접 대화형 에이전트를 구축하고 미세 조정하려는 개발팀에게 비용 효율적인 대안을 제시합니다.",
+      "technical_details": "",
+      "editorial_take": "샤오미미모의 이번 릴리즈는 소형 모델의 추론 효율성을 극대화하려는 시도로 평가받지만, 상세한 아키텍처나 학습 데이터셋의 라이선스 범위를 명확히 검증하기 전에는 상용 서비스 도입을 유보해야 합니다. 로컬 테스트베드에서 안전성 평가를 선행하고 점진적으로 적용 범위를 좁혀나가는 검증 단계를 거쳐야 리스크를 줄입니다.",
+      "reader_action": "Hugging Face 저장소의 모델 카드를 방문하여 라이선스 제약 사항을 확인하고 기본 추론 코드를 로컬에서 구동하여 성능을 직접 대조합니다.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "AI 에이전트가 만드는 저품질 화면 슬롭 UI를 식별하는 기준",
+      "source_ids": [
+        "hacker-news-aac59927e545ab79"
+      ],
+      "what_happened": "hereticpleb.vercel.app에 따르면, AI 에이전트가 적절한 출력 제약 없이 작동할 때 사용자 화면에 무분별한 저품질 콘텐츠인 슬롭을 양산하게 되며 이를 식별할 수 있는 10가지 구체적인 징후가 제시되었습니다.",
+      "plain_explanation": "인공지능 비서가 스스로 작동하는 과정에서 화면에 쓸모없는 텍스트나 불필요한 버튼, 어색한 레이아웃을 마구 채워 넣는 현상입니다. 사용자가 통제하기 힘들 정도로 복잡하고 무의미한 정보가 실시간으로 화면을 뒤덮는 상태를 가리킵니다.",
+      "why_it_matters": "에이전트 기반 서비스를 설계할 때 모델의 자율성에만 의존하면 사용자 경험이 완전히 무너지므로 프론트엔드 레벨에서의 제어 규칙을 반드시 수립해야 합니다.",
+      "technical_details": "",
+      "editorial_take": "개발 과정에서 모델의 추론 로직에만 몰두하다 보면 프론트엔드에서 발생하는 데이터 과잉 현상을 놓치기 쉽습니다. 슬롭 UI를 방지하려면 에이전트의 상태 변화를 실시간으로 요약하는 상태 머신을 설계하거나, 인간이 중간에 개입하는 인터페이스를 기본값으로 설정하는 구조적 보완책을 마련해야 실질적인 사용성을 확보합니다.",
+      "reader_action": "현재 개발 중인 AI 서비스의 화면에서 불필요한 로딩 메시지나 중복 출력되는 텍스트가 있는지 UI 흐름을 면밀히 대조하여 불필요한 요소를 걷어냅니다.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "오픈AI 소송에서 드러난 고위 임원들의 저작권 침해 인지 정황",
+      "source_ids": [
+        "hacker-news-bf6e13bc84725c71"
+      ],
+      "what_happened": "The Authors Guild에 따르면, 마이크로소프트와 오픈AI를 상대로 진행 중인 도서 저작권 침해 소송에서 양사 고위 임원들이 대규모 도서 복제가 불법이며 작가들의 생계를 위협할 수 있음을 인지하고 있었다는 내부 문건이 공개되었습니다.",
+      "plain_explanation": "유명 작가 단체가 인공지능 기업들을 상대로 제기한 소송에서, 기업 간부들이 책을 무단으로 수집해 인공지능 학습에 사용하는 것이 법적 문제가 된다는 사실을 사전에 알고 있었다는 증거 문서들이 법원을 통해 밝혀진 사건입니다.",
+      "why_it_matters": "거대 언어 모델의 학습 데이터 수집 방식이 단순한 도덕적 논쟁을 넘어 법적 책임과 징벌적 손해배상으로 이어질 수 있어, 향후 데이터 수집 파이프라인의 전면적인 재검토가 불가피합니다.",
+      "technical_details": "",
+      "editorial_take": "이번 법원 문건 공개는 무단 크롤링 데이터에 의존해 온 기존 모델들의 지속 가능성에 심각한 의문을 던집니다. 엔지니어들은 자체 모델을 학습시키거나 미세조정할 때, 출처가 불분명한 웹 데이터셋 대신 라이선스가 확보된 데이터나 합성 데이터 생성 기법을 적극적인 대안으로 검토하고, 소송 결과에 따른 모델 폐기 위험까지 개발 로드맵에 반영해야 안전합니다.",
+      "reader_action": "사내에서 활용 중인 오픈소스 모델들의 사전 학습 데이터 구성을 파악하고 저작권 분쟁 소지가 있는지 라이선스를 전수 조사하여 리스크를 파악합니다.",
+      "verification_notes": ""
+    }
+  ],
+  "closing": "모델의 추론 능력을 고도화하는 기술적 시도와 이를 사용자에게 안전하게 전달하는 인터페이스 설계, 그리고 학습 데이터의 법적 정당성은 모두 유기적으로 연결되어 있습니다. 기술적 편리함에만 매몰되지 않고 법적 리스크와 사용자 경험의 디테일을 동시에 통제할 때 비로소 시장에서 생존하는 제품이 완성됩니다.",
+  "editor_comment": "이번 주말에는 개발 중인 에이전트의 프롬프트에 엄격한 출력 형식을 지정해 슬롭 현상을 직접 제어해 보는 테스트를 권장합니다.",
+  "editorial_disclosure": "",
+  "model": "gemini-3.5-flash",
+  "article_count_note": "",
+  "images": {
+    "hero": {
+      "path": "hero.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-28/hero.png",
+      "kind": "generated-hero"
+    },
+    "huggingface-community-6f92c274a23e32dd": {
+      "origin_url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL/resolve/main/thumbnail.png",
+      "kind": "generated-fallback",
+      "path": "issue-1.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-28/issue-1.svg"
+    },
+    "hacker-news-aac59927e545ab79": {
+      "origin_url": "https://hereticpleb.com/og-image.jpg",
+      "kind": "generated-fallback",
+      "path": "issue-2.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-28/issue-2.svg"
+    },
+    "hacker-news-bf6e13bc84725c71": {
+      "origin_url": "https://authorsguild.org/app/uploads/2026/09/OpenAI-Day-2-Advocacy-Rectangle.jpg",
+      "kind": "source-image",
+      "path": "issue-3.jpg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-28/issue-3.jpg"
+    }
+  },
+  "source_items": [
+    {
+      "id": "huggingface-community-6f92c274a23e32dd",
+      "source": "Hugging Face 커뮤니티",
+      "topic": "AI 에이전트, 오픈소스, Hugging Face, AI 모델링",
+      "title": "XiaomiMiMo/MiMo-V2.6-Pro-RL",
+      "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
+      "published_at": "2026-09-22T12:52:00+09:00",
+      "summary": "Hugging Face에서 최근 주목받는 text-generation 모델 저장소입니다.",
+      "listing_url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
+      "introduced_at": "",
+      "image_url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL/resolve/main/thumbnail.png",
+      "official_url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
+      "canonical_key": "https://huggingface.co/xiaomimimo/mimo-v2.6-pro-rl",
+      "verification": {
+        "project_kind": "huggingface",
+        "project_name": "XiaomiMiMo/MiMo-V2.6-Pro-RL",
+        "project_owner": "XiaomiMiMo",
+        "license": "",
+        "updated_at": "2026-09-22T12:52:00+09:00",
+        "community_source": "huggingface",
+        "huggingface_likes": "556",
+        "huggingface_downloads": "75079",
+        "pipeline_tag": "text-generation"
+      }
+    },
+    {
+      "id": "hacker-news-aac59927e545ab79",
+      "source": "hereticpleb.vercel.app",
+      "topic": "AI 에이전트",
+      "title": "10 tells of a slop ui",
+      "url": "https://hereticpleb.vercel.app/blog/10-tells-of-slop",
+      "published_at": "2026-09-27T23:41:26+09:00",
+      "summary": "AI agents produce slop when not restricted. Here are 10 things to watch out for",
+      "listing_url": "https://news.ycombinator.com/item?id=49867038",
+      "introduced_at": "2026-09-27T23:41:26+09:00",
+      "image_url": "https://hereticpleb.com/og-image.jpg",
+      "official_url": "",
+      "canonical_key": "https://hereticpleb.vercel.app/blog/10-tells-of-slop",
+      "verification": {
+        "article_title_verified": "10 tells of a slop ui",
+        "article_source_verified": "hereticpleb.vercel.app",
+        "article_published_verified": "2026-09-27T23:41:26+09:00",
+        "article_url_verified": "https://hereticpleb.vercel.app/blog/10-tells-of-slop",
+        "geeknews_listing_url": ""
+      }
+    },
+    {
+      "id": "hacker-news-bf6e13bc84725c71",
+      "source": "The Authors Guild",
+      "topic": "생성형 AI",
+      "title": "Unsealed Briefs in Authors’ Case v. Microsoft/OpenAI: Top Execs Knew Their Mass Book Piracy Was Illegal And Would Put Authors Out of Work",
+      "url": "https://authorsguild.org/news/ag-v-openai-top-execs-knew-mass-book-piracy-was-illegal/",
+      "published_at": "2026-09-22T00:01:20+09:00",
+      "summary": "(New York, September 21, 2026) Explosive new documents released last Thursday in Authors Guild v. OpenAI—the major book authors’ ongoing lawsuit alleging OpenAI and Microsoft illegally trained their products on copyrighted books—show that executives and employees at both companies intentionally […]",
+      "listing_url": "https://news.ycombinator.com/item?id=49863864",
+      "introduced_at": "2026-09-27T15:19:33+09:00",
+      "image_url": "https://authorsguild.org/app/uploads/2026/09/OpenAI-Day-2-Advocacy-Rectangle.jpg",
+      "official_url": "",
+      "canonical_key": "https://authorsguild.org/news/ag-v-openai-top-execs-knew-mass-book-piracy-was-illegal",
+      "verification": {
+        "article_title_verified": "Unsealed Briefs in Authors’ Case v. Microsoft/OpenAI: Top Execs Knew Their Mass Book Piracy Was Illegal And Would Put Authors Out of Work",
+        "article_source_verified": "The Authors Guild",
+        "article_published_verified": "2026-09-22T00:01:20+09:00",
+        "article_url_verified": "https://authorsguild.org/news/ag-v-openai-top-execs-knew-mass-book-piracy-was-illegal/",
+        "geeknews_listing_url": ""
+      }
+    }
+  ]
+}
