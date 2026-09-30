@@ -1,0 +1,164 @@
+{
+  "date": "2026-09-30",
+  "title": "[AI 뉴스룸] 로컬 RAG 아키텍처의 현실적 타협점: CLM-v0.1-8B와 latticedb가 던지는 화두",
+  "title_candidates": [
+    "[AI 뉴스룸] 로컬 RAG 아키텍처의 현실적 타협점: CLM-v0.1-8B와 latticedb가 던지는 화두",
+    "[AI 뉴스룸] 서버리스 지식 그래프와 경량 리랭커 도입 시 고려해야 할 트레이드오프",
+    "[AI 뉴스룸] 클라우드 이탈 경로에서 마주하는 로컬 RAG의 한계와 프롬프트 보안 위협"
+  ],
+  "tags": [
+    "RAG",
+    "텍스트랭킹",
+    "그래프데이터베이스",
+    "개인정보보호",
+    "오픈소스",
+    "로컬AI"
+  ],
+  "meta_description": "로컬 환경에서 데이터 제어권을 확보하기 위한 경량 텍스트 랭킹 모델 CLM-v0.1-8B와 단일 파일 그래프 데이터베이스 latticedb의 활용법을 알아봅니다. 더불어 대화형 AI 에이전트의 개인정보 추적 실태 분석을 통해 프롬프트 보안 대책을 짚어봅니다.",
+  "article_count_note": "",
+  "quality_status": "READY_FOR_MANUAL_REVIEW",
+  "warnings": [
+    "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=49896586 (페이지 확인 실패: https://openai.com/index/introducing-gpt-6-1-sol/ (HTTP Error 403: Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=49896604 (페이지 확인 실패: https://openai.com/index/introducing-dots/ (HTTP Error 403: Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=49893509 (페이지 확인 실패: https://america.gov/ (HTTP Error 403: Forbidden))"
+  ],
+  "manual_review_required": true,
+  "publish_checklist": [
+    "원문 링크와 사실관계를 확인합니다.",
+    "작성자 분석이 자신의 실제 관점인지 검토합니다.",
+    "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요.",
+    "소개·문의·개인정보 페이지가 실제 값으로 공개됐는지 확인합니다.",
+    "티스토리 HTML 모드에 붙여넣은 뒤 모바일 화면을 확인합니다."
+  ],
+  "sources": [
+    {
+      "name": "Hugging Face 커뮤니티",
+      "title": "Contrastive-LM/CLM-v0.1-8B",
+      "url": "https://huggingface.co/Contrastive-LM/CLM-v0.1-8B"
+    },
+    {
+      "name": "GitHub",
+      "title": "GitHub - jeffhajewski/latticedb: Embedded single-file knowledge graph database with vector search and full-text search for AI/RAG apps",
+      "url": "https://github.com/jeffhajewski/latticedb"
+    },
+    {
+      "name": "jorgegarciaherrero.com",
+      "title": "A Privacy Analysis of Web and Mobile Conversational AI Agents [pdf]",
+      "url": "https://jorgegarciaherrero.com/wp-content/interactivos/20260916-Prompt-like-a-butterfly-sting-like-a-tracker-(clean).pdf"
+    }
+  ],
+  "fact_review": [
+    {
+      "source": "Hugging Face 커뮤니티",
+      "title": "Contrastive-LM/CLM-v0.1-8B",
+      "source_url": "https://huggingface.co/Contrastive-LM/CLM-v0.1-8B",
+      "official_url": "https://huggingface.co/Contrastive-LM/CLM-v0.1-8B",
+      "summary": "Hugging Face에서 최근 주목받는 text-ranking 모델 저장소입니다.",
+      "verified_facts": [
+        {
+          "label": "프로젝트·모델",
+          "value": "Contrastive-LM/CLM-v0.1-8B"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "Contrastive-LM"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-09-25T06:37:19+09:00"
+        },
+        {
+          "label": "Hugging Face 좋아요 (수집 시점)",
+          "value": "528"
+        },
+        {
+          "label": "Hugging Face 다운로드 (수집 시점)",
+          "value": "1910"
+        },
+        {
+          "label": "Hugging Face 파이프라인",
+          "value": "text-ranking"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "GitHub",
+      "title": "GitHub - jeffhajewski/latticedb: Embedded single-file knowledge graph database with vector search and full-text search for AI/RAG apps",
+      "source_url": "https://github.com/jeffhajewski/latticedb",
+      "official_url": "https://github.com/jeffhajewski/latticedb",
+      "summary": "Embedded single-file knowledge graph database with vector search and full-text search for AI/RAG apps - jeffhajewski/latticedb",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "GitHub"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-09-30T09:30:02+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "jeffhajewski/latticedb"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "jeffhajewski"
+        },
+        {
+          "label": "라이선스",
+          "value": "MIT"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-09-30T00:40:49Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "jorgegarciaherrero.com",
+      "title": "A Privacy Analysis of Web and Mobile Conversational AI Agents [pdf]",
+      "source_url": "https://jorgegarciaherrero.com/wp-content/interactivos/20260916-Prompt-like-a-butterfly-sting-like-a-tracker-(clean).pdf",
+      "official_url": "",
+      "summary": "",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "jorgegarciaherrero.com"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-09-29T18:03:41+09:00"
+        }
+      ],
+      "manual_review_note": "공식 프로젝트·1차 출처가 연결되지 않은 항목입니다. 숫자, 규제, 회사 관계, 인과관계 주장은 원문을 열어 직접 확인하세요."
+    }
+  ],
+  "images": {
+    "hero": {
+      "path": "hero.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-30/hero.png",
+      "kind": "generated-hero"
+    },
+    "huggingface-community-0b272935f82c063d": {
+      "origin_url": "https://huggingface.co/Contrastive-LM/CLM-v0.1-8B/resolve/main/thumbnail.png",
+      "kind": "generated-fallback",
+      "path": "issue-1.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-30/issue-1.svg"
+    },
+    "geeknews-1741d977cb7cebae": {
+      "origin_url": "https://opengraph.githubassets.com/c09465073bf7d9813820eaa286479847a3c51f2b0d6f65cf3a46bf7e967a21fb/jeffhajewski/latticedb",
+      "kind": "source-image",
+      "path": "issue-2.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-30/issue-2.png"
+    },
+    "hacker-news-f0a31df20886644e": {
+      "origin_url": "",
+      "kind": "source-image",
+      "path": "issue-3.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-09-30/issue-3.svg"
+    }
+  }
+}
