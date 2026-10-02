@@ -1,0 +1,220 @@
+{
+  "date": "2026-10-02",
+  "title": "[AI 뉴스룸] 경량 의사결정 모델 Clef와 장기 실행 프레임워크 Pi 1.0이 마주한 에이전트 아키텍처의 현실적 타협점",
+  "title_candidates": [
+    "[AI 뉴스룸] 경량 의사결정 모델 Clef와 장기 실행 프레임워크 Pi 1.0이 마주한 에이전트 아키텍처의 현실적 타협점",
+    "[AI 뉴스룸] 추론 지연과 보안 위협 사이에서: Clef의 초고속 판단과 AI-Infra-Guard의 방어 체계",
+    "[AI 뉴스룸] 가볍고 안전하게 오래 달리는 에이전트 설계: Clef와 Pi Durable이 제시하는 인프라적 대안"
+  ],
+  "tags": [
+    "AI 에이전트",
+    "오픈소스 모델",
+    "Cloudflare Clef",
+    "AI 보안",
+    "AI-Infra-Guard",
+    "Pi 1.0",
+    "멀티모달"
+  ],
+  "meta_description": "Cloudflare의 초경량 의사결정 모델 Clef, 텐센트의 AI 인프라 보안 플랫폼 AI-Infra-Guard, 그리고 장기 실행 에이전트를 위한 Pi 1.0 출시 소식을 통해 고속 판단과 보안, 지속성을 아우르는 최신 AI 에이전트 아키텍처 트렌드를 짚어봅니다.",
+  "article_count_note": "",
+  "quality_status": "READY_FOR_MANUAL_REVIEW",
+  "warnings": [
+    "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=49921118 (페이지 확인 실패: https://www.nytimes.com/2026/09/30/technology/meta-ai-data-centers-taxes.html (HTTP Error 403: Forbidden))"
+  ],
+  "manual_review_required": true,
+  "publish_checklist": [
+    "원문 링크와 사실관계를 확인합니다.",
+    "작성자 분석이 자신의 실제 관점인지 검토합니다.",
+    "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요.",
+    "소개·문의·개인정보 페이지가 실제 값으로 공개됐는지 확인합니다.",
+    "티스토리 HTML 모드에 붙여넣은 뒤 모바일 화면을 확인합니다."
+  ],
+  "sources": [
+    {
+      "name": "Hugging Face 커뮤니티",
+      "title": "Cloudflare/clef",
+      "url": "https://huggingface.co/Cloudflare/clef"
+    },
+    {
+      "name": "Cloudflare Blog",
+      "title": "Introducing Clef: our open-source decision models, and new RL fine-tuning platform",
+      "url": "https://blog.cloudflare.com/clef-decision-models/"
+    },
+    {
+      "name": "GitHub",
+      "title": "GitHub - Tencent/AI-Infra-Guard: A full-stack AI Red Teaming platform securing AI ecosystems via Agent Scan, Skills Scan, MCP scan, AI Infra scan and LLM jailbreak evaluation.",
+      "url": "https://github.com/Tencent/AI-Infra-Guard"
+    },
+    {
+      "name": "Earendil",
+      "title": "Pi 1.0 | Earendil",
+      "url": "https://earendil.com/posts/pi-1-0/"
+    }
+  ],
+  "fact_review": [
+    {
+      "source": "Hugging Face 커뮤니티",
+      "title": "Cloudflare/clef",
+      "source_url": "https://huggingface.co/Cloudflare/clef",
+      "official_url": "https://huggingface.co/Cloudflare/clef",
+      "summary": "Hugging Face에서 최근 주목받는 image-text-to-text 모델 저장소입니다.",
+      "verified_facts": [
+        {
+          "label": "프로젝트·모델",
+          "value": "Cloudflare/clef"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "Cloudflare"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-10-02T00:23:46+09:00"
+        },
+        {
+          "label": "Hugging Face 좋아요 (수집 시점)",
+          "value": "330"
+        },
+        {
+          "label": "Hugging Face 다운로드 (수집 시점)",
+          "value": "18"
+        },
+        {
+          "label": "Hugging Face 파이프라인",
+          "value": "image-text-to-text"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "Cloudflare Blog",
+      "title": "Introducing Clef: our open-source decision models, and new RL fine-tuning platform",
+      "source_url": "https://blog.cloudflare.com/clef-decision-models/",
+      "official_url": "https://huggingface.co/spaces/multimodalart/jev-decision-index",
+      "summary": "We are introducing Clef and Clef-flash, open-source decision models hosted on Workers AI for high-speed classification and agentic workflows. Also launching: a new reinforcement learning platform that allows developers to fine-tune decision models using their own data.",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "Cloudflare Blog"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-10-02T00:34:02.111000+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "multimodalart/jev-decision-index"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "multimodalart"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-09-28T00:40:34.000Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "GitHub",
+      "title": "GitHub - Tencent/AI-Infra-Guard: A full-stack AI Red Teaming platform securing AI ecosystems via Agent Scan, Skills Scan, MCP scan, AI Infra scan and LLM jailbreak evaluation.",
+      "source_url": "https://github.com/Tencent/AI-Infra-Guard",
+      "official_url": "https://github.com/Tencent/AI-Infra-Guard",
+      "summary": "A full-stack AI Red Teaming platform securing AI ecosystems via Agent Scan, Skills Scan, MCP scan, AI Infra scan and LLM jailbreak evaluation. - Tencent/AI-Infra-Guard",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "GitHub"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-10-02T09:30:02+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "Tencent/AI-Infra-Guard"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "Tencent"
+        },
+        {
+          "label": "라이선스",
+          "value": "Apache-2.0"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-10-02T01:04:06Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "Earendil",
+      "title": "Pi 1.0 | Earendil",
+      "source_url": "https://earendil.com/posts/pi-1-0/",
+      "official_url": "https://github.com/earendil-works/pi",
+      "summary": "Today we are shipping Pi 1.0, a hardened, minimal, extensible agent harness, alongside Pi Durable, a new experimental substrate for long-running agentic applications.",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "Earendil"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-10-01T00:00:00+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "earendil-works/pi"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "earendil-works"
+        },
+        {
+          "label": "라이선스",
+          "value": "MIT"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-10-02T01:10:04Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    }
+  ],
+  "images": {
+    "hero": {
+      "path": "hero.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-02/hero.png",
+      "kind": "generated-hero"
+    },
+    "huggingface-community-e4ec1e84959ae2fd": {
+      "origin_url": "https://huggingface.co/Cloudflare/clef/resolve/main/thumbnail.png",
+      "kind": "generated-fallback",
+      "path": "issue-1.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-02/issue-1.svg"
+    },
+    "hacker-news-e967910dc9b9aeec": {
+      "origin_url": "https://blog.cloudflare.com/_emdash/api/media/file/01M3TJV43SPQCPKJ6GBXFCDKNE.01M3TJV53VYDMVNCZDPH1FBFYN.png",
+      "kind": "source-image",
+      "path": "issue-2.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-02/issue-2.png"
+    },
+    "geeknews-3138ffbe03bcb6e9": {
+      "origin_url": "https://opengraph.githubassets.com/90e7e676ab8b77a19cd9e8aacfc0b179191e9651bd9dafa6c8671bb8e4abe64d/Tencent/AI-Infra-Guard",
+      "kind": "source-image",
+      "path": "issue-3.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-02/issue-3.png"
+    },
+    "hacker-news-c133b93b912dffd6": {
+      "origin_url": "https://earendil.com/static/og/posts/pi-1-0.png",
+      "kind": "source-image",
+      "path": "issue-4.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-02/issue-4.png"
+    }
+  }
+}
