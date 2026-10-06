@@ -1,0 +1,221 @@
+{
+  "date": "2026-10-06",
+  "title": "[AI 뉴스룸] 단일 모델의 한계를 넘는 에이전트 협업망과 실시간 데이터 결합의 설계 방식",
+  "title_candidates": [
+    "[AI 뉴스룸] 단일 모델의 한계를 넘는 에이전트 협업망과 실시간 데이터 결합의 설계 방식",
+    "[AI 뉴스룸] openrig와 Cloudflare Web Search API가 제시하는 오케스트레이션의 실제",
+    "[AI 뉴스룸] AI 에이전트가 탐색하는 하드웨어 소재와 로컬 멀티모달 모델의 활용 조건"
+  ],
+  "tags": [
+    "AI에이전트",
+    "오픈소스",
+    "멀티모달",
+    "openrig",
+    "Cloudflare",
+    "반도체소재",
+    "VLM"
+  ],
+  "meta_description": "오픈소스 멀티모달 모델 JEV-27B-VL, 에이전트 협업 도구 openrig, AI가 발견한 반도체 후보 물질, Cloudflare Web Search API 등 최신 기술의 한계와 엔지니어링 선택지를 분석합니다.",
+  "intro": "거대 언어 모델의 단독 추론 성능에 의존하는 개발 방식은 비용과 컨텍스트 유지의 한계에 직면했습니다. 엔지니어들은 이제 mvschwarz/openrig 같은 도구로 에이전트 간의 지속적인 협업망을 설계하거나, cloudflare/cloudflare-docs 저장소로 관리되는 Cloudflare Web Search API를 붙여 실시간 정보 탐색을 자동화하는 등 시스템 아키텍처 관점의 돌파구를 찾고 있습니다. 로컬 환경에서 구동 가능한 autotrust/JEV-27B-VL 같은 대형 멀티모달 모델의 등장 역시 이러한 인프라 다변화 흐름과 궤를 같이합니다.",
+  "sections": [
+    {
+      "headline": "로컬 멀티모달 모델 JEV-27B-VL의 저장소 공개와 활용 매개변수",
+      "source_ids": [
+        "huggingface-community-7073395c0f949110"
+      ],
+      "what_happened": "Hugging Face 커뮤니티에서 이미지와 텍스트 입력을 동시에 받아 텍스트 출력을 생성하는 27B 규모의 멀티모달 모델 autotrust/JEV-27B-VL 저장소가 공개되었습니다.",
+      "plain_explanation": "이 모델은 사용자가 입력한 이미지와 텍스트를 함께 분석하여 답변을 내놓는 시각-언어 모델입니다. 사진 속 객체들의 관계를 파악하거나 문서 이미지의 내용을 텍스트로 변환하는 작업을 수행합니다.",
+      "why_it_matters": "외부 API 호출 없이 로컬이나 자체 인프라에서 이미지 분석을 직접 처리할 수 있어 민감한 데이터의 외부 유출을 원천적으로 차단합니다.",
+      "technical_details": "",
+      "editorial_take": "27B 매개변수 규모는 로컬 장비 구동 시 상당한 VRAM을 요구하므로, 도입 전에 양자화 옵션별 정확도 손실을 정밀하게 측정해야 합니다. 엔터프라이즈 환경에서는 단순히 사전 학습된 가중치만 쓰기보다, 도메인 특화 데이터셋을 준비해 파인튜닝 파이프라인을 선제적으로 검증하는 편이 실질적인 성능 확보에 유리합니다.",
+      "reader_action": "보유 중인 GPU VRAM 용량에 맞춰 JEV-27B-VL의 FP16 및 INT4/INT8 양자화 버전의 추론 속도를 직접 비교 분석하기 바랍니다.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "Claude Code와 Codex를 엮어 지속성 있는 에이전트 팀을 구성하는 openrig",
+      "source_ids": [
+        "geeknews-a5babe6eb0c3a37f"
+      ],
+      "what_happened": "GitHub에 Claude Code, Codex, Pi 등의 모델을 조합하여 역할 분담과 컨텍스트 공유가 가능한 지속성 있는 에이전트 네트워크를 구축하는 오픈소스 프로젝트 mvschwarz/openrig가 공개되었습니다.",
+      "plain_explanation": "각기 다른 인공지능 에이전트에게 기획자나 개발자 같은 고유한 역할을 부여하고, 이들이 하나의 공유된 대화 맥락 안에서 협업하며 공동의 결과물을 만들어내도록 돕는 오케스트레이션 도구입니다. 이는 마치 하나의 가상 회사나 팀처럼 일하게 만드는 구조입니다.",
+      "why_it_matters": "단발성 프롬프트 실행에서 벗어나 장기적인 프로젝트 컨텍스트를 유지하며 복잡한 소프트웨어 개발 작업을 자율적으로 수행하는 다중 에이전트 환경을 제공합니다.",
+      "technical_details": "",
+      "editorial_take": "다중 에이전트 간의 상호작용은 API 호출 빈도를 기하급수적으로 늘려 토큰 비용 폭탄을 초래하기 쉽습니다. 따라서 시스템 설계 시 반드시 루프 제한 장치와 최대 예산 상한선을 하드코딩해야 하며, 에이전트 간의 역할 정의가 모호해 발생할 수 있는 무한 루프나 컨텍스트 오염을 방지하기 위한 프롬프트 가이드라인을 엄격히 수립해야 합니다.",
+      "reader_action": "openrig 리포지토리를 클론한 뒤 두 개의 에이전트가 서로 코드를 교차 검수하는 파이프라인을 로컬 환경에 셋업하여 토큰 소비량을 모니터링하십시오.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "Claude 에이전트가 탐색한 상온 반도체 자석 후보 물질과 계산 원장",
+      "source_ids": [
+        "hacker-news-ee97e68450db5c63"
+      ],
+      "what_happened": "www.vals.ai에 따르면 Claude Opus 5.5 에이전트 팀이 차세대 컴퓨터 메모리에 활용 가능한 상온 반도체 자석 후보 물질 두 가지를 찾아내고, 관련 계산 데이터와 시뮬레이션 코드가 포함된 spicylemonade/compensated-magnet-ledger 저장소를 공개했습니다.",
+      "plain_explanation": "인공지능 에이전트들이 양자 역학 기반의 컴퓨터 시뮬레이션을 수행하여 전력 소모가 적고 속도가 빠른 새로운 반도체 소재 후보를 발굴하고, 실제 실험실에서 검증할 수 있도록 설계 공식과 계산 원장을 작성했습니다.",
+      "why_it_matters": "인간 연구원이 수개월 동안 반복해야 했던 방대한 물리 화학적 시뮬레이션과 후보 물질 탐색 과정을 에이전트 자동화로 단축하여 신소재 개발 주기를 줄입니다.",
+      "technical_details": "",
+      "editorial_take": "시뮬레이션 상의 예측치는 실제 실험실에서의 물리적 합성 및 상온 안정성 검증을 거치기 전까지는 가설에 불과합니다. 인공지능의 계산 오류나 환각 가능성을 배제할 수 없으므로, 공개된 Quantum ESPRESSO 입력 파일과 계산 원장을 독립적으로 교차 검증하는 물리적 평가 프로세스를 거치는 것이 타당합니다.",
+      "reader_action": "spicylemonade/compensated-magnet-ledger 저장소의 QE 입력 파일을 다운로드하여 자체 클러스터에서 계산 결과를 재현해 볼 것을 권장합니다.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "Cloudflare AI Gateway를 통한 실시간 웹 검색 API 도입",
+      "source_ids": [
+        "hacker-news-98b8b5350e2302a2"
+      ],
+      "what_happened": "Cloudflare Docs에 따르면 Cloudflare가 AI Gateway를 통해 Ceramic.ai, Exa, Linkup 등의 검색 엔진을 활용하여 AI 에이전트와 애플리케이션에 실시간 웹 검색 기능을 연동할 수 있는 Web Search API를 출시했습니다.",
+      "plain_explanation": "인공지능 에이전트나 서비스가 최신 정보가 필요할 때 외부 검색 엔진을 통해 실시간으로 웹을 검색하고, 그 결과를 바탕으로 정확한 최신 답변을 생성할 수 있도록 지원하는 기능입니다.",
+      "why_it_matters": "복잡한 개별 검색 API 연동 과정을 거치지 않고, 단일 게이트웨이를 통해 다수의 검색 소스를 제어할 수 있어 RAG 시스템의 아키텍처를 단순화합니다.",
+      "technical_details": "",
+      "editorial_take": "여러 검색 제공업체를 거치는 게이트웨이 구조는 필연적으로 추가적인 네트워크 지연을 유발하므로 실시간 대화형 서비스 도입 시 캐싱 전략을 치밀하게 세워야 합니다. 아울러 검색 쿼리 전송 과정에서 내부 데이터나 사용자 개인정보가 외부 검색 엔진으로 흘러가지 않도록 마스킹 필터를 게이트웨이 단에 선제 적용하는 보안 조치가 요구됩니다.",
+      "reader_action": "Cloudflare AI Gateway 콘솔에서 Web Search API를 활성화하고 테스트 쿼리를 전송하여 검색 결과의 응답 속도와 데이터 포맷을 분석하십시오.",
+      "verification_notes": ""
+    }
+  ],
+  "closing": "단일 모델의 지능에만 의존하던 시기는 지났으며, 이제는 로컬 멀티모달 모델의 최적화, 다중 에이전트의 오케스트레이션, 그리고 실시간 외부 데이터의 안전한 결합이 핵심 경쟁력으로 작용합니다. 개발자는 개별 모델의 벤치마크 점수에 매몰되기보다, 각 구성 요소를 안전하고 효율적으로 연결하는 아키텍처 설계 역량에 집중해야 합니다.",
+  "editor_comment": "에이전트 네트워크의 무한 루프와 비용 폭증을 막기 위한 예산 제한 코드를 메인 루프에 먼저 작성해 두는 습관이 필요합니다.",
+  "editorial_disclosure": "",
+  "model": "gemini-3.5-flash",
+  "article_count_note": "",
+  "images": {
+    "hero": {
+      "path": "hero.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-06/hero.png",
+      "kind": "generated-hero"
+    },
+    "huggingface-community-7073395c0f949110": {
+      "origin_url": "https://huggingface.co/autotrust/JEV-27B-VL/resolve/main/thumbnail.png",
+      "kind": "generated-fallback",
+      "path": "issue-1.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-06/issue-1.svg"
+    },
+    "geeknews-a5babe6eb0c3a37f": {
+      "origin_url": "https://repository-images.githubusercontent.com/1198124295/1af4015a-ccfc-48e2-9d75-81ff3f15e3a1",
+      "kind": "source-image",
+      "path": "issue-2.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-06/issue-2.png"
+    },
+    "hacker-news-ee97e68450db5c63": {
+      "origin_url": "https://www.vals.ai/blogs/2026-10-04-room-temperature-magnetic-semiconductors/hero.png",
+      "kind": "source-image",
+      "path": "issue-3.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-06/issue-3.png"
+    },
+    "hacker-news-98b8b5350e2302a2": {
+      "origin_url": "https://developers.cloudflare.com/changelog/post/2026-10-02-introducing-web-search-api/og.png?v=1deaa8fb09156b56",
+      "kind": "source-image",
+      "path": "issue-4.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-06/issue-4.png"
+    }
+  },
+  "source_items": [
+    {
+      "id": "huggingface-community-7073395c0f949110",
+      "source": "Hugging Face 커뮤니티",
+      "topic": "오픈소스, Hugging Face, AI 모델링",
+      "title": "autotrust/JEV-27B-VL",
+      "url": "https://huggingface.co/autotrust/JEV-27B-VL",
+      "published_at": "2026-10-03T20:00:42+09:00",
+      "summary": "Hugging Face에서 최근 주목받는 image-text-to-text 모델 저장소입니다.",
+      "listing_url": "https://huggingface.co/autotrust/JEV-27B-VL",
+      "introduced_at": "",
+      "image_url": "https://huggingface.co/autotrust/JEV-27B-VL/resolve/main/thumbnail.png",
+      "official_url": "https://huggingface.co/autotrust/JEV-27B-VL",
+      "canonical_key": "https://huggingface.co/autotrust/jev-27b-vl",
+      "verification": {
+        "project_kind": "huggingface",
+        "project_name": "autotrust/JEV-27B-VL",
+        "project_owner": "autotrust",
+        "license": "",
+        "updated_at": "2026-10-03T20:00:42+09:00",
+        "community_source": "huggingface",
+        "huggingface_likes": "633",
+        "huggingface_downloads": "1278569",
+        "pipeline_tag": "image-text-to-text"
+      }
+    },
+    {
+      "id": "geeknews-a5babe6eb0c3a37f",
+      "source": "GitHub",
+      "topic": "생성형 AI, AI 에이전트, 오픈소스, 개발 도구",
+      "title": "GitHub - mvschwarz/openrig: Build your own network of agents from Claude Code, Codex and Pi: persistent teams with roles, shared context and owned work.",
+      "url": "https://github.com/mvschwarz/openrig",
+      "published_at": "2026-10-06T09:30:02+09:00",
+      "summary": "Build your own network of agents from Claude Code, Codex and Pi: persistent teams with roles, shared context and owned work. - mvschwarz/openrig",
+      "listing_url": "https://news.hada.io/topic?id=34854",
+      "introduced_at": "2026-10-06T09:30:02+09:00",
+      "image_url": "https://repository-images.githubusercontent.com/1198124295/1af4015a-ccfc-48e2-9d75-81ff3f15e3a1",
+      "official_url": "https://github.com/mvschwarz/openrig",
+      "canonical_key": "https://github.com/mvschwarz/openrig",
+      "verification": {
+        "article_title_verified": "GitHub - mvschwarz/openrig: Build your own network of agents from Claude Code, Codex and Pi: persistent teams with roles, shared context and owned work.",
+        "article_source_verified": "GitHub",
+        "article_published_verified": "2026-10-06T09:30:02+09:00",
+        "article_url_verified": "https://github.com/mvschwarz/openrig",
+        "geeknews_listing_url": "https://news.hada.io/topic?id=34854",
+        "official_url": "https://github.com/mvschwarz/openrig",
+        "project_name": "mvschwarz/openrig",
+        "project_owner": "mvschwarz",
+        "project_description": "Build your own network of agents from Claude Code, Codex and Pi: persistent teams with roles, shared context and owned work.",
+        "license": "Apache-2.0",
+        "updated_at": "2026-10-06T01:58:15Z",
+        "project_kind": "github"
+      }
+    },
+    {
+      "id": "hacker-news-ee97e68450db5c63",
+      "source": "www.vals.ai",
+      "topic": "생성형 AI, AI 에이전트",
+      "title": "Two Room-Temperature Antiferromagnetic Semiconductor Candidates | Vals AI",
+      "url": "https://www.vals.ai/blogs/room-temperature-magnetic-semiconductors",
+      "published_at": "2026-10-04T00:00:00+09:00",
+      "summary": "We are sharing two candidate magnets for next-generation computer memory, found by a team of Claude Opus 5.5 agents. Both are predicted to have zero net magnetism yet still sort electrons by spin: one a new compound we designed, the other a material first made in 1999. We're sharing the full calculations, the code, and a list of known caveats.",
+      "listing_url": "https://news.ycombinator.com/item?id=49970667",
+      "introduced_at": "2026-10-06T06:00:21+09:00",
+      "image_url": "https://www.vals.ai/blogs/2026-10-04-room-temperature-magnetic-semiconductors/hero.png",
+      "official_url": "https://github.com/spicylemonade/compensated-magnet-ledger",
+      "canonical_key": "https://github.com/spicylemonade/compensated-magnet-ledger",
+      "verification": {
+        "article_title_verified": "Two Room-Temperature Antiferromagnetic Semiconductor Candidates | Vals AI",
+        "article_source_verified": "www.vals.ai",
+        "article_published_verified": "2026-10-04T00:00:00+09:00",
+        "article_url_verified": "https://www.vals.ai/blogs/room-temperature-magnetic-semiconductors",
+        "geeknews_listing_url": "",
+        "official_url": "https://github.com/spicylemonade/compensated-magnet-ledger",
+        "project_name": "spicylemonade/compensated-magnet-ledger",
+        "project_owner": "spicylemonade",
+        "project_description": "Computational ledger for two room-temperature Luttinger-compensated magnet candidates, YBaMnFeO5 and KV[Cr(CN)6]: raw QE inputs/outputs, checker, re-runs",
+        "license": "NOASSERTION",
+        "updated_at": "2026-10-06T01:39:10Z",
+        "project_kind": "github"
+      }
+    },
+    {
+      "id": "hacker-news-98b8b5350e2302a2",
+      "source": "Cloudflare Docs",
+      "topic": "AI 에이전트",
+      "title": "Introducing Web Search API",
+      "url": "https://developers.cloudflare.com/changelog/post/2026-10-02-introducing-web-search-api/",
+      "published_at": "2026-10-02T00:00:00+09:00",
+      "summary": "Search the web from your AI agents and applications through AI Gateway with Ceramic.ai, Exa, and Linkup.",
+      "listing_url": "https://news.ycombinator.com/item?id=49963171",
+      "introduced_at": "2026-10-05T19:47:06+09:00",
+      "image_url": "https://developers.cloudflare.com/changelog/post/2026-10-02-introducing-web-search-api/og.png?v=1deaa8fb09156b56",
+      "official_url": "https://github.com/cloudflare/cloudflare-docs",
+      "canonical_key": "https://github.com/cloudflare/cloudflare-docs",
+      "verification": {
+        "article_title_verified": "Introducing Web Search API",
+        "article_source_verified": "Cloudflare Docs",
+        "article_published_verified": "2026-10-02T00:00:00+09:00",
+        "article_url_verified": "https://developers.cloudflare.com/changelog/post/2026-10-02-introducing-web-search-api/",
+        "geeknews_listing_url": "",
+        "official_url": "https://github.com/cloudflare/cloudflare-docs",
+        "project_name": "cloudflare/cloudflare-docs",
+        "project_owner": "cloudflare",
+        "project_description": "Cloudflare’s documentation",
+        "license": "CC-BY-4.0",
+        "updated_at": "2026-10-06T01:21:21Z",
+        "project_kind": "github"
+      }
+    }
+  ]
+}

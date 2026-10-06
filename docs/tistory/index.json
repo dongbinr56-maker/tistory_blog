@@ -1,5 +1,231 @@
 [
   {
+    "date": "2026-10-06",
+    "title": "[AI 뉴스룸] 단일 모델의 한계를 넘는 에이전트 협업망과 실시간 데이터 결합의 설계 방식",
+    "title_candidates": [
+      "[AI 뉴스룸] 단일 모델의 한계를 넘는 에이전트 협업망과 실시간 데이터 결합의 설계 방식",
+      "[AI 뉴스룸] openrig와 Cloudflare Web Search API가 제시하는 오케스트레이션의 실제",
+      "[AI 뉴스룸] AI 에이전트가 탐색하는 하드웨어 소재와 로컬 멀티모달 모델의 활용 조건"
+    ],
+    "tags": [
+      "AI에이전트",
+      "오픈소스",
+      "멀티모달",
+      "openrig",
+      "Cloudflare",
+      "반도체소재",
+      "VLM"
+    ],
+    "meta_description": "오픈소스 멀티모달 모델 JEV-27B-VL, 에이전트 협업 도구 openrig, AI가 발견한 반도체 후보 물질, Cloudflare Web Search API 등 최신 기술의 한계와 엔지니어링 선택지를 분석합니다.",
+    "article_count_note": "",
+    "quality_status": "READY_FOR_MANUAL_REVIEW",
+    "warnings": [
+      "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+      "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=49963366 (페이지 확인 실패: https://techfundingnews.com/europes-new-robotics-unicorn-germanys-robco-hits-1b-valuation/ (HTTP Error 403: Forbidden))",
+      "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=49961861 (페이지 확인 실패: https://www.bloomberg.com/news/articles/2026-10-05/qualcomm-licenses-patents-on-huawei-s-logicfolding-chip-tech (HTTP Error 403: Forbidden))"
+    ],
+    "manual_review_required": true,
+    "publish_checklist": [
+      "원문 링크와 사실관계를 확인합니다.",
+      "작성자 분석이 자신의 실제 관점인지 검토합니다.",
+      "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요.",
+      "소개·문의·개인정보 페이지가 실제 값으로 공개됐는지 확인합니다.",
+      "티스토리 HTML 모드에 붙여넣은 뒤 모바일 화면을 확인합니다."
+    ],
+    "sources": [
+      {
+        "name": "Hugging Face 커뮤니티",
+        "title": "autotrust/JEV-27B-VL",
+        "url": "https://huggingface.co/autotrust/JEV-27B-VL"
+      },
+      {
+        "name": "GitHub",
+        "title": "GitHub - mvschwarz/openrig: Build your own network of agents from Claude Code, Codex and Pi: persistent teams with roles, shared context and owned work.",
+        "url": "https://github.com/mvschwarz/openrig"
+      },
+      {
+        "name": "www.vals.ai",
+        "title": "Two Room-Temperature Antiferromagnetic Semiconductor Candidates | Vals AI",
+        "url": "https://www.vals.ai/blogs/room-temperature-magnetic-semiconductors"
+      },
+      {
+        "name": "Cloudflare Docs",
+        "title": "Introducing Web Search API",
+        "url": "https://developers.cloudflare.com/changelog/post/2026-10-02-introducing-web-search-api/"
+      }
+    ],
+    "fact_review": [
+      {
+        "source": "Hugging Face 커뮤니티",
+        "title": "autotrust/JEV-27B-VL",
+        "source_url": "https://huggingface.co/autotrust/JEV-27B-VL",
+        "official_url": "https://huggingface.co/autotrust/JEV-27B-VL",
+        "summary": "Hugging Face에서 최근 주목받는 image-text-to-text 모델 저장소입니다.",
+        "verified_facts": [
+          {
+            "label": "프로젝트·모델",
+            "value": "autotrust/JEV-27B-VL"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "autotrust"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-10-03T20:00:42+09:00"
+          },
+          {
+            "label": "Hugging Face 좋아요 (수집 시점)",
+            "value": "633"
+          },
+          {
+            "label": "Hugging Face 다운로드 (수집 시점)",
+            "value": "1278569"
+          },
+          {
+            "label": "Hugging Face 파이프라인",
+            "value": "image-text-to-text"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      },
+      {
+        "source": "GitHub",
+        "title": "GitHub - mvschwarz/openrig: Build your own network of agents from Claude Code, Codex and Pi: persistent teams with roles, shared context and owned work.",
+        "source_url": "https://github.com/mvschwarz/openrig",
+        "official_url": "https://github.com/mvschwarz/openrig",
+        "summary": "Build your own network of agents from Claude Code, Codex and Pi: persistent teams with roles, shared context and owned work. - mvschwarz/openrig",
+        "verified_facts": [
+          {
+            "label": "기사 출처",
+            "value": "GitHub"
+          },
+          {
+            "label": "기사 게시 시각",
+            "value": "2026-10-06T09:30:02+09:00"
+          },
+          {
+            "label": "프로젝트·모델",
+            "value": "mvschwarz/openrig"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "mvschwarz"
+          },
+          {
+            "label": "라이선스",
+            "value": "Apache-2.0"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-10-06T01:58:15Z"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      },
+      {
+        "source": "www.vals.ai",
+        "title": "Two Room-Temperature Antiferromagnetic Semiconductor Candidates | Vals AI",
+        "source_url": "https://www.vals.ai/blogs/room-temperature-magnetic-semiconductors",
+        "official_url": "https://github.com/spicylemonade/compensated-magnet-ledger",
+        "summary": "We are sharing two candidate magnets for next-generation computer memory, found by a team of Claude Opus 5.5 agents. Both are predicted to have zero net magnetism yet still sort electrons by spin: one a new compound we designed, the other a material first made in 1999. We're sharing the full calculations, the code, and a list of known caveats.",
+        "verified_facts": [
+          {
+            "label": "기사 출처",
+            "value": "www.vals.ai"
+          },
+          {
+            "label": "기사 게시 시각",
+            "value": "2026-10-04T00:00:00+09:00"
+          },
+          {
+            "label": "프로젝트·모델",
+            "value": "spicylemonade/compensated-magnet-ledger"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "spicylemonade"
+          },
+          {
+            "label": "라이선스",
+            "value": "NOASSERTION"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-10-06T01:39:10Z"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      },
+      {
+        "source": "Cloudflare Docs",
+        "title": "Introducing Web Search API",
+        "source_url": "https://developers.cloudflare.com/changelog/post/2026-10-02-introducing-web-search-api/",
+        "official_url": "https://github.com/cloudflare/cloudflare-docs",
+        "summary": "Search the web from your AI agents and applications through AI Gateway with Ceramic.ai, Exa, and Linkup.",
+        "verified_facts": [
+          {
+            "label": "기사 출처",
+            "value": "Cloudflare Docs"
+          },
+          {
+            "label": "기사 게시 시각",
+            "value": "2026-10-02T00:00:00+09:00"
+          },
+          {
+            "label": "프로젝트·모델",
+            "value": "cloudflare/cloudflare-docs"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "cloudflare"
+          },
+          {
+            "label": "라이선스",
+            "value": "CC-BY-4.0"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-10-06T01:21:21Z"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      }
+    ],
+    "images": {
+      "hero": {
+        "path": "hero.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-06/hero.png",
+        "kind": "generated-hero"
+      },
+      "huggingface-community-7073395c0f949110": {
+        "origin_url": "https://huggingface.co/autotrust/JEV-27B-VL/resolve/main/thumbnail.png",
+        "kind": "generated-fallback",
+        "path": "issue-1.svg",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-06/issue-1.svg"
+      },
+      "geeknews-a5babe6eb0c3a37f": {
+        "origin_url": "https://repository-images.githubusercontent.com/1198124295/1af4015a-ccfc-48e2-9d75-81ff3f15e3a1",
+        "kind": "source-image",
+        "path": "issue-2.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-06/issue-2.png"
+      },
+      "hacker-news-ee97e68450db5c63": {
+        "origin_url": "https://www.vals.ai/blogs/2026-10-04-room-temperature-magnetic-semiconductors/hero.png",
+        "kind": "source-image",
+        "path": "issue-3.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-06/issue-3.png"
+      },
+      "hacker-news-98b8b5350e2302a2": {
+        "origin_url": "https://developers.cloudflare.com/changelog/post/2026-10-02-introducing-web-search-api/og.png?v=1deaa8fb09156b56",
+        "kind": "source-image",
+        "path": "issue-4.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-06/issue-4.png"
+      }
+    },
+    "html_path": "tistory/2026-10-06.html"
+  },
+  {
     "date": "2026-10-04",
     "title": "[AI 뉴스룸] 로컬 멀티모달과 주권형 MoE 모델이 제시하는 탈클라우드 AI 아키텍처의 미래",
     "title_candidates": [

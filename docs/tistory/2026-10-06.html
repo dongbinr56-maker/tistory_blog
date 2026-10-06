@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>[AI 뉴스룸] 단일 모델의 한계를 넘는 에이전트 협업망과 실시간 데이터 결합의 설계 방식 — 검토용 초안</title></head>
+<body style="margin:0;padding:24px 12px;background:#f3f6fa">
+<article class="tistory-newsroom" lang="ko">
+  <style>
+    .tistory-newsroom {max-width:760px;margin:0 auto;color:#1f2937;font-family:Apple SD Gothic Neo,Malgun Gothic,sans-serif;line-height:1.85}
+    .tistory-newsroom .hero {padding:30px 26px;border:1px solid #dbe4ee;border-radius:18px;background:#f8fafc}
+    .tistory-newsroom .issue-image {display:block;width:100%;max-height:330px;margin:0 0 20px;border-radius:14px;object-fit:cover;background:#e2e8f0}
+    .tistory-newsroom h1 {margin:0 0 16px;color:#111827;font-size:30px;line-height:1.38}
+    .tistory-newsroom h2 {color:#111827;font-size:23px;line-height:1.45}
+    .tistory-newsroom p {margin:0 0 14px}
+    .tistory-newsroom .eyebrow {color:#0f766e;font-weight:700;font-size:13px;letter-spacing:.04em}
+    .tistory-newsroom .issue-card {margin:28px 0;padding:24px;border:1px solid #e2e8f0;border-radius:16px;background:#fff}
+    .tistory-newsroom .action {margin:18px 0 10px;padding:14px 16px;border-left:3px solid #0f766e;border-radius:0 10px 10px 0;background:#f0fdfa}
+    .tistory-newsroom .sources {margin:6px 0 0;color:#64748b;font-size:14px}
+    .tistory-newsroom .editor-note {margin:20px 0;padding:16px 18px;border-left:4px solid #334155;border-radius:0 12px 12px 0;background:#f8fafc;font-style:normal}
+    .tistory-newsroom .closing {margin-top:28px}
+    .tistory-newsroom a {color:#0f766e}
+  </style>
+  <header class="hero">
+    <p class="eyebrow">2026-10-06 · AI·개발</p>
+    <h1>[AI 뉴스룸] 단일 모델의 한계를 넘는 에이전트 협업망과 실시간 데이터 결합의 설계 방식</h1>
+    <p>거대 언어 모델의 단독 추론 성능에 의존하는 개발 방식은 비용과 컨텍스트 유지의 한계에 직면했습니다. 엔지니어들은 이제 mvschwarz/openrig 같은 도구로 에이전트 간의 지속적인 협업망을 설계하거나, cloudflare/cloudflare-docs 저장소로 관리되는 Cloudflare Web Search API를 붙여 실시간 정보 탐색을 자동화하는 등 시스템 아키텍처 관점의 돌파구를 찾고 있습니다. 로컬 환경에서 구동 가능한 autotrust/JEV-27B-VL 같은 대형 멀티모달 모델의 등장 역시 이러한 인프라 다변화 흐름과 궤를 같이합니다.</p>
+  </header>
+  <section class="editor-note"><p>에이전트 네트워크의 무한 루프와 비용 폭증을 막기 위한 예산 제한 코드를 메인 루프에 먼저 작성해 두는 습관이 필요합니다.</p></section>
+  <section class="issue-card">
+  <h2>로컬 멀티모달 모델 JEV-27B-VL의 저장소 공개와 활용 매개변수</h2>
+  <img class="issue-image" src="https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-06/issue-1.svg" alt="로컬 멀티모달 모델 JEV-27B-VL의 저장소 공개와 활용 매개변수 관련 이미지">
+  <p>Hugging Face 커뮤니티에서 이미지와 텍스트 입력을 동시에 받아 텍스트 출력을 생성하는 27B 규모의 멀티모달 모델 autotrust/JEV-27B-VL 저장소가 공개되었습니다.</p><p>이 모델은 사용자가 입력한 이미지와 텍스트를 함께 분석하여 답변을 내놓는 시각-언어 모델입니다. 사진 속 객체들의 관계를 파악하거나 문서 이미지의 내용을 텍스트로 변환하는 작업을 수행합니다.</p><p>외부 API 호출 없이 로컬이나 자체 인프라에서 이미지 분석을 직접 처리할 수 있어 민감한 데이터의 외부 유출을 원천적으로 차단합니다.</p><p>27B 매개변수 규모는 로컬 장비 구동 시 상당한 VRAM을 요구하므로, 도입 전에 양자화 옵션별 정확도 손실을 정밀하게 측정해야 합니다. 엔터프라이즈 환경에서는 단순히 사전 학습된 가중치만 쓰기보다, 도메인 특화 데이터셋을 준비해 파인튜닝 파이프라인을 선제적으로 검증하는 편이 실질적인 성능 확보에 유리합니다.</p>
+  <p class="action">보유 중인 GPU VRAM 용량에 맞춰 JEV-27B-VL의 FP16 및 INT4/INT8 양자화 버전의 추론 속도를 직접 비교 분석하기 바랍니다.</p>
+  <p class="sources">참고: <a href="https://huggingface.co/autotrust/JEV-27B-VL" rel="nofollow noopener noreferrer" target="_blank">Hugging Face 커뮤니티 원문</a></p>
+</section><section class="issue-card">
+  <h2>Claude Code와 Codex를 엮어 지속성 있는 에이전트 팀을 구성하는 openrig</h2>
+  <img class="issue-image" src="https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-06/issue-2.png" alt="Claude Code와 Codex를 엮어 지속성 있는 에이전트 팀을 구성하는 openrig 관련 이미지">
+  <p>GitHub에 Claude Code, Codex, Pi 등의 모델을 조합하여 역할 분담과 컨텍스트 공유가 가능한 지속성 있는 에이전트 네트워크를 구축하는 오픈소스 프로젝트 mvschwarz/openrig가 공개되었습니다.</p><p>각기 다른 인공지능 에이전트에게 기획자나 개발자 같은 고유한 역할을 부여하고, 이들이 하나의 공유된 대화 맥락 안에서 협업하며 공동의 결과물을 만들어내도록 돕는 오케스트레이션 도구입니다. 이는 마치 하나의 가상 회사나 팀처럼 일하게 만드는 구조입니다.</p><p>단발성 프롬프트 실행에서 벗어나 장기적인 프로젝트 컨텍스트를 유지하며 복잡한 소프트웨어 개발 작업을 자율적으로 수행하는 다중 에이전트 환경을 제공합니다.</p><p>다중 에이전트 간의 상호작용은 API 호출 빈도를 기하급수적으로 늘려 토큰 비용 폭탄을 초래하기 쉽습니다. 따라서 시스템 설계 시 반드시 루프 제한 장치와 최대 예산 상한선을 하드코딩해야 하며, 에이전트 간의 역할 정의가 모호해 발생할 수 있는 무한 루프나 컨텍스트 오염을 방지하기 위한 프롬프트 가이드라인을 엄격히 수립해야 합니다.</p>
+  <p class="action">openrig 리포지토리를 클론한 뒤 두 개의 에이전트가 서로 코드를 교차 검수하는 파이프라인을 로컬 환경에 셋업하여 토큰 소비량을 모니터링하십시오.</p>
+  <p class="sources">참고: <a href="https://github.com/mvschwarz/openrig" rel="nofollow noopener noreferrer" target="_blank">GitHub 원문</a></p>
+</section><section class="issue-card">
+  <h2>Claude 에이전트가 탐색한 상온 반도체 자석 후보 물질과 계산 원장</h2>
+  <img class="issue-image" src="https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-06/issue-3.png" alt="Claude 에이전트가 탐색한 상온 반도체 자석 후보 물질과 계산 원장 관련 이미지">
+  <p>www.vals.ai에 따르면 Claude Opus 5.5 에이전트 팀이 차세대 컴퓨터 메모리에 활용 가능한 상온 반도체 자석 후보 물질 두 가지를 찾아내고, 관련 계산 데이터와 시뮬레이션 코드가 포함된 spicylemonade/compensated-magnet-ledger 저장소를 공개했습니다.</p><p>인공지능 에이전트들이 양자 역학 기반의 컴퓨터 시뮬레이션을 수행하여 전력 소모가 적고 속도가 빠른 새로운 반도체 소재 후보를 발굴하고, 실제 실험실에서 검증할 수 있도록 설계 공식과 계산 원장을 작성했습니다.</p><p>인간 연구원이 수개월 동안 반복해야 했던 방대한 물리 화학적 시뮬레이션과 후보 물질 탐색 과정을 에이전트 자동화로 단축하여 신소재 개발 주기를 줄입니다.</p><p>시뮬레이션 상의 예측치는 실제 실험실에서의 물리적 합성 및 상온 안정성 검증을 거치기 전까지는 가설에 불과합니다. 인공지능의 계산 오류나 환각 가능성을 배제할 수 없으므로, 공개된 Quantum ESPRESSO 입력 파일과 계산 원장을 독립적으로 교차 검증하는 물리적 평가 프로세스를 거치는 것이 타당합니다.</p>
+  <p class="action">spicylemonade/compensated-magnet-ledger 저장소의 QE 입력 파일을 다운로드하여 자체 클러스터에서 계산 결과를 재현해 볼 것을 권장합니다.</p>
+  <p class="sources">참고: <a href="https://www.vals.ai/blogs/room-temperature-magnetic-semiconductors" rel="nofollow noopener noreferrer" target="_blank">www.vals.ai 원문</a></p>
+</section><section class="issue-card">
+  <h2>Cloudflare AI Gateway를 통한 실시간 웹 검색 API 도입</h2>
+  <img class="issue-image" src="https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-06/issue-4.png" alt="Cloudflare AI Gateway를 통한 실시간 웹 검색 API 도입 관련 이미지">
+  <p>Cloudflare Docs에 따르면 Cloudflare가 AI Gateway를 통해 Ceramic.ai, Exa, Linkup 등의 검색 엔진을 활용하여 AI 에이전트와 애플리케이션에 실시간 웹 검색 기능을 연동할 수 있는 Web Search API를 출시했습니다.</p><p>인공지능 에이전트나 서비스가 최신 정보가 필요할 때 외부 검색 엔진을 통해 실시간으로 웹을 검색하고, 그 결과를 바탕으로 정확한 최신 답변을 생성할 수 있도록 지원하는 기능입니다.</p><p>복잡한 개별 검색 API 연동 과정을 거치지 않고, 단일 게이트웨이를 통해 다수의 검색 소스를 제어할 수 있어 RAG 시스템의 아키텍처를 단순화합니다.</p><p>여러 검색 제공업체를 거치는 게이트웨이 구조는 필연적으로 추가적인 네트워크 지연을 유발하므로 실시간 대화형 서비스 도입 시 캐싱 전략을 치밀하게 세워야 합니다. 아울러 검색 쿼리 전송 과정에서 내부 데이터나 사용자 개인정보가 외부 검색 엔진으로 흘러가지 않도록 마스킹 필터를 게이트웨이 단에 선제 적용하는 보안 조치가 요구됩니다.</p>
+  <p class="action">Cloudflare AI Gateway 콘솔에서 Web Search API를 활성화하고 테스트 쿼리를 전송하여 검색 결과의 응답 속도와 데이터 포맷을 분석하십시오.</p>
+  <p class="sources">참고: <a href="https://developers.cloudflare.com/changelog/post/2026-10-02-introducing-web-search-api/" rel="nofollow noopener noreferrer" target="_blank">Cloudflare Docs 원문</a></p>
+</section>
+  <section class="closing"><p>단일 모델의 지능에만 의존하던 시기는 지났으며, 이제는 로컬 멀티모달 모델의 최적화, 다중 에이전트의 오케스트레이션, 그리고 실시간 외부 데이터의 안전한 결합이 핵심 경쟁력으로 작용합니다. 개발자는 개별 모델의 벤치마크 점수에 매몰되기보다, 각 구성 요소를 안전하고 효율적으로 연결하는 아키텍처 설계 역량에 집중해야 합니다.</p></section>
+</article>
+</body></html>
