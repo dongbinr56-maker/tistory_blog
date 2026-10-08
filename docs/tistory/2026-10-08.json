@@ -1,0 +1,223 @@
+{
+  "date": "2026-10-08",
+  "title": "[AI 뉴스룸] 로컬 하드웨어의 제약과 제어권 확보를 둘러싼 오픈소스의 설계 경로",
+  "title_candidates": [
+    "[AI 뉴스룸] 로컬 하드웨어의 제약과 제어권 확보를 둘러싼 오픈소스의 설계 경로",
+    "[AI 뉴스룸] 경량화 모델과 전용 SDK가 제시하는 로컬 의사결정 환경의 타협점",
+    "[AI 뉴스룸] 수학적 추론의 고도화부터 텍스트 애니메이션까지 관통하는 최적화 흐름"
+  ],
+  "tags": [
+    "오픈소스",
+    "로컬AI",
+    "GGUF",
+    "에이전트",
+    "수학추론",
+    "웹디자인"
+  ],
+  "meta_description": "Venastine-Research/Xing4.0-29B-A4B-GGUF 양자화 모델, strands-agents/harness-sdk 기반의 의사결정 엔진, 수학 연구용 AI 프로젝트, 그리고 웹용 ascii.rest 애니메이션 라이브러리까지 로컬 개발과 오픈소스 생태계의 실질적 쟁점을 다룹니다.",
+  "article_count_note": "",
+  "quality_status": "READY_FOR_MANUAL_REVIEW",
+  "warnings": [
+    "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=49996425 (페이지 확인 실패: https://openai.com/index/gpt-6-for-everyone/ (HTTP Error 403: Forbidden))"
+  ],
+  "manual_review_required": true,
+  "publish_checklist": [
+    "원문 링크와 사실관계를 확인합니다.",
+    "작성자 분석이 자신의 실제 관점인지 검토합니다.",
+    "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요.",
+    "소개·문의·개인정보 페이지가 실제 값으로 공개됐는지 확인합니다.",
+    "티스토리 HTML 모드에 붙여넣은 뒤 모바일 화면을 확인합니다."
+  ],
+  "sources": [
+    {
+      "name": "Hugging Face 커뮤니티",
+      "title": "Venastine-Research/Xing4.0-29B-A4B-GGUF",
+      "url": "https://huggingface.co/Venastine-Research/Xing4.0-29B-A4B-GGUF"
+    },
+    {
+      "name": "Strands Agents",
+      "title": "Introducing Strands Decider 2B: a small, open source, decision model",
+      "url": "https://strandsagents.com/blog/introducing-strands-decider/"
+    },
+    {
+      "name": "Shtetl-Optimized",
+      "title": "The Mathocalypse",
+      "url": "https://scottaaronson.blog/?p=10169"
+    },
+    {
+      "name": "ascii.rest",
+      "title": "ascii.rest: animated ascii art for web pages, by @bas3line",
+      "url": "https://ascii.rest/"
+    }
+  ],
+  "fact_review": [
+    {
+      "source": "Hugging Face 커뮤니티",
+      "title": "Venastine-Research/Xing4.0-29B-A4B-GGUF",
+      "source_url": "https://huggingface.co/Venastine-Research/Xing4.0-29B-A4B-GGUF",
+      "official_url": "https://huggingface.co/Venastine-Research/Xing4.0-29B-A4B-GGUF",
+      "summary": "Hugging Face에서 최근 주목받는 text-generation 모델 저장소입니다.",
+      "verified_facts": [
+        {
+          "label": "프로젝트·모델",
+          "value": "Venastine-Research/Xing4.0-29B-A4B-GGUF"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "Venastine-Research"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-09-29T02:07:47+09:00"
+        },
+        {
+          "label": "Hugging Face 좋아요 (수집 시점)",
+          "value": "626"
+        },
+        {
+          "label": "Hugging Face 다운로드 (수집 시점)",
+          "value": "33633"
+        },
+        {
+          "label": "Hugging Face 파이프라인",
+          "value": "text-generation"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "Strands Agents",
+      "title": "Introducing Strands Decider 2B: a small, open source, decision model",
+      "source_url": "https://strandsagents.com/blog/introducing-strands-decider/",
+      "official_url": "https://github.com/strands-agents/harness-sdk",
+      "summary": "Strands Decider 2B is a small, open source, decision model optimized for fast experimentation, local development, and innovation.",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "Strands Agents"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-10-01T09:00:00+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "strands-agents/harness-sdk"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "strands-agents"
+        },
+        {
+          "label": "라이선스",
+          "value": "Apache-2.0"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-10-08T00:53:14Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "Shtetl-Optimized",
+      "title": "The Mathocalypse",
+      "source_url": "https://scottaaronson.blog/?p=10169",
+      "official_url": "https://github.com/openai/math",
+      "summary": "Last night my 9-year-old son was taunting my wife, complexity theorist Dana Moshkovitz, as follows: “mommy, I heard you got cooked! I heard that a robot solved the math problem you worked on …",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "Shtetl-Optimized"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-10-08T03:57:26+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "openai/math"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "openai"
+        },
+        {
+          "label": "라이선스",
+          "value": "Apache-2.0"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-10-08T01:26:37Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "ascii.rest",
+      "title": "ascii.rest: animated ascii art for web pages, by @bas3line",
+      "source_url": "https://ascii.rest/",
+      "official_url": "https://github.com/bas3line/ascii",
+      "summary": "191 animated ascii pieces for web pages, in TypeScript with no dependencies: for React, Next.js, Astro, or one HTML tag. MIT licensed.",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "ascii.rest"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-10-08T00:05:37+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "bas3line/ascii"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "bas3line"
+        },
+        {
+          "label": "라이선스",
+          "value": "MIT"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-10-08T01:25:32Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    }
+  ],
+  "images": {
+    "hero": {
+      "path": "hero.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-08/hero.png",
+      "kind": "generated-hero"
+    },
+    "huggingface-community-5282b8e550cb40df": {
+      "origin_url": "https://huggingface.co/Venastine-Research/Xing4.0-29B-A4B-GGUF/resolve/main/thumbnail.png",
+      "kind": "generated-fallback",
+      "path": "issue-1.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-08/issue-1.svg"
+    },
+    "hacker-news-aee9f0d16c69308f": {
+      "origin_url": "https://strandsagents.com/blog/og/introducing-strands-decider.png",
+      "kind": "source-image",
+      "path": "issue-2.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-08/issue-2.png"
+    },
+    "hacker-news-a209d5dc0c353563": {
+      "origin_url": "https://s0.wp.com/_si/?t=eyJpbWciOiJodHRwczpcL1wvc2NvdHRhYXJvbnNvbi5ibG9nXC93cC1jb250ZW50XC91cGxvYWRzXC8yMDIxXC8xMFwvY3JvcHBlZC1KYWNrZXQuZ2lmIiwidHh0IjoiU2h0ZXRsLU9wdGltaXplZCIsInRlbXBsYXRlIjoiZWRnZSIsImZvbnQiOiIiLCJibG9nX2lkIjoxMjk1MjA1ODB9.siOtN7gHw4tefA_rZickBw4GfI6tPxGgOQ1AXr2ZoOQMQ",
+      "kind": "source-image",
+      "path": "issue-3.jpg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-08/issue-3.jpg"
+    },
+    "hacker-news-c2098b719c19eef4": {
+      "origin_url": "https://ascii.rest/og.png",
+      "kind": "source-image",
+      "path": "issue-4.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-08/issue-4.png"
+    }
+  }
+}
