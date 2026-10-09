@@ -1,0 +1,205 @@
+{
+  "date": "2026-10-09",
+  "title": "[AI 뉴스룸] 거대 인프라의 수익성 경고음 속에서 주목받는 초경량·최소화 엔지니어링",
+  "title_candidates": [
+    "[AI 뉴스룸] 거대 인프라의 수익성 경고음 속에서 주목받는 초경량·최소화 엔지니어링",
+    "[AI 뉴스룸] Nvidia 주가 하락과 초경량 로컬 모델이 던지는 AI 비용 최적화의 화두",
+    "[AI 뉴스룸] DietrichGebert/ponytail과 Whistle로 보는 극단적 효율화 지향 아키텍처"
+  ],
+  "tags": [
+    "AI에이전트",
+    "음성인식",
+    "로컬LLM",
+    "Threejs",
+    "인프라비용",
+    "ponytail",
+    "Whistle",
+    "Claude"
+  ],
+  "meta_description": "Nvidia와 Oracle 등 주요 기술 기업의 주가 하락과 OpenAI 매출 발표가 시사하는 인프라 시장의 명암을 짚어보고, 에이전트의 오버엔지니어링을 막는 ponytail, 16.9MB 초경량 음성 인식 모델 Whistle, Claude Opus 5.5의 3D 웹 시각화 실험을 통해 실용적인 아키텍처 설계 방향을 모색합니다.",
+  "article_count_note": "",
+  "quality_status": "READY_FOR_MANUAL_REVIEW",
+  "warnings": [
+    "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50006832 (페이지 확인 실패: https://apnews.com/article/h1b-visa-program-vance-microsoft-e7b3a407f822702b269ee277d21343ea (HTTP Error 403: Forbidden))"
+  ],
+  "manual_review_required": true,
+  "publish_checklist": [
+    "원문 링크와 사실관계를 확인합니다.",
+    "작성자 분석이 자신의 실제 관점인지 검토합니다.",
+    "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요.",
+    "소개·문의·개인정보 페이지가 실제 값으로 공개됐는지 확인합니다.",
+    "티스토리 HTML 모드에 붙여넣은 뒤 모바일 화면을 확인합니다."
+  ],
+  "sources": [
+    {
+      "name": "GitHub 커뮤니티",
+      "title": "DietrichGebert/ponytail",
+      "url": "https://github.com/DietrichGebert/ponytail"
+    },
+    {
+      "name": "cactuscompute.com",
+      "title": "Whistle: Speech to Text in 16.9 MB",
+      "url": "https://cactuscompute.com/blog/whistle"
+    },
+    {
+      "name": "Quesma",
+      "title": "I gave Opus 5.5 one prompt and six hours to visualize Invisible Cities - Quesma Blog",
+      "url": "https://quesma.com/blog/invisible-cities-one-shot/"
+    },
+    {
+      "name": "CNBC",
+      "title": "Nvidia, Oracle, CoreWeave and other AI stocks sink on OpenAI revenue report",
+      "url": "https://www.cnbc.com/2026/10/08/open-ai-revenue-nvidia-oracle-coreweave.html"
+    }
+  ],
+  "fact_review": [
+    {
+      "source": "GitHub 커뮤니티",
+      "title": "DietrichGebert/ponytail",
+      "source_url": "https://github.com/DietrichGebert/ponytail",
+      "official_url": "https://github.com/DietrichGebert/ponytail",
+      "summary": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
+      "verified_facts": [
+        {
+          "label": "프로젝트·모델",
+          "value": "DietrichGebert/ponytail"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "DietrichGebert"
+        },
+        {
+          "label": "라이선스",
+          "value": "MIT"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-10-09T01:33:34Z"
+        },
+        {
+          "label": "GitHub 스타 (수집 시점)",
+          "value": "158577"
+        },
+        {
+          "label": "GitHub 최근 푸시",
+          "value": "2026-10-08T16:19:55Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "cactuscompute.com",
+      "title": "Whistle: Speech to Text in 16.9 MB",
+      "source_url": "https://cactuscompute.com/blog/whistle",
+      "official_url": "https://github.com/cactus-compute/needle",
+      "summary": "An open speech recognition model that runs on the same CPU engine as Needle. It transcribes seven languages, reaches the first token in 11 ms, and loads beside Needle so one binary turns a clip straight into tool calls.",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "cactuscompute.com"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-10-02T00:00:00+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "cactus-compute/needle"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "cactus-compute"
+        },
+        {
+          "label": "라이선스",
+          "value": "Apache-2.0"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-10-09T01:32:32Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "Quesma",
+      "title": "I gave Opus 5.5 one prompt and six hours to visualize Invisible Cities - Quesma Blog",
+      "source_url": "https://quesma.com/blog/invisible-cities-one-shot/",
+      "official_url": "https://github.com/stared/invisible-cities-astra",
+      "summary": "Claude Opus 5.5 vs GPT-6 Astra one-shot Invisible Cities by Italo Calvino in Three.js: AI design, UX, data visualization and explorable explanations.",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "Quesma"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-10-07T18:26:43+09:00"
+        },
+        {
+          "label": "프로젝트·모델",
+          "value": "stared/invisible-cities-astra"
+        },
+        {
+          "label": "개발·배포 주체",
+          "value": "stared"
+        },
+        {
+          "label": "최근 업데이트",
+          "value": "2026-10-08T22:37:05Z"
+        }
+      ],
+      "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+    },
+    {
+      "source": "CNBC",
+      "title": "Nvidia, Oracle, CoreWeave and other AI stocks sink on OpenAI revenue report",
+      "source_url": "https://www.cnbc.com/2026/10/08/open-ai-revenue-nvidia-oracle-coreweave.html",
+      "official_url": "",
+      "summary": "OpenAI has told investors that it hit roughly $50 billion in annualized revenue at the end of September, CNBC confirmed.",
+      "verified_facts": [
+        {
+          "label": "기사 출처",
+          "value": "CNBC"
+        },
+        {
+          "label": "기사 게시 시각",
+          "value": "2026-10-09T03:14:54+09:00"
+        }
+      ],
+      "manual_review_note": "공식 프로젝트·1차 출처가 연결되지 않은 항목입니다. 숫자, 규제, 회사 관계, 인과관계 주장은 원문을 열어 직접 확인하세요."
+    }
+  ],
+  "images": {
+    "hero": {
+      "path": "hero.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-09/hero.png",
+      "kind": "generated-hero"
+    },
+    "github-community-38c3408d933af173": {
+      "origin_url": "https://opengraph.githubassets.com/1/DietrichGebert/ponytail",
+      "kind": "source-image",
+      "path": "issue-1.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-09/issue-1.png"
+    },
+    "hacker-news-e1739cedc6f9ead7": {
+      "origin_url": "",
+      "kind": "source-image",
+      "path": "issue-2.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-09/issue-2.svg"
+    },
+    "hacker-news-2047e13c8ae42108": {
+      "origin_url": "https://quesma.com/_astro/thumbnail.CbJSiyQh.jpg",
+      "kind": "source-image",
+      "path": "issue-3.jpg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-09/issue-3.jpg"
+    },
+    "hacker-news-53388dee81af3cea": {
+      "origin_url": "https://image.cnbcfm.com/api/v1/image/108369813-1790712609527-gettyimages-2297765616-_q3a2873_m5g8wtsy.jpeg?v=1790712953&w=1920&h=1080",
+      "kind": "source-image",
+      "path": "issue-4.jpg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-09/issue-4.jpg"
+    }
+  }
+}
