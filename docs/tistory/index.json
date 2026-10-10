@@ -1,5 +1,214 @@
 [
   {
+    "date": "2026-10-10",
+    "title": "[AI 뉴스룸] WebGPU 연산과 OS 화면 시각화로 확장되는 AI 에이전트 실행 접점",
+    "title_candidates": [
+      "[AI 뉴스룸] WebGPU 연산과 OS 화면 시각화로 확장되는 AI 에이전트 실행 접점",
+      "[AI 뉴스룸] 개발 프레임워크와 디스플레이 오버레이로 파고드는 에이전트 스택",
+      "[AI 뉴스룸] 모바일 빌드 플랫폼부터 GPU 텐서 가속까지 에이전트 인터페이스의 재편"
+    ],
+    "tags": [
+      "WebGPU",
+      "AI에이전트",
+      "Expo",
+      "텍스트생성",
+      "개발도구",
+      "프론트엔드"
+    ],
+    "meta_description": "WebGPU 크로스 런타임 라이브러리 vgpu, Mac 화면 오버레이 도구, humanizer 텍스트 파이프라인, Expo의 에이전트 투자를 통해 AI 에이전트가 개발 인터페이스 및 실행 환경과 결합하는 흐름을 다룹니다.",
+    "article_count_note": "",
+    "quality_status": "READY_FOR_MANUAL_REVIEW",
+    "warnings": [
+      "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+      "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50021066 (페이지 확인 실패: https://www.reuters.com/world/us-imposes-sanctions-international-criminal-court-hours-after-former-judge-wins-2026-10-09/ (HTTP Error 401: HTTP Forbidden))",
+      "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50026555 (페이지 확인 실패: https://gizmodo.com/youtuber-says-cops-paid-him-a-visit-after-he-built-flock-style-camera-to-track-cops-2000824306 (HTTP Error 403: Forbidden))"
+    ],
+    "manual_review_required": true,
+    "publish_checklist": [
+      "원문 링크와 사실관계를 확인합니다.",
+      "작성자 분석이 자신의 실제 관점인지 검토합니다.",
+      "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요.",
+      "소개·문의·개인정보 페이지가 실제 값으로 공개됐는지 확인합니다.",
+      "티스토리 HTML 모드에 붙여넣은 뒤 모바일 화면을 확인합니다."
+    ],
+    "sources": [
+      {
+        "name": "Hugging Face 커뮤니티",
+        "title": "jialinyyzz/humanizer",
+        "url": "https://huggingface.co/jialinyyzz/humanizer"
+      },
+      {
+        "name": "GitHub",
+        "title": "GitHub - franzenzenhofer/big-arrow-on-the-screen: Let your AI agents paint big arrows, boxes and text on your Mac screen. One CLI, click-through, gone by itself. Skill for Claude Code and Codex. MIT.",
+        "url": "https://github.com/franzenzenhofer/big-arrow-on-the-screen"
+      },
+      {
+        "name": "GitHub",
+        "title": "GitHub - vercel-labs/vgpu: Modular cross-runtime WebGPU library for shaders, 3D scenes, GPU tensors, neural networks, and math viz",
+        "url": "https://github.com/vercel-labs/vgpu"
+      },
+      {
+        "name": "The New Stack",
+        "title": "Expo bets big on React Native’s agentic future",
+        "url": "https://thenewstack.io/expo-bets-big-on-react-natives-agentic-future/"
+      }
+    ],
+    "fact_review": [
+      {
+        "source": "Hugging Face 커뮤니티",
+        "title": "jialinyyzz/humanizer",
+        "source_url": "https://huggingface.co/jialinyyzz/humanizer",
+        "official_url": "https://huggingface.co/jialinyyzz/humanizer",
+        "summary": "Hugging Face에서 최근 주목받는 text-generation 모델 저장소입니다.",
+        "verified_facts": [
+          {
+            "label": "프로젝트·모델",
+            "value": "jialinyyzz/humanizer"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "jialinyyzz"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-10-09T05:13:31+09:00"
+          },
+          {
+            "label": "Hugging Face 좋아요 (수집 시점)",
+            "value": "751"
+          },
+          {
+            "label": "Hugging Face 다운로드 (수집 시점)",
+            "value": "29470"
+          },
+          {
+            "label": "Hugging Face 파이프라인",
+            "value": "text-generation"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      },
+      {
+        "source": "GitHub",
+        "title": "GitHub - franzenzenhofer/big-arrow-on-the-screen: Let your AI agents paint big arrows, boxes and text on your Mac screen. One CLI, click-through, gone by itself. Skill for Claude Code and Codex. MIT.",
+        "source_url": "https://github.com/franzenzenhofer/big-arrow-on-the-screen",
+        "official_url": "https://github.com/franzenzenhofer/big-arrow-on-the-screen",
+        "summary": "Let your AI agents paint big arrows, boxes and text on your Mac screen. One CLI, click-through, gone by itself. Skill for Claude Code and Codex. MIT. - franzenzenhofer/big-arrow-on-the-screen",
+        "verified_facts": [
+          {
+            "label": "기사 출처",
+            "value": "GitHub"
+          },
+          {
+            "label": "기사 게시 시각",
+            "value": "2026-10-09T20:03:48+09:00"
+          },
+          {
+            "label": "프로젝트·모델",
+            "value": "franzenzenhofer/big-arrow-on-the-screen"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "franzenzenhofer"
+          },
+          {
+            "label": "라이선스",
+            "value": "MIT"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-10-10T01:18:59Z"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      },
+      {
+        "source": "GitHub",
+        "title": "GitHub - vercel-labs/vgpu: Modular cross-runtime WebGPU library for shaders, 3D scenes, GPU tensors, neural networks, and math viz",
+        "source_url": "https://github.com/vercel-labs/vgpu",
+        "official_url": "https://github.com/vercel-labs/vgpu",
+        "summary": "Modular cross-runtime WebGPU library for shaders, 3D scenes, GPU tensors, neural networks, and math viz - vercel-labs/vgpu",
+        "verified_facts": [
+          {
+            "label": "기사 출처",
+            "value": "GitHub"
+          },
+          {
+            "label": "기사 게시 시각",
+            "value": "2026-10-10T09:30:03+09:00"
+          },
+          {
+            "label": "프로젝트·모델",
+            "value": "vercel-labs/vgpu"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "vercel-labs"
+          },
+          {
+            "label": "라이선스",
+            "value": "MIT"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-10-10T01:01:21Z"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      },
+      {
+        "source": "The New Stack",
+        "title": "Expo bets big on React Native’s agentic future",
+        "source_url": "https://thenewstack.io/expo-bets-big-on-react-natives-agentic-future/",
+        "official_url": "",
+        "summary": "Open source app-building platform raises $45M and hires former Meta React lead Seth Webster as it embraces AI coding agents.",
+        "verified_facts": [
+          {
+            "label": "기사 출처",
+            "value": "The New Stack"
+          },
+          {
+            "label": "기사 게시 시각",
+            "value": "2026-04-17T00:37:32+09:00"
+          }
+        ],
+        "manual_review_note": "공식 프로젝트·1차 출처가 연결되지 않은 항목입니다. 숫자, 규제, 회사 관계, 인과관계 주장은 원문을 열어 직접 확인하세요."
+      }
+    ],
+    "images": {
+      "hero": {
+        "path": "hero.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-10/hero.png",
+        "kind": "generated-hero"
+      },
+      "huggingface-community-097c2ef4d87a406d": {
+        "origin_url": "https://huggingface.co/jialinyyzz/humanizer/resolve/main/thumbnail.png",
+        "kind": "generated-fallback",
+        "path": "issue-1.svg",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-10/issue-1.svg"
+      },
+      "hacker-news-bf2149b8045ec7a8": {
+        "origin_url": "https://opengraph.githubassets.com/6cf04d9349b823ca10bd6edb25df6ec80dc58af52462786cdcff5a1e7ea0b4b0/franzenzenhofer/big-arrow-on-the-screen",
+        "kind": "source-image",
+        "path": "issue-2.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-10/issue-2.png"
+      },
+      "geeknews-a8973344ac654314": {
+        "origin_url": "https://opengraph.githubassets.com/6a7aa947bdd8a5e0d44fde223dbe47226a3cdfd2b559b8b30f2b7e4451a2b0a3/vercel-labs/vgpu",
+        "kind": "source-image",
+        "path": "issue-3.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-10/issue-3.png"
+      },
+      "geeknews-4b3a9ff98b822be3": {
+        "origin_url": "https://cdn.thenewstack.io/media/2026/04/21ab5346-ubaid-e-alyafizi-chbwef815-m-unsplash-scaled.jpg",
+        "kind": "source-image",
+        "path": "issue-4.jpg",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-10/issue-4.jpg"
+      }
+    },
+    "html_path": "tistory/2026-10-10.html"
+  },
+  {
     "date": "2026-10-09",
     "title": "[AI 뉴스룸] 거대 인프라의 수익성 경고음 속에서 주목받는 초경량·최소화 엔지니어링",
     "title_candidates": [
