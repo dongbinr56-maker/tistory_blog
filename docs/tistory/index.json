@@ -1,5 +1,229 @@
 [
   {
+    "date": "2026-10-11",
+    "title": "[AI 뉴스룸] vercel/eve와 rociiu/talorys가 제시하는 에이전트 상태 보존과 인프라 격리 설계",
+    "title_candidates": [
+      "[AI 뉴스룸] vercel/eve와 rociiu/talorys가 제시하는 에이전트 상태 보존과 인프라 격리 설계",
+      "[AI 뉴스룸] 추론 단계 단축 파이프라인 Qwen-Image-2.1-Turbo와 코딩 에이전트 역공학 도구 morluto/rea",
+      "[AI 뉴스룸] 상태 유지형 프레임워크와 개인 인프라 에이전트 구축의 실무적 검토 조건"
+    ],
+    "tags": [
+      "AI에이전트",
+      "오픈소스",
+      "VercelEve",
+      "Talorys",
+      "Qwen",
+      "역공학",
+      "아키텍처"
+    ],
+    "meta_description": "Qwen/Qwen-Image-2.1-Turbo의 빠른 추론 파이프라인부터 Vercel의 eve 프레임워크, Cloudflare 기반 talorys 및 역공학 분석 도구 REA까지 하부 구조 제어 트레이드오프를 검토합니다.",
+    "article_count_note": "",
+    "quality_status": "READY_FOR_MANUAL_REVIEW",
+    "warnings": [
+      "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))"
+    ],
+    "manual_review_required": true,
+    "publish_checklist": [
+      "원문 링크와 사실관계를 확인합니다.",
+      "작성자 분석이 자신의 실제 관점인지 검토합니다.",
+      "관련된 기존 글이 있다면 발행 전 본문 끝에 내부 링크를 1개 이상 추가하세요.",
+      "소개·문의·개인정보 페이지가 실제 값으로 공개됐는지 확인합니다.",
+      "티스토리 HTML 모드에 붙여넣은 뒤 모바일 화면을 확인합니다."
+    ],
+    "sources": [
+      {
+        "name": "Hugging Face 커뮤니티",
+        "title": "Qwen/Qwen-Image-2.1-Turbo",
+        "url": "https://huggingface.co/Qwen/Qwen-Image-2.1-Turbo"
+      },
+      {
+        "name": "Vercel",
+        "title": "eve – The Agent Framework - Vercel",
+        "url": "https://vercel.com/eve"
+      },
+      {
+        "name": "GitHub",
+        "title": "GitHub - rociiu/talorys: Your personal AI agent in your own Cloudflare account. Chat, memory, tasks, notes and scheduled reminders, deployed with one command: npx create-talorys@latest. Free-tier friendly, single-user, no telemetry.",
+        "url": "https://github.com/rociiu/talorys"
+      },
+      {
+        "name": "REA",
+        "title": "REA — Reverse Engineering for Your Coding Agent",
+        "url": "https://rea.tools/"
+      }
+    ],
+    "fact_review": [
+      {
+        "source": "Hugging Face 커뮤니티",
+        "title": "Qwen/Qwen-Image-2.1-Turbo",
+        "source_url": "https://huggingface.co/Qwen/Qwen-Image-2.1-Turbo",
+        "official_url": "https://huggingface.co/Qwen/Qwen-Image-2.1-Turbo",
+        "summary": "Hugging Face에서 최근 주목받는 text-to-image 모델 저장소입니다.",
+        "verified_facts": [
+          {
+            "label": "프로젝트·모델",
+            "value": "Qwen/Qwen-Image-2.1-Turbo"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "Qwen"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-10-09T23:14:45+09:00"
+          },
+          {
+            "label": "Hugging Face 좋아요 (수집 시점)",
+            "value": "446"
+          },
+          {
+            "label": "Hugging Face 다운로드 (수집 시점)",
+            "value": "2138"
+          },
+          {
+            "label": "Hugging Face 파이프라인",
+            "value": "text-to-image"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      },
+      {
+        "source": "Vercel",
+        "title": "eve – The Agent Framework - Vercel",
+        "source_url": "https://vercel.com/eve",
+        "official_url": "https://github.com/vercel/eve",
+        "summary": "Like Next.js for web apps, but for agents. Markdown for instructions and skills, TypeScript for tools. Durable by default.",
+        "verified_facts": [
+          {
+            "label": "기사 출처",
+            "value": "Vercel"
+          },
+          {
+            "label": "기사 게시 시각",
+            "value": "2026-10-11T09:30:02+09:00"
+          },
+          {
+            "label": "프로젝트·모델",
+            "value": "vercel/eve"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "vercel"
+          },
+          {
+            "label": "라이선스",
+            "value": "Apache-2.0"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-10-10T23:39:05Z"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      },
+      {
+        "source": "GitHub",
+        "title": "GitHub - rociiu/talorys: Your personal AI agent in your own Cloudflare account. Chat, memory, tasks, notes and scheduled reminders, deployed with one command: npx create-talorys@latest. Free-tier friendly, single-user, no telemetry.",
+        "source_url": "https://github.com/rociiu/talorys",
+        "official_url": "https://github.com/rociiu/talorys",
+        "summary": "Your personal AI agent in your own Cloudflare account. Chat, memory, tasks, notes and scheduled reminders, deployed with one command: npx create-talorys@latest. Free-tier friendly, single-user, no ...",
+        "verified_facts": [
+          {
+            "label": "기사 출처",
+            "value": "GitHub"
+          },
+          {
+            "label": "기사 게시 시각",
+            "value": "2026-10-10T19:52:09+09:00"
+          },
+          {
+            "label": "프로젝트·모델",
+            "value": "rociiu/talorys"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "rociiu"
+          },
+          {
+            "label": "라이선스",
+            "value": "MIT"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-10-11T00:32:48Z"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      },
+      {
+        "source": "REA",
+        "title": "REA — Reverse Engineering for Your Coding Agent",
+        "source_url": "https://rea.tools/",
+        "official_url": "https://github.com/morluto/rea",
+        "summary": "Reverse engineer apps, binaries and browser behavior with your coding agent. Follow clear guides and try interactive examples with REA.",
+        "verified_facts": [
+          {
+            "label": "기사 출처",
+            "value": "REA"
+          },
+          {
+            "label": "기사 게시 시각",
+            "value": "2026-10-10T09:37:07+09:00"
+          },
+          {
+            "label": "프로젝트·모델",
+            "value": "morluto/rea"
+          },
+          {
+            "label": "개발·배포 주체",
+            "value": "morluto"
+          },
+          {
+            "label": "라이선스",
+            "value": "MIT"
+          },
+          {
+            "label": "최근 업데이트",
+            "value": "2026-10-11T00:35:11Z"
+          }
+        ],
+        "manual_review_note": "아래 값은 수집 시점의 원문·공식 페이지 기록입니다. 본문 표현과 원문을 함께 대조하세요."
+      }
+    ],
+    "images": {
+      "hero": {
+        "path": "hero.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-11/hero.png",
+        "kind": "generated-hero"
+      },
+      "huggingface-community-167c7efa09e6db36": {
+        "origin_url": "https://huggingface.co/Qwen/Qwen-Image-2.1-Turbo/resolve/main/thumbnail.png",
+        "kind": "generated-fallback",
+        "path": "issue-1.svg",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-11/issue-1.svg"
+      },
+      "geeknews-ce3dc91895d6b2cd": {
+        "origin_url": "https://lishhsx6kmthaacj.public.blob.vercel-storage.com/eve-og.png",
+        "kind": "source-image",
+        "path": "issue-2.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-11/issue-2.png"
+      },
+      "hacker-news-5c1db9239c15fa63": {
+        "origin_url": "https://opengraph.githubassets.com/88c00684f7eb57e939e36d6421d18af6bb645155245dfd62abf551db27e83a12/rociiu/talorys",
+        "kind": "source-image",
+        "path": "issue-3.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-11/issue-3.png"
+      },
+      "hacker-news-458c04cd04ca960b": {
+        "origin_url": "https://rea.tools/assets/social-card.png",
+        "kind": "source-image",
+        "path": "issue-4.png",
+        "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-11/issue-4.png"
+      }
+    },
+    "html_path": "tistory/2026-10-11.html"
+  },
+  {
     "date": "2026-10-10",
     "title": "[AI 뉴스룸] WebGPU 연산과 OS 화면 시각화로 확장되는 AI 에이전트 실행 접점",
     "title_candidates": [
