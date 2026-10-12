@@ -1,0 +1,12 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    "초안 생성 중단: 요즘IT·GeekNews·Hacker News 기사와 GitHub/Hugging Face 커뮤니티 프로젝트를 합쳐 검증 가능한 3건을 만들지 못했습니다."
+  ],
+  "collector_errors": [
+    "수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "검증 제외: https://news.ycombinator.com/item?id=50041619 (페이지 확인 실패: https://radar.cloudflare.com/bots/as13238?dateRange=7d (HTTP Error 403: Forbidden))",
+    "검증 제외: https://news.ycombinator.com/item?id=50040547 (페이지 확인 실패: https://status.yandex.cloud/en/incidents/2136 (HTTP Error 403: Forbidden))",
+    "검증 제외: https://news.ycombinator.com/item?id=50048312 (페이지 확인 실패: https://nonfunctional.substack.com/p/passkeys-are-a-trap-do-not-use-them (HTTP Error 403: Forbidden))"
+  ]
+}
