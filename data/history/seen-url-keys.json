@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-10-11T00:37:18.233385+00:00",
+  "updated_at": "2026-10-13T02:51:19.994128+00:00",
   "entries": {
     "https://aleph-alpha.com/en/blog/kolibri-has-landed-a-sovereign-open-weight-model": "2026-10-04",
     "https://anil.recoil.org/notes/rumour-is-the-exploit": "2026-08-29",
@@ -110,6 +110,7 @@
     "https://github.com/openai/codex": "2026-07-20",
     "https://github.com/openai/codex-security": "2026-07-29",
     "https://github.com/openai/codex/issues/28058": "2026-07-16",
+    "https://github.com/openai/codex/issues/48195": "2026-10-13",
     "https://github.com/openai/codex/pull/33972/files": "2026-07-20",
     "https://github.com/openai/math": "2026-10-08",
     "https://github.com/openai/openai-cookbook": "2026-08-25",
@@ -127,6 +128,7 @@
     "https://github.com/rynfar/meridian": "2026-07-13",
     "https://github.com/safedep/vet": "2026-08-21",
     "https://github.com/schlarpc/re-shell": "2026-08-25",
+    "https://github.com/scottjehl/respond": "2026-10-13",
     "https://github.com/shadcn-labs/pdfcn": "2026-09-23",
     "https://github.com/shopify/react-native-skia": "2026-09-11",
     "https://github.com/significant-gravitas/autogpt": "2026-07-12",
@@ -165,6 +167,7 @@
     "https://himitsushell.com": "2026-07-11",
     "https://huggingface.co/abenzerps/qwen-image-2.1-gguf": "2026-09-22",
     "https://huggingface.co/abenzerps/qwen-image-2.1-uncensored-gguf": "2026-09-23",
+    "https://huggingface.co/abenzerps/qwen-image-2.1-uncensored-quantized": "2026-10-13",
     "https://huggingface.co/aleph-alpha/kolibri-1": "2026-10-04",
     "https://huggingface.co/altworld/hemmingway-1": "2026-09-26",
     "https://huggingface.co/autotrust/gev-26b-decide": "2026-10-07",
@@ -447,6 +450,9 @@
     "https://news.ycombinator.com/item?id=50018817": "2026-10-10",
     "https://news.ycombinator.com/item?id=50028275": "2026-10-11",
     "https://news.ycombinator.com/item?id=50031614": "2026-10-11",
+    "https://news.ycombinator.com/item?id=50059115": "2026-10-13",
+    "https://news.ycombinator.com/item?id=50060694": "2026-10-13",
+    "https://news.ycombinator.com/item?id=50063427": "2026-10-13",
     "https://newsletter.semianalysis.com/p/openai-jalapeno-better-than-nvidia": "2026-08-26",
     "https://ollaya.dev": "2026-09-26",
     "https://openjev.com": "2026-09-19",
@@ -459,6 +465,7 @@
     "https://quesma.com/blog/invisible-cities-one-shot": "2026-10-09",
     "https://rea.tools": "2026-10-11",
     "https://research.meta.ai/blog/introducing-muse-glimmer-open-agentic-model": "2026-08-11",
+    "https://research.meta.ai/blog/muse-wonder": "2026-10-13",
     "https://rhonabwy.com/2026/08/15/software-engineering-fundamentals-matter-more-than-ever": "2026-08-17",
     "https://rosettalens.com/s/ko/when-ai-writes-almost-all-code-what": "2026-09-27",
     "https://safedep.io/arrayref-proc-macro1-rust-build-time-malware": "2026-08-21",
@@ -517,6 +524,7 @@
     "https://www.wafer.ai/blog/kimi-k3-mi355x": "2026-08-03",
     "https://www.wiz.io/blog/red-agent-snowflake-copilot-cicd-bug": "2026-08-18",
     "https://x.com/appledelhi/status/2079022142663094356": "2026-07-23",
+    "https://yyhh.org/blog/2026/10/ai-is-a-tool": "2026-10-13",
     "https://z.ai/blog/glm-built-its-inference-infrastructure": "2026-09-18",
     "https://zed.dev/blog/introducing-delta": "2026-08-13"
   }
