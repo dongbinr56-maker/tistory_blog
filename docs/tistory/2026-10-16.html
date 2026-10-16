@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>[AI 뉴스룸] 온디바이스 엣지부터 M5 Ultra 데스크톱까지 확장되는 오픈 가중치 추론 모델의 트레이드오프 — 검토용 초안</title></head>
+<body style="margin:0;padding:24px 12px;background:#f3f6fa">
+<article class="tistory-newsroom" lang="ko">
+  <style>
+    .tistory-newsroom {max-width:760px;margin:0 auto;color:#1f2937;font-family:Apple SD Gothic Neo,Malgun Gothic,sans-serif;line-height:1.85}
+    .tistory-newsroom .hero {padding:30px 26px;border:1px solid #dbe4ee;border-radius:18px;background:#f8fafc}
+    .tistory-newsroom .issue-image {display:block;width:100%;max-height:330px;margin:0 0 20px;border-radius:14px;object-fit:cover;background:#e2e8f0}
+    .tistory-newsroom h1 {margin:0 0 16px;color:#111827;font-size:30px;line-height:1.38}
+    .tistory-newsroom h2 {color:#111827;font-size:23px;line-height:1.45}
+    .tistory-newsroom p {margin:0 0 14px}
+    .tistory-newsroom .eyebrow {color:#0f766e;font-weight:700;font-size:13px;letter-spacing:.04em}
+    .tistory-newsroom .issue-card {margin:28px 0;padding:24px;border:1px solid #e2e8f0;border-radius:16px;background:#fff}
+    .tistory-newsroom .action {margin:18px 0 10px;padding:14px 16px;border-left:3px solid #0f766e;border-radius:0 10px 10px 0;background:#f0fdfa}
+    .tistory-newsroom .sources {margin:6px 0 0;color:#64748b;font-size:14px}
+    .tistory-newsroom .editor-note {margin:20px 0;padding:16px 18px;border-left:4px solid #334155;border-radius:0 12px 12px 0;background:#f8fafc;font-style:normal}
+    .tistory-newsroom .closing {margin-top:28px}
+    .tistory-newsroom a {color:#0f766e}
+  </style>
+  <header class="hero">
+    <p class="eyebrow">2026-10-16 · AI·개발</p>
+    <h1>[AI 뉴스룸] 온디바이스 엣지부터 M5 Ultra 데스크톱까지 확장되는 오픈 가중치 추론 모델의 트레이드오프</h1>
+    <p>로컬 인퍼런스 환경 구축의 핵심은 모델의 총 파라미터 수가 아니라 실행 순간 메모리에 부하를 주는 활성화 파라미터 비율을 제어하는 일입니다. openbmb/MiniCPM-V-4.7-35B-A3B 와 LiquidAI/LFM2.5-24B-A2B, meta-models/Muse-Spark-Open-816B-A42B 는 엣지 단말부터 고성능 데스크톱에 이르기까지 서로 다른 활성화 구조로 오프라인 에이전트 서빙의 가능성을 보여줍니다. 단일 클라우드 API에 의존하던 관성에서 벗어나 개별 하드웨어의 메모리 대역폭과 프롬프트 응답 속도 조건에 맞춘 가중치 분배 전략이 로컬 AI 시스템의 성패를 결정짓습니다.</p>
+  </header>
+  <section class="editor-note"><p>개별 오픈 가중치 모델을 로컬 추론 프레임워크에 직접 적재하여 디바이스 메모리 점유율과 도구 호출 프롬프트의 초당 토큰 생성 속도를 수치로 비교해보는 정량 평가가 필요한 시점입니다.</p></section>
+  <section class="issue-card">
+  <h2>openbmb/MiniCPM-V-4.7-35B-A3B 공개와 로컬 시각 멀티모달 최적화</h2>
+  <img class="issue-image" src="https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-16/issue-1.svg" alt="openbmb/MiniCPM-V-4.7-35B-A3B 공개와 로컬 시각 멀티모달 최적화 관련 이미지">
+  <p>Hugging Face 커뮤니티에 이미지와 텍스트를 함께 처리하는 openbmb/MiniCPM-V-4.7-35B-A3B 저장소가 공개되었습니다. 해당 저장소는 image-text-to-text 파이프라인 태그로 분류되어 있으며, 좋아요 793개와 다운로드 9278건을 기록하고 있습니다.</p><p>이미지와 글자를 동시에 받아들여 질문에 답하거나 정보를 해석하는 시각-언어 AI 모델의 가중치입니다. 모바일이나 단말 장치에서 클라우드 연동 없이 시각적 입력을 직접 처리할 때 사용하는 자원이며, 허깅페이스 플랫폼에서 관련 파이프라인 태그로 공유되는 오프라인 운용 패키지 형태를 취합니다.</p><p>외부 멀티모달 API 호출 시 발생하던 데이터 전송 대기 시간과 지속적인 유료 서빙 비용을 단말 내부 연산으로 전환하는 선택지를 제공합니다.</p><p>시각-언어 연산은 단일 텍스트 모델보다 입출력 처리 시 하드웨어 메모리 대역폭 병목이 훨씬 크게 발생합니다. 이 저장소를 로컬 시스템에 올리기 전, 실제 사용할 에지 장비나 데스크톱 환경에서 이미지 해상도에 따른 VRAM 점유량과 초당 토큰 생성 속도를 측정해야 합니다. 단일 인코더 기반 경량 모델과 비교하여 추가적인 아키텍처적 이점이 확실한지 테스트 환경에서 점검하는 과정이 수반되어야 실질적인 효용을 평가할 수 있습니다.</p>
+  <p class="action">허깅페이스 저장소에서 가중치를 받아 대상 단말의 VRAM 점유량과 이미지 입력 시 프롬프트 처리 지연 시간을 직접 비교 검증하십시오.</p>
+  <p class="sources">참고: <a href="https://huggingface.co/openbmb/MiniCPM-V-4.7-35B-A3B" rel="nofollow noopener noreferrer" target="_blank">Hugging Face 커뮤니티 원문</a></p>
+</section><section class="issue-card">
+  <h2>Liquid AI의 LFM2.5-24B-A2B 발표와 온디바이스 에이전트 추론</h2>
+  <img class="issue-image" src="https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-16/issue-2.png" alt="Liquid AI의 LFM2.5-24B-A2B 발표와 온디바이스 에이전트 추론 관련 이미지">
+  <p>Liquid AI가 온디바이스 에이전트 구동에 특화된 오픈 가중치 추론 모델 LFM2.5-24B-A2B를 발표했습니다. 전체 24B 매개변수 중 2B만 활성화되는 구조로, LiveClaw 벤치마크에서 Qwen3.6-35B-A3B보다 높은 성적을 거두었습니다.</p><p>네트워크 연결이 없는 개인 단말기 내부에서 빠르게 에이전트 기능을 수행하도록 만든 오픈 가중치 모델입니다. 총 240억 개의 파라미터를 보관하지만 실제 추론 순간에는 20억 개만 작동시켜 실행 속도를 높이고 전력 소모를 줄이도록 설계되었습니다.</p><p>활성화 파라미터를 2B로 제한하면서도 추론 성과를 유지하여, 로컬 기기에서 외부 통신 없이 도구 호출과 실시간 응답을 처리하는 온디바이스 에이전트 환경을 구성하게 만듭니다.</p><p>2B 수준의 연산량은 빠른 반응 속도를 보장하지만, 여러 도구를 연속으로 호출해야 하는 복잡한 에이전트 워크플로우에서는 지시 이행 충실도가 떨어지는 한계가 드러날 수 있습니다. 빠른 응답성이 최우선인 단말 단의 1차 도구 분류용으로 먼저 배치하고, 고난도 로직은 별도 모델로 분깃하는 아키텍처를 설계하는 접근이 타당합니다. 라이브 벤치마크 점수에만 의존하지 말고 실제 에이전트 루프 내 예외 처리율을 직접 측정하는 조치가 요구됩니다.</p>
+  <p class="action">공식 블로그의 사양을 확인하고 허깅페이스에서 가중치를 내려받아 로컬 에이전트 도구 호출 프롬프트의 지연 시간과 도구 선택 정확도를 점검하십시오.</p>
+  <p class="sources">참고: <a href="https://www.liquid.ai/blog/lfm2-5-24b-a2b" rel="nofollow noopener noreferrer" target="_blank">Liquid AI 원문</a></p>
+</section><section class="issue-card">
+  <h2>Meta AI Research의 Muse Spark Open 발표와 데스크톱 워크스테이션 에이전트</h2>
+  <img class="issue-image" src="https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-16/issue-3.webp" alt="Meta AI Research의 Muse Spark Open 발표와 데스크톱 워크스테이션 에이전트 관련 이미지">
+  <p>Meta AI Research가 미국 내 오픈 가중치 모델 중 최고 수준의 성능을 갖춘 Muse Spark Open을 발표했습니다. 총 816B 매개변수 중 42B를 활성화하는 아키텍처를 갖췄으며, Apple M5 Ultra 탑재 Mac Studio 환경에서 데스크톱 기반 에이전트 기능을 수행하도록 설계되었습니다.</p><p>대규모 에이전트 추론 기능을 데스크톱 컴퓨터 환경에서 직접 가동할 수 있도록 공개된 초대형 오픈 가중치 모델입니다. 8160억 개의 전체 파라미터 가운데 실행 시점에 420억 개만 활성화하여 동작하며, 고성능 워크스테이션 자원을 활용해 서버 없이 복잡한 작업을 자율 수행합니다.</p><p>민감한 내부 정보나 소스 코드를 외부 클라우드 API로 송신하지 않고, 온프레미스 고성능 데스크톱 안에서 최고 수준의 에이전트 자동화 파이프라인을 구동하는 대안을 제시합니다.</p><p>816B에 달하는 전체 가중치를 통합 메모리에 탑재해야 하므로 최소 수백 기가바이트 단위의 하드웨어 메모리 확보가 필수 전제 조건으로 작용합니다. 활성화 파라미터가 42B라 하더라도 오프로딩 시 발생할 수 있는 스토리지 I/O 병목 및 메모리 대역폭 한계가 실제 토큰 생성 속도를 좌우하게 됩니다. 대형 인프라 도입 전 70B급 양자화 모델과의 정교도 차이 및 초기 도입 비용 대비 운영 이점을 수치로 산출하는 과정이 선행되어야 합니다.</p>
+  <p class="action">보유한 워크스테이션의 통합 메모리 용량과 디스크 읽기 속도가 816B 가중치 적재 기준을 만족하는지 파악한 뒤 테스트를 진행하십시오.</p>
+  <p class="sources">참고: <a href="https://research.meta.ai/blog/muse-spark-open" rel="nofollow noopener noreferrer" target="_blank">Meta AI Research 원문</a></p>
+</section>
+  <section class="closing"><p>온디바이스 경량화 모델부터 데스크톱 워크스테이션급 대형 모델에 이르기까지 목표 시스템의 컴퓨팅 자원에 맞는 가중치 구조 선별이 필수적입니다. 메모리 대역폭과 보안 환경 요구사항을 엄밀히 측정하여 오프라인 파이프라인을 설계하는 판단이 요구됩니다.</p></section>
+</article>
+</body></html>

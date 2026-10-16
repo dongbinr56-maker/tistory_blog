@@ -1,0 +1,174 @@
+{
+  "date": "2026-10-16",
+  "title": "[AI 뉴스룸] 온디바이스 엣지부터 M5 Ultra 데스크톱까지 확장되는 오픈 가중치 추론 모델의 트레이드오프",
+  "title_candidates": [
+    "[AI 뉴스룸] 온디바이스 엣지부터 M5 Ultra 데스크톱까지 확장되는 오픈 가중치 추론 모델의 트레이드오프",
+    "[AI 뉴스룸] 활성화 파라미터 다변화가 가져온 로컬 AI 추론 아키텍처의 실무적 과제",
+    "[AI 뉴스룸] MiniCPM-V-4.7-35B, LFM2.5-24B-A2B, Muse-Spark-Open-81"
+  ],
+  "tags": [
+    "온디바이스AI",
+    "오픈소스AI",
+    "MiniCPM",
+    "LFM25",
+    "MuseSparkOpen",
+    "AI에이전트",
+    "로컬추론"
+  ],
+  "meta_description": "openbmb/MiniCPM-V-4.7-35B-A3B, LiquidAI/LFM2.5-24B-A2B, meta-models/Muse-Spark-Open-816B-A42B 등 로컬 및 온디바이스 환경을 겨냥한 오픈 가중치 모델의 서빙 스펙트럼과 하드웨어 도입 조건을 분석합니다.",
+  "intro": "로컬 인퍼런스 환경 구축의 핵심은 모델의 총 파라미터 수가 아니라 실행 순간 메모리에 부하를 주는 활성화 파라미터 비율을 제어하는 일입니다. openbmb/MiniCPM-V-4.7-35B-A3B 와 LiquidAI/LFM2.5-24B-A2B, meta-models/Muse-Spark-Open-816B-A42B 는 엣지 단말부터 고성능 데스크톱에 이르기까지 서로 다른 활성화 구조로 오프라인 에이전트 서빙의 가능성을 보여줍니다. 단일 클라우드 API에 의존하던 관성에서 벗어나 개별 하드웨어의 메모리 대역폭과 프롬프트 응답 속도 조건에 맞춘 가중치 분배 전략이 로컬 AI 시스템의 성패를 결정짓습니다.",
+  "sections": [
+    {
+      "headline": "openbmb/MiniCPM-V-4.7-35B-A3B 공개와 로컬 시각 멀티모달 최적화",
+      "source_ids": [
+        "huggingface-community-e7b2c4bb55dea757"
+      ],
+      "what_happened": "Hugging Face 커뮤니티에 이미지와 텍스트를 함께 처리하는 openbmb/MiniCPM-V-4.7-35B-A3B 저장소가 공개되었습니다. 해당 저장소는 image-text-to-text 파이프라인 태그로 분류되어 있으며, 좋아요 793개와 다운로드 9278건을 기록하고 있습니다.",
+      "plain_explanation": "이미지와 글자를 동시에 받아들여 질문에 답하거나 정보를 해석하는 시각-언어 AI 모델의 가중치입니다. 모바일이나 단말 장치에서 클라우드 연동 없이 시각적 입력을 직접 처리할 때 사용하는 자원이며, 허깅페이스 플랫폼에서 관련 파이프라인 태그로 공유되는 오프라인 운용 패키지 형태를 취합니다.",
+      "why_it_matters": "외부 멀티모달 API 호출 시 발생하던 데이터 전송 대기 시간과 지속적인 유료 서빙 비용을 단말 내부 연산으로 전환하는 선택지를 제공합니다.",
+      "technical_details": "",
+      "editorial_take": "시각-언어 연산은 단일 텍스트 모델보다 입출력 처리 시 하드웨어 메모리 대역폭 병목이 훨씬 크게 발생합니다. 이 저장소를 로컬 시스템에 올리기 전, 실제 사용할 에지 장비나 데스크톱 환경에서 이미지 해상도에 따른 VRAM 점유량과 초당 토큰 생성 속도를 측정해야 합니다. 단일 인코더 기반 경량 모델과 비교하여 추가적인 아키텍처적 이점이 확실한지 테스트 환경에서 점검하는 과정이 수반되어야 실질적인 효용을 평가할 수 있습니다.",
+      "reader_action": "허깅페이스 저장소에서 가중치를 받아 대상 단말의 VRAM 점유량과 이미지 입력 시 프롬프트 처리 지연 시간을 직접 비교 검증하십시오.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "Liquid AI의 LFM2.5-24B-A2B 발표와 온디바이스 에이전트 추론",
+      "source_ids": [
+        "hacker-news-70de1f9007989ad6"
+      ],
+      "what_happened": "Liquid AI가 온디바이스 에이전트 구동에 특화된 오픈 가중치 추론 모델 LFM2.5-24B-A2B를 발표했습니다. 전체 24B 매개변수 중 2B만 활성화되는 구조로, LiveClaw 벤치마크에서 Qwen3.6-35B-A3B보다 높은 성적을 거두었습니다.",
+      "plain_explanation": "네트워크 연결이 없는 개인 단말기 내부에서 빠르게 에이전트 기능을 수행하도록 만든 오픈 가중치 모델입니다. 총 240억 개의 파라미터를 보관하지만 실제 추론 순간에는 20억 개만 작동시켜 실행 속도를 높이고 전력 소모를 줄이도록 설계되었습니다.",
+      "why_it_matters": "활성화 파라미터를 2B로 제한하면서도 추론 성과를 유지하여, 로컬 기기에서 외부 통신 없이 도구 호출과 실시간 응답을 처리하는 온디바이스 에이전트 환경을 구성하게 만듭니다.",
+      "technical_details": "",
+      "editorial_take": "2B 수준의 연산량은 빠른 반응 속도를 보장하지만, 여러 도구를 연속으로 호출해야 하는 복잡한 에이전트 워크플로우에서는 지시 이행 충실도가 떨어지는 한계가 드러날 수 있습니다. 빠른 응답성이 최우선인 단말 단의 1차 도구 분류용으로 먼저 배치하고, 고난도 로직은 별도 모델로 분깃하는 아키텍처를 설계하는 접근이 타당합니다. 라이브 벤치마크 점수에만 의존하지 말고 실제 에이전트 루프 내 예외 처리율을 직접 측정하는 조치가 요구됩니다.",
+      "reader_action": "공식 블로그의 사양을 확인하고 허깅페이스에서 가중치를 내려받아 로컬 에이전트 도구 호출 프롬프트의 지연 시간과 도구 선택 정확도를 점검하십시오.",
+      "verification_notes": ""
+    },
+    {
+      "headline": "Meta AI Research의 Muse Spark Open 발표와 데스크톱 워크스테이션 에이전트",
+      "source_ids": [
+        "hacker-news-9108fd5fcf3ef59e"
+      ],
+      "what_happened": "Meta AI Research가 미국 내 오픈 가중치 모델 중 최고 수준의 성능을 갖춘 Muse Spark Open을 발표했습니다. 총 816B 매개변수 중 42B를 활성화하는 아키텍처를 갖췄으며, Apple M5 Ultra 탑재 Mac Studio 환경에서 데스크톱 기반 에이전트 기능을 수행하도록 설계되었습니다.",
+      "plain_explanation": "대규모 에이전트 추론 기능을 데스크톱 컴퓨터 환경에서 직접 가동할 수 있도록 공개된 초대형 오픈 가중치 모델입니다. 8160억 개의 전체 파라미터 가운데 실행 시점에 420억 개만 활성화하여 동작하며, 고성능 워크스테이션 자원을 활용해 서버 없이 복잡한 작업을 자율 수행합니다.",
+      "why_it_matters": "민감한 내부 정보나 소스 코드를 외부 클라우드 API로 송신하지 않고, 온프레미스 고성능 데스크톱 안에서 최고 수준의 에이전트 자동화 파이프라인을 구동하는 대안을 제시합니다.",
+      "technical_details": "",
+      "editorial_take": "816B에 달하는 전체 가중치를 통합 메모리에 탑재해야 하므로 최소 수백 기가바이트 단위의 하드웨어 메모리 확보가 필수 전제 조건으로 작용합니다. 활성화 파라미터가 42B라 하더라도 오프로딩 시 발생할 수 있는 스토리지 I/O 병목 및 메모리 대역폭 한계가 실제 토큰 생성 속도를 좌우하게 됩니다. 대형 인프라 도입 전 70B급 양자화 모델과의 정교도 차이 및 초기 도입 비용 대비 운영 이점을 수치로 산출하는 과정이 선행되어야 합니다.",
+      "reader_action": "보유한 워크스테이션의 통합 메모리 용량과 디스크 읽기 속도가 816B 가중치 적재 기준을 만족하는지 파악한 뒤 테스트를 진행하십시오.",
+      "verification_notes": ""
+    }
+  ],
+  "closing": "온디바이스 경량화 모델부터 데스크톱 워크스테이션급 대형 모델에 이르기까지 목표 시스템의 컴퓨팅 자원에 맞는 가중치 구조 선별이 필수적입니다. 메모리 대역폭과 보안 환경 요구사항을 엄밀히 측정하여 오프라인 파이프라인을 설계하는 판단이 요구됩니다.",
+  "editor_comment": "개별 오픈 가중치 모델을 로컬 추론 프레임워크에 직접 적재하여 디바이스 메모리 점유율과 도구 호출 프롬프트의 초당 토큰 생성 속도를 수치로 비교해보는 정량 평가가 필요한 시점입니다.",
+  "editorial_disclosure": "",
+  "model": "gemini-3.5-flash",
+  "article_count_note": "",
+  "images": {
+    "hero": {
+      "path": "hero.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-16/hero.png",
+      "kind": "generated-hero"
+    },
+    "huggingface-community-e7b2c4bb55dea757": {
+      "origin_url": "https://huggingface.co/openbmb/MiniCPM-V-4.7-35B-A3B/resolve/main/thumbnail.png",
+      "kind": "generated-fallback",
+      "path": "issue-1.svg",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-16/issue-1.svg"
+    },
+    "hacker-news-70de1f9007989ad6": {
+      "origin_url": "https://aypchzzf9pftwuto.public.blob.vercel-storage.com/image%20(3)-oOdUn61bDRSykk4H951SoDOHzqoOe1.png",
+      "kind": "source-image",
+      "path": "issue-2.png",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-16/issue-2.png"
+    },
+    "hacker-news-9108fd5fcf3ef59e": {
+      "origin_url": "https://research.meta.ai/articles/muse-spark-open/social/muse-spark-1-2-open-weights-social-v2.webp",
+      "kind": "source-image",
+      "path": "issue-3.webp",
+      "url": "https://dongbinr56-maker.github.io/tistory_blog/tistory/assets/2026-10-16/issue-3.webp"
+    }
+  },
+  "source_items": [
+    {
+      "id": "huggingface-community-e7b2c4bb55dea757",
+      "source": "Hugging Face 커뮤니티",
+      "topic": "오픈소스, 온디바이스 AI, Hugging Face, AI 모델링",
+      "title": "openbmb/MiniCPM-V-4.7-35B-A3B",
+      "url": "https://huggingface.co/openbmb/MiniCPM-V-4.7-35B-A3B",
+      "published_at": "2026-10-16T01:33:30+09:00",
+      "summary": "Hugging Face에서 최근 주목받는 image-text-to-text 모델 저장소입니다.",
+      "listing_url": "https://huggingface.co/openbmb/MiniCPM-V-4.7-35B-A3B",
+      "introduced_at": "",
+      "image_url": "https://huggingface.co/openbmb/MiniCPM-V-4.7-35B-A3B/resolve/main/thumbnail.png",
+      "official_url": "https://huggingface.co/openbmb/MiniCPM-V-4.7-35B-A3B",
+      "canonical_key": "https://huggingface.co/openbmb/minicpm-v-4.7-35b-a3b",
+      "verification": {
+        "project_kind": "huggingface",
+        "project_name": "openbmb/MiniCPM-V-4.7-35B-A3B",
+        "project_owner": "openbmb",
+        "license": "",
+        "updated_at": "2026-10-16T01:33:30+09:00",
+        "community_source": "huggingface",
+        "huggingface_likes": "793",
+        "huggingface_downloads": "9278",
+        "pipeline_tag": "image-text-to-text"
+      }
+    },
+    {
+      "id": "hacker-news-70de1f9007989ad6",
+      "source": "Liquid AI",
+      "topic": "AI 에이전트, Hugging Face, 온디바이스 AI",
+      "title": "LFM2.5-24B-A2B: Built for Fast On-Device Agents | Blog",
+      "url": "https://www.liquid.ai/blog/lfm2-5-24b-a2b",
+      "published_at": "2026-10-13T00:00:00+09:00",
+      "summary": "LFM2.5-24B-A2B: an open-weight 24B reasoning model with 2B active parameters, built for fast, private on-device agents. Beats Qwen3.6-35B-A3B on LiveClaw.",
+      "listing_url": "https://news.ycombinator.com/item?id=50097369",
+      "introduced_at": "2026-10-15T08:59:37+09:00",
+      "image_url": "https://aypchzzf9pftwuto.public.blob.vercel-storage.com/image%20(3)-oOdUn61bDRSykk4H951SoDOHzqoOe1.png",
+      "official_url": "https://huggingface.co/LiquidAI/LFM2.5-24B-A2B",
+      "canonical_key": "https://huggingface.co/liquidai/lfm2.5-24b-a2b",
+      "verification": {
+        "article_title_verified": "LFM2.5-24B-A2B: Built for Fast On-Device Agents | Blog",
+        "article_source_verified": "Liquid AI",
+        "article_published_verified": "2026-10-13T00:00:00+09:00",
+        "article_url_verified": "https://www.liquid.ai/blog/lfm2-5-24b-a2b",
+        "geeknews_listing_url": "",
+        "official_url": "https://huggingface.co/LiquidAI/LFM2.5-24B-A2B",
+        "project_name": "LiquidAI/LFM2.5-24B-A2B",
+        "project_owner": "LiquidAI",
+        "project_description": "",
+        "license": "other",
+        "updated_at": "2026-10-13T16:59:33.000Z",
+        "project_kind": "huggingface"
+      }
+    },
+    {
+      "id": "hacker-news-9108fd5fcf3ef59e",
+      "source": "Meta AI Research",
+      "topic": "AI 에이전트, Hugging Face",
+      "title": "Introducing Muse Spark Open, The Most Capable US Open‑Weight Model to Date",
+      "url": "https://research.meta.ai/blog/muse-spark-open",
+      "published_at": "2026-10-15T09:00:00+09:00",
+      "summary": "Muse Spark Open is the most capable US open-weight model to date, and brings leading agentic capabilities to your desktop on Apple M5 Ultra Mac Studios.",
+      "listing_url": "https://news.ycombinator.com/item?id=50107379",
+      "introduced_at": "2026-10-16T02:47:39+09:00",
+      "image_url": "https://research.meta.ai/articles/muse-spark-open/social/muse-spark-1-2-open-weights-social-v2.webp",
+      "official_url": "https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B",
+      "canonical_key": "https://huggingface.co/meta-models/muse-spark-open-816b-a42b",
+      "verification": {
+        "article_title_verified": "Introducing Muse Spark Open, The Most Capable US Open‑Weight Model to Date",
+        "article_source_verified": "Meta AI Research",
+        "article_published_verified": "2026-10-15T09:00:00+09:00",
+        "article_url_verified": "https://research.meta.ai/blog/muse-spark-open",
+        "geeknews_listing_url": "",
+        "official_url": "https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B",
+        "project_name": "meta-models/Muse-Spark-Open-816B-A42B",
+        "project_owner": "meta-models",
+        "project_description": "",
+        "license": "other",
+        "updated_at": "2026-10-15T15:46:43.000Z",
+        "project_kind": "huggingface"
+      }
+    }
+  ]
+}
