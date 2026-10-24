@@ -1,0 +1,17 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    "Gemini 초안 생성 실패: HTTP Error 402: Payment Required"
+  ],
+  "warnings": [
+    "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50207910 (페이지 확인 실패: https://music.apple.com/this-url-doesnt-exist (HTTP Error 404: Not Found))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50207405 (페이지 확인 실패: https://www.sverigesradio.se/artikel/chat-gpt-och-claude-forbjuder-regeringskansliet (HTTP Error 403: Forbidden))",
+    "기사형 소스 0건: 오늘 초안은 GitHub/Hugging Face 트렌딩 프로젝트 소개만으로 구성되어 뉴스 가치가 낮습니다. 발행 대신 직접 사용해 본 프로젝트 하나를 깊게 다루는 글로 대체하는 것을 검토하세요."
+  ],
+  "collector_errors": [
+    "수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "검증 제외: https://news.ycombinator.com/item?id=50207910 (페이지 확인 실패: https://music.apple.com/this-url-doesnt-exist (HTTP Error 404: Not Found))",
+    "검증 제외: https://news.ycombinator.com/item?id=50207405 (페이지 확인 실패: https://www.sverigesradio.se/artikel/chat-gpt-och-claude-forbjuder-regeringskansliet (HTTP Error 403: Forbidden))"
+  ]
+}
