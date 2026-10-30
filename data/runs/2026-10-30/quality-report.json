@@ -1,0 +1,20 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    "Gemini 초안 생성 실패: HTTP Error 402: Payment Required"
+  ],
+  "warnings": [
+    "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50294702 (페이지 확인 실패: https://www.nytimes.com/2026/10/29/arts/television/patrick-stewart-dead.html (HTTP Error 403: Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50296470 (페이지 확인 실패: https://arkm.com/explorer/entity/21a94755-f604-45e5-9501-6542e23005e8 (HTTP Error 403: Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50288867 (페이지 확인 실패: https://www.nytimes.com/2014/11/16/magazine/what-an-uncensored-letter-to-mlk-reveals.html (HTTP Error 403: Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50290668 (페이지 확인 실패: https://www.washingtonpost.com/climate-environment/2026/10/27/i-saw-future-driving-mexico-its-off-limits-americans/ (The read operation timed out))"
+  ],
+  "collector_errors": [
+    "수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "검증 제외: https://news.ycombinator.com/item?id=50294702 (페이지 확인 실패: https://www.nytimes.com/2026/10/29/arts/television/patrick-stewart-dead.html (HTTP Error 403: Forbidden))",
+    "검증 제외: https://news.ycombinator.com/item?id=50296470 (페이지 확인 실패: https://arkm.com/explorer/entity/21a94755-f604-45e5-9501-6542e23005e8 (HTTP Error 403: Forbidden))",
+    "검증 제외: https://news.ycombinator.com/item?id=50288867 (페이지 확인 실패: https://www.nytimes.com/2014/11/16/magazine/what-an-uncensored-letter-to-mlk-reveals.html (HTTP Error 403: Forbidden))",
+    "검증 제외: https://news.ycombinator.com/item?id=50290668 (페이지 확인 실패: https://www.washingtonpost.com/climate-environment/2026/10/27/i-saw-future-driving-mexico-its-off-limits-americans/ (The read operation timed out))"
+  ]
+}
