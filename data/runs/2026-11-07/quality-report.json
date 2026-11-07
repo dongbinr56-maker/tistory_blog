@@ -1,0 +1,20 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    "Gemini 초안 생성 실패: HTTP Error 402: Payment Required"
+  ],
+  "warnings": [
+    "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50389222 (페이지 확인 실패: https://www.reuters.com/business/world-at-work/britain-make-salary-disclosure-job-ads-mandatory-2026-11-05/ (HTTP Error 401: HTTP Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50388122 (페이지 확인 실패: https://thereader.mitpress.mit.edu/from-linux-to-wikipedia-how-volunteers-build-the-internet/ (HTTP Error 403: Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50388001 (페이지 확인 실패: https://www.reuters.com/world/us/us-faa-says-it-will-phase-out-floppy-disks-air-traffic-control-by-2028-2026-11-05/ (HTTP Error 401: HTTP Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50394906 (페이지 확인 실패: https://www.bloomberg.com/news/articles/2026-11-06/anthropic-ipo-valuation-expectations-pressured-after-ai-rout (HTTP Error 403: Forbidden))"
+  ],
+  "collector_errors": [
+    "수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "검증 제외: https://news.ycombinator.com/item?id=50389222 (페이지 확인 실패: https://www.reuters.com/business/world-at-work/britain-make-salary-disclosure-job-ads-mandatory-2026-11-05/ (HTTP Error 401: HTTP Forbidden))",
+    "검증 제외: https://news.ycombinator.com/item?id=50388122 (페이지 확인 실패: https://thereader.mitpress.mit.edu/from-linux-to-wikipedia-how-volunteers-build-the-internet/ (HTTP Error 403: Forbidden))",
+    "검증 제외: https://news.ycombinator.com/item?id=50388001 (페이지 확인 실패: https://www.reuters.com/world/us/us-faa-says-it-will-phase-out-floppy-disks-air-traffic-control-by-2028-2026-11-05/ (HTTP Error 401: HTTP Forbidden))",
+    "검증 제외: https://news.ycombinator.com/item?id=50394906 (페이지 확인 실패: https://www.bloomberg.com/news/articles/2026-11-06/anthropic-ipo-valuation-expectations-pressured-after-ai-rout (HTTP Error 403: Forbidden))"
+  ]
+}
