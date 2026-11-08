@@ -1,0 +1,16 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    "Gemini 초안 생성 실패: HTTP Error 402: Payment Required"
+  ],
+  "warnings": [
+    "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50401740 (페이지 확인 실패: https://www.science.org/content/article/barbarian-tribe-s-mythic-origin-story-true-ancient-dna-reveals (HTTP Error 403: Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50404599 (페이지 확인 실패: http://thelittleengineerthatcould.blogspot.com/2022/12/the-8-linux-computer.html (HTTP Error 429: Too Many Requests))"
+  ],
+  "collector_errors": [
+    "수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "검증 제외: https://news.ycombinator.com/item?id=50401740 (페이지 확인 실패: https://www.science.org/content/article/barbarian-tribe-s-mythic-origin-story-true-ancient-dna-reveals (HTTP Error 403: Forbidden))",
+    "검증 제외: https://news.ycombinator.com/item?id=50404599 (페이지 확인 실패: http://thelittleengineerthatcould.blogspot.com/2022/12/the-8-linux-computer.html (HTTP Error 429: Too Many Requests))"
+  ]
+}
