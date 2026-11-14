@@ -1,0 +1,20 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    "Gemini 초안 생성 실패: HTTP Error 402: Payment Required"
+  ],
+  "warnings": [
+    "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50482379 (페이지 확인 실패: https://www.science.org/doi/10.1126/science.132.3436.1291 (HTTP Error 403: Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50481870 (페이지 확인 실패: https://www.theatlantic.com/books/2026/11/ai-literary-scams-amazon/689391/ (HTTP Error 403: Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50487522 (페이지 확인 실패: https://www.reddit.com/r/Teachers/comments/1xuup7a/technology_sucks_it_literally_takes_16_clicks_for/ (HTTP Error 403: Blocked))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50483480 (페이지 확인 실패: https://garymarcus.substack.com/p/breaking-eli-lilly-ceo-becomes-latest (HTTP Error 403: Forbidden))"
+  ],
+  "collector_errors": [
+    "수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))",
+    "검증 제외: https://news.ycombinator.com/item?id=50482379 (페이지 확인 실패: https://www.science.org/doi/10.1126/science.132.3436.1291 (HTTP Error 403: Forbidden))",
+    "검증 제외: https://news.ycombinator.com/item?id=50481870 (페이지 확인 실패: https://www.theatlantic.com/books/2026/11/ai-literary-scams-amazon/689391/ (HTTP Error 403: Forbidden))",
+    "검증 제외: https://news.ycombinator.com/item?id=50487522 (페이지 확인 실패: https://www.reddit.com/r/Teachers/comments/1xuup7a/technology_sucks_it_literally_takes_16_clicks_for/ (HTTP Error 403: Blocked))",
+    "검증 제외: https://news.ycombinator.com/item?id=50483480 (페이지 확인 실패: https://garymarcus.substack.com/p/breaking-eli-lilly-ceo-becomes-latest (HTTP Error 403: Forbidden))"
+  ]
+}
