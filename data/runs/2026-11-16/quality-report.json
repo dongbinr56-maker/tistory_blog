@@ -1,0 +1,12 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    "Gemini 초안 생성 실패: HTTP Error 402: Payment Required"
+  ],
+  "warnings": [
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50505271 (페이지 확인 실패: https://space.stackexchange.com/questions/37775 (HTTP Error 403: Forbidden))"
+  ],
+  "collector_errors": [
+    "검증 제외: https://news.ycombinator.com/item?id=50505271 (페이지 확인 실패: https://space.stackexchange.com/questions/37775 (HTTP Error 403: Forbidden))"
+  ]
+}
