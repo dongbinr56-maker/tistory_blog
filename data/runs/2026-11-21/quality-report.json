@@ -1,0 +1,12 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    "Gemini 초안 생성 실패: HTTP Error 402: Payment Required"
+  ],
+  "warnings": [
+    "수집 경고: 수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))"
+  ],
+  "collector_errors": [
+    "수집 실패: 요즘IT (페이지 확인 실패: https://yozm.wishket.com/magazine/feed/ (HTTP Error 405: Not Allowed))"
+  ]
+}
