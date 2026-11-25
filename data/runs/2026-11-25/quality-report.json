@@ -1,0 +1,14 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    "Gemini 초안 생성 실패: HTTP Error 402: Payment Required"
+  ],
+  "warnings": [
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50627836 (페이지 확인 실패: https://www.bloomberg.com/news/articles/2026-11-24/anthropic-breaks-below-83-ipo-price-in-premarket-trading (HTTP Error 403: Forbidden))",
+    "수집 경고: 검증 제외: https://news.ycombinator.com/item?id=50631157 (페이지 확인 실패: https://www.reuters.com/business/microsoft-declares-code-red-after-historic-outage-internal-memos-show-2026-11-24/ (HTTP Error 401: HTTP Forbidden))"
+  ],
+  "collector_errors": [
+    "검증 제외: https://news.ycombinator.com/item?id=50627836 (페이지 확인 실패: https://www.bloomberg.com/news/articles/2026-11-24/anthropic-breaks-below-83-ipo-price-in-premarket-trading (HTTP Error 403: Forbidden))",
+    "검증 제외: https://news.ycombinator.com/item?id=50631157 (페이지 확인 실패: https://www.reuters.com/business/microsoft-declares-code-red-after-historic-outage-internal-memos-show-2026-11-24/ (HTTP Error 401: HTTP Forbidden))"
+  ]
+}
